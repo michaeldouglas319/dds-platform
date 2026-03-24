@@ -1,70 +1,98 @@
 @import 'tailwindcss';
 
+/* ─── Design Tokens (Vercel/Linear/Raycast-inspired) ──────────── */
 :root {
-  --color-brand-primary: #6366f1;
-  --color-brand-accent: #00ccaa;
   --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', monospace;
-  --section-gap: 6rem;
-  --content-max: 64rem;
-  --content-pad: 2rem;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Background depth layers (Raycast pattern) */
+  --bg-base: #050510;
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --bg-elevated: rgba(255, 255, 255, 0.06);
+
+  /* Text hierarchy (Linear 4-tier) */
+  --text-primary: #fafafa;
+  --text-secondary: rgba(255, 255, 255, 0.64);
+  --text-tertiary: rgba(255, 255, 255, 0.44);
+  --text-quaternary: rgba(255, 255, 255, 0.2);
+
+  /* Accent */
+  --accent: #6366f1;
+  --accent-glow: rgba(99, 102, 241, 0.15);
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+
+  /* Spacing */
+  --section-gap: clamp(5rem, 8vw, 8rem);
+  --block-gap: clamp(2.5rem, 4vw, 4rem);
+  --content-max: 72rem;
+  --content-pad: clamp(1.5rem, 4vw, 3rem);
 }
 
+/* ─── Base ────────────────────────────────────────────────────── */
 html {
-  background: #050510 !important;
+  background: var(--bg-base) !important;
+  color-scheme: dark;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  color-scheme: dark;
+  color: var(--text-secondary);
 }
 
 html.dark body {
   background: transparent;
-  color: hsl(0 0% 90%);
 }
 
-/* Override renderer CSS vars for transparent backgrounds */
-html.dark {
-  --background: 5 5 16;
-  --backgroundLight: rgba(5, 5, 16, 0);
-  --rgbBackground: 5 5 16;
-  --opacity: 0%;
+/* ─── Typography (Arc/Vercel tight tracking) ──────────────────── */
+h1, h2, h3 {
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
-html.dark *,
-html.dark [class*="project"],
-html.dark [class*="Section"] {
-  --background: rgba(5, 5, 16, 0);
-  --backgroundLight: rgba(5, 5, 16, 0);
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; }
+h2 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); font-weight: 600; }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 600; }
+
+p {
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  max-width: 65ch;
 }
 
-html:not(.dark) body {
-  background: hsl(0 0% 100%);
-  color: hsl(240 10% 3.9%);
+/* Monospace labels (Linear pattern) */
+.label, [class*="label"], small {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
 }
 
-/* Section spacing for renderer output */
+/* ─── Layout ──────────────────────────────────────────────────── */
 main > div,
 main > section {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--content-pad);
+  padding: var(--block-gap) var(--content-pad);
 }
 
-/* Give each ProjectSection breathing room */
+/* Section breathing room */
 [class*="projectSection"],
 [data-section] {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: var(--section-gap);
+  padding-bottom: var(--section-gap);
 }
 
-/* Hero area — full viewport height */
+/* ─── Hero ────────────────────────────────────────────────────── */
 .hero-area {
   min-height: 100vh;
   display: flex;
@@ -72,45 +100,113 @@ main > section {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem var(--content-pad);
+  padding: 6rem var(--content-pad);
+  position: relative;
 }
 
-/* Stats grid fix */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 2rem;
-  text-align: center;
+/* Ambient glow behind hero (Raycast) */
+.hero-area::after {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: -1;
 }
 
-/* Subtle divider between sections */
+/* ─── Dividers (Stripe gradient line) ─────────────────────────── */
 main > div + div,
 main > section + section {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: none;
+  position: relative;
 }
 
-/* Feature matrix readability */
+main > div + div::before,
+main > section + section::before {
+  content: '';
+  display: block;
+  height: 1px;
+  max-width: 50rem;
+  margin: 0 auto 0;
+  background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+}
+
+/* ─── Cards (Raycast glassmorphism) ───────────────────────────── */
+[class*="standardCard"] {
+  margin-bottom: 1.5rem;
+  padding: 1.75rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-surface);
+  backdrop-filter: blur(8px);
+  border-radius: 0 12px 12px 0;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+[class*="standardCard"]:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-elevated);
+}
+
+/* ─── Tables ──────────────────────────────────────────────────── */
 table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.9375rem;
 }
 
-th, td {
+th {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-hover);
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+td {
   padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
 }
 
-/* Timeline entries */
-[class*="standardCard"] {
-  margin-bottom: 1.5rem;
-  padding: 1.5rem;
-  border-left: 3px solid var(--color-brand-primary);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 0 0.5rem 0.5rem 0;
+tr:hover td {
+  background: var(--bg-surface);
 }
 
-/* Nav bar — mobile responsive */
+/* ─── Scroll Animations (Raycast/Arc) ─────────────────────────── */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Buttons/CTAs (Arc scale + Stripe dual pattern) ──────────── */
+a[href^="/"], a[href^="http"] {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+a[href^="/"]:hover, a[href^="http"]:hover {
+  transform: scale(1.02);
+}
+
+/* ─── Nav responsive ──────────────────────────────────────────── */
 @media (min-width: 769px) {
   .nav-hamburger { display: none !important; }
   .nav-mobile-menu { display: none !important; }
@@ -121,7 +217,7 @@ th, td {
   .nav-hamburger { display: block !important; }
 }
 
-/* Force all renderer backgrounds transparent for gravity particles */
+/* ─── Force transparent renderer backgrounds ──────────────────── */
 html.dark *::after,
 html.dark *::before {
   --background: transparent !important;
@@ -146,10 +242,17 @@ html.dark [data-light] {
   background-image: none !important;
 }
 
-/* Responsive */
+html.dark {
+  --background: rgba(5, 5, 16, 0);
+  --backgroundLight: rgba(5, 5, 16, 0);
+  --rgbBackground: 5 5 16;
+  --opacity: 0%;
+}
+
+/* ─── Responsive ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
   :root {
     --section-gap: 3rem;
-    --content-pad: 1.25rem;
+    --block-gap: 2rem;
   }
 }
