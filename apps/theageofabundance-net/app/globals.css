@@ -1,0 +1,99 @@
+@import 'tailwindcss';
+
+:root {
+  --color-brand-primary: #6366f1;
+  --color-brand-accent: #00ccaa;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', monospace;
+  --section-gap: 6rem;
+  --content-max: 64rem;
+  --content-pad: 2rem;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+html.dark body {
+  background: hsl(240 10% 3.9%);
+  color: hsl(0 0% 90%);
+}
+
+html:not(.dark) body {
+  background: hsl(0 0% 100%);
+  color: hsl(240 10% 3.9%);
+}
+
+/* Section spacing for renderer output */
+main > div,
+main > section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--content-pad);
+}
+
+/* Give each ProjectSection breathing room */
+[class*="projectSection"],
+[data-section] {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+/* Hero area — full viewport height */
+.hero-area {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem var(--content-pad);
+}
+
+/* Stats grid fix */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+/* Subtle divider between sections */
+main > div + div,
+main > section + section {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Feature matrix readability */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Timeline entries */
+[class*="standardCard"] {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border-left: 3px solid var(--color-brand-primary);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  :root {
+    --section-gap: 3rem;
+    --content-pad: 1.25rem;
+  }
+}

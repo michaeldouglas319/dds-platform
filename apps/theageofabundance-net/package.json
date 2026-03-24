@@ -1,0 +1,27 @@
+{
+  "name": "@dds/theageofabundance-net",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@dds/config": "workspace:*",
+    "@dds/hooks": "workspace:*",
+    "@dds/renderer": "workspace:*",
+    "@dds/tailwind-config": "workspace:*",
+    "@dds/types": "workspace:*",
+    "next": "^14.2.0"
+  },
+  "devDependencies": {
+    "@dds/tsconfig": "workspace:*",
+    "@tailwindcss/postcss": "^4.2.0",
+    "postcss": "^8.5.0",
+    "tailwindcss": "^4.2.0",
+    "typescript": "^5.9.0"
+  }
+}
