@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — App",
+    "label": "App",
     "description": "Your dashboard for abundant living",
     "baseUrl": "https://ageofabundance.app",
     "defaultTheme": "dark"

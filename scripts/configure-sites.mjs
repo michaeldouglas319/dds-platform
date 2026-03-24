@@ -21,6 +21,7 @@ const root = resolve(__dirname, '..');
 const sites = {
   'ageofabundance-shop': {
     name: 'Age of Abundance — Shop',
+    label: 'Shop',
     domain: 'ageofabundance.shop',
     word: 'Abundance',
     subtitle: 'Curated goods for the abundant life',
@@ -55,6 +56,7 @@ const sites = {
   },
   'ageofabundance-art': {
     name: 'Age of Abundance — Art',
+    label: 'Art',
     domain: 'ageofabundance.art',
     word: 'Creation',
     subtitle: 'Where art meets infinite possibility',
@@ -89,6 +91,7 @@ const sites = {
   },
   'ageofabundance-asia': {
     name: 'Age of Abundance — Asia',
+    label: 'Asia',
     domain: 'ageofabundance.asia',
     word: 'Convergence',
     subtitle: 'Eastern wisdom meets Western innovation',
@@ -123,6 +126,7 @@ const sites = {
   },
   'ageofabundance-wiki': {
     name: 'Age of Abundance — Wiki',
+    label: 'Wiki',
     domain: 'ageofabundance.wiki',
     word: 'Knowledge',
     subtitle: 'The open encyclopedia of abundance',
@@ -157,6 +161,7 @@ const sites = {
   },
   'ageofabundance-dev': {
     name: 'Age of Abundance — Dev',
+    label: 'Dev',
     domain: 'ageofabundance.dev',
     word: 'Build',
     subtitle: 'Developer tools for the abundant future',
@@ -191,6 +196,7 @@ const sites = {
   },
   'ageofabundance-app': {
     name: 'Age of Abundance — App',
+    label: 'App',
     domain: 'ageofabundance.app',
     word: 'Launch',
     subtitle: 'Your dashboard for abundant living',
@@ -225,6 +231,7 @@ const sites = {
   },
   'ageofabundance-space': {
     name: 'Age of Abundance — Space',
+    label: 'Space',
     domain: 'ageofabundance.space',
     word: 'Explore',
     subtitle: 'A community for abundance thinkers',
@@ -259,6 +266,7 @@ const sites = {
   },
   'ageofabundance-online': {
     name: 'Age of Abundance — Online',
+    label: 'Online',
     domain: 'ageofabundance.online',
     word: 'Transform',
     subtitle: 'Digital experiences for the new era',
@@ -293,6 +301,7 @@ const sites = {
   },
   'ageofabundance-site': {
     name: 'Age of Abundance',
+    label: 'Site',
     domain: 'ageofabundance.site',
     word: 'Foundation',
     subtitle: 'The corporate home of Age of Abundance',
@@ -327,6 +336,7 @@ const sites = {
   },
   'ageofabundance-tech': {
     name: 'Age of Abundance — Tech',
+    label: 'Tech',
     domain: 'ageofabundance.tech',
     word: 'Innovate',
     subtitle: 'Technology showcases and interactive demos',
@@ -361,6 +371,7 @@ const sites = {
   },
   'ageofabundance-net': {
     name: 'Age of Abundance — Network',
+    label: 'Network',
     domain: 'ageofabundance.net',
     word: 'Connect',
     subtitle: 'APIs and integrations for abundance',
@@ -395,6 +406,7 @@ const sites = {
   },
   'blackdot-dev': {
     name: 'Blackdot',
+    label: 'Dev',
     domain: 'blackdot.dev',
     word: 'Precision',
     subtitle: 'Engineering at the edge of possibility',
@@ -429,6 +441,7 @@ const sites = {
   },
   'blackdot-space': {
     name: 'Blackdot Space',
+    label: 'Space',
     domain: 'blackdot.space',
     word: 'Singularity',
     subtitle: 'Where ideas collapse into reality',
@@ -467,6 +480,7 @@ function buildSiteConfig(siteName, config) {
   return {
     app: {
       name: config.name,
+      label: config.label,
       description: config.subtitle,
       baseUrl: `https://${config.domain}`,
       defaultTheme: 'dark',

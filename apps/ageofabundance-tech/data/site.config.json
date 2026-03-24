@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Tech",
+    "label": "Tech",
     "description": "Technology showcases and interactive demos",
     "baseUrl": "https://ageofabundance.tech",
     "defaultTheme": "dark"

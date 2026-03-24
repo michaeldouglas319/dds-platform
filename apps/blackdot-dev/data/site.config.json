@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Blackdot",
+    "label": "Dev",
     "description": "Engineering at the edge of possibility",
     "baseUrl": "https://blackdot.dev",
     "defaultTheme": "dark"

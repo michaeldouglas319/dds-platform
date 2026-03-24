@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Network",
+    "label": "Network",
     "description": "APIs and integrations for abundance",
     "baseUrl": "https://ageofabundance.net",
     "defaultTheme": "dark"

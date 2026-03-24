@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Asia",
+    "label": "Asia",
     "description": "Eastern wisdom meets Western innovation",
     "baseUrl": "https://ageofabundance.asia",
     "defaultTheme": "dark"

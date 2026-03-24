@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Dev",
+    "label": "Dev",
     "description": "Developer tools for the abundant future",
     "baseUrl": "https://ageofabundance.dev",
     "defaultTheme": "dark"

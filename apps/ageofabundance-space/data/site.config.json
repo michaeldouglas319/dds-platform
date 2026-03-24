@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Space",
+    "label": "Space",
     "description": "A community for abundance thinkers",
     "baseUrl": "https://ageofabundance.space",
     "defaultTheme": "dark"

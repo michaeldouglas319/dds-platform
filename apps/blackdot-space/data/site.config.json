@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Blackdot Space",
+    "label": "Space",
     "description": "Where ideas collapse into reality",
     "baseUrl": "https://blackdot.space",
     "defaultTheme": "dark"

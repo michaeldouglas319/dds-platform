@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Art",
+    "label": "Art",
     "description": "Where art meets infinite possibility",
     "baseUrl": "https://ageofabundance.art",
     "defaultTheme": "dark"

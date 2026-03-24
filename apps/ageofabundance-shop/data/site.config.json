@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Shop",
+    "label": "Shop",
     "description": "Curated goods for the abundant life",
     "baseUrl": "https://ageofabundance.shop",
     "defaultTheme": "dark"

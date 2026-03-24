@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Wiki",
+    "label": "Wiki",
     "description": "The open encyclopedia of abundance",
     "baseUrl": "https://ageofabundance.wiki",
     "defaultTheme": "dark"

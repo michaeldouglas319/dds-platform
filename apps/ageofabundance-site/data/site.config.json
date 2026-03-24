@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance",
+    "label": "Site",
     "description": "The corporate home of Age of Abundance",
     "baseUrl": "https://ageofabundance.site",
     "defaultTheme": "dark"

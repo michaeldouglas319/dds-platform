@@ -1,6 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Online",
+    "label": "Online",
     "description": "Digital experiences for the new era",
     "baseUrl": "https://ageofabundance.online",
     "defaultTheme": "dark"
