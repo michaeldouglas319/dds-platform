@@ -463,5 +463,222 @@
     "content": {
       "body": "Each section represents a major domain of the platform. Sign in to access restricted research and governance materials."
     }
+  },
+  {
+    "id": "variant-gradient",
+    "type": "section",
+    "name": "Header: Gradient Variant",
+    "display": {
+      "layout": "header",
+      "variant": "gradient"
+    },
+    "subject": {
+      "title": "Gradient Header",
+      "color": "#8b5cf6"
+    },
+    "content": {
+      "body": "This header uses the **gradient** variant — animated mesh gradient background with gradient text. Set via display.variant: \"gradient\" in JSON."
+    }
+  },
+  {
+    "id": "variant-split-hero",
+    "type": "section",
+    "name": "Header: Split Hero Variant",
+    "display": {
+      "layout": "header",
+      "variant": "split-hero"
+    },
+    "subject": {
+      "title": "Split Hero",
+      "subtitle": "Two-column layout with decorative orb"
+    },
+    "content": {
+      "body": "The split-hero variant divides the section into text left and a decorative gradient orb right. Full viewport height."
+    }
+  },
+  {
+    "id": "variant-animated-counter",
+    "type": "section",
+    "name": "Stats: Animated Counter Variant",
+    "display": {
+      "layout": "stats-grid",
+      "variant": "animated-counter"
+    },
+    "subject": {
+      "title": "Animated Counters",
+      "subtitle": "Numbers count up on scroll"
+    },
+    "content": {
+      "stats": [
+        {
+          "label": "Domains",
+          "value": "16"
+        },
+        {
+          "label": "Renderers",
+          "value": "28"
+        },
+        {
+          "label": "Variants",
+          "value": "9"
+        },
+        {
+          "label": "Uptime",
+          "value": "99.9%"
+        }
+      ]
+    },
+    "meta": {
+      "columns": 4
+    }
+  },
+  {
+    "id": "variant-cards",
+    "type": "section",
+    "name": "Feature Matrix: Cards Variant",
+    "display": {
+      "layout": "feature-matrix",
+      "variant": "cards"
+    },
+    "subject": {
+      "title": "Cards Layout",
+      "subtitle": "Feature matrix as card panels"
+    },
+    "content": {
+      "columns": [
+        {
+          "name": "free",
+          "label": "Free"
+        },
+        {
+          "name": "pro",
+          "label": "Pro",
+          "highlight": true
+        },
+        {
+          "name": "enterprise",
+          "label": "Enterprise"
+        }
+      ],
+      "rows": [
+        {
+          "feature": "Renderers",
+          "values": {
+            "free": "10",
+            "pro": "28+",
+            "enterprise": "Unlimited"
+          }
+        },
+        {
+          "feature": "Variants",
+          "values": {
+            "free": "Default only",
+            "pro": "All 9",
+            "enterprise": "Custom"
+          }
+        },
+        {
+          "feature": "Physics",
+          "values": {
+            "free": false,
+            "pro": true,
+            "enterprise": true
+          }
+        },
+        {
+          "feature": "Support",
+          "values": {
+            "free": "Community",
+            "pro": "Priority",
+            "enterprise": "Dedicated"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "variant-horizontal",
+    "type": "section",
+    "name": "Timeline: Horizontal Variant",
+    "display": {
+      "layout": "timeline",
+      "variant": "horizontal"
+    },
+    "subject": {
+      "title": "Horizontal Timeline"
+    },
+    "children": [
+      {
+        "id": "h1",
+        "type": "entry",
+        "subject": {
+          "title": "Research",
+          "color": "#8b5cf6"
+        },
+        "content": {
+          "body": "Analyzed 7 competitor sites for design patterns"
+        },
+        "meta": {
+          "order": 1
+        }
+      },
+      {
+        "id": "h2",
+        "type": "entry",
+        "subject": {
+          "title": "Architect",
+          "color": "#06b6d4"
+        },
+        "content": {
+          "body": "Designed variant system with registerVariant()"
+        },
+        "meta": {
+          "order": 2
+        }
+      },
+      {
+        "id": "h3",
+        "type": "entry",
+        "subject": {
+          "title": "Build",
+          "color": "#22c55e"
+        },
+        "content": {
+          "body": "Implemented 9 variants across 5 renderer types"
+        },
+        "meta": {
+          "order": 3
+        }
+      },
+      {
+        "id": "h4",
+        "type": "entry",
+        "subject": {
+          "title": "Ship",
+          "color": "#f59e0b"
+        },
+        "content": {
+          "body": "Deployed to 16 live domains via Vercel"
+        },
+        "meta": {
+          "order": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "variant-highlight",
+    "type": "section",
+    "name": "Centered Text: Highlight Variant",
+    "display": {
+      "layout": "centered-text",
+      "variant": "highlight"
+    },
+    "subject": {
+      "title": "Highlighted Text"
+    },
+    "content": {
+      "body": "The **highlight** variant adds animated **gradient underlines** to bold words in your content. Just use **markdown bold** syntax and the renderer does the rest."
+    }
   }
 ]
