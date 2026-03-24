@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "env:pull": "vercel env pull .env.local",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
