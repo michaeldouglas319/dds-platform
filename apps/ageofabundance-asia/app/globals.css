@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+:root {
+  --color-brand-primary: #0066ff;
+  --color-brand-accent: #00ccaa;
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', monospace;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+/* Dark theme - matches DDS renderer tokens */
+html.dark body {
+  background: hsl(240 10% 3.9%);
+  color: hsl(0 0% 98%);
+}
+
+html:not(.dark) body {
+  background: hsl(0 0% 100%);
+  color: hsl(240 10% 3.9%);
+}

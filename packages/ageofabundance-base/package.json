@@ -1,0 +1,17 @@
+{
+  "name": "@dds/ageofabundance-base",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@dds/types": "workspace:*",
+    "@dds/ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}

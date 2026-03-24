@@ -1,0 +1,40 @@
+{
+  "app": {
+    "name": "ageofabundance-app",
+    "description": "A DDS-powered site",
+    "defaultTheme": "dark"
+  },
+  "navigation": {
+    "items": [
+      { "label": "Home", "path": "/" },
+      { "label": "About", "path": "/about" }
+    ]
+  },
+  "pages": [
+    {
+      "id": "home",
+      "path": "/",
+      "meta": {
+        "title": "Home",
+        "description": "Welcome"
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "section",
+          "name": "hero",
+          "subject": {
+            "title": "Welcome to ageofabundance-app",
+            "subtitle": "Powered by DDS Platform"
+          },
+          "content": {
+            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+          },
+          "display": {
+            "layout": "header"
+          }
+        }
+      ]
+    }
+  ]
+}

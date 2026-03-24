@@ -1,0 +1,58 @@
+{
+  "app": {
+    "name": "Age of Abundance",
+    "description": "Curated goods for the abundant life",
+    "baseUrl": "https://ageofabundance.shop",
+    "defaultTheme": "dark"
+  },
+  "navigation": {
+    "items": [
+      { "label": "Home", "path": "/" },
+      { "label": "Shop", "path": "/shop" },
+      { "label": "About", "path": "/about" }
+    ],
+    "sticky": true
+  },
+  "pages": [
+    {
+      "id": "home",
+      "path": "/",
+      "meta": {
+        "title": "Age of Abundance Shop",
+        "description": "Curated goods for the abundant life"
+      },
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "name": "hero",
+          "subject": {
+            "title": "Age of Abundance",
+            "subtitle": "Curated goods for the abundant life"
+          },
+          "content": {
+            "body": "We believe in a future where technology, creativity, and human potential converge to create unprecedented prosperity for all."
+          },
+          "display": {
+            "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Featured",
+            "subtitle": "Our latest curations"
+          },
+          "content": {
+            "body": "Explore our carefully selected collection of products that embody the spirit of abundance."
+          },
+          "display": {
+            "layout": "centered-text"
+          }
+        }
+      ]
+    }
+  ]
+}
