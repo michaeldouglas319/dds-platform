@@ -1,265 +1,92 @@
 {
   "app": {
-    "name": "Age of Abundance — App",
+    "name": "Age of Abundance",
     "label": "App",
-    "description": "Your dashboard for abundant living",
+    "description": "One umbrella. Two futures. Your move.",
     "baseUrl": "https://ageofabundance.app",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      {
-        "label": "Home",
-        "path": "/"
-      },
-      {
-        "label": "About",
-        "path": "/about"
-      }
+      { "label": "Home", "path": "/" }
     ],
-    "sticky": true
+    "sticky": false
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Age of Abundance — App — Launch",
-        "description": "Your dashboard for abundant living"
+        "title": "Age of Abundance",
+        "description": "One umbrella. Two futures. Your move."
       },
       "sections": [
         {
-          "id": "intro",
-          "type": "intro",
-          "name": "intro",
+          "id": "hero",
+          "type": "hero",
+          "name": "hero",
           "subject": {
-            "title": "Launch"
+            "title": "The future isn't coming. It's already being distributed.",
+            "subtitle": "Age of Abundance"
           },
           "content": {
-            "body": "Your dashboard for abundant living",
+            "body": "Every sector. Every market. Every border. The tools exist right now to build a world of radical abundance — or to extract from it at scale. The only question is which side of that line you stand on.",
             "highlights": [
-              "Track",
-              "Measure",
-              "Optimize",
-              "Automate",
-              "Reflect",
-              "Grow"
+              "Abundance",
+              "Access",
+              "Equity",
+              "Autonomy"
             ]
           },
-          "display": {
-            "layout": "intro"
-          },
-          "meta": {
-            "scrollTarget": "/#stats",
-            "textTransition": "reveal",
-            "textTransitionDuration": 1200,
-            "textTransitionInterval": 4000,
-            "highlightPosition": "bottom",
-            "highlightPrefix": "+"
-          }
+          "display": { "layout": "intro", "accessRoles": ["public"] }
         },
         {
-          "id": "mission",
+          "id": "two-futures",
           "type": "section",
-          "name": "mission",
+          "name": "two-futures",
           "subject": {
-            "title": "Age of Abundance — App"
+            "title": "Two Futures Under One Agnostic Umbrella",
+            "subtitle": "The same technologies. Opposite outcomes."
           },
           "content": {
-            "body": "Track, measure, and amplify the abundance in your life. One dashboard to align your actions with your aspirations."
-          },
-          "display": {
-            "layout": "header"
-          }
-        },
-        {
-          "id": "stats",
-          "type": "section",
-          "name": "stats",
-          "subject": {
-            "title": "By the Numbers",
-            "subtitle": "Key metrics"
-          },
-          "content": {
-            "stats": [
+            "body": "We are platform-agnostic, ideology-agnostic, and border-agnostic. The Age of Abundance doesn't pick sides — it maps both.",
+            "highlights": [
               {
-                "label": "Active Users",
-                "value": "50K+"
+                "subtitle": "The Utopia Path",
+                "description": "A future where decentralized tools, open infrastructure, and shared intelligence raise the floor for everyone. Abundance distributed. Barriers dissolved. Collective prosperity as the default state."
               },
               {
-                "label": "Goals Tracked",
-                "value": "1M+"
-              },
-              {
-                "label": "Integrations",
-                "value": "40+"
-              },
-              {
-                "label": "Uptime",
-                "value": "99.9%"
+                "subtitle": "The Extraction Path",
+                "description": "A future where the same tools let adversaries pump and dump from anywhere at minuscule cost. Borderless exploitation. Synthetic manipulation at scale. Abundance hoarded by those who move fastest."
               }
             ]
           },
-          "display": {
-            "layout": "stats-grid"
-          },
-          "meta": {
-            "columns": 4
-          }
+          "display": { "layout": "two-column", "accessRoles": ["authenticated"] }
         },
         {
-          "id": "vision",
+          "id": "sectors-contact",
           "type": "section",
-          "name": "vision",
+          "name": "sectors-contact",
           "subject": {
-            "title": "Our Vision"
+            "title": "Umbrella Sectors",
+            "subtitle": "The ecosystem we're building across"
           },
           "content": {
-            "body": "A personal operating system for the age of abundance — combining goal tracking, financial wellness, creative output, and well-being into a single, beautiful interface."
-          },
-          "display": {
-            "layout": "text-only"
-          }
-        },
-        {
-          "id": "features",
-          "type": "section",
-          "name": "features",
-          "subject": {
-            "title": "What We Offer",
-            "subtitle": "Choose your path"
-          },
-          "content": {
-            "columns": [
-              {
-                "name": "free",
-                "label": "Free"
-              },
-              {
-                "name": "plus",
-                "label": "Plus",
-                "highlight": true
-              },
-              {
-                "name": "team",
-                "label": "Team"
-              }
-            ],
-            "rows": [
-              {
-                "feature": "Goal Dashboard",
-                "values": {
-                  "free": true,
-                  "plus": true,
-                  "team": true
-                }
-              },
-              {
-                "feature": "AI Insights",
-                "values": {
-                  "free": false,
-                  "plus": true,
-                  "team": true
-                }
-              },
-              {
-                "feature": "Integrations",
-                "values": {
-                  "free": "5",
-                  "plus": "40+",
-                  "team": "Unlimited"
-                }
-              },
-              {
-                "feature": "Team Sharing",
-                "values": {
-                  "free": false,
-                  "plus": false,
-                  "team": true
-                }
-              },
-              {
-                "feature": "Custom Reports",
-                "values": {
-                  "free": false,
-                  "plus": true,
-                  "team": true
-                }
-              }
+            "body": "Each sector operates independently under the Age of Abundance umbrella — unified by shared infrastructure, separated by domain expertise.",
+            "items": [
+              "Commerce — ageofabundance.shop",
+              "Technology — ageofabundance.tech",
+              "Creative & Art — ageofabundance.art",
+              "Knowledge & Wiki — ageofabundance.wiki",
+              "Developer Tools — ageofabundance.dev",
+              "Community & Social — ageofabundance.net",
+              "AI & Intelligence — theageofabundance.ai",
+              "Asia-Pacific — ageofabundance.asia",
+              "Digital Space — ageofabundance.space",
+              "Organization — theageofabundance.org"
             ]
           },
-          "display": {
-            "layout": "feature-matrix"
-          }
-        },
-        {
-          "id": "roadmap",
-          "type": "section",
-          "name": "roadmap",
-          "subject": {
-            "title": "Roadmap"
-          },
-          "display": {
-            "layout": "timeline"
-          },
-          "children": [
-            {
-              "id": "milestone-1",
-              "type": "entry",
-              "subject": {
-                "title": "Alpha",
-                "color": "#6366f1"
-              },
-              "content": {
-                "body": "Personal dashboard with goal tracking, habits, and financial overview"
-              },
-              "meta": {
-                "order": 1
-              }
-            },
-            {
-              "id": "milestone-2",
-              "type": "entry",
-              "subject": {
-                "title": "Beta",
-                "color": "#10b981"
-              },
-              "content": {
-                "body": "AI insights, 40+ integrations, and collaborative goal-setting"
-              },
-              "meta": {
-                "order": 2
-              }
-            },
-            {
-              "id": "milestone-3",
-              "type": "entry",
-              "subject": {
-                "title": "Launch",
-                "color": "#ec4899"
-              },
-              "content": {
-                "body": "Public release with team plans, API, and mobile companion"
-              },
-              "meta": {
-                "order": 3
-              }
-            }
-          ]
-        },
-        {
-          "id": "cta",
-          "type": "section",
-          "name": "cta",
-          "subject": {
-            "title": "Join the Launch"
-          },
-          "content": {
-            "body": "Be part of the age of abundance. ageofabundance.app is just getting started."
-          },
-          "display": {
-            "layout": "centered-text"
-          }
+          "display": { "layout": "sectors-grid", "accessRoles": ["authenticated"] }
         }
       ]
     }

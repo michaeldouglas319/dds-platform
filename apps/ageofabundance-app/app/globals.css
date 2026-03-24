@@ -3,15 +3,15 @@
 :root {
   --color-brand-primary: #6366f1;
   --color-brand-accent: #00ccaa;
+  --color-utopia: #10b981;
+  --color-extraction: #ef4444;
   --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: ui-monospace, 'SF Mono', monospace;
-  --section-gap: 6rem;
   --content-max: 64rem;
   --content-pad: 2rem;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   font-family: var(--font-sans);
@@ -29,22 +29,18 @@ html:not(.dark) body {
   color: hsl(240 10% 3.9%);
 }
 
-/* Section spacing for renderer output */
-main > div,
+/* ─── Layout ─── */
 main > section {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--content-pad);
+  padding: 5rem var(--content-pad);
 }
 
-/* Give each ProjectSection breathing room */
-[class*="projectSection"],
-[data-section] {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+main > section + section {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Hero area — full viewport height */
+/* ─── Section 1: Hero ─── */
 .hero-area {
   min-height: 100vh;
   display: flex;
@@ -55,45 +51,289 @@ main > section {
   padding: 4rem var(--content-pad);
 }
 
-/* Stats grid fix */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 2rem;
+.hero-content {
+  margin-top: 2rem;
+  max-width: 44rem;
+}
+
+.hero-hook {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 1.5rem;
+}
+
+.hero-body {
+  font-size: 1.1rem;
+  opacity: 0.75;
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.85rem;
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  padding: 0.75rem 2rem;
+  background: var(--color-brand-primary);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+.btn-secondary {
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Section headers ─── */
+.section-header {
   text-align: center;
+  margin-bottom: 3rem;
 }
 
-/* Subtle divider between sections */
-main > div + div,
-main > section + section {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+.section-header h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
 }
 
-/* Feature matrix readability */
-table {
-  width: 100%;
-  border-collapse: collapse;
+.section-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.5;
+  margin: 0 0 1rem;
 }
 
-th, td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.section-body {
+  font-size: 1rem;
+  opacity: 0.7;
+  max-width: 36rem;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
-/* Timeline entries */
-[class*="standardCard"] {
-  margin-bottom: 1.5rem;
-  padding: 1.5rem;
-  border-left: 3px solid var(--color-brand-primary);
+/* ─── Section 2: Two Futures ─── */
+.futures-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.future-card {
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 0 0.5rem 0.5rem 0;
 }
 
-/* Responsive */
+.future-card h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.75rem;
+}
+
+.future-card p {
+  font-size: 0.95rem;
+  opacity: 0.7;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.future-card.utopia {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.future-card.utopia h3 {
+  color: var(--color-utopia);
+}
+
+.future-card.extraction {
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.future-card.extraction h3 {
+  color: var(--color-extraction);
+}
+
+/* ─── Section 3: Sectors ─── */
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.sector-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s;
+}
+
+.sector-card:hover {
+  border-color: var(--color-brand-primary);
+}
+
+.sector-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sector-domain {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  opacity: 0.45;
+}
+
+/* ─── Contact + Registration row ─── */
+.contact-registration-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.contact-form,
+.clerk-registration {
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.contact-form h3,
+.clerk-registration h3 {
+  font-size: 1.2rem;
+  margin: 0 0 1rem;
+}
+
+.clerk-registration p {
+  font-size: 0.95rem;
+  opacity: 0.7;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  display: block;
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--color-brand-primary);
+}
+
+.contact-form button {
+  width: 100%;
+}
+
+.registered-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* ─── Auth gate (signed out view for sections 2/3) ─── */
+.auth-gate {
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-gate-content {
+  text-align: center;
+  max-width: 28rem;
+}
+
+.auth-gate-content h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.auth-gate-content p {
+  opacity: 0.6;
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+.auth-gate-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ─── Responsive ─── */
 @media (max-width: 768px) {
   :root {
-    --section-gap: 3rem;
     --content-pad: 1.25rem;
+  }
+
+  .futures-grid,
+  .contact-registration-row {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-hook {
+    font-size: 1.5rem;
   }
 }
