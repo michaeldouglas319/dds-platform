@@ -28,12 +28,41 @@
       },
       "sections": [
         {
-          "id": "hero",
-          "type": "hero",
-          "name": "hero",
+          "id": "intro",
+          "type": "intro",
+          "name": "intro",
           "subject": {
-            "title": "Transform",
-            "subtitle": "Digital experiences for the new era"
+            "title": "Transform"
+          },
+          "content": {
+            "body": "Digital experiences for the new era",
+            "highlights": [
+              "Websites",
+              "Apps",
+              "Campaigns",
+              "Experiences",
+              "Stories",
+              "Brands"
+            ]
+          },
+          "display": {
+            "layout": "intro"
+          },
+          "meta": {
+            "scrollTarget": "/#stats",
+            "textTransition": "reveal",
+            "textTransitionDuration": 1200,
+            "textTransitionInterval": 4000,
+            "highlightPosition": "bottom",
+            "highlightPrefix": "+"
+          }
+        },
+        {
+          "id": "mission",
+          "type": "section",
+          "name": "mission",
+          "subject": {
+            "title": "Age of Abundance — Online"
           },
           "content": {
             "body": "The digital world is the first domain where abundance became real. Infinite copies, zero marginal cost, boundless reach."
@@ -43,15 +72,189 @@
           }
         },
         {
-          "id": "featured",
+          "id": "stats",
           "type": "section",
-          "name": "featured",
+          "name": "stats",
           "subject": {
-            "title": "Landing Pages",
-            "subtitle": "Experiences designed for a world of infinite possibility."
+            "title": "By the Numbers",
+            "subtitle": "Key metrics"
           },
           "content": {
-            "body": "Experiences designed for a world of infinite possibility."
+            "stats": [
+              {
+                "label": "Sites Launched",
+                "value": "200+"
+              },
+              {
+                "label": "Page Views",
+                "value": "50M+"
+              },
+              {
+                "label": "Templates",
+                "value": "75+"
+              },
+              {
+                "label": "Load Time",
+                "value": "<1s"
+              }
+            ]
+          },
+          "display": {
+            "layout": "stats-grid"
+          },
+          "meta": {
+            "columns": 4
+          }
+        },
+        {
+          "id": "vision",
+          "type": "section",
+          "name": "vision",
+          "subject": {
+            "title": "Our Vision"
+          },
+          "content": {
+            "body": "We craft digital experiences that embody the principles of abundance — generous, beautiful, accessible, and built to scale without limits."
+          },
+          "display": {
+            "layout": "text-only"
+          }
+        },
+        {
+          "id": "features",
+          "type": "section",
+          "name": "features",
+          "subject": {
+            "title": "What We Offer",
+            "subtitle": "Choose your path"
+          },
+          "content": {
+            "columns": [
+              {
+                "name": "starter",
+                "label": "Starter"
+              },
+              {
+                "name": "business",
+                "label": "Business",
+                "highlight": true
+              },
+              {
+                "name": "agency",
+                "label": "Agency"
+              }
+            ],
+            "rows": [
+              {
+                "feature": "Templates",
+                "values": {
+                  "starter": "10",
+                  "business": "75+",
+                  "agency": "Unlimited"
+                }
+              },
+              {
+                "feature": "Custom Domain",
+                "values": {
+                  "starter": true,
+                  "business": true,
+                  "agency": true
+                }
+              },
+              {
+                "feature": "AI Content",
+                "values": {
+                  "starter": false,
+                  "business": true,
+                  "agency": true
+                }
+              },
+              {
+                "feature": "Analytics",
+                "values": {
+                  "starter": "Basic",
+                  "business": "Advanced",
+                  "agency": "Enterprise"
+                }
+              },
+              {
+                "feature": "White Label",
+                "values": {
+                  "starter": false,
+                  "business": false,
+                  "agency": true
+                }
+              }
+            ]
+          },
+          "display": {
+            "layout": "feature-matrix"
+          }
+        },
+        {
+          "id": "roadmap",
+          "type": "section",
+          "name": "roadmap",
+          "subject": {
+            "title": "Roadmap"
+          },
+          "display": {
+            "layout": "timeline"
+          },
+          "children": [
+            {
+              "id": "milestone-1",
+              "type": "entry",
+              "subject": {
+                "title": "Template",
+                "color": "#8b5cf6"
+              },
+              "content": {
+                "body": "Launch 75+ production-ready templates powered by DDS renderer"
+              },
+              "meta": {
+                "order": 1
+              }
+            },
+            {
+              "id": "milestone-2",
+              "type": "entry",
+              "subject": {
+                "title": "Generate",
+                "color": "#ec4899"
+              },
+              "content": {
+                "body": "AI-powered content generation and page building from prompts"
+              },
+              "meta": {
+                "order": 2
+              }
+            },
+            {
+              "id": "milestone-3",
+              "type": "entry",
+              "subject": {
+                "title": "Platform",
+                "color": "#06b6d4"
+              },
+              "content": {
+                "body": "Full no-code platform with visual editor and deployment pipeline"
+              },
+              "meta": {
+                "order": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "cta",
+          "type": "section",
+          "name": "cta",
+          "subject": {
+            "title": "Join the Transform"
+          },
+          "content": {
+            "body": "Be part of the age of abundance. ageofabundance.online is just getting started."
           },
           "display": {
             "layout": "centered-text"

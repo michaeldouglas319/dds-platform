@@ -28,12 +28,41 @@
       },
       "sections": [
         {
-          "id": "hero",
-          "type": "hero",
-          "name": "hero",
+          "id": "intro",
+          "type": "intro",
+          "name": "intro",
           "subject": {
-            "title": "Build",
-            "subtitle": "Developer tools for the abundant future"
+            "title": "Build"
+          },
+          "content": {
+            "body": "Developer tools for the abundant future",
+            "highlights": [
+              "APIs",
+              "SDKs",
+              "Open Source",
+              "AI-Native",
+              "Real-Time",
+              "Scalable"
+            ]
+          },
+          "display": {
+            "layout": "intro"
+          },
+          "meta": {
+            "scrollTarget": "/#stats",
+            "textTransition": "reveal",
+            "textTransitionDuration": 1200,
+            "textTransitionInterval": 4000,
+            "highlightPosition": "bottom",
+            "highlightPrefix": "+"
+          }
+        },
+        {
+          "id": "mission",
+          "type": "section",
+          "name": "mission",
+          "subject": {
+            "title": "Age of Abundance — Dev"
           },
           "content": {
             "body": "The builders of abundance need the best tools. Open source, AI-native, and designed for the scale of tomorrow."
@@ -43,15 +72,189 @@
           }
         },
         {
-          "id": "featured",
+          "id": "stats",
           "type": "section",
-          "name": "featured",
+          "name": "stats",
           "subject": {
-            "title": "Developer Portal",
-            "subtitle": "APIs, SDKs, and frameworks that power the age of abundance."
+            "title": "By the Numbers",
+            "subtitle": "Key metrics"
           },
           "content": {
-            "body": "APIs, SDKs, and frameworks that power the age of abundance."
+            "stats": [
+              {
+                "label": "API Endpoints",
+                "value": "200+"
+              },
+              {
+                "label": "SDKs",
+                "value": "12"
+              },
+              {
+                "label": "Open Source Repos",
+                "value": "30+"
+              },
+              {
+                "label": "Developers",
+                "value": "10K+"
+              }
+            ]
+          },
+          "display": {
+            "layout": "stats-grid"
+          },
+          "meta": {
+            "columns": 4
+          }
+        },
+        {
+          "id": "vision",
+          "type": "section",
+          "name": "vision",
+          "subject": {
+            "title": "Our Vision"
+          },
+          "content": {
+            "body": "We provide the infrastructure layer for abundance — APIs, SDKs, and frameworks that make it trivially easy to build products that serve billions."
+          },
+          "display": {
+            "layout": "text-only"
+          }
+        },
+        {
+          "id": "features",
+          "type": "section",
+          "name": "features",
+          "subject": {
+            "title": "What We Offer",
+            "subtitle": "Choose your path"
+          },
+          "content": {
+            "columns": [
+              {
+                "name": "free",
+                "label": "Free Tier"
+              },
+              {
+                "name": "pro",
+                "label": "Pro",
+                "highlight": true
+              },
+              {
+                "name": "enterprise",
+                "label": "Enterprise"
+              }
+            ],
+            "rows": [
+              {
+                "feature": "API Access",
+                "values": {
+                  "free": "1K/day",
+                  "pro": "100K/day",
+                  "enterprise": "Unlimited"
+                }
+              },
+              {
+                "feature": "SDKs",
+                "values": {
+                  "free": true,
+                  "pro": true,
+                  "enterprise": true
+                }
+              },
+              {
+                "feature": "Webhooks",
+                "values": {
+                  "free": false,
+                  "pro": true,
+                  "enterprise": true
+                }
+              },
+              {
+                "feature": "SLA",
+                "values": {
+                  "free": "Best Effort",
+                  "pro": "99.9%",
+                  "enterprise": "99.99%"
+                }
+              },
+              {
+                "feature": "Dedicated Support",
+                "values": {
+                  "free": false,
+                  "pro": false,
+                  "enterprise": true
+                }
+              }
+            ]
+          },
+          "display": {
+            "layout": "feature-matrix"
+          }
+        },
+        {
+          "id": "roadmap",
+          "type": "section",
+          "name": "roadmap",
+          "subject": {
+            "title": "Roadmap"
+          },
+          "display": {
+            "layout": "timeline"
+          },
+          "children": [
+            {
+              "id": "milestone-1",
+              "type": "entry",
+              "subject": {
+                "title": "Ship",
+                "color": "#06b6d4"
+              },
+              "content": {
+                "body": "Launch core APIs with SDKs for JavaScript, Python, Go, and Rust"
+              },
+              "meta": {
+                "order": 1
+              }
+            },
+            {
+              "id": "milestone-2",
+              "type": "entry",
+              "subject": {
+                "title": "Open",
+                "color": "#8b5cf6"
+              },
+              "content": {
+                "body": "Open-source the rendering engine, data layer, and orchestration tools"
+              },
+              "meta": {
+                "order": 2
+              }
+            },
+            {
+              "id": "milestone-3",
+              "type": "entry",
+              "subject": {
+                "title": "Scale",
+                "color": "#f59e0b"
+              },
+              "content": {
+                "body": "Edge deployment, real-time sync, and AI-assisted development"
+              },
+              "meta": {
+                "order": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "cta",
+          "type": "section",
+          "name": "cta",
+          "subject": {
+            "title": "Join the Build"
+          },
+          "content": {
+            "body": "Be part of the age of abundance. ageofabundance.dev is just getting started."
           },
           "display": {
             "layout": "centered-text"

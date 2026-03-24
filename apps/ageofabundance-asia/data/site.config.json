@@ -28,12 +28,41 @@
       },
       "sections": [
         {
-          "id": "hero",
-          "type": "hero",
-          "name": "hero",
+          "id": "intro",
+          "type": "intro",
+          "name": "intro",
           "subject": {
-            "title": "Convergence",
-            "subtitle": "Eastern wisdom meets Western innovation"
+            "title": "Convergence"
+          },
+          "content": {
+            "body": "Eastern wisdom meets Western innovation",
+            "highlights": [
+              "Tokyo",
+              "Shanghai",
+              "Singapore",
+              "Seoul",
+              "Mumbai",
+              "Jakarta"
+            ]
+          },
+          "display": {
+            "layout": "intro"
+          },
+          "meta": {
+            "scrollTarget": "/#stats",
+            "textTransition": "reveal",
+            "textTransitionDuration": 1200,
+            "textTransitionInterval": 4000,
+            "highlightPosition": "bottom",
+            "highlightPrefix": "+"
+          }
+        },
+        {
+          "id": "mission",
+          "type": "section",
+          "name": "mission",
+          "subject": {
+            "title": "Age of Abundance — Asia"
           },
           "content": {
             "body": "The convergence of ancient wisdom and modern technology is reshaping Asia into the epicenter of global abundance."
@@ -43,15 +72,189 @@
           }
         },
         {
-          "id": "featured",
+          "id": "stats",
           "type": "section",
-          "name": "featured",
+          "name": "stats",
           "subject": {
-            "title": "Regional Hub",
-            "subtitle": "Insights from the fastest-growing region on earth."
+            "title": "By the Numbers",
+            "subtitle": "Key metrics"
           },
           "content": {
-            "body": "Insights from the fastest-growing region on earth."
+            "stats": [
+              {
+                "label": "Markets Covered",
+                "value": "15"
+              },
+              {
+                "label": "Contributors",
+                "value": "200+"
+              },
+              {
+                "label": "Languages",
+                "value": "8"
+              },
+              {
+                "label": "Monthly Readers",
+                "value": "500K"
+              }
+            ]
+          },
+          "display": {
+            "layout": "stats-grid"
+          },
+          "meta": {
+            "columns": 4
+          }
+        },
+        {
+          "id": "vision",
+          "type": "section",
+          "name": "vision",
+          "subject": {
+            "title": "Our Vision"
+          },
+          "content": {
+            "body": "Asia is not just participating in the age of abundance — it is leading it. We chronicle the technologies, cultures, and ideas driving this transformation."
+          },
+          "display": {
+            "layout": "text-only"
+          }
+        },
+        {
+          "id": "features",
+          "type": "section",
+          "name": "features",
+          "subject": {
+            "title": "What We Offer",
+            "subtitle": "Choose your path"
+          },
+          "content": {
+            "columns": [
+              {
+                "name": "free",
+                "label": "Free"
+              },
+              {
+                "name": "premium",
+                "label": "Premium",
+                "highlight": true
+              },
+              {
+                "name": "enterprise",
+                "label": "Enterprise"
+              }
+            ],
+            "rows": [
+              {
+                "feature": "Weekly Digest",
+                "values": {
+                  "free": true,
+                  "premium": true,
+                  "enterprise": true
+                }
+              },
+              {
+                "feature": "Deep Analysis",
+                "values": {
+                  "free": false,
+                  "premium": true,
+                  "enterprise": true
+                }
+              },
+              {
+                "feature": "Market Data",
+                "values": {
+                  "free": false,
+                  "premium": true,
+                  "enterprise": true
+                }
+              },
+              {
+                "feature": "Custom Reports",
+                "values": {
+                  "free": false,
+                  "premium": false,
+                  "enterprise": true
+                }
+              },
+              {
+                "feature": "API Access",
+                "values": {
+                  "free": false,
+                  "premium": false,
+                  "enterprise": true
+                }
+              }
+            ]
+          },
+          "display": {
+            "layout": "feature-matrix"
+          }
+        },
+        {
+          "id": "roadmap",
+          "type": "section",
+          "name": "roadmap",
+          "subject": {
+            "title": "Roadmap"
+          },
+          "display": {
+            "layout": "timeline"
+          },
+          "children": [
+            {
+              "id": "milestone-1",
+              "type": "entry",
+              "subject": {
+                "title": "Chronicle",
+                "color": "#ef4444"
+              },
+              "content": {
+                "body": "Launch editorial platform covering abundance across 15 Asian markets"
+              },
+              "meta": {
+                "order": 1
+              }
+            },
+            {
+              "id": "milestone-2",
+              "type": "entry",
+              "subject": {
+                "title": "Translate",
+                "color": "#f97316"
+              },
+              "content": {
+                "body": "Multi-language support with AI translation for 8 languages"
+              },
+              "meta": {
+                "order": 2
+              }
+            },
+            {
+              "id": "milestone-3",
+              "type": "entry",
+              "subject": {
+                "title": "Bridge",
+                "color": "#14b8a6"
+              },
+              "content": {
+                "body": "Cross-border collaboration tools connecting East and West"
+              },
+              "meta": {
+                "order": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "cta",
+          "type": "section",
+          "name": "cta",
+          "subject": {
+            "title": "Join the Convergence"
+          },
+          "content": {
+            "body": "Be part of the age of abundance. ageofabundance.asia is just getting started."
           },
           "display": {
             "layout": "centered-text"

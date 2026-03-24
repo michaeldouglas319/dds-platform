@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "Age of Abundance — Tech",
-    "description": "Technology demos and showcases",
+    "description": "Technology showcases and interactive demos",
     "baseUrl": "https://ageofabundance.tech",
     "defaultTheme": "dark"
   },
@@ -24,16 +24,45 @@
       "path": "/",
       "meta": {
         "title": "Age of Abundance — Tech — Innovate",
-        "description": "Technology demos and showcases"
+        "description": "Technology showcases and interactive demos"
       },
       "sections": [
         {
-          "id": "hero",
-          "type": "hero",
-          "name": "hero",
+          "id": "intro",
+          "type": "intro",
+          "name": "intro",
           "subject": {
-            "title": "Innovate",
-            "subtitle": "Technology demos and showcases"
+            "title": "Innovate"
+          },
+          "content": {
+            "body": "Technology showcases and interactive demos",
+            "highlights": [
+              "AI",
+              "WebGPU",
+              "Edge Computing",
+              "Spatial",
+              "Quantum",
+              "Bio"
+            ]
+          },
+          "display": {
+            "layout": "intro"
+          },
+          "meta": {
+            "scrollTarget": "/#stats",
+            "textTransition": "reveal",
+            "textTransitionDuration": 1200,
+            "textTransitionInterval": 4000,
+            "highlightPosition": "bottom",
+            "highlightPrefix": "+"
+          }
+        },
+        {
+          "id": "mission",
+          "type": "section",
+          "name": "mission",
+          "subject": {
+            "title": "Age of Abundance — Tech"
           },
           "content": {
             "body": "Technology is the engine of abundance. Every breakthrough reduces the cost of the previously impossible."
@@ -43,15 +72,189 @@
           }
         },
         {
-          "id": "featured",
+          "id": "stats",
           "type": "section",
-          "name": "featured",
+          "name": "stats",
           "subject": {
-            "title": "Tech Showcase",
-            "subtitle": "Interactive demos of the technologies shaping our abundant future."
+            "title": "By the Numbers",
+            "subtitle": "Key metrics"
           },
           "content": {
-            "body": "Interactive demos of the technologies shaping our abundant future."
+            "stats": [
+              {
+                "label": "Live Demos",
+                "value": "30+"
+              },
+              {
+                "label": "Technologies",
+                "value": "12"
+              },
+              {
+                "label": "Benchmarks",
+                "value": "100+"
+              },
+              {
+                "label": "Open Source",
+                "value": "80%"
+              }
+            ]
+          },
+          "display": {
+            "layout": "stats-grid"
+          },
+          "meta": {
+            "columns": 4
+          }
+        },
+        {
+          "id": "vision",
+          "type": "section",
+          "name": "vision",
+          "subject": {
+            "title": "Our Vision"
+          },
+          "content": {
+            "body": "Interactive demonstrations of the technologies that are making abundance real — from AI and edge computing to spatial interfaces and quantum algorithms."
+          },
+          "display": {
+            "layout": "text-only"
+          }
+        },
+        {
+          "id": "features",
+          "type": "section",
+          "name": "features",
+          "subject": {
+            "title": "What We Offer",
+            "subtitle": "Choose your path"
+          },
+          "content": {
+            "columns": [
+              {
+                "name": "explore",
+                "label": "Explore"
+              },
+              {
+                "name": "benchmark",
+                "label": "Benchmark",
+                "highlight": true
+              },
+              {
+                "name": "contribute",
+                "label": "Contribute"
+              }
+            ],
+            "rows": [
+              {
+                "feature": "Interactive Demos",
+                "values": {
+                  "explore": true,
+                  "benchmark": true,
+                  "contribute": true
+                }
+              },
+              {
+                "feature": "Performance Data",
+                "values": {
+                  "explore": false,
+                  "benchmark": true,
+                  "contribute": true
+                }
+              },
+              {
+                "feature": "Source Code",
+                "values": {
+                  "explore": false,
+                  "benchmark": false,
+                  "contribute": true
+                }
+              },
+              {
+                "feature": "Custom Benchmarks",
+                "values": {
+                  "explore": false,
+                  "benchmark": true,
+                  "contribute": true
+                }
+              },
+              {
+                "feature": "Research Papers",
+                "values": {
+                  "explore": false,
+                  "benchmark": true,
+                  "contribute": true
+                }
+              }
+            ]
+          },
+          "display": {
+            "layout": "feature-matrix"
+          }
+        },
+        {
+          "id": "roadmap",
+          "type": "section",
+          "name": "roadmap",
+          "subject": {
+            "title": "Roadmap"
+          },
+          "display": {
+            "layout": "timeline"
+          },
+          "children": [
+            {
+              "id": "milestone-1",
+              "type": "entry",
+              "subject": {
+                "title": "Demo",
+                "color": "#ef4444"
+              },
+              "content": {
+                "body": "Launch 30+ interactive technology demos with live benchmarking"
+              },
+              "meta": {
+                "order": 1
+              }
+            },
+            {
+              "id": "milestone-2",
+              "type": "entry",
+              "subject": {
+                "title": "Measure",
+                "color": "#f97316"
+              },
+              "content": {
+                "body": "Standardized abundance-tech benchmarks adopted by the community"
+              },
+              "meta": {
+                "order": 2
+              }
+            },
+            {
+              "id": "milestone-3",
+              "type": "entry",
+              "subject": {
+                "title": "Advance",
+                "color": "#a855f7"
+              },
+              "content": {
+                "body": "Research lab producing papers and open-source implementations"
+              },
+              "meta": {
+                "order": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "cta",
+          "type": "section",
+          "name": "cta",
+          "subject": {
+            "title": "Join the Innovate"
+          },
+          "content": {
+            "body": "Be part of the age of abundance. ageofabundance.tech is just getting started."
           },
           "display": {
             "layout": "centered-text"

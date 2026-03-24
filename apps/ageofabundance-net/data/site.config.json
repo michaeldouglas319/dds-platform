@@ -28,12 +28,41 @@
       },
       "sections": [
         {
-          "id": "hero",
-          "type": "hero",
-          "name": "hero",
+          "id": "intro",
+          "type": "intro",
+          "name": "intro",
           "subject": {
-            "title": "Connect",
-            "subtitle": "APIs and integrations for abundance"
+            "title": "Connect"
+          },
+          "content": {
+            "body": "APIs and integrations for abundance",
+            "highlights": [
+              "REST",
+              "GraphQL",
+              "Webhooks",
+              "Streaming",
+              "Federation",
+              "Mesh"
+            ]
+          },
+          "display": {
+            "layout": "intro"
+          },
+          "meta": {
+            "scrollTarget": "/#stats",
+            "textTransition": "reveal",
+            "textTransitionDuration": 1200,
+            "textTransitionInterval": 4000,
+            "highlightPosition": "bottom",
+            "highlightPrefix": "+"
+          }
+        },
+        {
+          "id": "mission",
+          "type": "section",
+          "name": "mission",
+          "subject": {
+            "title": "Age of Abundance — Network"
           },
           "content": {
             "body": "Networks multiply value. Every new connection creates possibilities that did not exist before."
@@ -43,15 +72,189 @@
           }
         },
         {
-          "id": "featured",
+          "id": "stats",
           "type": "section",
-          "name": "featured",
+          "name": "stats",
           "subject": {
-            "title": "API Hub",
-            "subtitle": "API documentation, integration guides, and developer resources."
+            "title": "By the Numbers",
+            "subtitle": "Key metrics"
           },
           "content": {
-            "body": "API documentation, integration guides, and developer resources."
+            "stats": [
+              {
+                "label": "API Endpoints",
+                "value": "500+"
+              },
+              {
+                "label": "Integrations",
+                "value": "100+"
+              },
+              {
+                "label": "Uptime",
+                "value": "99.99%"
+              },
+              {
+                "label": "Requests/Day",
+                "value": "10M+"
+              }
+            ]
+          },
+          "display": {
+            "layout": "stats-grid"
+          },
+          "meta": {
+            "columns": 4
+          }
+        },
+        {
+          "id": "vision",
+          "type": "section",
+          "name": "vision",
+          "subject": {
+            "title": "Our Vision"
+          },
+          "content": {
+            "body": "The connective tissue of the abundance ecosystem — APIs, protocols, and integration layers that let every venture in our portfolio communicate seamlessly."
+          },
+          "display": {
+            "layout": "text-only"
+          }
+        },
+        {
+          "id": "features",
+          "type": "section",
+          "name": "features",
+          "subject": {
+            "title": "What We Offer",
+            "subtitle": "Choose your path"
+          },
+          "content": {
+            "columns": [
+              {
+                "name": "free",
+                "label": "Free"
+              },
+              {
+                "name": "scale",
+                "label": "Scale",
+                "highlight": true
+              },
+              {
+                "name": "dedicated",
+                "label": "Dedicated"
+              }
+            ],
+            "rows": [
+              {
+                "feature": "API Access",
+                "values": {
+                  "free": "10K/day",
+                  "scale": "1M/day",
+                  "dedicated": "Unlimited"
+                }
+              },
+              {
+                "feature": "GraphQL",
+                "values": {
+                  "free": true,
+                  "scale": true,
+                  "dedicated": true
+                }
+              },
+              {
+                "feature": "Webhooks",
+                "values": {
+                  "free": "5",
+                  "scale": "100",
+                  "dedicated": "Unlimited"
+                }
+              },
+              {
+                "feature": "SLA",
+                "values": {
+                  "free": "99%",
+                  "scale": "99.99%",
+                  "dedicated": "99.999%"
+                }
+              },
+              {
+                "feature": "Dedicated Infra",
+                "values": {
+                  "free": false,
+                  "scale": false,
+                  "dedicated": true
+                }
+              }
+            ]
+          },
+          "display": {
+            "layout": "feature-matrix"
+          }
+        },
+        {
+          "id": "roadmap",
+          "type": "section",
+          "name": "roadmap",
+          "subject": {
+            "title": "Roadmap"
+          },
+          "display": {
+            "layout": "timeline"
+          },
+          "children": [
+            {
+              "id": "milestone-1",
+              "type": "entry",
+              "subject": {
+                "title": "Wire",
+                "color": "#06b6d4"
+              },
+              "content": {
+                "body": "Launch unified API gateway connecting all 14 abundance ventures"
+              },
+              "meta": {
+                "order": 1
+              }
+            },
+            {
+              "id": "milestone-2",
+              "type": "entry",
+              "subject": {
+                "title": "Mesh",
+                "color": "#6366f1"
+              },
+              "content": {
+                "body": "Service mesh with automatic discovery, auth, and rate limiting"
+              },
+              "meta": {
+                "order": 2
+              }
+            },
+            {
+              "id": "milestone-3",
+              "type": "entry",
+              "subject": {
+                "title": "Federate",
+                "color": "#10b981"
+              },
+              "content": {
+                "body": "Open federation protocol for third-party abundance services"
+              },
+              "meta": {
+                "order": 3
+              }
+            }
+          ]
+        },
+        {
+          "id": "cta",
+          "type": "section",
+          "name": "cta",
+          "subject": {
+            "title": "Join the Connect"
+          },
+          "content": {
+            "body": "Be part of the age of abundance. ageofabundance.net is just getting started."
           },
           "display": {
             "layout": "centered-text"
