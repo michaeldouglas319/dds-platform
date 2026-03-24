@@ -2,16 +2,17 @@
   "app": {
     "name": "The Age of Abundance",
     "label": "AI",
-    "description": "Intelligence amplified. Abundance realized.",
+    "description": "A BlackDot Company. Intelligence amplified. Abundance realized.",
     "baseUrl": "https://theageofabundance.ai",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
       { "label": "Home", "path": "/" },
-      { "label": "Portfolio", "path": "https://michaeldouglas.app", "external": true },
-      { "label": "Network", "path": "https://theageofabundance.net", "external": true },
-      { "label": "Organization", "path": "https://theageofabundance.org", "external": true }
+      { "label": "Vision", "path": "/vision" },
+      { "label": "Playground", "path": "/playground" },
+      { "label": "Showcase", "path": "/showcase" },
+      { "label": "michaeldouglas.app", "path": "https://michaeldouglas.app", "external": true }
     ],
     "sticky": true
   },
@@ -20,8 +21,8 @@
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "The Age of Abundance — AI",
-        "description": "Intelligence amplified. Abundance realized."
+        "title": "The Age of Abundance — A BlackDot Company",
+        "description": "Intelligence amplified. Abundance realized. 16 domains. One universal platform."
       },
       "sections": [
         {
@@ -35,7 +36,7 @@
           },
           "display": { "layout": "intro" },
           "meta": {
-            "scrollTarget": "/#vision",
+            "scrollTarget": "/#about",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 3500,
@@ -44,12 +45,12 @@
           }
         },
         {
-          "id": "vision",
+          "id": "about",
           "type": "section",
-          "name": "vision",
-          "subject": { "title": "A New Paradigm" },
+          "name": "about",
+          "subject": { "title": "A BlackDot Company" },
           "content": {
-            "body": "We are building an ecosystem of AI-powered ventures that prove abundance is not a distant dream — it is an engineering problem with a solution. Fourteen domains. One universal platform. Zero artificial scarcity."
+            "body": "The Age of Abundance is a **BlackDot** venture — an ecosystem of AI-powered domains that prove abundance is not a distant dream, but an engineering problem with a solution. We build, launch, and scale ventures across commerce, technology, art, and knowledge. Every product shares one universal platform. Every site is config-driven. Every domain is independently sellable."
           },
           "display": { "layout": "header" }
         },
@@ -57,44 +58,101 @@
           "id": "stats",
           "type": "section",
           "name": "stats",
-          "subject": { "title": "The Ecosystem", "subtitle": "Built on the DDS universal renderer" },
+          "subject": { "title": "The Platform", "subtitle": "Built on the DDS Universal Renderer" },
           "content": {
             "stats": [
               { "label": "Live Domains", "value": "16" },
-              { "label": "Shared Renderers", "value": "28+" },
-              { "label": "Section Types", "value": "50+" },
-              { "label": "Open Source", "value": "100%" }
+              { "label": "Renderers", "value": "28+" },
+              { "label": "Variants", "value": "9" },
+              { "label": "Brands", "value": "3" }
             ]
           },
           "display": { "layout": "stats-grid" },
           "meta": { "columns": 4 }
         },
         {
-          "id": "domains",
+          "id": "brands",
           "type": "section",
-          "name": "domains",
-          "subject": { "title": "The Portfolio", "subtitle": "Every domain serves a unique purpose" },
+          "name": "brands",
+          "subject": { "title": "Three Brands, One Platform" },
+          "content": {
+            "body": "**The Age of Abundance** — 11 domains spanning commerce, art, knowledge, community, and technology. Each domain serves a unique vertical while sharing infrastructure.\n\n**BlackDot** — Engineering tools and creative laboratory. Where precision meets ambition. The technical backbone that powers the ecosystem.\n\n**Michael Douglas** — Personal portfolio and engineering showcase. The origin story."
+          },
+          "display": { "layout": "text-only" }
+        },
+        {
+          "id": "aoa-domains",
+          "type": "section",
+          "name": "aoa-domains",
+          "subject": { "title": "Age of Abundance Domains", "subtitle": "11 ventures across every vertical" },
+          "content": {
+            "columns": [
+              { "name": "tld", "label": "TLD" },
+              { "name": "purpose", "label": "Purpose", "highlight": true },
+              { "name": "stack", "label": "Technology" }
+            ],
+            "rows": [
+              { "feature": "theageofabundance.ai", "description": "Flagship AI hub — you are here", "values": { "tld": ".ai", "purpose": "AI Hub & Flagship", "stack": "Three.js + DDS" } },
+              { "feature": "theageofabundance.net", "description": "API gateway connecting all ventures", "values": { "tld": ".net", "purpose": "API Network", "stack": "Scalar" } },
+              { "feature": "theageofabundance.org", "description": "The organization and holding company", "values": { "tld": ".org", "purpose": "Organization", "stack": "DDS" } },
+              { "feature": "ageofabundance.shop", "description": "Curated marketplace for the abundant life", "values": { "tld": ".shop", "purpose": "E-Commerce", "stack": "Medusa.js" } },
+              { "feature": "ageofabundance.art", "description": "Gallery and art platform", "values": { "tld": ".art", "purpose": "Gallery", "stack": "YARL + Photo Album" } },
+              { "feature": "ageofabundance.wiki", "description": "Open knowledge base", "values": { "tld": ".wiki", "purpose": "Knowledge Base", "stack": "Fumadocs" } },
+              { "feature": "ageofabundance.dev", "description": "Developer blog and tools", "values": { "tld": ".dev", "purpose": "Developer Portal", "stack": "Keystatic" } },
+              { "feature": "ageofabundance.app", "description": "SaaS dashboard for abundant living", "values": { "tld": ".app", "purpose": "SaaS Dashboard", "stack": "Recharts + TanStack" } },
+              { "feature": "ageofabundance.tech", "description": "Interactive technology demos", "values": { "tld": ".tech", "purpose": "Tech Showcase", "stack": "Sandpack + Shiki" } },
+              { "feature": "ageofabundance.space", "description": "Community for abundance thinkers", "values": { "tld": ".space", "purpose": "Community", "stack": "Supabase Realtime" } },
+              { "feature": "ageofabundance.asia", "description": "Eastern wisdom meets Western innovation", "values": { "tld": ".asia", "purpose": "Regional Hub", "stack": "next-intl" } }
+            ]
+          },
+          "display": { "layout": "feature-matrix" }
+        },
+        {
+          "id": "more-domains",
+          "type": "section",
+          "name": "more-domains",
+          "subject": { "title": "Additional Domains", "subtitle": "Expanding the ecosystem" },
+          "content": {
+            "columns": [
+              { "name": "tld", "label": "TLD" },
+              { "name": "purpose", "label": "Purpose", "highlight": true },
+              { "name": "status", "label": "Status" }
+            ],
+            "rows": [
+              { "feature": "ageofabundance.online", "values": { "tld": ".online", "purpose": "Landing Pages", "status": "Live" } },
+              { "feature": "ageofabundance.site", "values": { "tld": ".site", "purpose": "Corporate", "status": "Live" } },
+              { "feature": "ageofabundance.net", "values": { "tld": ".net", "purpose": "API Hub", "status": "Live" } }
+            ]
+          },
+          "display": { "layout": "feature-matrix" }
+        },
+        {
+          "id": "blackdot",
+          "type": "section",
+          "name": "blackdot",
+          "subject": { "title": "BlackDot", "subtitle": "The engineering backbone" },
           "content": {
             "columns": [
               { "name": "domain", "label": "Domain" },
               { "name": "purpose", "label": "Purpose", "highlight": true },
-              { "name": "stack", "label": "Stack" }
+              { "name": "stack", "label": "Technology" }
             ],
             "rows": [
-              { "feature": "theageofabundance.ai", "values": { "domain": "✦", "purpose": "AI Hub", "stack": "Flagship" } },
-              { "feature": "michaeldouglas.app", "values": { "domain": "✦", "purpose": "Portfolio", "stack": "DDS v3" } },
-              { "feature": "ageofabundance.shop", "values": { "domain": "✦", "purpose": "Commerce", "stack": "Medusa" } },
-              { "feature": "ageofabundance.art", "values": { "domain": "✦", "purpose": "Gallery", "stack": "YARL" } },
-              { "feature": "ageofabundance.wiki", "values": { "domain": "✦", "purpose": "Knowledge", "stack": "Fumadocs" } },
-              { "feature": "ageofabundance.dev", "values": { "domain": "✦", "purpose": "Developer", "stack": "Keystatic" } },
-              { "feature": "ageofabundance.app", "values": { "domain": "✦", "purpose": "Dashboard", "stack": "Recharts" } },
-              { "feature": "ageofabundance.tech", "values": { "domain": "✦", "purpose": "Demos", "stack": "Sandpack" } },
-              { "feature": "theageofabundance.net", "values": { "domain": "✦", "purpose": "API Hub", "stack": "Scalar" } },
-              { "feature": "blackdot.dev", "values": { "domain": "●", "purpose": "Engineering", "stack": "Monaco" } },
-              { "feature": "blackdot.space", "values": { "domain": "●", "purpose": "Creative Lab", "stack": "R3F" } }
+              { "feature": "blackdot.dev", "description": "Engineering tools and developer portal", "values": { "domain": "●", "purpose": "Dev Tools", "stack": "Sandpack + Monaco" } },
+              { "feature": "blackdot.space", "description": "Creative laboratory and experiments", "values": { "domain": "●", "purpose": "Creative Lab", "stack": "GSAP + Lenis + R3F" } }
             ]
           },
           "display": { "layout": "feature-matrix" }
+        },
+        {
+          "id": "michael",
+          "type": "section",
+          "name": "michael",
+          "subject": { "title": "michaeldouglas.app", "subtitle": "Where it all started" },
+          "content": {
+            "body": "The personal portfolio and engineering showcase of **Michael Douglas**. Built on DDS v3 — the original universal renderer that powers this entire ecosystem. The proof that one person with the right architecture can ship 16 production sites from a single monorepo."
+          },
+          "display": { "layout": "text-only" }
         },
         {
           "id": "tech",
@@ -102,7 +160,7 @@
           "name": "tech",
           "subject": { "title": "The Technology" },
           "content": {
-            "body": "Every site is powered by the **DDS Universal Renderer** — a config-driven section rendering system where entire pages are expressed as JSON. One renderer. Infinite configurations."
+            "body": "Every site is powered by the **DDS Universal Renderer** — a config-driven section rendering system where entire pages are expressed as JSON. One shared renderer package. 28+ section types. 9 theme variants. Infinite configurations.\n\nThe monorepo uses **pnpm workspaces + Turborepo** for build orchestration. The renderer is a **git submodule** maintained independently. Each app is a **Next.js 14** project that can be extracted and sold as a standalone product.\n\nOpen source packages selected for each vertical: **Medusa.js** (commerce), **Fumadocs** (docs), **Keystatic** (content), **Recharts** (dashboards), **Scalar** (API docs), **Sandpack** (playgrounds), **GSAP + Lenis** (animation), **Supabase** (realtime)."
           },
           "display": { "layout": "text-only" }
         },
@@ -113,19 +171,19 @@
           "subject": { "title": "Roadmap" },
           "display": { "layout": "timeline" },
           "children": [
-            { "id": "p1", "type": "entry", "subject": { "title": "Foundation", "color": "#6366f1" }, "content": { "body": "16 domains live. Shared monorepo. Vercel deployment." }, "meta": { "order": 1 } },
-            { "id": "p2", "type": "entry", "subject": { "title": "Specialization", "color": "#06b6d4" }, "content": { "body": "Domain-specific packages: Medusa, Fumadocs, Scalar, Sandpack." }, "meta": { "order": 2 } },
-            { "id": "p3", "type": "entry", "subject": { "title": "Intelligence", "color": "#10b981" }, "content": { "body": "AI content generation, adaptive layouts, cross-domain synthesis." }, "meta": { "order": 3 } },
-            { "id": "p4", "type": "entry", "subject": { "title": "Scale", "color": "#f59e0b" }, "content": { "body": "Theme variants, physics, community, abundance network." }, "meta": { "order": 4 } }
+            { "id": "p1", "type": "entry", "subject": { "title": "Foundation ✓", "color": "#6366f1" }, "content": { "body": "16 domains live. Shared monorepo. Vercel deployment pipeline. 28+ renderers. 9 theme variants." }, "meta": { "order": 1 } },
+            { "id": "p2", "type": "entry", "subject": { "title": "Specialization", "color": "#06b6d4" }, "content": { "body": "Domain-specific packages integrated: Medusa (commerce), Fumadocs (wiki), Scalar (API docs), Sandpack (demos), Keystatic (blog)." }, "meta": { "order": 2 } },
+            { "id": "p3", "type": "entry", "subject": { "title": "Intelligence", "color": "#10b981" }, "content": { "body": "AI-powered content generation, adaptive layouts, cross-domain knowledge synthesis, and generative section authoring." }, "meta": { "order": 3 } },
+            { "id": "p4", "type": "entry", "subject": { "title": "Scale", "color": "#f59e0b" }, "content": { "body": "React 19 upgrade. R3F + Rapier physics. Community features. Abundance network federation. Custom domain deployment." }, "meta": { "order": 4 } }
           ]
         },
         {
           "id": "cta",
           "type": "section",
           "name": "cta",
-          "subject": { "title": "Explore the Ecosystem" },
+          "subject": { "title": "Explore" },
           "content": {
-            "body": "[michaeldouglas.app](https://michaeldouglas.app) — Portfolio & engineering showcase\n\n[theageofabundance.net](https://theageofabundance.net) — API gateway & network\n\n[theageofabundance.org](https://theageofabundance.org) — The organization"
+            "body": "[theageofabundance.ai/vision](/vision) — Interactive Three.js ecosystem experience\n\n[theageofabundance.ai/playground](/playground) — Physics playground with 7 shape types\n\n[theageofabundance.ai/showcase](/showcase) — Complete DDS renderer catalog with 9 variants\n\n[michaeldouglas.app](https://michaeldouglas.app) — Portfolio & engineering showcase\n\n---\n\n*The Age of Abundance is a BlackDot company.*"
           },
           "display": { "layout": "centered-text" }
         }

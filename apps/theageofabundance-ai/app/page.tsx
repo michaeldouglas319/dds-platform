@@ -37,6 +37,18 @@ export default function Home() {
           </span>
         </h1>
 
+        {/* BlackDot + Michael Douglas attribution */}
+        <p style={{
+          fontSize: '0.75rem',
+          fontFamily: 'var(--font-mono)',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          color: 'var(--text-quaternary)',
+          marginTop: '1rem',
+        }}>
+          A <span style={{ color: 'var(--text-tertiary)' }}>BlackDot</span> Company · <span style={{ color: 'var(--text-tertiary)' }}>Michael Douglas</span>
+        </p>
+
         {/* Subtitle */}
         {hero && (
           <div style={{ marginTop: '2rem', maxWidth: '40rem', textAlign: 'center' }}>
