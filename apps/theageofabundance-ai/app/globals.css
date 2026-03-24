@@ -20,7 +20,7 @@ body {
 }
 
 html.dark body {
-  background: hsl(240 10% 3.9%);
+  background: transparent;
   color: hsl(0 0% 90%);
 }
 
