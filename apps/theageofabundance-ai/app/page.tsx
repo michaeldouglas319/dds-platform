@@ -55,6 +55,23 @@ export default function Home() {
         )}
       </div>
 
+      {/* Interactive experience link */}
+      <div style={{ textAlign: 'center', padding: '2rem' }}>
+        <a href="/vision" style={{
+          display: 'inline-block',
+          padding: '0.8rem 2.5rem',
+          borderRadius: '9999px',
+          background: 'linear-gradient(135deg, #8b5cf6, #06b6d4)',
+          color: 'white',
+          textDecoration: 'none',
+          fontWeight: 600,
+          fontSize: '1rem',
+          letterSpacing: '0.02em',
+        }}>
+          Enter the Experience →
+        </a>
+      </div>
+
       {/* Remaining sections via DDS renderer */}
       <SectionBatchRenderer sections={rest} />
     </main>

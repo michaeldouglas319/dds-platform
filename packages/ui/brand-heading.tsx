@@ -17,6 +17,8 @@ export function BrandHeading({ children, className }: BrandHeadingProps) {
       margin: 0,
       textAlign: 'center',
     }}>
+      <span style={{ opacity: 0.3, fontWeight: 300, fontSize: '0.5em' }}>The</span>
+      {' '}
       <span style={{ opacity: 0.4, fontWeight: 400 }}>Age of</span>
       <br />
       <span>Abundance</span>
