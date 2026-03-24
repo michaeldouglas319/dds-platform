@@ -7,29 +7,31 @@ interface BrandHeadingProps {
   className?: string;
 }
 
-/**
- * Shared brand heading: "Age of Abundance"
- * Pass a child to get "Age of Abundance: {child}"
- *
- * <BrandHeading />              → "Age of Abundance"
- * <BrandHeading>Shop</BrandHeading> → "Age of Abundance: Shop"
- */
 export function BrandHeading({ children, className }: BrandHeadingProps) {
   return (
     <h1 className={className} style={{
-      fontSize: 'clamp(2rem, 5vw, 4rem)',
-      fontWeight: 700,
-      letterSpacing: '-0.02em',
-      lineHeight: 1.1,
+      fontSize: 'clamp(2.5rem, 7vw, 5.5rem)',
+      fontWeight: 800,
+      letterSpacing: '-0.03em',
+      lineHeight: 1.05,
       margin: 0,
+      textAlign: 'center',
     }}>
-      <span style={{ opacity: 0.6 }}>Age of</span>{' '}
+      <span style={{ opacity: 0.4, fontWeight: 400 }}>Age of</span>
+      <br />
       <span>Abundance</span>
       {children && (
-        <>
-          <span style={{ opacity: 0.3, margin: '0 0.3em' }}>:</span>
-          <span>{children}</span>
-        </>
+        <span style={{
+          display: 'block',
+          fontSize: '0.4em',
+          fontWeight: 500,
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+          opacity: 0.5,
+          marginTop: '0.5em',
+        }}>
+          {children}
+        </span>
       )}
     </h1>
   );
