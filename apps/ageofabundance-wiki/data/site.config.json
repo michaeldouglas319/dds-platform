@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-wiki",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Wiki",
+    "description": "The open encyclopedia of abundance",
+    "baseUrl": "https://ageofabundance.wiki",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Wiki — Knowledge",
+        "description": "The open encyclopedia of abundance"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-wiki",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Knowledge",
+            "subtitle": "The open encyclopedia of abundance"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "Knowledge is the foundation of abundance. When information flows freely, innovation accelerates exponentially."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Knowledge Base",
+            "subtitle": "Contribute to the collective understanding of our abundant future."
+          },
+          "content": {
+            "body": "Contribute to the collective understanding of our abundant future."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

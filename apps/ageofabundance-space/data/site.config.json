@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-space",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Space",
+    "description": "A community for abundance thinkers",
+    "baseUrl": "https://ageofabundance.space",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Space — Explore",
+        "description": "A community for abundance thinkers"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-space",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Explore",
+            "subtitle": "A community for abundance thinkers"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "The future belongs to those who believe in the beauty of their ideas. Join a community dedicated to expanding what is possible."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Community",
+            "subtitle": "Conversations, collaborations, and connections that shape tomorrow."
+          },
+          "content": {
+            "body": "Conversations, collaborations, and connections that shape tomorrow."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

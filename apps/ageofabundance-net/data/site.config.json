@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-net",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Network",
+    "description": "APIs and integrations for abundance",
+    "baseUrl": "https://ageofabundance.net",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Network — Connect",
+        "description": "APIs and integrations for abundance"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-net",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Connect",
+            "subtitle": "APIs and integrations for abundance"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "Networks multiply value. Every new connection creates possibilities that did not exist before."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "API Hub",
+            "subtitle": "API documentation, integration guides, and developer resources."
+          },
+          "content": {
+            "body": "API documentation, integration guides, and developer resources."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

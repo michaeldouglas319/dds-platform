@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-dev",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Dev",
+    "description": "Developer tools for the abundant future",
+    "baseUrl": "https://ageofabundance.dev",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Dev — Build",
+        "description": "Developer tools for the abundant future"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-dev",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Build",
+            "subtitle": "Developer tools for the abundant future"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "The builders of abundance need the best tools. Open source, AI-native, and designed for the scale of tomorrow."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Developer Portal",
+            "subtitle": "APIs, SDKs, and frameworks that power the age of abundance."
+          },
+          "content": {
+            "body": "APIs, SDKs, and frameworks that power the age of abundance."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

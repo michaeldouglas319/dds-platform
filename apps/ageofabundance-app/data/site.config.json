@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-app",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — App",
+    "description": "Your dashboard for abundant living",
+    "baseUrl": "https://ageofabundance.app",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — App — Launch",
+        "description": "Your dashboard for abundant living"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-app",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Launch",
+            "subtitle": "Your dashboard for abundant living"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "Track, measure, and amplify the abundance in your life. One dashboard to align your actions with your aspirations."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "SaaS Dashboard",
+            "subtitle": "Tools that transform intention into impact."
+          },
+          "content": {
+            "body": "Tools that transform intention into impact."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

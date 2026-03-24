@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-tech",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Tech",
+    "description": "Technology demos and showcases",
+    "baseUrl": "https://ageofabundance.tech",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Tech — Innovate",
+        "description": "Technology demos and showcases"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-tech",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Innovate",
+            "subtitle": "Technology demos and showcases"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "Technology is the engine of abundance. Every breakthrough reduces the cost of the previously impossible."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Tech Showcase",
+            "subtitle": "Interactive demos of the technologies shaping our abundant future."
+          },
+          "content": {
+            "body": "Interactive demos of the technologies shaping our abundant future."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

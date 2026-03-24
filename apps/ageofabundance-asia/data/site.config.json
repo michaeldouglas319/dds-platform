@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-asia",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Asia",
+    "description": "Eastern wisdom meets Western innovation",
+    "baseUrl": "https://ageofabundance.asia",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Asia — Convergence",
+        "description": "Eastern wisdom meets Western innovation"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-asia",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Convergence",
+            "subtitle": "Eastern wisdom meets Western innovation"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "The convergence of ancient wisdom and modern technology is reshaping Asia into the epicenter of global abundance."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Regional Hub",
+            "subtitle": "Insights from the fastest-growing region on earth."
+          },
+          "content": {
+            "body": "Insights from the fastest-growing region on earth."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

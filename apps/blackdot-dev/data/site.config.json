@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "blackdot-dev",
-    "description": "A DDS-powered site",
+    "name": "Blackdot",
+    "description": "Engineering at the edge of possibility",
+    "baseUrl": "https://blackdot.dev",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Blackdot — Precision",
+        "description": "Engineering at the edge of possibility"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to blackdot-dev",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Precision",
+            "subtitle": "Engineering at the edge of possibility"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "Every complex system begins with a single point of clarity. Blackdot is where precision meets ambition."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Developer Portal",
+            "subtitle": "Developer tools and technical resources built for the discerning engineer."
+          },
+          "content": {
+            "body": "Developer tools and technical resources built for the discerning engineer."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

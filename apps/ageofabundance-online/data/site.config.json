@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-online",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Online",
+    "description": "Digital experiences for the new era",
+    "baseUrl": "https://ageofabundance.online",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Online — Transform",
+        "description": "Digital experiences for the new era"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-online",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Transform",
+            "subtitle": "Digital experiences for the new era"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "The digital world is the first domain where abundance became real. Infinite copies, zero marginal cost, boundless reach."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Landing Pages",
+            "subtitle": "Experiences designed for a world of infinite possibility."
+          },
+          "content": {
+            "body": "Experiences designed for a world of infinite possibility."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]

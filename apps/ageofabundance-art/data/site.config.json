@@ -1,37 +1,60 @@
 {
   "app": {
-    "name": "ageofabundance-art",
-    "description": "A DDS-powered site",
+    "name": "Age of Abundance — Art",
+    "description": "Where art meets infinite possibility",
+    "baseUrl": "https://ageofabundance.art",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "About", "path": "/about" }
-    ]
+      {
+        "label": "Home",
+        "path": "/"
+      },
+      {
+        "label": "About",
+        "path": "/about"
+      }
+    ],
+    "sticky": true
   },
   "pages": [
     {
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Home",
-        "description": "Welcome"
+        "title": "Age of Abundance — Art — Creation",
+        "description": "Where art meets infinite possibility"
       },
       "sections": [
         {
           "id": "hero",
-          "type": "section",
+          "type": "hero",
           "name": "hero",
           "subject": {
-            "title": "Welcome to ageofabundance-art",
-            "subtitle": "Powered by DDS Platform"
+            "title": "Creation",
+            "subtitle": "Where art meets infinite possibility"
           },
           "content": {
-            "body": "This site is built on the DDS universal renderer system. Edit data/site.config.json to customize."
+            "body": "Art is the language of abundance. Every creation expands the boundaries of what we thought possible."
           },
           "display": {
             "layout": "header"
+          }
+        },
+        {
+          "id": "featured",
+          "type": "section",
+          "name": "featured",
+          "subject": {
+            "title": "Gallery",
+            "subtitle": "Discover works that capture the essence of a world without limits."
+          },
+          "content": {
+            "body": "Discover works that capture the essence of a world without limits."
+          },
+          "display": {
+            "layout": "centered-text"
           }
         }
       ]
