@@ -1,0 +1,646 @@
+[
+  {
+    "id": "showcase-intro",
+    "type": "section",
+    "name": "Intro",
+    "display": { "layout": "intro" },
+    "subject": { "title": "The Age of Abundance" },
+    "content": {
+      "body": "Building Tomorrow",
+      "highlights": [
+        "Autonomous Systems",
+        "Decentralized Intelligence",
+        "Post-Scarcity Economics",
+        "Regenerative Design",
+        "Collective Knowledge"
+      ]
+    },
+    "meta": {
+      "scrollTarget": "#showcase-header",
+      "textTransition": "reveal",
+      "textTransitionInterval": 4000,
+      "highlightPrefix": "+",
+      "highlightPosition": "bottom"
+    }
+  },
+  {
+    "id": "showcase-header",
+    "type": "section",
+    "name": "Ecosystem Overview",
+    "display": { "layout": "header" },
+    "subject": { "title": "The Abundance Ecosystem" },
+    "content": {
+      "body": "A convergence of artificial intelligence, distributed systems, and regenerative economics is reshaping what it means to build, share, and thrive. The Age of Abundance is not a prediction — it is an architecture."
+    }
+  },
+  {
+    "id": "showcase-centered-text",
+    "type": "section",
+    "name": "Centered Vision",
+    "display": { "layout": "centered-text" },
+    "subject": { "title": "Intelligence Without Borders" },
+    "content": {
+      "body": "When knowledge flows freely and computation becomes abundant, the constraints that defined the industrial era dissolve. What remains is human creativity amplified by machine intelligence — a partnership that unlocks capabilities neither could achieve alone."
+    },
+    "meta": {
+      "centerMobile": true
+    }
+  },
+  {
+    "id": "showcase-text-only",
+    "type": "section",
+    "name": "Manifesto",
+    "display": { "layout": "text-only" },
+    "subject": { "title": "Why Abundance Matters" },
+    "content": {
+      "body": "For most of human history, economics was defined by scarcity. Resources were finite, access was gated, and zero-sum thinking dominated every institution.\n\nBut three forces are converging to rewrite these rules:\n\n1. **AI-driven automation** reduces the marginal cost of intellectual labor toward zero\n2. **Decentralized networks** eliminate rent-seeking intermediaries\n3. **Open-source culture** turns knowledge into a public good\n\nThe result is not utopia — it is a new design space where the bottleneck shifts from *having enough* to *coordinating well*."
+    }
+  },
+  {
+    "id": "showcase-stats-grid",
+    "type": "section",
+    "name": "Platform Metrics",
+    "display": { "layout": "stats-grid" },
+    "subject": {
+      "title": "Abundance by the Numbers",
+      "subtitle": "Key metrics from the ecosystem as of Q1 2026"
+    },
+    "content": {
+      "stats": [
+        {
+          "label": "AI Models Deployed",
+          "value": 847,
+          "icon": "🤖",
+          "description": "Production inference endpoints across the network"
+        },
+        {
+          "label": "Knowledge Nodes",
+          "value": 12400,
+          "suffix": "+",
+          "icon": "🧠",
+          "description": "Interconnected data sources feeding the intelligence layer"
+        },
+        {
+          "label": "Cost Reduction",
+          "value": 94,
+          "suffix": "%",
+          "icon": "📉",
+          "description": "Average operational cost savings vs. traditional infrastructure"
+        },
+        {
+          "label": "Community Contributors",
+          "value": 3200,
+          "icon": "👥",
+          "description": "Active builders, researchers, and maintainers"
+        },
+        {
+          "label": "Latency (p99)",
+          "value": 12,
+          "suffix": "ms",
+          "icon": "⚡",
+          "description": "Edge inference response time at the 99th percentile"
+        },
+        {
+          "label": "Open Source Repos",
+          "value": 186,
+          "icon": "📦",
+          "description": "Public repositories powering the platform stack"
+        }
+      ],
+      "body": "These numbers reflect a system designed for compounding returns — every new node, model, and contributor makes the entire network more capable."
+    },
+    "meta": {
+      "columns": 3,
+      "animationDuration": 2500
+    }
+  },
+  {
+    "id": "showcase-feature-matrix",
+    "type": "section",
+    "name": "Platform Comparison",
+    "display": { "layout": "feature-matrix" },
+    "subject": {
+      "title": "How Abundance Compares",
+      "subtitle": "Feature comparison across paradigms"
+    },
+    "content": {
+      "columns": [
+        { "name": "traditional", "label": "Traditional Cloud" },
+        { "name": "web3", "label": "Web3 / Crypto" },
+        { "name": "abundance", "label": "Age of Abundance", "highlight": true }
+      ],
+      "rows": [
+        {
+          "feature": "AI-Native Architecture",
+          "description": "Built from the ground up for machine learning workloads",
+          "values": { "traditional": false, "web3": false, "abundance": true }
+        },
+        {
+          "feature": "Decentralized Governance",
+          "description": "No single entity controls the network",
+          "values": { "traditional": false, "web3": true, "abundance": true }
+        },
+        {
+          "feature": "Sub-100ms Edge Inference",
+          "description": "Real-time AI at the network edge",
+          "values": { "traditional": "Partial", "web3": false, "abundance": true }
+        },
+        {
+          "feature": "Zero Marginal Cost Scaling",
+          "description": "Adding capacity without proportional cost increase",
+          "values": { "traditional": false, "web3": false, "abundance": true }
+        },
+        {
+          "feature": "Open Knowledge Layer",
+          "description": "Shared intelligence that improves with participation",
+          "values": { "traditional": false, "web3": "Limited", "abundance": true }
+        },
+        {
+          "feature": "Enterprise SLA Support",
+          "description": "Guaranteed uptime and performance contracts",
+          "values": { "traditional": true, "web3": false, "abundance": true }
+        },
+        {
+          "feature": "Regenerative Economics",
+          "description": "Value creation that strengthens rather than depletes",
+          "values": { "traditional": false, "web3": "Partial", "abundance": true }
+        }
+      ],
+      "footer": "The Age of Abundance platform combines the reliability of traditional infrastructure with the openness of decentralized systems — and adds an AI-native intelligence layer that neither can match alone."
+    },
+    "meta": {
+      "highlightColumn": "abundance"
+    }
+  },
+  {
+    "id": "showcase-timeline",
+    "type": "section",
+    "name": "Roadmap",
+    "display": { "layout": "timeline" },
+    "children": [
+      {
+        "id": "timeline-phase-1",
+        "type": "section",
+        "name": "Phase 1: Foundation",
+        "display": { "layout": "standard-card" },
+        "subject": {
+          "title": "Phase 1 — Foundation Layer",
+          "color": "#5b9fd0"
+        },
+        "content": {
+          "body": "Core infrastructure deployment: distributed compute mesh, knowledge graph seeding, and the initial AI model registry.",
+          "highlights": [
+            "Deployed edge inference network across 14 regions",
+            "Established open knowledge protocol v1.0",
+            "Launched contributor onboarding pipeline"
+          ]
+        },
+        "meta": {
+          "period": "Q1 2025 — Q2 2025",
+          "order": 1
+        }
+      },
+      {
+        "id": "timeline-phase-2",
+        "type": "section",
+        "name": "Phase 2: Intelligence",
+        "display": { "layout": "standard-card" },
+        "subject": {
+          "title": "Phase 2 — Intelligence Amplification",
+          "color": "#8b5cf6"
+        },
+        "content": {
+          "body": "Layering autonomous reasoning on top of the foundation. Multi-agent orchestration, self-improving knowledge graphs, and adaptive resource allocation.",
+          "highlights": [
+            "Multi-agent task decomposition engine",
+            "Self-healing infrastructure with <5min MTTR",
+            "Knowledge graph reached 10,000+ node milestone"
+          ]
+        },
+        "meta": {
+          "period": "Q3 2025 — Q4 2025",
+          "order": 2
+        }
+      },
+      {
+        "id": "timeline-phase-3",
+        "type": "section",
+        "name": "Phase 3: Abundance",
+        "display": { "layout": "standard-card" },
+        "subject": {
+          "title": "Phase 3 — Post-Scarcity Operations",
+          "color": "#10b981"
+        },
+        "content": {
+          "body": "The system begins generating more value than it consumes. Zero-marginal-cost scaling, community-governed resource allocation, and fully autonomous optimization loops.",
+          "highlights": [
+            "Operational costs approach zero through self-optimization",
+            "Community governance DAO operational",
+            "First fully autonomous product launches"
+          ]
+        },
+        "meta": {
+          "period": "Q1 2026 — Present",
+          "order": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "showcase-standard-card",
+    "type": "section",
+    "name": "Core Principle",
+    "display": { "layout": "standard-card" },
+    "subject": {
+      "title": "Compounding Intelligence",
+      "role": "Core Design Principle",
+      "color": "#f59e0b"
+    },
+    "content": {
+      "body": "Every interaction with the Abundance platform feeds back into a shared intelligence layer. Unlike traditional systems where usage creates wear, here usage creates wisdom. The platform literally becomes smarter with every query, every contribution, and every connection.",
+      "highlights": [
+        "Federated learning ensures privacy while enabling collective improvement",
+        "Knowledge graph edges strengthen with repeated traversal",
+        "Model fine-tuning happens continuously based on real-world feedback",
+        "Contributors earn reputation that compounds into governance weight"
+      ]
+    },
+    "meta": {
+      "company": "Abundance Research Lab",
+      "period": "Ongoing",
+      "location": "Distributed"
+    }
+  },
+  {
+    "id": "showcase-profile",
+    "type": "section",
+    "name": "Architect Profile",
+    "display": { "layout": "profile" },
+    "subject": {
+      "title": "The Vision Behind Abundance",
+      "subtitle": "About the Architect"
+    },
+    "content": {
+      "body": "The Age of Abundance grew from a simple observation: the tools we use to build the future should embody the future we want to build. If we believe in open access, our platforms must be open. If we believe in collective intelligence, our systems must learn collectively.",
+      "body2": "This is not just a technology platform — it is a proof of concept for a new economic paradigm. One where the act of participating creates value for everyone, where intelligence is a commons, and where the default state is abundance rather than scarcity.",
+      "decorativeText": "AOA",
+      "decorativeFontSize": "6rem"
+    },
+    "media": {
+      "image": {
+        "src": "/images/placeholder-profile.jpg",
+        "srcLarge": "/images/placeholder-profile-large.jpg",
+        "placeholder": "/images/placeholder-profile-thumb.jpg",
+        "alt": "The Age of Abundance architect"
+      }
+    },
+    "links": {
+      "primary": {
+        "text": "Read the Whitepaper",
+        "href": "/whitepaper"
+      }
+    },
+    "meta": {
+      "buttonStyle": "secondary",
+      "buttonIcon": "arrow-right"
+    }
+  },
+  {
+    "id": "showcase-project-header",
+    "type": "section",
+    "name": "Project Header",
+    "display": { "layout": "project-header" },
+    "subject": { "title": "Neural Mesh Network" },
+    "content": {
+      "body": "A distributed compute fabric that routes AI inference requests to the nearest capable node, achieving sub-10ms latency at global scale."
+    },
+    "media": {
+      "background": {
+        "src": "/images/placeholder-bg.jpg",
+        "srcLarge": "/images/placeholder-bg-large.jpg",
+        "placeholder": "/images/placeholder-bg-thumb.jpg"
+      }
+    },
+    "links": {
+      "primary": {
+        "text": "View Documentation",
+        "href": "/projects/neural-mesh"
+      },
+      "roles": ["Systems Architecture", "Distributed Computing", "Edge AI"]
+    }
+  },
+  {
+    "id": "showcase-project-summary",
+    "type": "section",
+    "name": "Knowledge Engine",
+    "display": { "layout": "project-summary" },
+    "subject": {
+      "title": "Knowledge Engine",
+      "color": "#8b5cf6"
+    },
+    "content": {
+      "body": "An autonomous knowledge graph that ingests, connects, and surfaces insights from thousands of data sources. It learns what matters by observing how humans interact with information.",
+      "decorativeText": "KE",
+      "decorativeFontSize": "2.5rem"
+    },
+    "media": {
+      "model": {
+        "type": "laptop",
+        "alt": "Knowledge Engine dashboard preview",
+        "textures": [
+          {
+            "src": "/images/placeholder-screen.jpg",
+            "srcSet": "/images/placeholder-screen.jpg 800w, /images/placeholder-screen-large.jpg 1440w",
+            "placeholder": "/images/placeholder-screen-thumb.jpg"
+          }
+        ]
+      }
+    },
+    "links": {
+      "primary": {
+        "text": "Explore the Engine",
+        "href": "/projects/knowledge-engine"
+      }
+    },
+    "meta": {
+      "alternate": false,
+      "index": 1
+    }
+  },
+  {
+    "id": "showcase-image-only",
+    "type": "section",
+    "name": "Architecture Diagram",
+    "display": { "layout": "image-only" },
+    "meta": {
+      "image": {
+        "src": "/images/placeholder-architecture.jpg",
+        "srcWidth": 1280,
+        "srcLarge": "/images/placeholder-architecture-large.jpg",
+        "srcLargeWidth": 2560,
+        "placeholder": "/images/placeholder-architecture-thumb.jpg"
+      },
+      "width": 1280,
+      "height": 720,
+      "alt": "Age of Abundance system architecture diagram showing the interconnected layers of compute, intelligence, and governance",
+      "plain": false
+    }
+  },
+  {
+    "id": "showcase-image-text",
+    "type": "section",
+    "name": "Distributed Compute",
+    "display": { "layout": "image-text" },
+    "subject": { "title": "Compute at the Edge" },
+    "content": {
+      "body": "Traditional cloud architectures centralize compute in a handful of regions, creating latency bottlenecks and single points of failure. The Abundance network distributes inference across thousands of edge nodes, each capable of running optimized models locally.\n\nThe result: responses that feel instant, costs that decrease with scale, and resilience that improves as the network grows."
+    },
+    "media": {
+      "themedImage": {
+        "dark": {
+          "src": "/images/placeholder-edge-dark.jpg",
+          "srcLarge": "/images/placeholder-edge-dark-large.jpg",
+          "placeholder": "/images/placeholder-edge-dark-thumb.jpg"
+        },
+        "light": {
+          "src": "/images/placeholder-edge-light.jpg",
+          "srcLarge": "/images/placeholder-edge-light-large.jpg",
+          "placeholder": "/images/placeholder-edge-light-thumb.jpg"
+        },
+        "width": 940,
+        "height": 500,
+        "alt": "Edge compute network visualization",
+        "sizes": "(max-width: 768px) 100vw, 940px"
+      }
+    },
+    "display": {
+      "layout": "image-text",
+      "imagePosition": "above"
+    }
+  },
+  {
+    "id": "showcase-side-by-side",
+    "type": "section",
+    "name": "Open Protocol",
+    "display": { "layout": "side-by-side" },
+    "subject": { "title": "The Open Knowledge Protocol" },
+    "content": {
+      "body": "At the heart of the Abundance ecosystem is a protocol for sharing knowledge without surrendering control. Contributors publish structured insights — research findings, model weights, curated datasets — into a shared graph. Each contribution is attributed, versioned, and composable.\n\nThe protocol ensures that knowledge flows freely while creators retain provenance. It is designed so that sharing always benefits the sharer — a fundamental inversion of the extractive data models that dominate today's internet."
+    },
+    "media": {
+      "image": "/images/placeholder-protocol.jpg"
+    },
+    "meta": {
+      "company": "Open Knowledge Foundation"
+    }
+  },
+  {
+    "id": "showcase-background-columns",
+    "type": "section",
+    "name": "Regenerative Economics",
+    "display": { "layout": "background-columns" },
+    "subject": { "title": "Regenerative by Design" },
+    "content": {
+      "body": "Traditional platforms extract value from their participants. The Abundance platform inverts this: every interaction strengthens the network, every contribution compounds, and every participant benefits from the collective intelligence.\n\nThis is not idealism — it is mechanism design. When the incentive structure rewards creation over extraction, abundance emerges naturally."
+    },
+    "media": {
+      "backgroundFull": {
+        "src": "/images/placeholder-regen-bg.jpg",
+        "srcLarge": "/images/placeholder-regen-bg-large.jpg",
+        "width": 1920,
+        "height": 1080,
+        "placeholder": "/images/placeholder-regen-bg-thumb.jpg",
+        "alt": "Regenerative systems visualization"
+      }
+    }
+  },
+  {
+    "id": "showcase-sidebar-images",
+    "type": "section",
+    "name": "Multi-Agent Systems",
+    "display": { "layout": "sidebar-images" },
+    "subject": { "title": "Autonomous Agent Orchestration" },
+    "content": {
+      "body": "The Abundance platform coordinates fleets of specialized AI agents that decompose complex tasks, collaborate on solutions, and verify each other's work. Each agent has a narrow expertise — code generation, research synthesis, data validation, creative ideation — and the orchestration layer composes them into workflows that exceed any single model's capability.\n\nThis multi-agent architecture means the platform can tackle problems that are too complex for any monolithic system, while maintaining the interpretability and reliability that production systems demand."
+    },
+    "media": {
+      "sidebarImages": [
+        {
+          "dark": {
+            "src": "/images/placeholder-agents-dark-1.jpg",
+            "srcLarge": "/images/placeholder-agents-dark-1-large.jpg",
+            "placeholder": "/images/placeholder-agents-dark-1-thumb.jpg"
+          },
+          "light": {
+            "src": "/images/placeholder-agents-light-1.jpg",
+            "srcLarge": "/images/placeholder-agents-light-1-large.jpg",
+            "placeholder": "/images/placeholder-agents-light-1-thumb.jpg"
+          },
+          "width": 400,
+          "height": 300,
+          "alt": "Agent orchestration dashboard",
+          "sizes": "(max-width: 768px) 100vw, 400px"
+        },
+        {
+          "dark": {
+            "src": "/images/placeholder-agents-dark-2.jpg",
+            "srcLarge": "/images/placeholder-agents-dark-2-large.jpg",
+            "placeholder": "/images/placeholder-agents-dark-2-thumb.jpg"
+          },
+          "light": {
+            "src": "/images/placeholder-agents-light-2.jpg",
+            "srcLarge": "/images/placeholder-agents-light-2-large.jpg",
+            "placeholder": "/images/placeholder-agents-light-2-thumb.jpg"
+          },
+          "width": 400,
+          "height": 300,
+          "alt": "Agent task decomposition flow",
+          "sizes": "(max-width: 768px) 100vw, 400px"
+        }
+      ]
+    }
+  },
+  {
+    "id": "showcase-carousel",
+    "type": "section",
+    "name": "Platform Gallery",
+    "display": { "layout": "carousel" },
+    "meta": {
+      "images": [
+        {
+          "src": "/images/placeholder-gallery-1.jpg",
+          "srcSet": "/images/placeholder-gallery-1.jpg 800w, /images/placeholder-gallery-1-large.jpg 1600w",
+          "alt": "Knowledge graph visualization showing 12,000+ interconnected nodes"
+        },
+        {
+          "src": "/images/placeholder-gallery-2.jpg",
+          "srcSet": "/images/placeholder-gallery-2.jpg 800w, /images/placeholder-gallery-2-large.jpg 1600w",
+          "alt": "Real-time inference dashboard with global latency heatmap"
+        },
+        {
+          "src": "/images/placeholder-gallery-3.jpg",
+          "srcSet": "/images/placeholder-gallery-3.jpg 800w, /images/placeholder-gallery-3-large.jpg 1600w",
+          "alt": "Multi-agent workflow builder with drag-and-drop orchestration"
+        },
+        {
+          "src": "/images/placeholder-gallery-4.jpg",
+          "srcSet": "/images/placeholder-gallery-4.jpg 800w, /images/placeholder-gallery-4-large.jpg 1600w",
+          "alt": "Community contribution metrics and governance voting interface"
+        }
+      ],
+      "width": 1280,
+      "height": 720,
+      "placeholder": "/images/placeholder-gallery-thumb.jpg"
+    }
+  },
+  {
+    "id": "showcase-featured-overlay",
+    "type": "section",
+    "name": "Call to Action",
+    "display": { "layout": "featured-overlay" },
+    "subject": { "title": "Join the Abundance Network" },
+    "content": {
+      "body": "Whether you are a researcher, engineer, designer, or simply someone who believes the future should be built differently — there is a place for you in this ecosystem. Every contribution compounds. Every participant makes the network smarter."
+    },
+    "media": {
+      "backgroundFull": {
+        "src": "/images/placeholder-cta-bg.jpg",
+        "srcLarge": "/images/placeholder-cta-bg-large.jpg",
+        "width": 1920,
+        "height": 800,
+        "placeholder": "/images/placeholder-cta-bg-thumb.jpg",
+        "alt": "Abstract network visualization",
+        "sizes": "100vw"
+      }
+    },
+    "links": {
+      "primary": {
+        "text": "Get Started",
+        "href": "/onboarding"
+      }
+    },
+    "meta": {
+      "buttonStyle": {
+        "secondary": false,
+        "iconHoverShift": true,
+        "icon": "arrow-right"
+      }
+    }
+  },
+  {
+    "id": "showcase-code-diff",
+    "type": "section",
+    "name": "Config Evolution",
+    "display": { "layout": "code-diff" },
+    "subject": {
+      "title": "From Scarcity to Abundance",
+      "subtitle": "How the configuration paradigm evolves"
+    },
+    "content": {
+      "body": "The old way required manual provisioning, static allocation, and constant human oversight. The Abundance way uses declarative intent — describe what you need, and the network figures out how to deliver it optimally.",
+      "before": {
+        "code": "// Traditional: Manual resource allocation\nconst cluster = new CloudCluster({\n  region: 'us-east-1',\n  instances: 12,\n  instanceType: 'p4d.24xlarge',\n  costPerHour: 32.77,\n  autoScale: false,\n  monitoring: 'manual',\n  failover: 'none'\n});\n\n// Fixed capacity, fixed cost, fixed location\nawait cluster.deploy();\nawait cluster.warmUp(300); // 5 min cold start",
+        "language": "typescript",
+        "label": "Before: Static Infrastructure"
+      },
+      "after": {
+        "code": "// Abundance: Declarative intent\nconst mesh = abundance.inference({\n  intent: 'real-time-classification',\n  latencyTarget: '< 15ms',\n  budget: 'minimize',\n  resilience: 'self-healing',\n  scaling: 'automatic',\n  learning: true\n});\n\n// Dynamic, global, self-optimizing\nawait mesh.activate(); // Instant — always warm",
+        "language": "typescript",
+        "label": "After: Abundance Network"
+      }
+    },
+    "meta": {
+      "showLineNumbers": true,
+      "highlightLines": [3, 4, 5, 6, 7]
+    }
+  },
+  {
+    "id": "showcase-index-grid",
+    "type": "section",
+    "name": "Content Index",
+    "display": { "layout": "index-grid" },
+    "subject": {
+      "title": "Explore the Ecosystem",
+      "description": "Dive deeper into the components that make the Age of Abundance possible."
+    },
+    "content": {
+      "body": "Each section represents a major domain of the platform. Sign in to access restricted research and governance materials."
+    }
+  },
+  {
+    "id": "showcase-signal-lines",
+    "type": "section",
+    "name": "Neural Network Visualization",
+    "display": { "layout": "signal-lines" },
+    "subject": {
+      "color": "#0a0a0a"
+    },
+    "spatial": {
+      "position": [0.0, 0.0, 0.0],
+      "rotation": [0.0, 0.0, -0.15]
+    },
+    "meta": {
+      "height": "60vh",
+      "colorLine": "#1a1a2e",
+      "colorSignal": "#5b9fd0",
+      "colorSignal2": "#8b5cf6",
+      "colorSignal3": "#10b981",
+      "useColor2": true,
+      "useColor3": true,
+      "lineCount": 80,
+      "spreadHeight": 3.5,
+      "spreadDepth": 2.0,
+      "curveLength": 4.0,
+      "straightLength": 3.0,
+      "curvePower": 2.5,
+      "waveSpeed": 0.3,
+      "waveHeight": 0.15,
+      "lineOpacity": 0.25,
+      "signalCount": 24,
+      "speedGlobal": 0.8,
+      "trailLength": 0.4,
+      "bloomStrength": 1.2,
+      "bloomRadius": 0.6
+    }
+  }
+]
