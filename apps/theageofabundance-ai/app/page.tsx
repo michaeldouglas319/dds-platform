@@ -56,7 +56,14 @@ export default function Home() {
       </div>
 
       {/* Interactive experience link */}
-      <div style={{ textAlign: 'center', padding: '2rem' }}>
+      <div style={{
+        textAlign: 'center',
+        padding: '2rem',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '0.75rem',
+        justifyContent: 'center',
+      }}>
         <a href="/vision" style={{
           display: 'inline-block',
           padding: '0.8rem 2.5rem',
@@ -68,7 +75,37 @@ export default function Home() {
           fontSize: '1rem',
           letterSpacing: '0.02em',
         }}>
-          Enter the Experience →
+          Enter the Experience &rarr;
+        </a>
+        <a href="/playground" style={{
+          display: 'inline-block',
+          padding: '0.8rem 2rem',
+          borderRadius: '9999px',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          color: 'rgba(255, 255, 255, 0.85)',
+          textDecoration: 'none',
+          fontWeight: 500,
+          fontSize: '0.9rem',
+          letterSpacing: '0.02em',
+          backdropFilter: 'blur(8px)',
+        }}>
+          Playground
+        </a>
+        <a href="/showcase" style={{
+          display: 'inline-block',
+          padding: '0.8rem 2rem',
+          borderRadius: '9999px',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          color: 'rgba(255, 255, 255, 0.85)',
+          textDecoration: 'none',
+          fontWeight: 500,
+          fontSize: '0.9rem',
+          letterSpacing: '0.02em',
+          backdropFilter: 'blur(8px)',
+        }}>
+          Showcase
         </a>
       </div>
 

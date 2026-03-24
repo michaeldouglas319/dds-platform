@@ -10,6 +10,10 @@
   --content-pad: 2rem;
 }
 
+html {
+  background: #050510 !important;
+}
+
 html,
 body {
   margin: 0;
@@ -17,11 +21,27 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
 }
 
 html.dark body {
   background: transparent;
   color: hsl(0 0% 90%);
+}
+
+/* Override renderer CSS vars for transparent backgrounds */
+html.dark {
+  --background: 5 5 16;
+  --backgroundLight: rgba(5, 5, 16, 0);
+  --rgbBackground: 5 5 16;
+  --opacity: 0%;
+}
+
+html.dark *,
+html.dark [class*="project"],
+html.dark [class*="Section"] {
+  --background: rgba(5, 5, 16, 0);
+  --backgroundLight: rgba(5, 5, 16, 0);
 }
 
 html:not(.dark) body {
@@ -88,6 +108,42 @@ th, td {
   border-left: 3px solid var(--color-brand-primary);
   background: rgba(255, 255, 255, 0.02);
   border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Nav bar — mobile responsive */
+@media (min-width: 769px) {
+  .nav-hamburger { display: none !important; }
+  .nav-mobile-menu { display: none !important; }
+}
+
+@media (max-width: 768px) {
+  .nav-links-desktop { display: none !important; }
+  .nav-hamburger { display: block !important; }
+}
+
+/* Force all renderer backgrounds transparent for gravity particles */
+html.dark *::after,
+html.dark *::before {
+  --background: transparent !important;
+  --background1: transparent !important;
+  --background2: transparent !important;
+  --background3: transparent !important;
+  --backgroundLight: transparent !important;
+}
+
+html.dark [class*="projectSection"],
+html.dark [class*="section"],
+html.dark [class*="Section"],
+html.dark [class*="project"],
+html.dark [class*="Background"],
+html.dark main,
+html.dark main > div,
+html.dark main > section,
+html.dark [data-section],
+html.dark [data-light] {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
 }
 
 /* Responsive */

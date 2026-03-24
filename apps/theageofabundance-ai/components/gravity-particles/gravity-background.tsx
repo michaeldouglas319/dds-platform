@@ -24,22 +24,23 @@ const WELLS = [
   { position: [0, 0, 0], mass: 40, captureRadius: 0.6, id: 'core' },
   { position: [-4, 2, -2], mass: 20, captureRadius: 0.4, id: 'left' },
   { position: [4, -1, -1], mass: 20, captureRadius: 0.4, id: 'right' },
+  { position: [2, -3, 1], mass: 15, captureRadius: 0.4, id: 'lower' },
 ];
 
 const EMITTERS = [
-  { position: [8, 4, 2], rate: 12, initialSpeed: 1.2, spread: 1 },
-  { position: [-8, -3, 3], rate: 10, initialSpeed: 1.0, spread: 1 },
-  { position: [0, 8, -2], rate: 8, initialSpeed: 1.5, spread: 1.5 },
-  { position: [-5, -6, 1], rate: 8, initialSpeed: 1.3, spread: 0.8 },
-  { position: [6, 5, -3], rate: 6, initialSpeed: 1.1, spread: 1.2 },
+  { position: [8, 4, 2], rate: 25, initialSpeed: 1.2, spread: 1 },
+  { position: [-8, -3, 3], rate: 22, initialSpeed: 1.0, spread: 1 },
+  { position: [0, 8, -2], rate: 20, initialSpeed: 1.5, spread: 1.5 },
+  { position: [-5, -6, 1], rate: 18, initialSpeed: 1.3, spread: 0.8 },
+  { position: [6, 5, -3], rate: 15, initialSpeed: 1.1, spread: 1.2 },
 ];
 
 const THRESHOLDS = [
-  { count: 50, color: [0.15, 0.1, 0.25], bloom: 0 },
-  { count: 200, color: [0.35, 0.2, 0.65], bloom: 0.2 },
-  { count: 500, color: [0.55, 0.3, 0.95], bloom: 0.5 },
-  { count: 1000, color: [0.9, 0.5, 1.0], bloom: 0.8 },
-  { count: 2000, color: [1.0, 0.8, 1.0], bloom: 1.2 },
+  { count: 20, color: [0.3, 0.1, 0.5], bloom: 0.1 },
+  { count: 100, color: [0.6, 0.15, 0.9], bloom: 0.3 },
+  { count: 300, color: [0.8, 0.2, 1.0], bloom: 0.6 },
+  { count: 600, color: [1.0, 0.4, 1.0], bloom: 0.9 },
+  { count: 1200, color: [1.0, 0.7, 1.0], bloom: 1.3 },
 ];
 
 export function GravityBackground() {
@@ -76,7 +77,7 @@ export function GravityBackground() {
     composer.addPass(bloomPass);
 
     // Simulation
-    const sim = new GravitySimulation({ maxParticles: 4096, damping: 0.998, maxAge: 25 });
+    const sim = new GravitySimulation({ maxParticles: 4096, damping: 0.998, maxAge: 35 });
 
     WELLS.forEach((cfg, i) => {
       sim.addWell(new GravityWell({ ...cfg, id: cfg.id || `well-${i}` }));
@@ -87,7 +88,7 @@ export function GravityBackground() {
     });
 
     // Particle renderer
-    const particleRenderer = new ParticleRenderer({ maxParticles: 4096, pointSize: 2.5 });
+    const particleRenderer = new ParticleRenderer({ maxParticles: 4096, pointSize: 3.5 });
     scene.add(particleRenderer.points);
 
     // Threshold config
