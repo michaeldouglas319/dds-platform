@@ -8,6 +8,7 @@ const navLinks = [
   { label: 'Vision', href: '/vision' },
   { label: 'Playground', href: '/playground' },
   { label: 'Showcase', href: '/showcase' },
+  { label: 'Variants', href: '/variants' },
 ];
 
 const externalLinks = [
