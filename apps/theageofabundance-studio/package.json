@@ -4,12 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "env:pull": "vercel env pull .env.local",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.39.0",
     "@dds/config": "workspace:*",
     "@dds/hooks": "workspace:*",
     "@dds/renderer": "workspace:*",
