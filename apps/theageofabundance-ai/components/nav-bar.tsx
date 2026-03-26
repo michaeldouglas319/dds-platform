@@ -12,7 +12,7 @@ const navLinks = [
 ];
 
 const externalLinks = [
-  { label: 'michaeldouglas.app', href: 'https://michaeldouglas.app' },
+  { label: 'blackdot.dev', href: 'https://blackdot.dev' },
 ];
 
 export function NavBar() {

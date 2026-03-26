@@ -10,7 +10,7 @@
     "items": [
       { "label": "Home", "path": "/" },
       { "label": "AI Hub", "path": "https://theageofabundance.ai", "external": true },
-      { "label": "Portfolio", "path": "https://michaeldouglas.app", "external": true },
+      { "label": "Portfolio", "path": "https://blackdot.dev", "external": true },
       { "label": "Network", "path": "https://theageofabundance.net", "external": true }
     ],
     "sticky": true
@@ -85,7 +85,7 @@
           "name": "cta",
           "subject": { "title": "The Ecosystem" },
           "content": {
-            "body": "[theageofabundance.ai](https://theageofabundance.ai) — AI hub & flagship\n\n[michaeldouglas.app](https://michaeldouglas.app) — Engineering portfolio\n\n[theageofabundance.net](https://theageofabundance.net) — API network"
+            "body": "[theageofabundance.ai](https://theageofabundance.ai) — AI hub & flagship\n\n[blackdot.dev](https://blackdot.dev) — Engineering portfolio\n\n[theageofabundance.net](https://theageofabundance.net) — API network"
           },
           "display": { "layout": "centered-text" }
         }

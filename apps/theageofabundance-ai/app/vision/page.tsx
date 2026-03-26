@@ -655,7 +655,7 @@ export default function VisionPage() {
             }}>
               ← Back to Home
             </a>
-            <a href="https://michaeldouglas.app" style={{
+            <a href="https://blackdot.dev" style={{
               padding: '0.8rem 2rem',
               borderRadius: '9999px',
               border: '1px solid rgba(255,255,255,0.2)',
@@ -665,7 +665,7 @@ export default function VisionPage() {
               fontSize: '1rem',
               transition: 'border-color 0.2s',
             }}>
-              michaeldouglas.app →
+              blackdot.dev →
             </a>
           </div>
           <p style={{

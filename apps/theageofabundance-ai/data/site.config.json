@@ -12,7 +12,7 @@
       { "label": "Vision", "path": "/vision" },
       { "label": "Playground", "path": "/playground" },
       { "label": "Showcase", "path": "/showcase" },
-      { "label": "michaeldouglas.app", "path": "https://michaeldouglas.app", "external": true }
+      { "label": "blackdot.dev", "path": "https://blackdot.dev", "external": true }
     ],
     "sticky": true
   },
@@ -76,7 +76,7 @@
           "name": "brands",
           "subject": { "title": "Three Brands, One Platform" },
           "content": {
-            "body": "**The Age of Abundance** — 11 domains spanning commerce, art, knowledge, community, and technology. Each domain serves a unique vertical while sharing infrastructure.\n\n**BlackDot** — Engineering tools and creative laboratory. Where precision meets ambition. The technical backbone that powers the ecosystem.\n\n**Michael Douglas** — Personal portfolio and engineering showcase. The origin story."
+            "body": "**The Age of Abundance** — 11 domains spanning commerce, art, knowledge, community, and technology. Each domain serves a unique vertical while sharing infrastructure.\n\n**BlackDot** — Engineering tools and creative laboratory. Where precision meets ambition. The technical backbone that powers the ecosystem.\n\n**The MD** — Personal portfolio and engineering showcase. The origin story."
           },
           "display": { "layout": "text-only" }
         },
@@ -148,9 +148,9 @@
           "id": "michael",
           "type": "section",
           "name": "michael",
-          "subject": { "title": "michaeldouglas.app", "subtitle": "Where it all started" },
+          "subject": { "title": "blackdot.dev", "subtitle": "Where it all started" },
           "content": {
-            "body": "The personal portfolio and engineering showcase of **Michael Douglas**. Built on DDS v3 — the original universal renderer that powers this entire ecosystem. The proof that one person with the right architecture can ship 16 production sites from a single monorepo."
+            "body": "The personal portfolio and engineering showcase of **The MD**. Built on DDS v3 — the original universal renderer that powers this entire ecosystem. The proof that one person with the right architecture can ship 16 production sites from a single monorepo."
           },
           "display": { "layout": "text-only" }
         },
@@ -183,7 +183,7 @@
           "name": "cta",
           "subject": { "title": "Explore" },
           "content": {
-            "body": "[theageofabundance.ai/vision](/vision) — Interactive Three.js ecosystem experience\n\n[theageofabundance.ai/playground](/playground) — Physics playground with 7 shape types\n\n[theageofabundance.ai/showcase](/showcase) — Complete DDS renderer catalog with 9 variants\n\n[michaeldouglas.app](https://michaeldouglas.app) — Portfolio & engineering showcase\n\n---\n\n*The Age of Abundance is a BlackDot company.*"
+            "body": "[theageofabundance.ai/vision](/vision) — Interactive Three.js ecosystem experience\n\n[theageofabundance.ai/playground](/playground) — Physics playground with 7 shape types\n\n[theageofabundance.ai/showcase](/showcase) — Complete DDS renderer catalog with 9 variants\n\n[blackdot.dev](https://blackdot.dev) — Portfolio & engineering showcase\n\n---\n\n*The Age of Abundance is a BlackDot company.*"
           },
           "display": { "layout": "centered-text" }
         }

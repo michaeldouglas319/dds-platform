@@ -37,7 +37,7 @@ export default function Home() {
           </span>
         </h1>
 
-        {/* BlackDot + Michael Douglas attribution */}
+        {/* BlackDot + The MD attribution */}
         <p style={{
           fontSize: '0.75rem',
           fontFamily: 'var(--font-mono)',
@@ -46,7 +46,7 @@ export default function Home() {
           color: 'var(--text-quaternary)',
           marginTop: '1rem',
         }}>
-          A <span style={{ color: 'var(--text-tertiary)' }}>BlackDot</span> Company · <span style={{ color: 'var(--text-tertiary)' }}>Michael Douglas</span>
+          A <span style={{ color: 'var(--text-tertiary)' }}>BlackDot</span> Company · <span style={{ color: 'var(--text-tertiary)' }}>The MD</span>
         </p>
 
         {/* Subtitle */}

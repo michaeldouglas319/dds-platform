@@ -10,7 +10,7 @@
     "items": [
       { "label": "Home", "path": "/" },
       { "label": "AI Hub", "path": "https://theageofabundance.ai", "external": true },
-      { "label": "Portfolio", "path": "https://michaeldouglas.app", "external": true },
+      { "label": "Portfolio", "path": "https://blackdot.dev", "external": true },
       { "label": "Organization", "path": "https://theageofabundance.org", "external": true }
     ],
     "sticky": true
@@ -109,7 +109,7 @@
           "name": "cta",
           "subject": { "title": "Explore" },
           "content": {
-            "body": "[theageofabundance.ai](https://theageofabundance.ai) — The AI hub\n\n[michaeldouglas.app](https://michaeldouglas.app) — Engineering portfolio\n\n[theageofabundance.org](https://theageofabundance.org) — The organization"
+            "body": "[theageofabundance.ai](https://theageofabundance.ai) — The AI hub\n\n[blackdot.dev](https://blackdot.dev) — Engineering portfolio\n\n[theageofabundance.org](https://theageofabundance.org) — The organization"
           },
           "display": { "layout": "centered-text" }
         }
