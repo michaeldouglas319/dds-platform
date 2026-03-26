@@ -1,9 +1,9 @@
 {
   "app": {
-    "name": "Blackdot",
-    "label": "Dev",
-    "description": "Engineering at the edge of possibility",
-    "baseUrl": "https://blackdot.dev",
+    "name": "blackdot.partners",
+    "label": "Art",
+    "description": "Coming soon",
+    "baseUrl": "https://blackdot.partners",
     "defaultTheme": "dark"
   },
   "navigation": {
@@ -20,8 +20,8 @@
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Blackdot — Precision",
-        "description": "Engineering at the edge of possibility"
+        "title": "blackdot.partners — Partners",
+        "description": "Coming soon"
       },
       "sections": [
         {
@@ -29,17 +29,17 @@
           "type": "intro",
           "name": "intro",
           "subject": {
-            "title": "Precision"
+            "title": "Partners"
           },
           "content": {
-            "body": "Engineering at the edge of possibility",
+            "body": "Coming soon",
             "highlights": [
-              "Systems",
-              "Performance",
-              "Security",
-              "Architecture",
-              "Craft",
-              "Depth"
+              "Visual",
+              "Generative",
+              "Interactive",
+              "Immersive",
+              "Collaborative",
+              "Timeless"
             ]
           },
           "display": {

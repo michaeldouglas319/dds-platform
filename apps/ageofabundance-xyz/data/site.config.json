@@ -1,9 +1,9 @@
 {
   "app": {
-    "name": "Blackdot",
-    "label": "Dev",
-    "description": "Engineering at the edge of possibility",
-    "baseUrl": "https://blackdot.dev",
+    "name": "ageofabundance.xyz",
+    "label": "Art",
+    "description": "Coming soon",
+    "baseUrl": "https://ageofabundance.xyz",
     "defaultTheme": "dark"
   },
   "navigation": {
@@ -20,8 +20,8 @@
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "Blackdot — Precision",
-        "description": "Engineering at the edge of possibility"
+        "title": "ageofabundance.xyz — XYZ",
+        "description": "Coming soon"
       },
       "sections": [
         {
@@ -29,17 +29,17 @@
           "type": "intro",
           "name": "intro",
           "subject": {
-            "title": "Precision"
+            "title": "XYZ"
           },
           "content": {
-            "body": "Engineering at the edge of possibility",
+            "body": "Coming soon",
             "highlights": [
-              "Systems",
-              "Performance",
-              "Security",
-              "Architecture",
-              "Craft",
-              "Depth"
+              "Visual",
+              "Generative",
+              "Interactive",
+              "Immersive",
+              "Collaborative",
+              "Timeless"
             ]
           },
           "display": {
@@ -62,7 +62,7 @@
             "title": "Join the Founding Membership"
           },
           "content": {
-            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://blackdot.partners)"
+            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://theageofabundance.ai)"
           },
           "display": {
             "layout": "centered-text"
