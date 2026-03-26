@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { ThemeProviderV2 } from '@dds/renderer';
-import '@dds/renderer/lib/themes/theme-variants.css';
 import siteConfig from '../data/site.config.json';
 import './globals.css';
 

@@ -53,10 +53,10 @@ export default function Home() {
               </div>
             )}
 
-            {/* Showcase Link */}
-            <div style={{ marginTop: '2rem' }}>
+            {/* Demo Links */}
+            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               <Link
-                href="/showcase"
+                href="/sections"
                 style={{
                   display: 'inline-block',
                   padding: '0.75rem 1.5rem',
@@ -77,7 +77,31 @@ export default function Home() {
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
-                View Component Showcase →
+                View All Sections →
+              </Link>
+              <Link
+                href="/demo"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  background: 'var(--color-brand-accent)',
+                  color: 'black',
+                  textDecoration: 'none',
+                  fontWeight: 500,
+                  fontSize: '0.95rem',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = '0.8';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = '1';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                Demo Page →
               </Link>
             </div>
           </div>
