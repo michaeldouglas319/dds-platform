@@ -8,10 +8,10 @@
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "AI Hub", "path": "https://theageofabundance.ai", "external": true },
-      { "label": "Portfolio", "path": "https://blackdot.dev", "external": true },
-      { "label": "Network", "path": "https://theageofabundance.net", "external": true }
+      {
+        "label": "Home",
+        "path": "/"
+      }
     ],
     "sticky": true
   },
@@ -28,14 +28,25 @@
           "id": "intro",
           "type": "intro",
           "name": "intro",
-          "subject": { "title": "The Age of Abundance" },
+          "subject": {
+            "title": "The Age of Abundance"
+          },
           "content": {
             "body": "The Organization",
-            "highlights": ["Mission", "Vision", "Team", "Ventures", "Impact", "Future"]
+            "highlights": [
+              "Mission",
+              "Vision",
+              "Team",
+              "Ventures",
+              "Impact",
+              "Future"
+            ]
           },
-          "display": { "layout": "intro" },
+          "display": {
+            "layout": "intro"
+          },
           "meta": {
-            "scrollTarget": "/#about",
+            "scrollTarget": "/#waitlist",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 4000,
@@ -44,50 +55,18 @@
           }
         },
         {
-          "id": "about",
+          "id": "waitlist",
           "type": "section",
-          "name": "about",
-          "subject": { "title": "About" },
-          "content": {
-            "body": "The Age of Abundance is a holding company and innovation lab dedicated to proving that abundance-oriented businesses outperform scarcity-driven ones. We build, launch, and scale ventures across commerce, technology, art, and knowledge."
+          "name": "waitlist",
+          "subject": {
+            "title": "Join the Founding Membership"
           },
-          "display": { "layout": "header" }
-        },
-        {
-          "id": "stats",
-          "type": "section",
-          "name": "stats",
-          "subject": { "title": "By the Numbers" },
           "content": {
-            "stats": [
-              { "label": "Ventures", "value": "16" },
-              { "label": "Domains", "value": "16" },
-              { "label": "Founded", "value": "2025" },
-              { "label": "Open Source", "value": "100%" }
-            ]
+            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://ageofabundance.app)"
           },
-          "display": { "layout": "stats-grid" },
-          "meta": { "columns": 4 }
-        },
-        {
-          "id": "mission",
-          "type": "section",
-          "name": "mission",
-          "subject": { "title": "Mission" },
-          "content": {
-            "body": "To demonstrate that when you build for abundance — generous margins, open systems, shared infrastructure — the result is not just more ethical, but more profitable. Every venture we launch tests this thesis in a different vertical."
-          },
-          "display": { "layout": "text-only" }
-        },
-        {
-          "id": "cta",
-          "type": "section",
-          "name": "cta",
-          "subject": { "title": "The Ecosystem" },
-          "content": {
-            "body": "[theageofabundance.ai](https://theageofabundance.ai) — AI hub & flagship\n\n[blackdot.dev](https://blackdot.dev) — Engineering portfolio\n\n[theageofabundance.net](https://theageofabundance.net) — API network"
-          },
-          "display": { "layout": "centered-text" }
+          "display": {
+            "layout": "centered-text"
+          }
         }
       ]
     }

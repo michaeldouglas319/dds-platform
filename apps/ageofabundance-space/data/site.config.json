@@ -11,10 +11,6 @@
       {
         "label": "Home",
         "path": "/"
-      },
-      {
-        "label": "About",
-        "path": "/about"
       }
     ],
     "sticky": true
@@ -50,7 +46,7 @@
             "layout": "intro"
           },
           "meta": {
-            "scrollTarget": "/#stats",
+            "scrollTarget": "/#waitlist",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 4000,
@@ -59,203 +55,14 @@
           }
         },
         {
-          "id": "mission",
+          "id": "waitlist",
           "type": "section",
-          "name": "mission",
+          "name": "waitlist",
           "subject": {
-            "title": "Age of Abundance — Space"
+            "title": "Join the Founding Membership"
           },
           "content": {
-            "body": "The future belongs to those who believe in the beauty of their ideas. Join a community dedicated to expanding what is possible."
-          },
-          "display": {
-            "layout": "header"
-          }
-        },
-        {
-          "id": "stats",
-          "type": "section",
-          "name": "stats",
-          "subject": {
-            "title": "By the Numbers",
-            "subtitle": "Key metrics"
-          },
-          "content": {
-            "stats": [
-              {
-                "label": "Members",
-                "value": "25K+"
-              },
-              {
-                "label": "Discussions",
-                "value": "100K+"
-              },
-              {
-                "label": "Events Hosted",
-                "value": "500+"
-              },
-              {
-                "label": "Mentorships",
-                "value": "2,000+"
-              }
-            ]
-          },
-          "display": {
-            "layout": "stats-grid"
-          },
-          "meta": {
-            "columns": 4
-          }
-        },
-        {
-          "id": "vision",
-          "type": "section",
-          "name": "vision",
-          "subject": {
-            "title": "Our Vision"
-          },
-          "content": {
-            "body": "A space for thinkers, builders, and dreamers to connect around the shared belief that abundance is not just possible — it is inevitable."
-          },
-          "display": {
-            "layout": "text-only"
-          }
-        },
-        {
-          "id": "features",
-          "type": "section",
-          "name": "features",
-          "subject": {
-            "title": "What We Offer",
-            "subtitle": "Choose your path"
-          },
-          "content": {
-            "columns": [
-              {
-                "name": "member",
-                "label": "Member"
-              },
-              {
-                "name": "creator",
-                "label": "Creator",
-                "highlight": true
-              },
-              {
-                "name": "patron",
-                "label": "Patron"
-              }
-            ],
-            "rows": [
-              {
-                "feature": "Community Access",
-                "values": {
-                  "member": true,
-                  "creator": true,
-                  "patron": true
-                }
-              },
-              {
-                "feature": "Create Spaces",
-                "values": {
-                  "member": false,
-                  "creator": true,
-                  "patron": true
-                }
-              },
-              {
-                "feature": "Host Events",
-                "values": {
-                  "member": false,
-                  "creator": true,
-                  "patron": true
-                }
-              },
-              {
-                "feature": "Fund Projects",
-                "values": {
-                  "member": false,
-                  "creator": false,
-                  "patron": true
-                }
-              },
-              {
-                "feature": "Mentorship Program",
-                "values": {
-                  "member": false,
-                  "creator": true,
-                  "patron": true
-                }
-              }
-            ]
-          },
-          "display": {
-            "layout": "feature-matrix"
-          }
-        },
-        {
-          "id": "roadmap",
-          "type": "section",
-          "name": "roadmap",
-          "subject": {
-            "title": "Roadmap"
-          },
-          "display": {
-            "layout": "timeline"
-          },
-          "children": [
-            {
-              "id": "milestone-1",
-              "type": "entry",
-              "subject": {
-                "title": "Gather",
-                "color": "#f97316"
-              },
-              "content": {
-                "body": "Launch community platform with forums, events, and member profiles"
-              },
-              "meta": {
-                "order": 1
-              }
-            },
-            {
-              "id": "milestone-2",
-              "type": "entry",
-              "subject": {
-                "title": "Connect",
-                "color": "#06b6d4"
-              },
-              "content": {
-                "body": "Mentorship matching, project collaborations, and local meetups"
-              },
-              "meta": {
-                "order": 2
-              }
-            },
-            {
-              "id": "milestone-3",
-              "type": "entry",
-              "subject": {
-                "title": "Thrive",
-                "color": "#22c55e"
-              },
-              "content": {
-                "body": "Self-sustaining ecosystem with patron funding and creator economy"
-              },
-              "meta": {
-                "order": 3
-              }
-            }
-          ]
-        },
-        {
-          "id": "cta",
-          "type": "section",
-          "name": "cta",
-          "subject": {
-            "title": "Join the Explore"
-          },
-          "content": {
-            "body": "Be part of the age of abundance. ageofabundance.space is just getting started."
+            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://ageofabundance.app)"
           },
           "display": {
             "layout": "centered-text"

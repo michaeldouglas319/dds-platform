@@ -8,10 +8,10 @@
   },
   "navigation": {
     "items": [
-      { "label": "Home", "path": "/" },
-      { "label": "AI Hub", "path": "https://theageofabundance.ai", "external": true },
-      { "label": "Portfolio", "path": "https://blackdot.dev", "external": true },
-      { "label": "Organization", "path": "https://theageofabundance.org", "external": true }
+      {
+        "label": "Home",
+        "path": "/"
+      }
     ],
     "sticky": true
   },
@@ -28,14 +28,25 @@
           "id": "intro",
           "type": "intro",
           "name": "intro",
-          "subject": { "title": "The Abundance Network" },
+          "subject": {
+            "title": "The Abundance Network"
+          },
           "content": {
             "body": "Connect Everything",
-            "highlights": ["REST", "GraphQL", "Webhooks", "Streaming", "Federation", "Mesh"]
+            "highlights": [
+              "REST",
+              "GraphQL",
+              "Webhooks",
+              "Streaming",
+              "Federation",
+              "Mesh"
+            ]
           },
-          "display": { "layout": "intro" },
+          "display": {
+            "layout": "intro"
+          },
           "meta": {
-            "scrollTarget": "/#stats",
+            "scrollTarget": "/#waitlist",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 4000,
@@ -44,74 +55,18 @@
           }
         },
         {
-          "id": "mission",
+          "id": "waitlist",
           "type": "section",
-          "name": "mission",
-          "subject": { "title": "The Connective Tissue" },
-          "content": {
-            "body": "Every venture in the Age of Abundance ecosystem communicates through this network. Unified APIs, shared authentication, cross-domain data flow — all orchestrated through a single gateway."
+          "name": "waitlist",
+          "subject": {
+            "title": "Join the Founding Membership"
           },
-          "display": { "layout": "header" }
-        },
-        {
-          "id": "stats",
-          "type": "section",
-          "name": "stats",
-          "subject": { "title": "Network Status", "subtitle": "Real-time" },
           "content": {
-            "stats": [
-              { "label": "API Endpoints", "value": "200+" },
-              { "label": "Connected Services", "value": "16" },
-              { "label": "Uptime", "value": "99.99%" },
-              { "label": "Avg Response", "value": "<50ms" }
-            ]
+            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://ageofabundance.app)"
           },
-          "display": { "layout": "stats-grid" },
-          "meta": { "columns": 4 }
-        },
-        {
-          "id": "services",
-          "type": "section",
-          "name": "services",
-          "subject": { "title": "Connected Services", "subtitle": "The abundance mesh" },
-          "content": {
-            "columns": [
-              { "name": "service", "label": "Service" },
-              { "name": "protocol", "label": "Protocol", "highlight": true },
-              { "name": "status", "label": "Status" }
-            ],
-            "rows": [
-              { "feature": "Commerce API", "description": "Product catalog, cart, checkout", "values": { "service": "shop", "protocol": "REST", "status": "Live" } },
-              { "feature": "Content API", "description": "Wiki, blog, documentation", "values": { "service": "wiki + dev", "protocol": "GraphQL", "status": "Live" } },
-              { "feature": "Auth API", "description": "Unified authentication", "values": { "service": "all", "protocol": "OAuth 2.0", "status": "Live" } },
-              { "feature": "Media API", "description": "Image processing, CDN", "values": { "service": "art", "protocol": "REST", "status": "Live" } },
-              { "feature": "Analytics API", "description": "Cross-domain analytics", "values": { "service": "all", "protocol": "Streaming", "status": "Beta" } },
-              { "feature": "AI Gateway", "description": "Model routing, inference", "values": { "service": "ai", "protocol": "REST + WS", "status": "Alpha" } }
-            ]
-          },
-          "display": { "layout": "feature-matrix" }
-        },
-        {
-          "id": "roadmap",
-          "type": "section",
-          "name": "roadmap",
-          "subject": { "title": "Network Roadmap" },
-          "display": { "layout": "timeline" },
-          "children": [
-            { "id": "r1", "type": "entry", "subject": { "title": "Wire", "color": "#06b6d4" }, "content": { "body": "Unified API gateway connecting all 16 abundance ventures." }, "meta": { "order": 1 } },
-            { "id": "r2", "type": "entry", "subject": { "title": "Mesh", "color": "#6366f1" }, "content": { "body": "Service mesh with automatic discovery, auth, and rate limiting." }, "meta": { "order": 2 } },
-            { "id": "r3", "type": "entry", "subject": { "title": "Federate", "color": "#10b981" }, "content": { "body": "Open federation protocol for third-party abundance services." }, "meta": { "order": 3 } }
-          ]
-        },
-        {
-          "id": "cta",
-          "type": "section",
-          "name": "cta",
-          "subject": { "title": "Explore" },
-          "content": {
-            "body": "[theageofabundance.ai](https://theageofabundance.ai) — The AI hub\n\n[blackdot.dev](https://blackdot.dev) — Engineering portfolio\n\n[theageofabundance.org](https://theageofabundance.org) — The organization"
-          },
-          "display": { "layout": "centered-text" }
+          "display": {
+            "layout": "centered-text"
+          }
         }
       ]
     }

@@ -11,10 +11,6 @@
       {
         "label": "Home",
         "path": "/"
-      },
-      {
-        "label": "About",
-        "path": "/about"
       }
     ],
     "sticky": true
@@ -50,7 +46,7 @@
             "layout": "intro"
           },
           "meta": {
-            "scrollTarget": "/#stats",
+            "scrollTarget": "/#waitlist",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 4000,
@@ -59,203 +55,14 @@
           }
         },
         {
-          "id": "mission",
+          "id": "waitlist",
           "type": "section",
-          "name": "mission",
+          "name": "waitlist",
           "subject": {
-            "title": "Age of Abundance — Tech"
+            "title": "Join the Founding Membership"
           },
           "content": {
-            "body": "Technology is the engine of abundance. Every breakthrough reduces the cost of the previously impossible."
-          },
-          "display": {
-            "layout": "header"
-          }
-        },
-        {
-          "id": "stats",
-          "type": "section",
-          "name": "stats",
-          "subject": {
-            "title": "By the Numbers",
-            "subtitle": "Key metrics"
-          },
-          "content": {
-            "stats": [
-              {
-                "label": "Live Demos",
-                "value": "30+"
-              },
-              {
-                "label": "Technologies",
-                "value": "12"
-              },
-              {
-                "label": "Benchmarks",
-                "value": "100+"
-              },
-              {
-                "label": "Open Source",
-                "value": "80%"
-              }
-            ]
-          },
-          "display": {
-            "layout": "stats-grid"
-          },
-          "meta": {
-            "columns": 4
-          }
-        },
-        {
-          "id": "vision",
-          "type": "section",
-          "name": "vision",
-          "subject": {
-            "title": "Our Vision"
-          },
-          "content": {
-            "body": "Interactive demonstrations of the technologies that are making abundance real — from AI and edge computing to spatial interfaces and quantum algorithms."
-          },
-          "display": {
-            "layout": "text-only"
-          }
-        },
-        {
-          "id": "features",
-          "type": "section",
-          "name": "features",
-          "subject": {
-            "title": "What We Offer",
-            "subtitle": "Choose your path"
-          },
-          "content": {
-            "columns": [
-              {
-                "name": "explore",
-                "label": "Explore"
-              },
-              {
-                "name": "benchmark",
-                "label": "Benchmark",
-                "highlight": true
-              },
-              {
-                "name": "contribute",
-                "label": "Contribute"
-              }
-            ],
-            "rows": [
-              {
-                "feature": "Interactive Demos",
-                "values": {
-                  "explore": true,
-                  "benchmark": true,
-                  "contribute": true
-                }
-              },
-              {
-                "feature": "Performance Data",
-                "values": {
-                  "explore": false,
-                  "benchmark": true,
-                  "contribute": true
-                }
-              },
-              {
-                "feature": "Source Code",
-                "values": {
-                  "explore": false,
-                  "benchmark": false,
-                  "contribute": true
-                }
-              },
-              {
-                "feature": "Custom Benchmarks",
-                "values": {
-                  "explore": false,
-                  "benchmark": true,
-                  "contribute": true
-                }
-              },
-              {
-                "feature": "Research Papers",
-                "values": {
-                  "explore": false,
-                  "benchmark": true,
-                  "contribute": true
-                }
-              }
-            ]
-          },
-          "display": {
-            "layout": "feature-matrix"
-          }
-        },
-        {
-          "id": "roadmap",
-          "type": "section",
-          "name": "roadmap",
-          "subject": {
-            "title": "Roadmap"
-          },
-          "display": {
-            "layout": "timeline"
-          },
-          "children": [
-            {
-              "id": "milestone-1",
-              "type": "entry",
-              "subject": {
-                "title": "Demo",
-                "color": "#ef4444"
-              },
-              "content": {
-                "body": "Launch 30+ interactive technology demos with live benchmarking"
-              },
-              "meta": {
-                "order": 1
-              }
-            },
-            {
-              "id": "milestone-2",
-              "type": "entry",
-              "subject": {
-                "title": "Measure",
-                "color": "#f97316"
-              },
-              "content": {
-                "body": "Standardized abundance-tech benchmarks adopted by the community"
-              },
-              "meta": {
-                "order": 2
-              }
-            },
-            {
-              "id": "milestone-3",
-              "type": "entry",
-              "subject": {
-                "title": "Advance",
-                "color": "#a855f7"
-              },
-              "content": {
-                "body": "Research lab producing papers and open-source implementations"
-              },
-              "meta": {
-                "order": 3
-              }
-            }
-          ]
-        },
-        {
-          "id": "cta",
-          "type": "section",
-          "name": "cta",
-          "subject": {
-            "title": "Join the Innovate"
-          },
-          "content": {
-            "body": "Be part of the age of abundance. ageofabundance.tech is just getting started."
+            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://ageofabundance.app)"
           },
           "display": {
             "layout": "centered-text"

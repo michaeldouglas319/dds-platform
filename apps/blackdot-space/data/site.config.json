@@ -11,10 +11,6 @@
       {
         "label": "Home",
         "path": "/"
-      },
-      {
-        "label": "About",
-        "path": "/about"
       }
     ],
     "sticky": true
@@ -50,7 +46,7 @@
             "layout": "intro"
           },
           "meta": {
-            "scrollTarget": "/#stats",
+            "scrollTarget": "/#waitlist",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 4000,
@@ -59,203 +55,14 @@
           }
         },
         {
-          "id": "mission",
+          "id": "waitlist",
           "type": "section",
-          "name": "mission",
+          "name": "waitlist",
           "subject": {
-            "title": "Blackdot Space"
+            "title": "Join the Founding Membership"
           },
           "content": {
-            "body": "A space for the convergence of thought, design, and execution. Where the infinite becomes the tangible."
-          },
-          "display": {
-            "layout": "header"
-          }
-        },
-        {
-          "id": "stats",
-          "type": "section",
-          "name": "stats",
-          "subject": {
-            "title": "By the Numbers",
-            "subtitle": "Key metrics"
-          },
-          "content": {
-            "stats": [
-              {
-                "label": "Experiments",
-                "value": "100+"
-              },
-              {
-                "label": "Prototypes",
-                "value": "40+"
-              },
-              {
-                "label": "Published Papers",
-                "value": "12"
-              },
-              {
-                "label": "Shipped to Prod",
-                "value": "60%"
-              }
-            ]
-          },
-          "display": {
-            "layout": "stats-grid"
-          },
-          "meta": {
-            "columns": 4
-          }
-        },
-        {
-          "id": "vision",
-          "type": "section",
-          "name": "vision",
-          "subject": {
-            "title": "Our Vision"
-          },
-          "content": {
-            "body": "The experimental arm of Blackdot — a laboratory for ideas too ambitious for roadmaps and too important to ignore."
-          },
-          "display": {
-            "layout": "text-only"
-          }
-        },
-        {
-          "id": "features",
-          "type": "section",
-          "name": "features",
-          "subject": {
-            "title": "What We Offer",
-            "subtitle": "Choose your path"
-          },
-          "content": {
-            "columns": [
-              {
-                "name": "observe",
-                "label": "Observe"
-              },
-              {
-                "name": "participate",
-                "label": "Participate",
-                "highlight": true
-              },
-              {
-                "name": "sponsor",
-                "label": "Sponsor"
-              }
-            ],
-            "rows": [
-              {
-                "feature": "View Experiments",
-                "values": {
-                  "observe": true,
-                  "participate": true,
-                  "sponsor": true
-                }
-              },
-              {
-                "feature": "Join Research",
-                "values": {
-                  "observe": false,
-                  "participate": true,
-                  "sponsor": true
-                }
-              },
-              {
-                "feature": "Early Access",
-                "values": {
-                  "observe": false,
-                  "participate": true,
-                  "sponsor": true
-                }
-              },
-              {
-                "feature": "Direct Research",
-                "values": {
-                  "observe": false,
-                  "participate": false,
-                  "sponsor": true
-                }
-              },
-              {
-                "feature": "IP Licensing",
-                "values": {
-                  "observe": false,
-                  "participate": false,
-                  "sponsor": true
-                }
-              }
-            ]
-          },
-          "display": {
-            "layout": "feature-matrix"
-          }
-        },
-        {
-          "id": "roadmap",
-          "type": "section",
-          "name": "roadmap",
-          "subject": {
-            "title": "Roadmap"
-          },
-          "display": {
-            "layout": "timeline"
-          },
-          "children": [
-            {
-              "id": "milestone-1",
-              "type": "entry",
-              "subject": {
-                "title": "Observe",
-                "color": "#a855f7"
-              },
-              "content": {
-                "body": "Open the lab — publish experiments, prototypes, and findings"
-              },
-              "meta": {
-                "order": 1
-              }
-            },
-            {
-              "id": "milestone-2",
-              "type": "entry",
-              "subject": {
-                "title": "Participate",
-                "color": "#ec4899"
-              },
-              "content": {
-                "body": "Open research program with collaborative experimentation"
-              },
-              "meta": {
-                "order": 2
-              }
-            },
-            {
-              "id": "milestone-3",
-              "type": "entry",
-              "subject": {
-                "title": "Converge",
-                "color": "#6366f1"
-              },
-              "content": {
-                "body": "Ship the best experiments into Blackdot production tools"
-              },
-              "meta": {
-                "order": 3
-              }
-            }
-          ]
-        },
-        {
-          "id": "cta",
-          "type": "section",
-          "name": "cta",
-          "subject": {
-            "title": "Join the Singularity"
-          },
-          "content": {
-            "body": "Be part of the age of abundance. blackdot.space is just getting started."
+            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://ageofabundance.app)"
           },
           "display": {
             "layout": "centered-text"

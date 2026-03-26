@@ -41,52 +41,16 @@
           "display": { "layout": "intro", "accessRoles": ["public"] }
         },
         {
-          "id": "two-futures",
+          "id": "membership",
           "type": "section",
-          "name": "two-futures",
+          "name": "membership",
           "subject": {
-            "title": "Two Futures Under One Agnostic Umbrella",
-            "subtitle": "The same technologies. Opposite outcomes."
+            "title": "Founding Membership"
           },
           "content": {
-            "body": "We are platform-agnostic, ideology-agnostic, and border-agnostic. The Age of Abundance doesn't pick sides — it maps both.",
-            "highlights": [
-              {
-                "subtitle": "The Utopia Path",
-                "description": "A future where decentralized tools, open infrastructure, and shared intelligence raise the floor for everyone. Abundance distributed. Barriers dissolved. Collective prosperity as the default state."
-              },
-              {
-                "subtitle": "The Extraction Path",
-                "description": "A future where the same tools let adversaries pump and dump from anywhere at minuscule cost. Borderless exploitation. Synthetic manipulation at scale. Abundance hoarded by those who move fastest."
-              }
-            ]
+            "body": "Early access, founding member pricing, and direct influence on what we build next."
           },
-          "display": { "layout": "two-column", "accessRoles": ["authenticated"] }
-        },
-        {
-          "id": "sectors-contact",
-          "type": "section",
-          "name": "sectors-contact",
-          "subject": {
-            "title": "Umbrella Sectors",
-            "subtitle": "The ecosystem we're building across"
-          },
-          "content": {
-            "body": "Each sector operates independently under the Age of Abundance umbrella — unified by shared infrastructure, separated by domain expertise.",
-            "items": [
-              "Commerce — ageofabundance.shop",
-              "Technology — ageofabundance.tech",
-              "Creative & Art — ageofabundance.art",
-              "Knowledge & Wiki — ageofabundance.wiki",
-              "Developer Tools — ageofabundance.dev",
-              "Community & Social — ageofabundance.net",
-              "AI & Intelligence — theageofabundance.ai",
-              "Asia-Pacific — ageofabundance.asia",
-              "Digital Space — ageofabundance.space",
-              "Organization — theageofabundance.org"
-            ]
-          },
-          "display": { "layout": "sectors-grid", "accessRoles": ["authenticated"] }
+          "display": { "layout": "centered-text" }
         }
       ]
     }
