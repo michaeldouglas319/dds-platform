@@ -65,9 +65,9 @@ function MembershipSection() {
         <p style={{ maxWidth: '40rem', margin: '0 auto', opacity: 0.8, lineHeight: 1.6 }}>
           Get early access, founding member pricing, and direct influence on what we build next.
         </p>
-        <SignUpButton mode="modal">
-          <button className="btn-primary" style={{ marginTop: '1rem' }}>Create Account →</button>
-        </SignUpButton>
+        <a href="https://theageofabundance.ai" style={{ display: 'inline-block', marginTop: '1rem' }}>
+          <button className="btn-primary">Sign Up at The Age of Abundance →</button>
+        </a>
       </SignedOut>
 
       <SignedIn>
