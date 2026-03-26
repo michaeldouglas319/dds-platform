@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { SectionBatchRenderer } from '@dds/renderer';
 import { BrandHeading } from '@dds/ui';
 import type { UniversalSection } from '@dds/types';
@@ -51,6 +52,34 @@ export default function Home() {
                 ))}
               </div>
             )}
+
+            {/* Showcase Link */}
+            <div style={{ marginTop: '2rem' }}>
+              <Link
+                href="/showcase"
+                style={{
+                  display: 'inline-block',
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: '0.5rem',
+                  background: 'var(--color-brand-primary)',
+                  color: 'white',
+                  textDecoration: 'none',
+                  fontWeight: 500,
+                  fontSize: '0.95rem',
+                  transition: 'all 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = '0.8';
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = '1';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                View Component Showcase →
+              </Link>
+            </div>
           </div>
         )}
       </div>

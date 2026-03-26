@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from '@dds/renderer';
+import { ThemeProviderV2 } from '@dds/renderer';
+import '@dds/renderer/lib/themes/theme-variants.css';
 import siteConfig from '../data/site.config.json';
 import './globals.css';
 
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 const theme = (siteConfig.app.defaultTheme as 'light' | 'dark') || 'dark';
+const variant = (siteConfig.app as any).themeVariant || 'minimal';
 
 export default function RootLayout({
   children,
@@ -16,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme={theme} className={theme === 'dark' ? 'dark' : ''}>
+    <html lang="en" data-theme={theme} data-theme-variant={variant} className={theme === 'dark' ? 'dark' : ''}>
       <body>
-        <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
+        <ThemeProviderV2 initialTheme={theme} initialVariant={variant}>
+          {children}
+        </ThemeProviderV2>
       </body>
     </html>
   );
