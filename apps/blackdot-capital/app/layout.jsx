@@ -1,14 +1,4 @@
-export const metadata = {
-  title: 'System',
-  description: 'Emergency mode',
-};
-
+export const metadata = { title: '', description: '' };
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body style={{ margin: 0, padding: 0 }}>
-        {children}
-      </body>
-    </html>
-  );
+  return <html><body style={{ margin: 0, padding: 0 }}>{children}</body></html>;
 }
