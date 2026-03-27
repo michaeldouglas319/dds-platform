@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd ../.. && pnpm turbo run build --filter=@dds/ageofabundance-art",
-  "outputDirectory": ".next",
-  "installCommand": "pnpm install",
-  "framework": "nextjs"
-}
