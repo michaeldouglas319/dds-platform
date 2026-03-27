@@ -1,16 +1,9 @@
 import type { Metadata } from 'next';
-import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
-import { ThemeProvider } from '@dds/renderer';
-import siteConfig from '../data/site.config.json';
-import './globals.css';
 
 export const metadata: Metadata = {
-  title: siteConfig.app.name,
-  description: siteConfig.app.description,
+  title: 'System',
+  description: 'Emergency mode',
 };
-
-const theme = (siteConfig.app.defaultTheme as 'light' | 'dark') || 'dark';
 
 export default function RootLayout({
   children,
@@ -18,20 +11,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: theme === 'dark' ? dark : undefined,
-        variables: {
-          colorPrimary: '#6366f1',
-          colorTextOnPrimaryBackground: '#fff',
-        },
-      }}
-    >
-      <html lang="en" data-theme={theme} className={theme === 'dark' ? 'dark' : ''}>
-        <body>
-          <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body style={{ margin: 0, padding: 0 }}>
+        {children}
+      </body>
+    </html>
   );
 }
