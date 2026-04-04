@@ -10,7 +10,8 @@
     "create-site": "node scripts/create-site.mjs",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "test": "vitest run"
   },
   "dependencies": {
     "three": "^0.161.0",
@@ -30,10 +31,14 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.48.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/react": "^16.0.0",
     "@types/react": "18.3.28",
     "@types/react-dom": "18.3.7",
+    "jsdom": "^25.0.0",
     "turbo": "^2.4.0",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
   },
   "packageManager": "pnpm@9.15.0",
   "engines": {
