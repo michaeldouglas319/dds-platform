@@ -1,0 +1,22 @@
+{
+  "name": "@dds/ai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./chat": "./chat.tsx",
+    "./provider": "./provider.tsx",
+    "./generate-content": "./generate-content.ts"
+  },
+  "dependencies": {
+    "ai": "^4.3.0",
+    "@ai-sdk/openai": "^1.3.0",
+    "@dds/types": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

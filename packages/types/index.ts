@@ -40,6 +40,7 @@ export type {
 export type {
   AppConfig,
   AppMetadata,
+  FeatureFlags,
   NavigationConfig,
   NavItem,
   PageConfig,

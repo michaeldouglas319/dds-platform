@@ -14,15 +14,33 @@ export interface AppConfig {
   navigation: NavigationConfig;
   pages: PageConfig[];
   theme?: ThemeConfig;
+  features?: FeatureFlags;
 }
 
 export interface AppMetadata {
   name: string;
+  label?: string;
   description?: string;
   baseUrl?: string;
   defaultTheme?: 'light' | 'dark';
   favicon?: string;
   ogImage?: string;
+  sector?: string;
+}
+
+export interface FeatureFlags {
+  chat?: boolean;
+  commerce?: boolean;
+  docs?: boolean;
+  blog?: boolean;
+  gallery?: boolean;
+  pageBuilder?: boolean;
+  cms?: boolean;
+  apiDocs?: boolean;
+  codeDemos?: boolean;
+  i18n?: boolean;
+  generativeUI?: boolean;
+  [key: string]: boolean | undefined;
 }
 
 export interface NavigationConfig {

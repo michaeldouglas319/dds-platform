@@ -10,6 +10,7 @@ export { isAppConfig } from '@dds/types';
 export type {
   AppConfig,
   AppMetadata,
+  FeatureFlags,
   NavigationConfig,
   NavItem,
   PageConfig,
@@ -23,7 +24,7 @@ export {
   useAppConfig,
   useCurrentPage,
   useNavigation,
+  useFeatureFlag,
+  ConfigPage,
+  ConfigNavigation,
 } from '@dds/renderer/config';
-
-export { ConfigPage } from '@dds/renderer/config';
-export { ConfigNavigation } from '@dds/renderer/config';
