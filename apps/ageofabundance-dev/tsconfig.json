@@ -1,0 +1,13 @@
+{
+  "extends": "@dds/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "strict": false,
+    "paths": {
+      "@/*": ["./*"],
+      "@/components/*": ["../../packages/renderer/components/*"],
+      "@/lib/*": ["../../packages/renderer/lib/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
