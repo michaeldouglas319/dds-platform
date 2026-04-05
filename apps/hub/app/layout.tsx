@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
+import { DdsAuthProvider } from '@dds/auth/clerk';
 import { getDomainConfig } from '../config/domains';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -10,8 +11,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body style={{ margin: 0, padding: 0 }}>{children}</body>
-    </html>
+    <DdsAuthProvider>
+      <html lang="en">
+        <body style={{ margin: 0, padding: 0 }}>{children}</body>
+      </html>
+    </DdsAuthProvider>
   );
 }

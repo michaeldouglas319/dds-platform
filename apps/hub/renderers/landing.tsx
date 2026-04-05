@@ -1,4 +1,5 @@
 import type { DomainConfig } from '../config/domains';
+import { SubscribeForm } from '@dds/auth/subscribe';
 
 export function LandingRenderer({ domain }: DomainConfig & { domain: string }) {
   return (
@@ -34,6 +35,7 @@ export function LandingRenderer({ domain }: DomainConfig & { domain: string }) {
       >
         {domain}
       </p>
+      <SubscribeForm domain={domain} />
     </main>
   );
 }

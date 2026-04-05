@@ -11,6 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dds/auth": "workspace:*",
     "@dds/config": "workspace:*",
     "@dds/renderer": "workspace:*",
     "@dds/types": "workspace:*",
