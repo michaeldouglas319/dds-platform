@@ -8,12 +8,13 @@ import { createClient } from '@supabase/supabase-js';
  * Service client (server-only):  createDdsSupabaseAdmin()
  */
 export function createDdsSupabase() {
-  const url = process.env.NEXT_PUBLIC_dds_SUPABASE_URL ?? process.env.dds_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_dds_SUPABASE_ANON_KEY;
+  // Vercel Marketplace provisions uppercase DDS_ prefix
+  const url = process.env.NEXT_PUBLIC_DDS_SUPABASE_URL ?? process.env.DDS_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_DDS_SUPABASE_ANON_KEY;
 
   if (!url || !key) {
     throw new Error(
-      '@dds/auth: Missing NEXT_PUBLIC_dds_SUPABASE_URL or NEXT_PUBLIC_dds_SUPABASE_ANON_KEY'
+      '@dds/auth: Missing NEXT_PUBLIC_DDS_SUPABASE_URL or NEXT_PUBLIC_DDS_SUPABASE_ANON_KEY'
     );
   }
 
@@ -21,12 +22,12 @@ export function createDdsSupabase() {
 }
 
 export function createDdsSupabaseAdmin() {
-  const url = process.env.dds_SUPABASE_URL;
-  const key = process.env.dds_SUPABASE_SERVICE_ROLE_KEY;
+  const url = process.env.DDS_SUPABASE_URL;
+  const key = process.env.DDS_SUPABASE_SERVICE_ROLE_KEY;
 
   if (!url || !key) {
     throw new Error(
-      '@dds/auth: Missing dds_SUPABASE_URL or dds_SUPABASE_SERVICE_ROLE_KEY (server-only)'
+      '@dds/auth: Missing DDS_SUPABASE_URL or DDS_SUPABASE_SERVICE_ROLE_KEY (server-only)'
     );
   }
 
