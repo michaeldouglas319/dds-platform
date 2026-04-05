@@ -1,0 +1,23 @@
+{
+  "name": "@dds/theageofabundance-store",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "env:pull": "vercel env pull .env.local",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@dds/config": "workspace:*",
+    "@dds/renderer": "workspace:*",
+    "@dds/types": "workspace:*",
+    "next": "^14.2.0"
+  },
+  "devDependencies": {
+    "@dds/tsconfig": "workspace:*",
+    "typescript": "^5.9.0"
+  }
+}

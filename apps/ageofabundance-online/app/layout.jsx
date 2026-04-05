@@ -1,4 +1,12 @@
-export const metadata = { title: '', description: '' };
+export const metadata = {
+  title: 'ageofabundance.online',
+  description: 'ageofabundance.online',
+};
+
 export default function RootLayout({ children }) {
-  return <html><body style={{ margin: 0, padding: 0 }}>{children}</body></html>;
+  return (
+    <html lang="en">
+      <body style={{ margin: 0, padding: 0 }}>{children}</body>
+    </html>
+  );
 }
