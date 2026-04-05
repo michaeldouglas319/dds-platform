@@ -1,0 +1,31 @@
+# DDS Platform — Code Ownership
+# Changes to protected paths require approval from the listed owners.
+# Requires branch protection rule: "Require review from Code Owners"
+
+# ──────────────────────────────────────────────────────────
+# Core infrastructure — platform team only
+# ──────────────────────────────────────────────────────────
+/packages/renderer/       @michaeldouglas319
+/packages/types/          @michaeldouglas319
+/packages/config/         @michaeldouglas319
+/packages/ui/             @michaeldouglas319
+/packages/hooks/          @michaeldouglas319
+/turbo.json               @michaeldouglas319
+/pnpm-workspace.yaml      @michaeldouglas319
+/vercel.json              @michaeldouglas319
+
+# Hub app — platform team only
+/apps/hub/                @michaeldouglas319
+
+# ──────────────────────────────────────────────────────────
+# Per-app ownership — assign teams as they graduate
+# Format: @org/team or @username
+# ──────────────────────────────────────────────────────────
+# /apps/wiki/             @michaeldouglas319 @wiki-team
+# /apps/shop/             @michaeldouglas319 @shop-team
+# /apps/gallery/          @michaeldouglas319 @art-team
+
+# ──────────────────────────────────────────────────────────
+# CI/CD and GitHub config — platform team only
+# ──────────────────────────────────────────────────────────
+/.github/                 @michaeldouglas319
