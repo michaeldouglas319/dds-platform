@@ -11,6 +11,7 @@
 
 export type RendererType =
   | 'landing'   // white room — default
+  | 'grid'      // tile grid of all apps
   | 'puck'      // Puck visual builder (.site, .online)
   | 'wiki'      // Fumadocs (.wiki)
   | 'shop'      // Medusa.js (.shop)
@@ -50,7 +51,7 @@ export interface DomainConfig {
 const REGISTRY: Record<string, DomainConfig> = {
   // ── Black Dot ─────────────────────────────────────────
   'blackdot.capital':  { renderer: 'landing', icon: '𒀭', header: { title: 'Black Dot Capital', subtitle: 'Finance' } },
-  'blackdot.partners': { renderer: 'landing', icon: '𒁹', header: { title: 'Black Dot Partners', subtitle: 'Business' } },
+  'blackdot.partners': { renderer: 'grid', icon: '𒁹', header: { title: 'Black Dot Partners', subtitle: 'Business' } },
   'blackdot.dev':      { renderer: 'landing', icon: '𒌋', header: { title: 'Black Dot Dev', subtitle: 'Developer Tools' } },
   'blackdot.space':    { renderer: 'landing', icon: '𒀊', header: { title: 'Black Dot Space', subtitle: 'Graphics & Design' } },
 
@@ -90,6 +91,13 @@ const REGISTRY: Record<string, DomainConfig> = {
   // ── Personal ──────────────────────────────────────────
   'michaeldouglas.app':    { renderer: 'landing', icon: '𒌓', header: { title: 'michaeldouglas.app', subtitle: 'Productivity' } }
 };
+
+// ---------------------------------------------------------------------------
+// Unique apps (exclude theageofabundance.* defensive mirrors)
+// ---------------------------------------------------------------------------
+export const UNIQUE_APPS = Object.entries(REGISTRY)
+  .filter(([domain]) => !domain.startsWith('theageofabundance.'))
+  .map(([domain, config]) => ({ domain, ...config }));
 
 // ---------------------------------------------------------------------------
 // Resolver
