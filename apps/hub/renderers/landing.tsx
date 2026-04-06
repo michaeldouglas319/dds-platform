@@ -4,7 +4,7 @@ import { SubscribeForm } from '@dds/auth/subscribe';
 const DEFAULT_ICON = '𒌓';
 
 const flipCSS = `
-@keyframes flipIn {
+@keyframes dds-landing-flipIn {
   from { transform: perspective(600px) rotateY(360deg); opacity: 0; }
   to   { transform: perspective(600px) rotateY(0deg);   opacity: 1; }
 }
@@ -38,7 +38,7 @@ export function LandingRenderer({ domain, icon, header }: DomainConfig & { domai
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: 32,
-            animation: 'flipIn 0.8s ease-out forwards',
+            animation: 'dds-landing-flipIn 0.8s ease-out forwards',
             backfaceVisibility: 'hidden',
           }}
         >

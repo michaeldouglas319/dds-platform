@@ -1,25 +1,40 @@
+'use client';
+
 import type { DomainConfig } from '../config/domains';
 import { UNIQUE_APPS } from '../config/domains';
 import { SubscribeForm } from '@dds/auth/subscribe';
 
-const flipCSS = `
-@keyframes flipIn {
+// Scoped keyframe name to avoid collision with other renderers
+const ANIM_NAME = 'dds-grid-flipIn';
+
+const gridCSS = `
+@keyframes ${ANIM_NAME} {
   from { transform: perspective(600px) rotateY(360deg); opacity: 0; }
   to   { transform: perspective(600px) rotateY(0deg);   opacity: 1; }
 }
 `;
 
-function Tile({ domain, icon, header, index }: {
+// Seeded random from domain string — stable across renders, random across tiles
+function hashDelay(domain: string): number {
+  let h = 0;
+  for (let i = 0; i < domain.length; i++) {
+    h = ((h << 5) - h + domain.charCodeAt(i)) | 0;
+  }
+  return (Math.abs(h) % 800) / 1000; // 0–0.8s random delay
+}
+
+function Tile({ domain, icon, header }: {
   domain: string;
   icon?: string | false;
   header?: { title: string; subtitle?: string };
-  index: number;
 }) {
   const tld = domain.split('.').pop();
+  const delay = hashDelay(domain);
 
   return (
     <a
       href={`https://${domain}`}
+      className="dds-grid-tile"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -32,17 +47,9 @@ function Tile({ domain, icon, header, index }: {
         color: '#000',
         background: '#fff',
         transition: 'transform 0.15s, box-shadow 0.15s',
-        animation: `flipIn 0.6s ease-out ${index * 0.05}s both`,
-        backfaceVisibility: 'hidden' as const,
+        animation: `${ANIM_NAME} 0.6s ease-out ${delay}s both`,
+        backfaceVisibility: 'hidden',
         minHeight: 140,
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)';
-        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = '';
-        e.currentTarget.style.boxShadow = '';
       }}
     >
       {icon && icon !== false && (
@@ -95,7 +102,12 @@ export function GridRenderer({ domain, header }: DomainConfig & { domain: string
         padding: '60px 24px',
       }}
     >
-      <style dangerouslySetInnerHTML={{ __html: flipCSS }} />
+      <style dangerouslySetInnerHTML={{ __html: gridCSS + `
+        .dds-grid-tile:hover {
+          transform: translateY(-4px) !important;
+          box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+      `}} />
 
       {header && (
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
@@ -130,13 +142,12 @@ export function GridRenderer({ domain, header }: DomainConfig & { domain: string
           width: '100%',
         }}
       >
-        {UNIQUE_APPS.map((app, i) => (
+        {UNIQUE_APPS.map((app) => (
           <Tile
             key={app.domain}
             domain={app.domain}
             icon={app.icon}
             header={app.header}
-            index={i}
           />
         ))}
       </div>
