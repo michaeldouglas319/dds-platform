@@ -49,78 +49,46 @@ export interface DomainConfig {
 
 const REGISTRY: Record<string, DomainConfig> = {
   // ── Black Dot ─────────────────────────────────────────
-  'blackdot.capital': {
-    renderer: 'landing',
-    icon: '𒀭',  // AN — god/sky/wealth
-    header: {
-      title: 'Black Dot Capital',
-      subtitle: 'Strategic Investment & Venture Architecture',
-      slogan: 'Where conviction meets capital.',
-    },
-  },
-  'blackdot.partners': {
-    renderer: 'landing',
-    icon: '𒁹',  // DIŠ — unity/one
-    header: {
-      title: 'Black Dot Partners',
-      subtitle: 'Design, Engineering & Growth',
-      slogan: 'Building what matters.',
-    },
-  },
-  'blackdot.dev': {
-    renderer: 'landing',
-    icon: '𒌋',  // U — foundation/base
-    header: {
-      title: 'Black Dot Dev',
-      subtitle: 'Developer Platform & API',
-      slogan: 'The infrastructure layer.',
-    },
-  },
-  'blackdot.space': {
-    renderer: 'landing',
-    icon: '𒀊',  // A — water/origin
-    header: {
-      title: 'Black Dot Space',
-      subtitle: 'Creative Lab & Experiments',
-      slogan: 'Ideas without boundaries.',
-    },
-  },
+  'blackdot.capital':  { renderer: 'landing', icon: '𒀭', header: { title: 'Black Dot Capital', subtitle: 'Finance' } },
+  'blackdot.partners': { renderer: 'landing', icon: '𒁹', header: { title: 'Black Dot Partners', subtitle: 'Business' } },
+  'blackdot.dev':      { renderer: 'landing', icon: '𒌋', header: { title: 'Black Dot Dev', subtitle: 'Developer Tools' } },
+  'blackdot.space':    { renderer: 'landing', icon: '𒀊', header: { title: 'Black Dot Space', subtitle: 'Graphics & Design' } },
 
   // ── The Age of Abundance ──────────────────────────────
-  'theageofabundance.shop':   { renderer: 'landing', icon: '𒀀', header: { title: 'theageofabundance.shop', slogan: 'Abundant goods, delivered.' } },
-  'theageofabundance.cloud':  { renderer: 'landing', icon: '𒀁', header: { title: 'theageofabundance.cloud', slogan: 'Infinite infrastructure.' } },
-  'theageofabundance.store':  { renderer: 'landing', icon: '𒀂', header: { title: 'theageofabundance.store', slogan: 'Everything, always available.' } },
-  'theageofabundance.app':    { renderer: 'landing', icon: '𒀃', header: { title: 'theageofabundance.app', slogan: 'Your abundance, daily.' } },
-  'theageofabundance.wiki':   { renderer: 'landing', icon: '𒀄', header: { title: 'theageofabundance.wiki', slogan: 'Collective knowledge.' } },
-  'theageofabundance.info':   { renderer: 'landing', icon: '𒀅', header: { title: 'theageofabundance.info', slogan: 'Signal over noise.' } },
-  'theageofabundance.agency': { renderer: 'landing', icon: '𒀆', header: { title: 'theageofabundance.agency', slogan: 'Sovereign execution.' } },
-  'theageofabundance.actor':  { renderer: 'landing', icon: '𒀇', header: { title: 'theageofabundance.actor', slogan: 'Talent without limits.' } },
-  'theageofabundance.ai':     { renderer: 'landing', icon: '𒀈', header: { title: 'theageofabundance.ai', slogan: 'Intelligence, abundant.' } },
-  'theageofabundance.net':    { renderer: 'landing', icon: '𒀉', header: { title: 'theageofabundance.net', slogan: 'Connected abundance.' } },
-  'theageofabundance.org':    { renderer: 'landing', icon: '𒀋', header: { title: 'theageofabundance.org', slogan: 'The mission.' } },
-  'theageofabundance.studio': { renderer: 'landing', icon: '𒀌', header: { title: 'theageofabundance.studio', slogan: 'Where work ships.' } },
-  'theageofabundance.space':  { renderer: 'landing', icon: '𒀍', header: { title: 'theageofabundance.space', slogan: 'Room to grow.' } },
+  'theageofabundance.shop':   { renderer: 'landing', icon: '𒀀', header: { title: 'theageofabundance.shop', subtitle: 'Shopping' } },
+  'theageofabundance.cloud':  { renderer: 'landing', icon: '𒀁', header: { title: 'theageofabundance.cloud', subtitle: 'Utilities' } },
+  'theageofabundance.store':  { renderer: 'landing', icon: '𒀂', header: { title: 'theageofabundance.store', subtitle: 'Shopping' } },
+  'theageofabundance.app':    { renderer: 'landing', icon: '𒀃', header: { title: 'theageofabundance.app', subtitle: 'Productivity' } },
+  'theageofabundance.wiki':   { renderer: 'landing', icon: '𒀄', header: { title: 'theageofabundance.wiki', subtitle: 'Reference' } },
+  'theageofabundance.info':   { renderer: 'landing', icon: '𒀅', header: { title: 'theageofabundance.info', subtitle: 'Reference' } },
+  'theageofabundance.agency': { renderer: 'landing', icon: '𒀆', header: { title: 'theageofabundance.agency', subtitle: 'Business' } },
+  'theageofabundance.actor':  { renderer: 'landing', icon: '𒀇', header: { title: 'theageofabundance.actor', subtitle: 'Entertainment' } },
+  'theageofabundance.ai':     { renderer: 'landing', icon: '𒀈', header: { title: 'theageofabundance.ai', subtitle: 'Productivity' } },
+  'theageofabundance.net':    { renderer: 'landing', icon: '𒀉', header: { title: 'theageofabundance.net', subtitle: 'Social Networking' } },
+  'theageofabundance.org':    { renderer: 'landing', icon: '𒀋', header: { title: 'theageofabundance.org', subtitle: 'Lifestyle' } },
+  'theageofabundance.studio': { renderer: 'landing', icon: '𒀌', header: { title: 'theageofabundance.studio', subtitle: 'Graphics & Design' } },
+  'theageofabundance.space':  { renderer: 'landing', icon: '𒀍', header: { title: 'theageofabundance.space', subtitle: 'Social Networking' } },
 
   // ── Age of Abundance ──────────────────────────────────
-  'ageofabundance.shop':   { renderer: 'landing', icon: '𒀎', header: { title: 'ageofabundance.shop', slogan: 'Commerce, reimagined.' } },
-  'ageofabundance.store':  { renderer: 'landing', icon: '𒀏', header: { title: 'ageofabundance.store', slogan: 'Supply meets demand.' } },
-  'ageofabundance.art':    { renderer: 'landing', icon: '𒀐', header: { title: 'ageofabundance.art', slogan: 'Beauty in surplus.' } },
-  'ageofabundance.asia':   { renderer: 'landing', icon: '𒀑', header: { title: 'ageofabundance.asia', slogan: 'Eastern abundance.' } },
-  'ageofabundance.wiki':   { renderer: 'landing', icon: '𒀒', header: { title: 'ageofabundance.wiki', slogan: 'Open knowledge.' } },
-  'ageofabundance.dev':    { renderer: 'landing', icon: '𒀓', header: { title: 'ageofabundance.dev', slogan: 'Build the future.' } },
-  'ageofabundance.app':    { renderer: 'landing', icon: '𒁀', header: { title: 'ageofabundance.app', slogan: 'Tools for everyone.' } },
-  'ageofabundance.space':  { renderer: 'landing', icon: '𒁁', header: { title: 'ageofabundance.space', slogan: 'Explore freely.' } },
-  'ageofabundance.online': { renderer: 'puck', icon: '𒁂', header: { title: 'ageofabundance.online', slogan: 'Always on.' } },
-  'ageofabundance.site':   { renderer: 'puck', icon: '𒁃', header: { title: 'ageofabundance.site', slogan: 'Your ground.' } },
-  'ageofabundance.tech':   { renderer: 'landing', icon: '𒁄', header: { title: 'ageofabundance.tech', slogan: 'Deep technology.' } },
-  'ageofabundance.net':    { renderer: 'landing', icon: '𒁅', header: { title: 'ageofabundance.net', slogan: 'The network.' } },
-  'ageofabundance.info':   { renderer: 'landing', icon: '𒁆', header: { title: 'ageofabundance.info', slogan: 'Truth, sourced.' } },
-  'ageofabundance.agency': { renderer: 'landing', icon: '𒁇', header: { title: 'ageofabundance.agency', slogan: 'Agency for all.' } },
-  'ageofabundance.actor':  { renderer: 'landing', icon: '𒁈', header: { title: 'ageofabundance.actor', slogan: 'Play your part.' } },
-  'ageofabundance.xyz':    { renderer: 'landing', icon: '𒁉', header: { title: 'ageofabundance.xyz', slogan: 'The unknown.' } },
+  'ageofabundance.shop':   { renderer: 'landing', icon: '𒀎', header: { title: 'ageofabundance.shop', subtitle: 'Shopping' } },
+  'ageofabundance.store':  { renderer: 'landing', icon: '𒀏', header: { title: 'ageofabundance.store', subtitle: 'Shopping' } },
+  'ageofabundance.art':    { renderer: 'landing', icon: '𒀐', header: { title: 'ageofabundance.art', subtitle: 'Photo & Video' } },
+  'ageofabundance.asia':   { renderer: 'landing', icon: '𒀑', header: { title: 'ageofabundance.asia', subtitle: 'Travel' } },
+  'ageofabundance.wiki':   { renderer: 'landing', icon: '𒀒', header: { title: 'ageofabundance.wiki', subtitle: 'Education' } },
+  'ageofabundance.dev':    { renderer: 'landing', icon: '𒀓', header: { title: 'ageofabundance.dev', subtitle: 'Developer Tools' } },
+  'ageofabundance.app':    { renderer: 'landing', icon: '𒁀', header: { title: 'ageofabundance.app', subtitle: 'Productivity' } },
+  'ageofabundance.space':  { renderer: 'landing', icon: '𒁁', header: { title: 'ageofabundance.space', subtitle: 'Social Networking' } },
+  'ageofabundance.online': { renderer: 'puck', icon: '𒁂', header: { title: 'ageofabundance.online', subtitle: 'Lifestyle' } },
+  'ageofabundance.site':   { renderer: 'puck', icon: '𒁃', header: { title: 'ageofabundance.site', subtitle: 'Utilities' } },
+  'ageofabundance.tech':   { renderer: 'landing', icon: '𒁄', header: { title: 'ageofabundance.tech', subtitle: 'Developer Tools' } },
+  'ageofabundance.net':    { renderer: 'landing', icon: '𒁅', header: { title: 'ageofabundance.net', subtitle: 'Social Networking' } },
+  'ageofabundance.info':   { renderer: 'landing', icon: '𒁆', header: { title: 'ageofabundance.info', subtitle: 'Reference' } },
+  'ageofabundance.agency': { renderer: 'landing', icon: '𒁇', header: { title: 'ageofabundance.agency', subtitle: 'Business' } },
+  'ageofabundance.actor':  { renderer: 'landing', icon: '𒁈', header: { title: 'ageofabundance.actor', subtitle: 'Entertainment' } },
+  'ageofabundance.xyz':    { renderer: 'landing', icon: '𒁉', header: { title: 'ageofabundance.xyz', subtitle: 'Lifestyle' } },
 
   // ── Personal ──────────────────────────────────────────
-  'michaeldouglas.app':    { renderer: 'landing', icon: '𒌓', header: { title: 'michaeldouglas.app', slogan: 'By Michael Douglas.' } }
+  'michaeldouglas.app':    { renderer: 'landing', icon: '𒌓', header: { title: 'michaeldouglas.app', subtitle: 'Productivity' } }
 };
 
 // ---------------------------------------------------------------------------
