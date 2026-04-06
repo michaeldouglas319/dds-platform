@@ -3,436 +3,371 @@
 import { BrandHeading } from '@dds/ui';
 import { DOMAINS, ABUNDANCE_DOMAINS, BLACKDOT_DOMAINS, LIVE_DOMAINS, COMING_SOON_DOMAINS } from '@dds/config/domains';
 
+// ─── SVG Icon Components ─────────────────────────────────────────
+
+function IconLayers() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+      <polyline points="2 17 12 22 22 17" />
+      <polyline points="2 12 12 17 22 12" />
+    </svg>
+  );
+}
+
+function IconCode() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="16 18 22 12 16 6" />
+      <polyline points="8 6 2 12 8 18" />
+    </svg>
+  );
+}
+
+function IconFlask() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 3h6" />
+      <path d="M10 3v6.5L4 20h16l-6-10.5V3" />
+      <path d="M8.5 14h7" />
+    </svg>
+  );
+}
+
+function IconServer() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+      <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+      <line x1="6" y1="6" x2="6.01" y2="6" />
+      <line x1="6" y1="18" x2="6.01" y2="18" />
+    </svg>
+  );
+}
+
+function IconHandshake() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z" />
+    </svg>
+  );
+}
+
+function IconTrendingUp() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+      <polyline points="17 6 23 6 23 12" />
+    </svg>
+  );
+}
+
+function IconPalette() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="13.5" cy="6.5" r="2" />
+      <circle cx="17.5" cy="10.5" r="2" />
+      <circle cx="8.5" cy="7.5" r="2" />
+      <circle cx="6.5" cy="12.5" r="2" />
+      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+    </svg>
+  );
+}
+
+function IconStar() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+  );
+}
+
+function IconShoppingBag() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <path d="M16 10a4 4 0 0 1-8 0" />
+    </svg>
+  );
+}
+
+function IconAppWindow() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="3" width="20" height="18" rx="2" />
+      <line x1="2" y1="9" x2="22" y2="9" />
+      <line x1="6" y1="6" x2="6.01" y2="6" />
+      <line x1="10" y1="6" x2="10.01" y2="6" />
+    </svg>
+  );
+}
+
+function IconBook() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  );
+}
+
+function IconCpu() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <rect x="9" y="9" width="6" height="6" />
+      <line x1="9" y1="1" x2="9" y2="4" />
+      <line x1="15" y1="1" x2="15" y2="4" />
+      <line x1="9" y1="20" x2="9" y2="23" />
+      <line x1="15" y1="20" x2="15" y2="23" />
+      <line x1="20" y1="9" x2="23" y2="9" />
+      <line x1="20" y1="14" x2="23" y2="14" />
+      <line x1="1" y1="9" x2="4" y2="9" />
+      <line x1="1" y1="14" x2="4" y2="14" />
+    </svg>
+  );
+}
+
+function IconUsers() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </svg>
+  );
+}
+
+function IconGlobe() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <line x1="2" y1="12" x2="22" y2="12" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  );
+}
+
+function IconBriefcase() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  );
+}
+
+function IconMonitor() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="17" x2="12" y2="21" />
+    </svg>
+  );
+}
+
+function IconBuilding() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+      <line x1="9" y1="6" x2="9.01" y2="6" />
+      <line x1="15" y1="6" x2="15.01" y2="6" />
+      <line x1="9" y1="10" x2="9.01" y2="10" />
+      <line x1="15" y1="10" x2="15.01" y2="10" />
+      <line x1="9" y1="14" x2="9.01" y2="14" />
+      <line x1="15" y1="14" x2="15.01" y2="14" />
+      <path d="M9 22v-4h6v4" />
+    </svg>
+  );
+}
+
+function IconDiamond() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2l10 10-10 10L2 12z" />
+    </svg>
+  );
+}
+
+// ─── Icon Mapping ────────────────────────────────────────────────
+
+const CATEGORY_ICONS: Record<string, () => JSX.Element> = {
+  flagship: IconStar,
+  infrastructure: IconServer,
+  commerce: IconShoppingBag,
+  saas: IconAppWindow,
+  creative: IconPalette,
+  knowledge: IconBook,
+  developer: IconCode,
+  technology: IconCpu,
+  community: IconUsers,
+  regional: IconGlobe,
+  services: IconBriefcase,
+  digital: IconMonitor,
+  corporate: IconBuilding,
+  experimental: IconFlask,
+  partnerships: IconHandshake,
+  investment: IconTrendingUp,
+};
+
+function getCategoryIcon(category?: string) {
+  const Icon = category ? CATEGORY_ICONS[category] : undefined;
+  return Icon ? <Icon /> : <IconDiamond />;
+}
+
+// ─── Tile Component ──────────────────────────────────────────────
+
+function Tile({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <div className="group relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 text-center backdrop-blur-sm transition-all hover:border-violet-500/40 hover:bg-neutral-800/60">
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-violet-500/0 to-violet-500/5 opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="relative mb-3 flex justify-center text-neutral-500 transition-colors group-hover:text-violet-400">
+        {icon}
+      </div>
+      <span className="relative text-sm font-medium text-neutral-300 group-hover:text-white">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function LinkTile({ icon, label, href, status }: { icon: React.ReactNode; label: string; href: string; status?: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 text-center no-underline backdrop-blur-sm transition-all hover:border-violet-500/40 hover:bg-neutral-800/60"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-violet-500/0 to-violet-500/5 opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="relative mb-3 flex justify-center text-neutral-500 transition-colors group-hover:text-violet-400">
+        {icon}
+      </div>
+      <span className="relative block text-sm font-medium text-neutral-300 group-hover:text-white">
+        {label}
+      </span>
+      {status && (
+        <span className={`relative mt-2 inline-block rounded px-2 py-0.5 text-xs ${
+          status === 'live'
+            ? 'bg-emerald-500/20 text-emerald-400'
+            : 'bg-violet-500/20 text-violet-400'
+        }`}>
+          {status === 'live' ? 'Live' : 'Soon'}
+        </span>
+      )}
+    </a>
+  );
+}
+
+// ─── Page ────────────────────────────────────────────────────────
+
 export default function Home() {
   return (
-    <main>
+    <main className="min-h-screen">
       {/* Hero Section */}
-      <section style={{
-        padding: '6rem 2rem',
-        textAlign: 'center',
-        minHeight: '60vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: '2rem'
-      }}>
+      <section className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-6 py-24 text-center">
         <BrandHeading>BlackDot</BrandHeading>
-        <h1 style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontWeight: 700,
-          marginBottom: '1rem'
-        }}>
+        <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-bold">
           Partners
         </h1>
-        <p style={{
-          maxWidth: '50rem',
-          fontSize: '1.1rem',
-          opacity: 0.8,
-          lineHeight: 1.6
-        }}>
-          The engineering backbone of the Age of Abundance ecosystem. We build the infrastructure, tools, and platforms that power 24+ domains of abundance.
+        <p className="max-w-xl text-lg leading-relaxed text-neutral-400">
+          Bring Your Expertise
+        </p>
+        <p className="max-w-2xl text-base leading-relaxed text-neutral-500">
+          The engineering backbone of the Age of Abundance ecosystem. We build the infrastructure, tools, and platforms that power {DOMAINS.length}+ domains of abundance.
         </p>
       </section>
 
-      {/* Platform Overview */}
-      <section style={{
-        padding: '6rem 2rem',
-        background: 'rgba(139,92,246,0.03)',
-        borderTop: '1px solid rgba(139,92,246,0.2)',
-        borderBottom: '1px solid rgba(139,92,246,0.2)'
-      }}>
-        <div style={{
-          maxWidth: '1000px',
-          margin: '0 auto'
-        }}>
-          <h2 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-            fontWeight: 700,
-            marginBottom: '3rem',
-            textAlign: 'center'
-          }}>
+      {/* What We Build */}
+      <section className="border-y border-violet-500/20 bg-violet-500/[0.03] px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-12 text-center text-[clamp(1.8rem,4vw,2.5rem)] font-bold">
             What We Build
           </h2>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '2rem'
-          }}>
-            {[
-              {
-                title: 'Universal Platform',
-                description: 'DDS (Dynamic Domain System) — a config-driven rendering engine that powers all 24 domains from a single codebase.'
-              },
-              {
-                title: 'Developer Tools',
-                description: 'Open-source SDKs, APIs, and infrastructure for building abundance-native applications at scale.'
-              },
-              {
-                title: 'Creative Laboratory',
-                description: 'Experiments at the intersection of design, technology, and human creativity. From prototypes to production.'
-              },
-              {
-                title: 'Shared Infrastructure',
-                description: 'Authentication, analytics, content management, and deployment pipelines — unified across the ecosystem.'
-              }
-            ].map((item, i) => (
-              <div key={i} style={{
-                padding: '2rem',
-                borderRadius: '8px',
-                border: '1px solid rgba(139,92,246,0.3)',
-                background: 'rgba(139,92,246,0.08)'
-              }}>
-                <h3 style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  marginBottom: '1rem',
-                  color: '#a78bfa'
-                }}>
-                  {item.title}
-                </h3>
-                <p style={{
-                  margin: 0,
-                  opacity: 0.8,
-                  lineHeight: 1.6,
-                  fontSize: '0.95rem'
-                }}>
-                  {item.description}
-                </p>
-              </div>
-            ))}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <Tile icon={<IconLayers />} label="Universal Platform" />
+            <Tile icon={<IconCode />} label="Developer Tools" />
+            <Tile icon={<IconFlask />} label="Creative Laboratory" />
+            <Tile icon={<IconServer />} label="Shared Infrastructure" />
           </div>
         </div>
       </section>
 
-      {/* All Domains Grid */}
-      <section style={{
-        padding: '4rem 2rem',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        width: '100%'
-      }}>
-        <h2 style={{
-          fontSize: '2rem',
-          fontWeight: 700,
-          marginBottom: '3rem',
-          textAlign: 'center'
-        }}>
+      {/* The Ecosystem */}
+      <section className="mx-auto w-full max-w-6xl px-6 py-16">
+        <h2 className="mb-12 text-center text-2xl font-bold">
           The Ecosystem ({DOMAINS.length} Domains)
         </h2>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem',
-          marginBottom: '4rem'
-        }}>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {DOMAINS.map((domain) => (
-            <a
+            <LinkTile
               key={domain.domain}
+              icon={getCategoryIcon(domain.category)}
+              label={domain.label}
               href={domain.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '2rem',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                color: 'inherit',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1rem',
-                background: 'rgba(255,255,255,0.02)',
-                backdropFilter: 'blur(10px)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)';
-                e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                e.currentTarget.style.background = 'rgba(255,255,255,0.02)';
-              }}
-            >
-              <div>
-                <div style={{
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  opacity: 0.6,
-                  marginBottom: '0.5rem'
-                }}>
-                  {domain.brand === 'blackdot' ? '● BlackDot' : '∞ Age of Abundance'}
-                </div>
-                <h3 style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  margin: 0,
-                  marginBottom: '0.5rem'
-                }}>
-                  {domain.label}
-                </h3>
-                <p style={{
-                  margin: 0,
-                  fontSize: '0.9rem',
-                  opacity: 0.7,
-                  wordBreak: 'break-all'
-                }}>
-                  {domain.domain}
-                </p>
-              </div>
-              <div style={{
-                marginTop: 'auto',
-                paddingTop: '1rem',
-                borderTop: '1px solid rgba(255,255,255,0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontSize: '0.8rem'
-              }}>
-                <span style={{
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '4px',
-                  background: domain.status === 'live' ? 'rgba(34,197,94,0.2)' : 'rgba(139,92,246,0.2)',
-                  color: domain.status === 'live' ? '#22c55e' : '#a78bfa'
-                }}>
-                  {domain.status === 'live' ? '● Live' : '○ Coming Soon'}
-                </span>
-                {domain.category && (
-                  <span style={{ opacity: 0.6 }}>
-                    {domain.category}
-                  </span>
-                )}
-              </div>
-            </a>
+              status={domain.status}
+            />
           ))}
         </div>
       </section>
 
       {/* Summary Stats */}
-      <section style={{
-        padding: '4rem 2rem',
-        background: 'rgba(139,92,246,0.05)',
-        borderTop: '1px solid rgba(255,255,255,0.1)',
-        borderBottom: '1px solid rgba(255,255,255,0.1)',
-        textAlign: 'center'
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '2rem'
-        }}>
-          <div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-              {DOMAINS.length}
+      <section className="border-y border-white/10 bg-violet-500/5 px-6 py-16 text-center">
+        <div className="mx-auto grid max-w-5xl grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          {[
+            { value: DOMAINS.length, label: 'Total Domains' },
+            { value: LIVE_DOMAINS.length, label: 'Live Now' },
+            { value: COMING_SOON_DOMAINS.length, label: 'Coming Soon' },
+            { value: ABUNDANCE_DOMAINS.length, label: 'Age of Abundance' },
+            { value: BLACKDOT_DOMAINS.length, label: 'BlackDot' },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="mb-1 text-4xl font-bold">{stat.value}</div>
+              <div className="text-sm text-neutral-500">{stat.label}</div>
             </div>
-            <div style={{ opacity: 0.7 }}>Total Domains</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-              {LIVE_DOMAINS.length}
-            </div>
-            <div style={{ opacity: 0.7 }}>Live Now</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-              {COMING_SOON_DOMAINS.length}
-            </div>
-            <div style={{ opacity: 0.7 }}>Coming Soon</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-              {ABUNDANCE_DOMAINS.length}
-            </div>
-            <div style={{ opacity: 0.7 }}>Age of Abundance</div>
-          </div>
-          <div>
-            <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-              {BLACKDOT_DOMAINS.length}
-            </div>
-            <div style={{ opacity: 0.7 }}>BlackDot</div>
-          </div>
+          ))}
         </div>
       </section>
 
-      {/* Collaboration Section */}
-      <section style={{
-        padding: '6rem 2rem',
-        background: 'linear-gradient(135deg, rgba(139,92,246,0.1) 0%, rgba(139,92,246,0.05) 100%)',
-        borderTop: '1px solid rgba(139,92,246,0.2)'
-      }}>
-        <div style={{
-          maxWidth: '900px',
-          margin: '0 auto'
-        }}>
-          <h2 style={{
-            fontSize: 'clamp(1.8rem, 4vw, 2.5rem)',
-            fontWeight: 700,
-            marginBottom: '2rem',
-            textAlign: 'center'
-          }}>
-            Let's Build Together
+      {/* Let's Build Together */}
+      <section className="border-t border-violet-500/20 bg-gradient-to-br from-violet-500/10 to-violet-500/5 px-6 py-24">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-4 text-center text-[clamp(1.8rem,4vw,2.5rem)] font-bold">
+            Let&apos;s Build Together
           </h2>
-
-          <p style={{
-            fontSize: '1.1rem',
-            opacity: 0.85,
-            lineHeight: 1.8,
-            marginBottom: '3rem',
-            textAlign: 'center'
-          }}>
-            BlackDot is open to partnerships, integrations, and collaborations. Whether you're a developer, designer, partner, or investor — we're interested in building the future of abundance with you.
+          <p className="mx-auto mb-12 max-w-2xl text-center text-base leading-relaxed text-neutral-400">
+            BlackDot is open to partnerships, integrations, and collaborations. Whether you&apos;re a developer, designer, partner, or investor — we&apos;re interested in building the future of abundance with you.
           </p>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '1.5rem',
-            marginBottom: '3rem'
-          }}>
-            {[
-              {
-                title: 'Developers',
-                text: 'Build on our open-source SDKs and APIs. Access our shared infrastructure and contribute to the platform.',
-                link: 'https://blackdot.dev'
-              },
-              {
-                title: 'Partners',
-                text: 'Integrate with the Age of Abundance ecosystem. Reach 24 domains and millions of users.',
-                link: 'https://blackdot.partners'
-              },
-              {
-                title: 'Investors',
-                text: 'Discover investment opportunities across our verticals and participate in our growth.',
-                link: 'https://blackdot.capital'
-              },
-              {
-                title: 'Creatives',
-                text: 'Collaborate on design, art, and innovation projects. Push the boundaries of what\'s possible.',
-                link: 'https://blackdot.space'
-              }
-            ].map((opportunity, i) => (
-              <a
-                key={i}
-                href={opportunity.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  padding: '2rem',
-                  borderRadius: '8px',
-                  border: '1px solid rgba(139,92,246,0.4)',
-                  background: 'rgba(139,92,246,0.1)',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  transition: 'all 0.3s ease',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1rem'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.8)';
-                  e.currentTarget.style.background = 'rgba(139,92,246,0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)';
-                  e.currentTarget.style.background = 'rgba(139,92,246,0.1)';
-                }}
-              >
-                <h3 style={{
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  color: '#a78bfa',
-                  margin: 0
-                }}>
-                  {opportunity.title}
-                </h3>
-                <p style={{
-                  margin: 0,
-                  opacity: 0.8,
-                  fontSize: '0.9rem',
-                  lineHeight: 1.5
-                }}>
-                  {opportunity.text}
-                </p>
-                <div style={{
-                  marginTop: 'auto',
-                  fontSize: '0.8rem',
-                  opacity: 0.6
-                }}>
-                  Explore →
-                </div>
-              </a>
-            ))}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <LinkTile icon={<IconCode />} label="Developers" href="https://blackdot.dev" />
+            <LinkTile icon={<IconHandshake />} label="Partners" href="https://blackdot.partners" />
+            <LinkTile icon={<IconTrendingUp />} label="Investors" href="https://blackdot.capital" />
+            <LinkTile icon={<IconPalette />} label="Creatives" href="https://blackdot.space" />
           </div>
         </div>
       </section>
 
-      {/* Contact/Join CTA */}
-      <section style={{
-        padding: '6rem 2rem',
-        textAlign: 'center'
-      }}>
-        <h2 style={{
-          fontSize: '2rem',
-          fontWeight: 700,
-          marginBottom: '2rem'
-        }}>
+      {/* CTA */}
+      <section className="px-6 py-24 text-center">
+        <h2 className="mb-6 text-2xl font-bold">
           Ready to Join?
         </h2>
-        <p style={{
-          maxWidth: '40rem',
-          margin: '0 auto 3rem',
-          opacity: 0.7,
-          lineHeight: 1.6
-        }}>
+        <p className="mx-auto mb-10 max-w-lg text-neutral-500 leading-relaxed">
           Start with The Age of Abundance to join our founding membership, or reach out directly to discuss partnership opportunities.
         </p>
-        <div style={{
-          display: 'flex',
-          gap: '1rem',
-          justifyContent: 'center',
-          flexWrap: 'wrap'
-        }}>
-          <a href="https://theageofabundance.ai" style={{
-            display: 'inline-block',
-            padding: '0.75rem 2rem',
-            background: '#8b5cf6',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '8px',
-            fontWeight: 600,
-            transition: 'opacity 0.3s ease'
-          }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+        <div className="flex flex-wrap justify-center gap-4">
+          <a
+            href="https://theageofabundance.ai"
+            className="inline-block rounded-lg bg-violet-600 px-6 py-3 font-semibold text-white transition-opacity hover:opacity-80"
           >
             Join the Ecosystem →
           </a>
-          <a href="mailto:partners@blackdot.dev" style={{
-            display: 'inline-block',
-            padding: '0.75rem 2rem',
-            border: '1px solid rgba(139,92,246,0.5)',
-            background: 'transparent',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '8px',
-            fontWeight: 600,
-            transition: 'all 0.3s ease'
-          }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(139,92,246,0.8)';
-              e.currentTarget.style.background = 'rgba(139,92,246,0.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(139,92,246,0.5)';
-              e.currentTarget.style.background = 'transparent';
-            }}
+          <a
+            href="mailto:partners@blackdot.dev"
+            className="inline-block rounded-lg border border-violet-500/50 bg-transparent px-6 py-3 font-semibold text-white transition-all hover:border-violet-500/80 hover:bg-violet-500/10"
           >
             Contact Partners
           </a>
