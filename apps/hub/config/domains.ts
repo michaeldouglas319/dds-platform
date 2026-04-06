@@ -25,6 +25,12 @@ export interface DomainConfig {
   renderer: RendererType
   /** Override the display label (defaults to the domain itself) */
   label?: string
+  /** Header section content (universal schema subject/content) */
+  header?: {
+    title: string
+    subtitle?: string
+    slogan?: string
+  }
   /** Arbitrary renderer-specific config */
   options?: Record<string, unknown>
 }
@@ -34,19 +40,49 @@ export interface DomainConfig {
 // Add entries as each domain gets built out.
 // ---------------------------------------------------------------------------
 const REGISTRY: Record<string, DomainConfig> = {
-  // --- .site → Puck visual builder ---
-  'ageofabundance.site': { renderer: 'puck' },
+  // ── Black Dot ─────────────────────────────────────────
+  'blackdot.capital': {
+    renderer: 'landing',
+    header: {
+      title: 'Black Dot Capital',
+      subtitle: 'Strategic Investment & Venture Architecture',
+      slogan: 'Where conviction meets capital.',
+    },
+  },
+  'blackdot.partners': {
+    renderer: 'landing',
+    header: {
+      title: 'Black Dot Partners',
+      subtitle: 'Design, Engineering & Growth',
+      slogan: 'Building what matters.',
+    },
+  },
+  'blackdot.dev': {
+    renderer: 'landing',
+    header: {
+      title: 'Black Dot Dev',
+      subtitle: 'Developer Platform & API',
+      slogan: 'The infrastructure layer.',
+    },
+  },
+  'blackdot.space': {
+    renderer: 'landing',
+    header: {
+      title: 'Black Dot Space',
+      subtitle: 'Creative Lab & Experiments',
+      slogan: 'Ideas without boundaries.',
+    },
+  },
 
-  // --- .online → Puck visual builder ---
+  // ── Puck visual builder ───────────────────────────────
+  'ageofabundance.site': { renderer: 'puck' },
   'ageofabundance.online': { renderer: 'puck' },
 
-  // --- .wiki → Fumadocs (scaffold when ready) ---
+  // ── Future renderers (uncomment when ready) ───────────
   // 'ageofabundance.wiki':    { renderer: 'wiki' },
   // 'theageofabundance.wiki': { renderer: 'wiki' },
-
-  // --- .shop → Medusa.js (scaffold when ready) ---
-  // 'ageofabundance.shop':      { renderer: 'shop' },
-  // 'theageofabundance.shop':   { renderer: 'shop' },
+  // 'ageofabundance.shop':    { renderer: 'shop' },
+  // 'theageofabundance.shop': { renderer: 'shop' },
 };
 
 // ---------------------------------------------------------------------------
