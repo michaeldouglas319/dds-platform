@@ -20,6 +20,8 @@ SITES=(
   ageofabundance-net
   blackdot-dev
   blackdot-space
+  blackdot-partners
+  blackdot-capital
 )
 
 for site in "${SITES[@]}"; do

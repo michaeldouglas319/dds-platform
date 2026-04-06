@@ -1,0 +1,65 @@
+name: Deploy All Sites
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        site:
+          - ageofabundance-shop
+          - ageofabundance-art
+          - ageofabundance-asia
+          - ageofabundance-wiki
+          - ageofabundance-dev
+          - ageofabundance-app
+          - ageofabundance-space
+          - ageofabundance-online
+          - ageofabundance-site
+          - ageofabundance-tech
+          - ageofabundance-net
+          - blackdot-dev
+          - blackdot-space
+          - blackdot-partners
+          - blackdot-capital
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.15.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure Vercel for ${{ matrix.site }}
+        run: |
+          cat > vercel.json << EOF
+          {
+            "buildCommand": "pnpm turbo run build --filter=@dds/${{ matrix.site }}",
+            "outputDirectory": "apps/${{ matrix.site }}/.next",
+            "installCommand": "pnpm install",
+            "framework": "nextjs"
+          }
+          EOF
+
+      - name: Deploy ${{ matrix.site }}
+        run: |
+          npm install -g vercel
+          vercel deploy --prod --yes --name "${{ matrix.site }}" --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
