@@ -25,6 +25,8 @@ export interface DomainConfig {
   renderer: RendererType
   /** Override the display label (defaults to the domain itself) */
   label?: string
+  /** Icon displayed above the dot. Defaults to cuneiform monogram 𒌓 */
+  icon?: string | false
   /** Header section content (universal schema subject/content) */
   header?: {
     title: string
@@ -43,6 +45,7 @@ const REGISTRY: Record<string, DomainConfig> = {
   // ── Black Dot ─────────────────────────────────────────
   'blackdot.capital': {
     renderer: 'landing',
+    icon: '●',
     header: {
       title: 'Black Dot Capital',
       subtitle: 'Strategic Investment & Venture Architecture',
@@ -51,6 +54,7 @@ const REGISTRY: Record<string, DomainConfig> = {
   },
   'blackdot.partners': {
     renderer: 'landing',
+    icon: '●',
     header: {
       title: 'Black Dot Partners',
       subtitle: 'Design, Engineering & Growth',
@@ -59,6 +63,7 @@ const REGISTRY: Record<string, DomainConfig> = {
   },
   'blackdot.dev': {
     renderer: 'landing',
+    icon: '●',
     header: {
       title: 'Black Dot Dev',
       subtitle: 'Developer Platform & API',
@@ -67,6 +72,7 @@ const REGISTRY: Record<string, DomainConfig> = {
   },
   'blackdot.space': {
     renderer: 'landing',
+    icon: '●',
     header: {
       title: 'Black Dot Space',
       subtitle: 'Creative Lab & Experiments',

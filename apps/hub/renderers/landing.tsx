@@ -1,8 +1,12 @@
 import type { DomainConfig } from '../config/domains';
 import { SubscribeForm } from '@dds/auth/subscribe';
 
-export function LandingRenderer({ domain, header }: DomainConfig & { domain: string }) {
+// Default icon: cuneiform monogram from dds-renderer
+const DEFAULT_ICON = '𒌓';
+
+export function LandingRenderer({ domain, icon, header }: DomainConfig & { domain: string }) {
   const hasHeader = header?.title;
+  const displayIcon = icon === false ? null : (icon ?? DEFAULT_ICON);
 
   return (
     <main
@@ -17,6 +21,20 @@ export function LandingRenderer({ domain, header }: DomainConfig & { domain: str
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
+      {displayIcon && (
+        <span
+          aria-hidden
+          style={{
+            fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+            color: '#000',
+            marginBottom: 24,
+            lineHeight: 1,
+          }}
+        >
+          {displayIcon}
+        </span>
+      )}
+
       <div
         style={{
           width: 10,
