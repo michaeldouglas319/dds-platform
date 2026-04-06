@@ -52,7 +52,7 @@ function Tile({ domain, icon, header }: {
         minHeight: 140,
       }}
     >
-      {icon && icon !== false && (
+      {icon && (
         <span
           aria-hidden
           style={{
