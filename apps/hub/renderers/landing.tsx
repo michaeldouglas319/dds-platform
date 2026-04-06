@@ -1,8 +1,14 @@
 import type { DomainConfig } from '../config/domains';
 import { SubscribeForm } from '@dds/auth/subscribe';
 
-// Default icon: cuneiform monogram from dds-renderer
 const DEFAULT_ICON = '𒌓';
+
+const flipCSS = `
+@keyframes flipIn {
+  from { transform: perspective(600px) rotateY(360deg); opacity: 0; }
+  to   { transform: perspective(600px) rotateY(0deg);   opacity: 1; }
+}
+`;
 
 export function LandingRenderer({ domain, icon, header }: DomainConfig & { domain: string }) {
   const hasHeader = header?.title;
@@ -21,7 +27,7 @@ export function LandingRenderer({ domain, icon, header }: DomainConfig & { domai
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      {/* Icon in 3D negative-space frame */}
+      <style dangerouslySetInnerHTML={{ __html: flipCSS }} />
       {displayIcon && (
         <div
           style={{
@@ -32,6 +38,8 @@ export function LandingRenderer({ domain, icon, header }: DomainConfig & { domai
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: 32,
+            animation: 'flipIn 0.8s ease-out forwards',
+            backfaceVisibility: 'hidden',
           }}
         >
           {/* Outer shadow layer — pushed back */}
