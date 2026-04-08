@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { PartnershipPitch } from '@dds/ui';
+import { SignIn, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { AppChip, getCuneiformByTLD, extractTLD } from '@dds/icons';
+import { DOMAINS } from '@dds/config/domains';
 import type { UniversalSection } from '@dds/types';
 import siteConfig from '../data/site.config.json';
 import type { ConflictEvent, DebugSettings } from '../components/PoimandresScene';
@@ -119,15 +122,122 @@ export default function Home() {
         )}
       </div>
 
-      {/* ── Registration ─── */}
-      <div id="partner">
-        <PartnershipPitch
-          headline="Join the Wait List"
-          subheadline="Or show your interest by registering for a Partnership."
-          stats={[]}
-          tiers={[]}
-          registerEndpoint="/api/register-partner"
-        />
+      {/* ── Registration (hidden once signed in) ─── */}
+      <SignedOut>
+        <div id="partner">
+          <PartnershipPitch
+            headline="Join the Wait List"
+            subheadline="Or show your interest by registering for a Partnership."
+            stats={[]}
+            tiers={[]}
+            registerEndpoint="/api/register-partner"
+          />
+        </div>
+      </SignedOut>
+
+      {/* ── Sign in / account ─── */}
+      <div
+        id="sign-in"
+        style={{
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          padding: '4rem 1.5rem 6rem',
+        }}
+      >
+        <SignedOut>
+          <SignIn routing="hash" />
+        </SignedOut>
+        <SignedIn>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '1.5rem',
+              textAlign: 'center',
+              maxWidth: '52rem',
+            }}
+          >
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
+                gap: '1.25rem',
+                width: '100%',
+                marginBottom: '1rem',
+              }}
+            >
+              {DOMAINS.map((d) => {
+                const tld = extractTLD(d.domain);
+                const entry = getCuneiformByTLD(tld);
+                if (!entry) return null;
+                return (
+                  <a
+                    key={d.domain}
+                    href={d.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      background: 'rgba(255,255,255,0.35)',
+                      backdropFilter: 'blur(14px) saturate(160%)',
+                      WebkitBackdropFilter: 'blur(14px) saturate(160%)',
+                      border: '1px solid rgba(255,255,255,0.4)',
+                      boxShadow: '0 4px 24px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5)',
+                      borderRadius: 14,
+                      padding: '1.5rem 1rem',
+                      textAlign: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      textDecoration: 'none',
+                      color: 'inherit',
+                    }}
+                  >
+                    <AppChip
+                      entry={entry}
+                      size={52}
+                      tooltip={false}
+                      badgeBg="#ffffff"
+                      badgeBorder="rgba(0,0,0,0.1)"
+                    />
+                    <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'rgba(0,0,0,0.7)' }}>
+                      {d.label}
+                    </span>
+                    {d.status && (
+                      <span
+                        style={{
+                          fontSize: '0.65rem',
+                          fontWeight: 600,
+                          letterSpacing: '0.05em',
+                          textTransform: 'uppercase',
+                          color: d.status === 'live' ? '#059669' : 'rgba(0,0,0,0.3)',
+                        }}
+                      >
+                        {d.status === 'live' ? 'Live' : 'Soon'}
+                      </span>
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+            <h2
+              style={{
+                fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
+                fontWeight: 600,
+                margin: 0,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              Thank you
+            </h2>
+            <p style={{ fontSize: '1.125rem', opacity: 0.75, lineHeight: 1.6, margin: 0 }}>
+              You&rsquo;re on the list. We&rsquo;ll be in touch as partnership slots open up.
+            </p>
+            <UserButton afterSignOutUrl="/" />
+          </div>
+        </SignedIn>
       </div>
     </main>
   );

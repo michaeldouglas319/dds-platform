@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm turbo run build --filter=@dds/hub",
-  "outputDirectory": "apps/hub/.next",
+  "buildCommand": "pnpm turbo run build --filter=@dds/blackdot-partners",
+  "outputDirectory": "apps/blackdot-partners/.next",
   "installCommand": "pnpm install",
   "framework": "nextjs"
 }
