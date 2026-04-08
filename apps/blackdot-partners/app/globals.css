@@ -29,9 +29,9 @@ html:not(.dark) body {
   color: hsl(240 10% 3.9%);
 }
 
-/* Section spacing for renderer output */
-main > div,
-main > section {
+/* Section spacing for renderer output — exclude full-width sections */
+main > div:not(#partner),
+main > section:not(#ecosystem) {
   max-width: var(--content-max);
   margin: 0 auto;
   padding: var(--content-pad);
@@ -44,8 +44,9 @@ main > section {
   padding-bottom: 3rem;
 }
 
-/* Hero area — full viewport height */
+/* Hero area — full viewport height, Poimandres R3F scene behind */
 .hero-area {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -53,6 +54,19 @@ main > section {
   align-items: center;
   text-align: center;
   padding: 4rem var(--content-pad);
+  overflow: hidden;
+  background: #f0f0f0;
+  color: #0a0a0a;
+}
+
+.hero-area > canvas,
+.hero-area > div:first-child {
+  z-index: 0;
+}
+
+.hero-area > *:not(:first-child) {
+  position: relative;
+  z-index: 1;
 }
 
 /* Stats grid fix */

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@dds/renderer';
+import { DdsAuthProvider } from '@dds/auth/clerk';
 import siteConfig from '../data/site.config.json';
 import './globals.css';
 
@@ -16,10 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme={theme} className={theme === 'dark' ? 'dark' : ''}>
-      <body>
-        <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
-      </body>
-    </html>
+    <DdsAuthProvider>
+      <html lang="en" data-theme={theme} className={theme === 'dark' ? 'dark' : ''}>
+        <body>
+          <ThemeProvider initialTheme={theme}>{children}</ThemeProvider>
+        </body>
+      </html>
+    </DdsAuthProvider>
   );
 }

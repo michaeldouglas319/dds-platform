@@ -13,7 +13,7 @@
     "./middleware": "./src/middleware.ts"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.39.0",
+    "@clerk/nextjs": "^6.36.8",
     "@supabase/supabase-js": "^2.49.0"
   },
   "peerDependencies": {

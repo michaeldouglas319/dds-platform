@@ -41,3 +41,6 @@ export {
   type TabsTriggerProps,
   type TabsContentProps,
 } from './components/tabs';
+
+// Partnership
+export { PartnershipPitch, type PartnershipPitchProps, type PartnershipTier, type RegistrationData } from './partnership-pitch';

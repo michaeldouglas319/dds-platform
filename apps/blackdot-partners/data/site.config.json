@@ -1,17 +1,16 @@
 {
   "app": {
     "name": "blackdot.partners",
-    "label": "Art",
-    "description": "Coming soon",
+    "label": "Partners",
+    "description": "The engineering backbone of the Age of Abundance ecosystem",
     "baseUrl": "https://blackdot.partners",
     "defaultTheme": "dark"
   },
   "navigation": {
     "items": [
-      {
-        "label": "Home",
-        "path": "/"
-      }
+      { "label": "Home", "path": "/" },
+      { "label": "Ecosystem", "path": "/#ecosystem" },
+      { "label": "Partner", "path": "/#partner" }
     ],
     "sticky": true
   },
@@ -20,8 +19,8 @@
       "id": "home",
       "path": "/",
       "meta": {
-        "title": "blackdot.partners — Partners",
-        "description": "Coming soon"
+        "title": "BlackDot Partners — Build the Future of Abundance",
+        "description": "Partner with the ecosystem powering 34+ live domains across commerce, creative, technology, and community."
       },
       "sections": [
         {
@@ -29,24 +28,25 @@
           "type": "intro",
           "name": "intro",
           "subject": {
-            "title": "Partners"
+            "title": "Partners",
+            "subtitle": "BlackDot"
           },
           "content": {
-            "body": "Coming soon",
+            "body": "Bring your expertise. Let's make it ours. BlackDot is a collective of builders, strategists, and creators shaping the Age of Abundance — together.",
             "highlights": [
-              "Visual",
-              "Generative",
-              "Interactive",
-              "Immersive",
-              "Collaborative",
-              "Timeless"
+              "Technology",
+              "Strategic",
+              "Investment",
+              "Creative",
+              "Infrastructure",
+              "Commerce"
             ]
           },
           "display": {
             "layout": "intro"
           },
           "meta": {
-            "scrollTarget": "/#waitlist",
+            "scrollTarget": "/#ecosystem",
             "textTransition": "reveal",
             "textTransitionDuration": 1200,
             "textTransitionInterval": 4000,
@@ -55,14 +55,42 @@
           }
         },
         {
-          "id": "waitlist",
+          "id": "platform",
           "type": "section",
-          "name": "waitlist",
+          "name": "platform",
           "subject": {
-            "title": "Join the Founding Membership"
+            "title": "What We Build"
           },
           "content": {
-            "body": "Get early access, founding member pricing, and direct influence on what we build next.\n\n[Join the Waitlist →](https://blackdot.partners)"
+            "body": "DDS (Dynamic Domain System) — a config-driven rendering engine powering all domains from a single codebase. Open-source SDKs, shared auth, analytics, CMS, and deployment pipelines unified across the ecosystem."
+          },
+          "display": {
+            "layout": "centered-text"
+          }
+        },
+        {
+          "id": "ecosystem",
+          "type": "section",
+          "name": "ecosystem",
+          "subject": {
+            "title": "The Ecosystem"
+          },
+          "content": {
+            "body": "34+ live domains spanning commerce, creative, technology, knowledge, community, and infrastructure."
+          },
+          "display": {
+            "layout": "centered-text"
+          }
+        },
+        {
+          "id": "partner",
+          "type": "section",
+          "name": "partner",
+          "subject": {
+            "title": "Partner With BlackDot"
+          },
+          "content": {
+            "body": "Join the ecosystem powering the next era of abundance. One platform, infinite verticals, shared infrastructure — and room for you."
           },
           "display": {
             "layout": "centered-text"

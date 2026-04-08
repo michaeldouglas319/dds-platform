@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@dds/config": "workspace:*",
+    "@dds/icons": "workspace:*",
+    "@dds/ui": "workspace:*",
     "@dds/hooks": "workspace:*",
     "@dds/renderer": "workspace:*",
     "@dds/tailwind-config": "workspace:*",

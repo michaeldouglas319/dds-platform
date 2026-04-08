@@ -2,13 +2,20 @@
 
 import { SectionBatchRenderer } from '@dds/renderer';
 import { BrandHeading } from '@dds/ui';
+import { AppChip, getCuneiformByTLD } from '@dds/icons';
 import type { UniversalSection } from '@dds/types';
 import siteConfig from '../data/site.config.json';
 
 export default function Home() {
   const homePage = siteConfig.pages.find((p: { path: string }) => p.path === '/');
   const sections = (homePage?.sections ?? []) as UniversalSection[];
-  const label = (siteConfig.app as Record<string, unknown>).label as string | undefined;
+  const app = siteConfig.app as Record<string, unknown>;
+  const label = app.label as string | undefined;
+
+  // Derive TLD from site name (e.g. "blackdot.partners" → "partners")
+  const siteName = (app.name as string) ?? '';
+  const tld = siteName.includes('.') ? siteName.split('.').pop()! : siteName;
+  const cuneiform = getCuneiformByTLD(tld);
 
   // Split hero (first section) from the rest for layout control
   const [hero, ...rest] = sections;
@@ -17,6 +24,14 @@ export default function Home() {
     <main>
       {/* Hero — full viewport */}
       <div className="hero-area">
+        {cuneiform && (
+          <AppChip
+            entry={cuneiform}
+            size={64}
+            flipDelay={1000}
+            flipDuration={800}
+          />
+        )}
         <BrandHeading>{label}</BrandHeading>
         {hero && (
           <div style={{ marginTop: '2rem', maxWidth: '40rem' }}>
