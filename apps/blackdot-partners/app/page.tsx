@@ -71,19 +71,6 @@ export default function Home() {
 
       {/* ── Hero content ─── */}
       <div className="hero-area">
-        {/* Brand mark — the Sumerian glyph BA (𒁀): "to give, to share" */}
-        <span
-          aria-label="BlackDot"
-          style={{
-            fontSize: 56,
-            lineHeight: 1,
-            color: '#0a0a0a',
-            fontFamily:
-              'system-ui, "Segoe UI Symbol", "Noto Sans Cuneiform", serif',
-          }}
-        >
-          𒁀
-        </span>
         <h1
           style={{
             fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
@@ -91,10 +78,21 @@ export default function Home() {
             margin: '1.5rem 0 0',
             letterSpacing: '-0.02em',
             lineHeight: 1,
+            textAlign: 'center',
           }}
         >
-          <span style={{ color: '#0a0a0a' }}>BlackDot</span>
-          <span style={{ color: '#0a0a0a', opacity: 0.3, fontWeight: 400, marginLeft: '0.4em' }}>
+          <span style={{ display: 'block', color: '#0a0a0a' }}>BlackDot</span>
+          <span
+            style={{
+              display: 'block',
+              color: '#0a0a0a',
+              opacity: 0.25,
+              fontWeight: 300,
+              fontSize: '0.55em',
+              letterSpacing: '0.04em',
+              marginTop: '0.25em',
+            }}
+          >
             partners
           </span>
         </h1>

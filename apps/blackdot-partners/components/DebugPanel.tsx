@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import type { DebugSettings } from './PoimandresScene';
+import type { ArcStyle, DebugSettings } from './PoimandresScene';
+
+const ARC_STYLES: ArcStyle[] = ['solid', 'gradient', 'pulse', 'noise'];
 
 type Props = {
   settings: DebugSettings;
@@ -132,19 +134,49 @@ export default function DebugPanel({
               value={settings.showArcs}
               onChange={(v) => update('showArcs', v)}
             />
+            <label
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '80px 1fr',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <span style={{ opacity: 0.7 }}>style</span>
+              <select
+                value={settings.arcStyle}
+                onChange={(e) =>
+                  update('arcStyle', e.target.value as ArcStyle)
+                }
+                style={{
+                  background: 'rgba(255,255,255,0.05)',
+                  color: '#e6e6e6',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  borderRadius: 4,
+                  padding: '2px 4px',
+                  font: 'inherit',
+                }}
+              >
+                {ARC_STYLES.map((s) => (
+                  <option key={s} value={s} style={{ color: '#0a0a0a' }}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </label>
             <Slider
               label="k neighbors"
               min={0}
-              max={6}
+              max={16}
               step={1}
               value={settings.arcK}
               onChange={(v) => update('arcK', v)}
             />
             <Slider
               label="lift"
-              min={1.001}
-              max={1.1}
-              step={0.001}
+              min={0}
+              max={1.5}
+              step={0.01}
               value={settings.arcLift}
               onChange={(v) => update('arcLift', v)}
             />
@@ -167,8 +199,8 @@ export default function DebugPanel({
             <Slider
               label="rotation speed"
               min={0}
-              max={0.5}
-              step={0.01}
+              max={3}
+              step={0.05}
               value={settings.globeRotationSpeed}
               onChange={(v) => update('globeRotationSpeed', v)}
             />
