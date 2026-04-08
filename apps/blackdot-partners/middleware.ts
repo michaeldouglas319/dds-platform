@@ -8,6 +8,9 @@ import { createDdsSupabaseAdmin } from '@dds/auth/supabase';
 const isPublicRoute = createRouteMatcher([
   '/',
   '/api/register-partner',
+  '/api/conflict-events',
+  '/api/events',
+  '/api/cron/(.*)',
   '/sign-in(.*)',
   '/sign-up(.*)',
   '/api/webhooks(.*)',

@@ -4,8 +4,8 @@
     "strict": false,
     "paths": {
       "@/*": ["./*"],
-      "@/components/*": ["../../packages/renderer/components/*"],
-      "@/lib/*": ["../../packages/renderer/lib/*"]
+      "@/lib/*": ["./lib/*"],
+      "@/components/*": ["./components/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", ".next/types/**/*.ts"],

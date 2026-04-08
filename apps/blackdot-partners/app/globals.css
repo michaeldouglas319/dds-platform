@@ -30,7 +30,7 @@ html:not(.dark) body {
 }
 
 /* Section spacing for renderer output — exclude full-width sections */
-main > div:not(#partner),
+main > div:not(#partner):not(.hero-area):not(.scene-backdrop),
 main > section:not(#ecosystem) {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -44,7 +44,64 @@ main > section:not(#ecosystem) {
   padding-bottom: 3rem;
 }
 
-/* Hero area — full viewport height, Poimandres R3F scene behind */
+/* Conflict filter — floating pill, top-right */
+.conflict-filter {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: #0a0a0a;
+  font-size: 0.8rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.conflict-filter label {
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.conflict-filter select {
+  background: transparent;
+  border: none;
+  font: inherit;
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.15rem 0.25rem;
+}
+
+.conflict-filter .conflict-count {
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+  padding-left: 0.4rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Fixed 3D backdrop — stays pinned while interface scrolls over it */
+.scene-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Everything in main sits above the scene, dark text on the white room */
+main {
+  position: relative;
+  z-index: 1;
+  color: #0a0a0a;
+}
+
+/* Hero area — full viewport height, transparent so backdrop shows through */
 .hero-area {
   position: relative;
   min-height: 100vh;
@@ -54,19 +111,16 @@ main > section:not(#ecosystem) {
   align-items: center;
   text-align: center;
   padding: 4rem var(--content-pad);
-  overflow: hidden;
-  background: #f0f0f0;
+  background: transparent;
   color: #0a0a0a;
 }
 
-.hero-area > canvas,
-.hero-area > div:first-child {
-  z-index: 0;
-}
-
-.hero-area > *:not(:first-child) {
-  position: relative;
-  z-index: 1;
+/* Sections below the hero get a soft light panel so they're readable over the scene */
+main > #partner {
+  background: rgba(240, 240, 240, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #0a0a0a;
 }
 
 /* Stats grid fix */
