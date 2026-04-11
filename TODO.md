@@ -19,7 +19,7 @@ and blackdot-partners deploy must keep working after every change.
   `<article>` landmark, h1 lede, h2 body sections with permalink anchor IDs,
   ≤75ch measure, prefers-reduced-motion guard, high-contrast tokens.
   Ships: packages/renderer/renderers/wiki-article-renderer.tsx + unit test +
-  Playwright golden path against ageofabundance-wiki home. — commit: pending
+  Playwright golden path against ageofabundance-wiki home. — commit: 243c54a
 - [ ] Article infobox renderer plugin (`wiki-infobox`) — keyed fact sheet on
   the side of an article, derived from `subject.tags` and `content.items`.
 - [ ] Auto Table of Contents (TOC) plugin (`wiki-toc`) — reads heading anchors
@@ -66,4 +66,12 @@ and blackdot-partners deploy must keep working after every change.
   breaking changes to @dds/types or existing renderers. Wiki app supplies a
   `UniversalSection` fixture and uses `SectionBatchRenderer` to render it so
   any future wiki page is just config.
-- Deployed commit: pending (see commit SHAs in session summary).
+- Deployed commit: 243c54a (pushed to branch claude/fervent-hopper-Lbh46).
+  Note: repo vercel.json only deploys @dds/blackdot-partners; the wiki app
+  is not yet hooked up to a Vercel project. My changes are strictly
+  additive against @dds/renderer (new export, new default registry keys)
+  and blackdot-partners/app/layout.tsx only imports ThemeProvider from
+  @dds/renderer — unchanged in this commit. No production regression risk.
+- Follow-up: stand up a Vercel project for apps/ageofabundance-wiki so
+  future wiki sessions can actually verify via get_deployment +
+  get_runtime_logs per the session rulebook.
