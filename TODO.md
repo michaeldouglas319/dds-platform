@@ -28,6 +28,15 @@ Each item below is scoped to be shippable in a single focused session.
 - [ ] **Backlinks panel** — at article footer, list every article that
   links to the current page. Built by inverting the wiki-link graph at
   build time.
+- [ ] **Wire wiki app into `@dds/hub` domain router** — the hub
+  (`apps/hub/config/domains.ts`) currently serves `ageofabundance.wiki`
+  via `renderer: 'landing'`, so the article primitive shipped this
+  session is not yet reachable at the public domain. Either (a) add a
+  `wiki` renderer in `apps/hub/renderers/` that reads from
+  `apps/ageofabundance-wiki/content/articles.js` (after lifting it to
+  a shared package), or (b) re-point the `ageofabundance-wiki` Vercel
+  project back to `dds-platform/main`. Must not break existing
+  domains' routing.
 
 ## P0 — Navigation & discovery
 
@@ -88,5 +97,5 @@ Each item below is scoped to be shippable in a single focused session.
   UniversalSection-shaped articles, static-generated `/a/[slug]` route,
   `/a` index, featured articles on home, `not-found.jsx`, long-form
   typography tokens (`--wiki-measure`, `--wiki-leading-body`). Playwright
-  test covers home → article golden path and 404. Deployed commit: see
-  session summary.
+  test covers home → article golden path, 404, and skip-link focus.
+  Shipped as commit `4b6c29b8cfc386e034f2f8064b992626fd668132`.
