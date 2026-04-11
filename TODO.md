@@ -56,4 +56,30 @@ schema — wiki-specific renderers plug in, they do not fork the core.
   state). Plugin-compatible, static-generated, AA-contrast, reduced-motion
   guarded. Playwright golden-path spec added at `e2e-wiki/wiki.spec.ts` and
   wired through a dedicated `playwright.wiki.config.ts` so it runs isolated
-  from the existing `blackdot-dev` suite. Commit: _(pending push)_.
+  from the existing `blackdot-dev` suite. All 7 wiki e2e specs pass locally
+  and `next build` statically generates every article route.
+  Commit `f72dac76d599de8f8aec86e7911792d4ace8762b` pushed to
+  `origin/claude/fervent-hopper-dIZwH`. Production Vercel verification was
+  not in-path this session: the root `vercel.json` filters the
+  `dds-platform` Vercel project to `@dds/blackdot-partners`, and the
+  `ageofabundance-wiki` Vercel project currently tracks a different repo.
+  Re-pointing deployment for `ageofabundance.wiki` is itself a follow-up
+  item (see below).
+
+## Follow-ups discovered this session
+
+* Reconcile the `ageofabundance-wiki` Vercel project's upstream repo —
+  it currently tracks `theageofabundance-platform`, not `dds-platform`,
+  so wiki work in this monorepo does not reach the `ageofabundance.wiki`
+  domain until that pointer is fixed (or a new Vercel project is wired
+  to `apps/ageofabundance-wiki`).
+* Root `vercel.json` hard-codes
+  `--filter=@dds/blackdot-partners` as the build command. Consider a
+  per-app deploy config so additional apps in the monorepo can ship
+  independently without editing root config on every session.
+* Checked-in Playwright browser cache is `chromium-1194`, which matches
+  `@playwright/test@1.56.x`. Newer Playwright versions require a
+  different browser bundle that the environment cannot download. If the
+  team wants to upgrade Playwright, they must also refresh
+  `/opt/pw-browsers`. Pinning to `1.56.1` in `package.json` is the
+  workaround applied this session.
