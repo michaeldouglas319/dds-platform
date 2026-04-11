@@ -1,31 +1,54 @@
-export default function Home() {
+import { listFeaturedArticles } from '../content/articles.js';
+import { ArticleCard } from '../components/article-card.jsx';
+
+export const metadata = {
+  title: 'ageofabundance.wiki — a living encyclopedia of post-scarcity civilization',
+  description:
+    'The Age of Abundance wiki: concepts, pillars, and open questions of the socio-technical transition to near-zero-marginal-cost essentials.',
+};
+
+export default function HomePage() {
+  const featured = listFeaturedArticles();
+
   return (
-    <main style={{
-      width: '100%',
-      height: '100vh',
-      background: '#fff',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    }}>
-      <div style={{
-        width: 10,
-        height: 10,
-        borderRadius: '50%',
-        background: '#000',
-        marginBottom: 40,
-      }} />
-      <p style={{
-        fontSize: 'clamp(1rem, 3vw, 1.5rem)',
-        letterSpacing: '0.08em',
-        color: '#000',
-        margin: 0,
-        fontWeight: 400,
-      }}>
-        ageofabundance.wiki
-      </p>
+    <main id="main-content" className="wiki-home">
+      <header className="wiki-home__hero" aria-labelledby="wiki-home-title">
+        <span className="wiki-home__dot" aria-hidden="true" />
+        <p className="wiki-home__kicker">ageofabundance.wiki</p>
+        <h1 id="wiki-home-title" className="wiki-home__title">
+          A living encyclopedia of post-scarcity civilization.
+        </h1>
+        <p className="wiki-home__lede">
+          Concepts, pillars, and open questions of the transition to
+          near-zero-marginal-cost energy, compute, atoms, and coordination.
+        </p>
+        <p className="wiki-home__cta">
+          <a className="wiki-home__cta-link" href="#featured">
+            Browse featured articles
+          </a>
+        </p>
+      </header>
+
+      <section
+        id="featured"
+        className="wiki-home__featured"
+        aria-labelledby="wiki-home-featured-title"
+      >
+        <h2 id="wiki-home-featured-title" className="wiki-home__section-title">
+          Featured articles
+        </h2>
+        {featured.length === 0 ? (
+          <p className="wiki-home__empty">No articles yet. Check back soon.</p>
+        ) : (
+          <ul className="wiki-home__grid" role="list">
+            {featured.map((article) => (
+              <li key={article.id}>
+                <ArticleCard article={article} />
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </main>
   );
 }

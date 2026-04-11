@@ -19,10 +19,18 @@ export default defineConfig({
     },
   ],
 
-  webServer: {
-    command: 'cd apps/blackdot-dev && pnpm dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  webServer: [
+    {
+      command: 'cd apps/blackdot-dev && pnpm dev',
+      url: 'http://localhost:3000',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120 * 1000,
+    },
+    {
+      command: 'cd apps/ageofabundance-wiki && PORT=3101 pnpm dev',
+      url: 'http://localhost:3101',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120 * 1000,
+    },
+  ],
 });
