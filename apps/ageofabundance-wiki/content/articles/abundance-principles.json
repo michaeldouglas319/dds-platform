@@ -1,0 +1,75 @@
+{
+  "slug": "abundance-principles",
+  "title": "Principles of Abundance",
+  "summary": "A foundational overview of the core ideas that shape a post-scarcity worldview — cooperation, regenerative systems, and the commons.",
+  "category": "Core concepts",
+  "updated": "2026-04-11",
+  "infobox": {
+    "id": "infobox-abundance-principles",
+    "type": "section",
+    "display": { "layout": "wiki-infobox" },
+    "subject": {
+      "title": "Principles of Abundance",
+      "category": "Core concepts"
+    },
+    "content": {
+      "body": "A living index of the foundational ideas used throughout the wiki.",
+      "highlights": [
+        { "subtitle": "First drafted", "description": "2026-01-14" },
+        { "subtitle": "Revisions", "description": "7" },
+        { "subtitle": "Related", "description": "Commons, Cooperation, Regeneration" }
+      ]
+    }
+  },
+  "sections": [
+    {
+      "id": "section-overview",
+      "type": "section",
+      "name": "Overview",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "Overview" },
+      "content": {
+        "body": "The principles of abundance describe a way of organising people, tools, and ecosystems so that the default outcome is enough — enough food, enough energy, enough care, enough time. They are drawn from regenerative agriculture, commons theory, cooperative economics, and the lived practice of communities who have treated scarcity as a design flaw rather than a law of nature."
+      }
+    },
+    {
+      "id": "section-cooperation",
+      "type": "section",
+      "name": "Cooperation over competition",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "Cooperation over competition" },
+      "content": {
+        "paragraphs": [
+          {
+            "subtitle": "Why it matters",
+            "description": "Competitive systems maximise for a narrow slice of outcomes and tend to externalise their costs. Cooperative systems, designed well, distribute the gains of shared infrastructure — roads, seeds, protocols, vocabularies — back into the community that maintains them."
+          },
+          {
+            "subtitle": "How it shows up",
+            "description": "Cooperative patterns appear wherever people hold resources in common without fencing them off: seed libraries, tool libraries, open source, mutual aid networks, and the quiet everyday work of neighbours who know each other's names."
+          }
+        ]
+      }
+    },
+    {
+      "id": "section-regeneration",
+      "type": "section",
+      "name": "Regenerative systems",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "Regenerative systems" },
+      "content": {
+        "body": "A regenerative system leaves its surroundings richer than it found them. It is the opposite of extractive: it invests surplus back into soil, water, trust, skills, and tools. Measured over generations, a regenerative system compounds abundance the same way an extractive system compounds debt."
+      }
+    },
+    {
+      "id": "section-commons",
+      "type": "section",
+      "name": "The commons",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "The commons" },
+      "content": {
+        "body": "A commons is any resource that a community takes collective responsibility for stewarding. Air, water, rivers, code, language, and public knowledge are all commons. The health of a commons is a direct measurement of the health of the community that holds it."
+      }
+    }
+  ]
+}

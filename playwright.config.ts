@@ -15,14 +15,31 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testIgnore: /wiki-.*\.spec\.ts/,
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'wiki',
+      testMatch: /wiki-.*\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://localhost:3100',
+      },
     },
   ],
 
-  webServer: {
-    command: 'cd apps/blackdot-dev && pnpm dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  webServer: [
+    {
+      command: 'cd apps/blackdot-dev && pnpm dev',
+      url: 'http://localhost:3000',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120 * 1000,
+    },
+    {
+      command: 'cd apps/ageofabundance-wiki && pnpm exec next dev --port 3100',
+      url: 'http://localhost:3100',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120 * 1000,
+    },
+  ],
 });

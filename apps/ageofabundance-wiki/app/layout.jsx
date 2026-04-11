@@ -1,12 +1,15 @@
+import './globals.css';
+
 export const metadata = {
   title: 'ageofabundance.wiki',
-  description: 'ageofabundance.wiki',
+  description:
+    'A living, plugin-driven wiki built on the DDS UniversalSection schema.',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body style={{ margin: 0, padding: 0 }}>{children}</body>
+    <html lang="en" data-theme="light">
+      <body>{children}</body>
     </html>
   );
 }

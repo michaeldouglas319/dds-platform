@@ -1,0 +1,73 @@
+{
+  "slug": "universal-section",
+  "title": "The Universal Section Schema",
+  "summary": "Every page, sidebar, infobox, and article body in this wiki compiles down to a single data shape: the UniversalSection.",
+  "category": "Platform",
+  "updated": "2026-04-11",
+  "infobox": {
+    "id": "infobox-universal-section",
+    "type": "section",
+    "display": { "layout": "wiki-infobox" },
+    "subject": {
+      "title": "UniversalSection",
+      "category": "Schema"
+    },
+    "content": {
+      "body": "Core data shape for everything the platform renders.",
+      "highlights": [
+        { "subtitle": "Package", "description": "@dds/types" },
+        { "subtitle": "Stability", "description": "1.0 — backward compatible" },
+        { "subtitle": "Buckets", "description": "subject, content, media, links, display, spatial" }
+      ]
+    }
+  },
+  "sections": [
+    {
+      "id": "section-one-shape",
+      "type": "section",
+      "name": "One shape, many renderers",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "One shape, many renderers" },
+      "content": {
+        "body": "The platform ships a registry of renderers keyed by display.layout or section type. A hero, a stats grid, a timeline, an article body, an infobox — all of them are UniversalSection objects on the wire, and all of them are plugged into the registry at runtime. Wiki-specific renderers are additive plugins; they never fork the core."
+      }
+    },
+    {
+      "id": "section-buckets",
+      "type": "section",
+      "name": "Buckets",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "Buckets" },
+      "content": {
+        "paragraphs": [
+          {
+            "subtitle": "subject",
+            "description": "Title, subtitle, category, ordering, tags. The identity of the thing."
+          },
+          {
+            "subtitle": "content",
+            "description": "Body text, paragraphs, highlights, stats, items — the prose."
+          },
+          {
+            "subtitle": "media",
+            "description": "Images, themed images, background plates, video, 3D model references."
+          },
+          {
+            "subtitle": "display",
+            "description": "Layout key, text width, alignment, animation, feature flags, access roles."
+          }
+        ]
+      }
+    },
+    {
+      "id": "section-backwards-compat",
+      "type": "section",
+      "name": "Backward compatibility",
+      "display": { "layout": "wiki-body", "headingLevel": 2 },
+      "subject": { "title": "Backward compatibility" },
+      "content": {
+        "body": "New fields are always optional and always additive. An old app can read a new section and simply ignore the extra keys; a new app can render an old section because every bucket is optional except id and type. The schema versions itself forward without breaking anything downstream."
+      }
+    }
+  ]
+}
