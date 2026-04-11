@@ -14,17 +14,68 @@
  * count, summary) is read through {@link deriveWikiMeta} so the header
  * stays consistent for articles that ship with explicit metadata and
  * those that let the helper derive it.
+ *
+ * Inline `[[wiki-links]]` inside `content.body` and
+ * `content.paragraphs[].description` are parsed via {@link parseWikiLinks}
+ * and rendered as `<a>` when the target exists, or a non-interactive
+ * `<span class="wiki-link wiki-link--broken">` when it does not. The
+ * renderer takes a `knownSlugs` set so it can run entirely statically;
+ * the page component owns supplying that set.
  */
 
 import { deriveWikiMeta } from '../content/wiki-meta.js';
+import { parseWikiLinks } from '../content/wiki-links.js';
 
-export function WikiArticle({ article }) {
+/**
+ * Render a string that may contain `[[wiki-link]]` markers. Returns an
+ * array of React nodes suitable for dropping directly inside any text
+ * container. Pure function over serializable inputs, RSC-safe.
+ *
+ * @param {string} text
+ * @param {Set<string>} knownSlugs
+ * @param {string} keyPrefix  Stable prefix for React `key` generation.
+ */
+function renderWikiText(text, knownSlugs, keyPrefix) {
+  const segments = parseWikiLinks(text, knownSlugs);
+  if (segments.length === 0) return text;
+  return segments.map((seg, i) => {
+    if (seg.type === 'text') {
+      return seg.value;
+    }
+    if (seg.broken) {
+      return (
+        <span
+          key={`${keyPrefix}-${i}`}
+          className="wiki-link wiki-link--broken"
+          aria-label={`Broken wiki link: ${seg.value}`}
+          title="This article does not exist yet"
+          data-broken="true"
+        >
+          {seg.value}
+        </span>
+      );
+    }
+    return (
+      <a
+        key={`${keyPrefix}-${i}`}
+        className="wiki-link"
+        href={`/a/${seg.slug}`}
+        data-wiki-link={seg.slug}
+      >
+        {seg.value}
+      </a>
+    );
+  });
+}
+
+export function WikiArticle({ article, knownSlugs }) {
   const title = article?.subject?.title;
   const subtitle = article?.subject?.subtitle;
   const category = article?.subject?.category;
   const body = article?.content?.body;
   const paragraphs = article?.content?.paragraphs ?? [];
   const meta = deriveWikiMeta(article);
+  const slugSet = knownSlugs instanceof Set ? knownSlugs : new Set(knownSlugs ?? []);
 
   return (
     <article className="wiki-article" aria-labelledby="wiki-article-title">
@@ -102,7 +153,11 @@ export function WikiArticle({ article }) {
       </header>
 
       <div className="wiki-article__body">
-        {body && <p className="wiki-article__lede">{body}</p>}
+        {body && (
+          <p className="wiki-article__lede">
+            {renderWikiText(body, slugSet, 'lede')}
+          </p>
+        )}
 
         {paragraphs.map((p, i) => (
           <section key={i} className="wiki-article__section">
@@ -110,7 +165,9 @@ export function WikiArticle({ article }) {
               <h2 className="wiki-article__h2">{p.subtitle}</h2>
             )}
             {p.description && (
-              <p className="wiki-article__p">{p.description}</p>
+              <p className="wiki-article__p">
+                {renderWikiText(p.description, slugSet, `p-${i}`)}
+              </p>
             )}
           </section>
         ))}

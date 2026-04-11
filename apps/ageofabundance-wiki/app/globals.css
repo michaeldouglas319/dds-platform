@@ -530,6 +530,50 @@ video {
   hyphens: auto;
 }
 
+/* ─── Inline wiki-links ────────────────────────────────────────────
+ *
+ * Real links are rendered as `<a class="wiki-link">` and get a heavier
+ * underline + the accent ink color so they read as editorial cross-
+ * references, not generic web links. Broken links are non-interactive
+ * `<span class="wiki-link wiki-link--broken">` — never focusable,
+ * never clickable, always announced via aria-label.
+ *
+ * Both states meet WCAG AA contrast against the light and dark
+ * surfaces in `--wiki-accent-ink` / `--wiki-ink-muted`. The broken
+ * dotted underline is a redundant signal on top of color so it also
+ * satisfies WCAG 1.4.1 Use of Color.
+ */
+.wiki-link {
+  color: var(--wiki-accent-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+.wiki-link:hover {
+  color: var(--wiki-accent);
+  text-decoration-thickness: 2px;
+}
+
+.wiki-link--broken {
+  color: var(--wiki-ink-muted);
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  cursor: help;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.wiki-link--broken::after {
+  /* SR-only marker so sighted users see the dotted underline while
+   * assistive tech hears the full aria-label. Keeps source prose
+   * readable even when CSS is unavailable. */
+  content: '';
+}
+
 .wiki-article__footer {
   margin-top: var(--wiki-stack-lg);
   padding-top: var(--wiki-stack);

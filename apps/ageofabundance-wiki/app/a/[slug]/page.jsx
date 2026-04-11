@@ -6,6 +6,10 @@ import {
 import { WikiArticle } from '../../../components/wiki-article.jsx';
 import { deriveWikiMeta } from '../../../content/wiki-meta.js';
 
+// Pre-computed once at module load so every article render shares the
+// same set object — cheap, static, no runtime walking of the dataset.
+const KNOWN_SLUGS = new Set(listArticleSlugs());
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -89,7 +93,7 @@ export default function ArticlePage({ params }) {
           <li aria-current="page">{article.subject?.title}</li>
         </ol>
       </nav>
-      <WikiArticle article={article} />
+      <WikiArticle article={article} knownSlugs={KNOWN_SLUGS} />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger -- trusted, server-rendered JSON-LD

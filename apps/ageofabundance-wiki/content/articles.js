@@ -6,6 +6,21 @@
  * `meta.wiki` so the core schema continues to parse unchanged and the data
  * remains plug-compatible with future @dds/renderer plugins.
  *
+ * ## Wiki-link syntax inside body text
+ *
+ * Article body / paragraph text may contain `[[wiki-links]]`, parsed at
+ * render time by {@link parseWikiLinks}. Two supported forms:
+ *
+ *   - `[[Energy Abundance]]` — slugified to `energy-abundance`, visible
+ *     text is the literal inside the brackets.
+ *   - `[[energy-abundance|cheap power]]` — MediaWiki-style pipe: left is
+ *     the target slug, right is the visible text.
+ *
+ * Unknown targets render as a non-interactive `.wiki-link--broken` span
+ * so editors can seed forward-references ahead of the article's own
+ * creation. Seeing broken links in the rendered page is a feature, not
+ * a bug — it surfaces the wiki's editorial debt.
+ *
  * @typedef {Object} WikiMeta
  * @property {string} [lastUpdatedISO]
  * @property {string[]} [authors]
@@ -49,7 +64,7 @@ export const articles = [
         {
           subtitle: 'Core pillars',
           description:
-            'Commentators commonly identify four pillars: (1) energy abundance, driven by solar, storage, and advanced geothermal; (2) compute abundance, driven by learned models and efficient silicon; (3) atoms abundance, driven by robotics, additive manufacturing, and synthetic biology; and (4) coordination abundance, driven by open protocols, verifiable identity, and legitimate governance. The absence of any single pillar tends to stall the others.',
+            'Commentators commonly identify four pillars: (1) [[Energy Abundance]], driven by solar, storage, and advanced geothermal; (2) [[Compute Abundance]], driven by learned models and efficient silicon; (3) [[Atoms Abundance]], driven by robotics, additive manufacturing, and synthetic biology; and (4) [[Coordination Abundance]], driven by open protocols, verifiable identity, and legitimate governance. The absence of any single pillar tends to stall the others.',
         },
         {
           subtitle: 'Critiques and open questions',
@@ -83,7 +98,7 @@ export const articles = [
       category: 'Pillar',
     },
     content: {
-      body: 'Energy abundance is the first and most load-bearing pillar of the Age of Abundance. When electricity drops below one cent per kilowatt-hour at point of use, the marginal cost of most other goods — desalinated water, compute, protein, long-distance mobility — collapses with it. The learning curves of photovoltaic solar and lithium storage are the clearest evidence that this is not a forecast but a trajectory.',
+      body: 'Energy abundance is the first and most load-bearing pillar of the [[Age of Abundance]]. When electricity drops below one cent per kilowatt-hour at point of use, the marginal cost of most other goods — desalinated water, compute, protein, long-distance mobility — collapses with it. The learning curves of photovoltaic solar and lithium storage are the clearest evidence that this is not a forecast but a trajectory.',
       paragraphs: [
         {
           subtitle: 'The Wright-curve argument',
@@ -127,7 +142,7 @@ export const articles = [
       category: 'Pillar',
     },
     content: {
-      body: 'If energy, compute, and atoms are the material pillars of abundance, coordination is the pillar that decides what we do with them. Without legitimate institutions, open protocols, and verifiable identity, cheap electrons and trained models turn into centralized rents. Coordination abundance asks whether the governance layer can scale at the same pace as the underlying capacity.',
+      body: 'If energy, compute, and atoms are the material pillars of abundance, coordination is the pillar that decides what we do with them. Without legitimate institutions, open protocols, and verifiable identity, the cheap electrons of [[Energy Abundance]] and the trained models of [[Compute Abundance]] turn into centralized rents. Coordination abundance asks whether the governance layer can scale at the same pace as the underlying capacity. See also [[Age of Abundance]] for the umbrella framing.',
       paragraphs: [
         {
           subtitle: 'Why coordination is the bottleneck',

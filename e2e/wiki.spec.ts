@@ -112,4 +112,50 @@ test.describe('Age of Abundance wiki', () => {
     await expect(skip).toBeVisible();
     await expect(skip).toContainText(/skip to main content/i);
   });
+
+  test('inline wiki-links render as internal <a> or broken span', async ({ page }) => {
+    // The age-of-abundance article body seeds four cross-links:
+    //   - [[Energy Abundance]]        → resolved
+    //   - [[Coordination Abundance]]  → resolved
+    //   - [[Compute Abundance]]       → broken (article not in seed)
+    //   - [[Atoms Abundance]]         → broken (article not in seed)
+    // This test locks down the three contract promises:
+    //   1. resolved wiki-links render as <a> with href /a/<slug>
+    //   2. broken wiki-links render as a span, never an <a>, and carry an
+    //      aria-label starting with "Broken wiki link"
+    //   3. clicking a resolved wiki-link navigates to that article
+    await page.goto(`${WIKI}/a/age-of-abundance`);
+
+    const articleBody = page.locator('.wiki-article__body');
+    await expect(articleBody).toBeVisible();
+
+    // (1) resolved link: <a class="wiki-link"> pointing at /a/energy-abundance
+    const energyLink = articleBody.locator('a.wiki-link[href="/a/energy-abundance"]');
+    await expect(energyLink).toHaveCount(1);
+    await expect(energyLink).toContainText(/energy abundance/i);
+
+    const coordLink = articleBody.locator(
+      'a.wiki-link[href="/a/coordination-abundance"]',
+    );
+    await expect(coordLink).toHaveCount(1);
+
+    // (2) broken link: span.wiki-link--broken with an aria-label. Must NOT
+    // be an <a>, so a pure CSS selector by tag + class proves the contract.
+    const brokenSpans = articleBody.locator('span.wiki-link--broken');
+    const brokenCount = await brokenSpans.count();
+    expect(brokenCount).toBeGreaterThanOrEqual(1);
+    await expect(brokenSpans.first()).toHaveAttribute(
+      'aria-label',
+      /^Broken wiki link: /,
+    );
+    // No <a> element should ever carry the broken modifier class.
+    await expect(articleBody.locator('a.wiki-link--broken')).toHaveCount(0);
+
+    // (3) navigate via a real wiki-link click — golden path.
+    await energyLink.click();
+    await page.waitForURL(`${WIKI}/a/energy-abundance`);
+    await expect(
+      page.locator('article.wiki-article').getByRole('heading', { level: 1 }),
+    ).toContainText(/energy abundance/i);
+  });
 });

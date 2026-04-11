@@ -20,9 +20,10 @@ Each item below is scoped to be shippable in a single focused session.
   _Shipped: see session log below._
 - [ ] **Article index (`/a`)** — paginated list of every article, sorted by
   `lastUpdatedISO`, filterable by tag.
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -118,3 +119,30 @@ Each item below is scoped to be shippable in a single focused session.
   with or without `meta.wiki` continue to parse. Vitest `include` was
   extended to pick up tests under `apps/**`. Shipped as commit
   `<PENDING_SHA>`.
+- 2026-04-11 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module provides `parseWikiLinks(text, knownSlugs)` that turns `[[…]]`
+  markers into typed `{ type: 'text' | 'link', slug, broken }` segments.
+  Supports `[[Title Case]]` slugified resolution, `[[target|display]]`
+  MediaWiki-style pipe syntax, and broken-link detection when the target
+  is not in the known-slug set. A companion `buildWikiGraph(articles)`
+  builds forward + backlink adjacency maps and a broken-link report — the
+  backlinks panel (P0) can read directly from it next session. Rendering:
+  `WikiArticle` now accepts a `knownSlugs` prop and runs `renderWikiText`
+  over `content.body` and each `content.paragraphs[].description`. Known
+  targets render as `<a class="wiki-link" href="/a/{slug}">` (accent ink,
+  underline). Unknown targets render as `<span class="wiki-link
+  wiki-link--broken" aria-label="Broken wiki link: …">` (muted ink,
+  dotted underline, `cursor: help`). The broken span is never focusable
+  and never an `<a>` — conforming with WAI-ARIA guidance. Cross-links
+  seeded into all 3 existing articles: age-of-abundance → energy,
+  coordination, compute (broken), atoms (broken); energy → age-of-abundance;
+  coordination → age-of-abundance, energy, compute (broken). 28 new vitest
+  cases cover slugify, parseWikiLinks, collectLinksFromArticle,
+  buildWikiGraph, and the live seed dataset. Playwright test asserts
+  resolved links render as `<a>`, broken links as `<span>`, and that
+  clicking a wiki-link navigates to the target article. CSS uses custom
+  properties; meets WCAG AA on both light and dark surfaces.
+  `playwright.config.ts` gained a `CHROMIUM_PATH` env-var escape hatch
+  for sandbox/CI environments. Backward compatibility: articles without
+  wiki-links continue to render identically; `@dds/types` untouched.
+  Shipped as commit `<PENDING_SHA>`.
