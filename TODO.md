@@ -89,6 +89,14 @@ smarter.
   `ageofabundance.wiki`, the dds-platform Vercel project will need either a
   multi-app routing strategy or a dedicated wiki Vercel project pointing at
   this repo. Recorded for the next session.
+- [ ] **Vercel feature-branch deploys**: the dds-platform Vercel project does
+  not currently auto-deploy from non-`main` branches — recent deploys are all
+  CLI-driven (`source: cli`) on `main` only. As a result the wiki feature
+  shipped this session is verifiable locally but cannot be exercised on a
+  Vercel preview URL until the project's Git integration is enabled for
+  feature branches (or until the wiki app gets its own Vercel project pointing
+  at this repo). Until then "verify in production via Vercel" is fulfilled by
+  the next push to `main`.
 - [ ] **Wiki app dependency hygiene** — `@tailwindcss/postcss`, `postcss`, and
   `tailwindcss` remain in `apps/ageofabundance-wiki/package.json` even though
   the wiki uses raw CSS only. Drop them in a follow-up once nothing else
