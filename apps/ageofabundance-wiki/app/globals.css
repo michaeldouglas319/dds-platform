@@ -598,6 +598,57 @@ video {
   text-decoration: none;
 }
 
+/* ─── Wiki-links (inline cross-references) ────────────────────── */
+
+/*
+ * Inline `[[target|display]]` cross-references rendered by
+ * <WikiLinkedText>. Valid links resolve to /a/<slug>; unresolved
+ * ("redlink") targets render as a non-navigable span so broken links
+ * are visually distinct and editorially actionable, never silently
+ * dropped.
+ */
+.wiki-link {
+  color: var(--wiki-accent-ink);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  border-radius: 2px;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.wiki-link:hover {
+  color: var(--wiki-accent);
+  background: color-mix(in srgb, var(--wiki-accent) 8%, transparent);
+}
+
+.wiki-link--broken {
+  color: var(--wiki-ink-faint);
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--wiki-accent) 45%, transparent);
+  text-underline-offset: 0.18em;
+  cursor: help;
+}
+
+.wiki-link--broken:hover {
+  color: var(--wiki-ink-muted);
+  background: none;
+}
+
+/* Screen-reader-only utility for the broken-link explanation text. */
+.wiki-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── Motion-safety ────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

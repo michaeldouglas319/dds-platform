@@ -1,10 +1,16 @@
 import { notFound } from 'next/navigation';
 import {
+  articles,
   findArticleBySlug,
   listArticleSlugs,
 } from '../../../content/articles.js';
 import { WikiArticle } from '../../../components/wiki-article.jsx';
 import { deriveWikiMeta } from '../../../content/wiki-meta.js';
+import { createWikiLinkResolver } from '../../../content/wiki-links.js';
+
+// Resolver is computed once per server process — article list is static
+// and frozen at build time, so no per-request cost.
+const wikiLinkResolver = createWikiLinkResolver(articles);
 
 export const dynamicParams = false;
 
@@ -89,7 +95,7 @@ export default function ArticlePage({ params }) {
           <li aria-current="page">{article.subject?.title}</li>
         </ol>
       </nav>
-      <WikiArticle article={article} />
+      <WikiArticle article={article} resolver={wikiLinkResolver} />
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger -- trusted, server-rendered JSON-LD

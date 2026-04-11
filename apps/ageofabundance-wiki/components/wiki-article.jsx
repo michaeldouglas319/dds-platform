@@ -17,8 +17,9 @@
  */
 
 import { deriveWikiMeta } from '../content/wiki-meta.js';
+import { WikiLinkedText } from './wiki-linked-text.jsx';
 
-export function WikiArticle({ article }) {
+export function WikiArticle({ article, resolver = null }) {
   const title = article?.subject?.title;
   const subtitle = article?.subject?.subtitle;
   const category = article?.subject?.category;
@@ -102,7 +103,11 @@ export function WikiArticle({ article }) {
       </header>
 
       <div className="wiki-article__body">
-        {body && <p className="wiki-article__lede">{body}</p>}
+        {body && (
+          <p className="wiki-article__lede">
+            <WikiLinkedText text={body} resolver={resolver} />
+          </p>
+        )}
 
         {paragraphs.map((p, i) => (
           <section key={i} className="wiki-article__section">
@@ -110,7 +115,9 @@ export function WikiArticle({ article }) {
               <h2 className="wiki-article__h2">{p.subtitle}</h2>
             )}
             {p.description && (
-              <p className="wiki-article__p">{p.description}</p>
+              <p className="wiki-article__p">
+                <WikiLinkedText text={p.description} resolver={resolver} />
+              </p>
             )}
           </section>
         ))}

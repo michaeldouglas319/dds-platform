@@ -20,9 +20,10 @@ Each item below is scoped to be shippable in a single focused session.
   _Shipped: see session log below._
 - [ ] **Article index (`/a`)** — paginated list of every article, sorted by
   `lastUpdatedISO`, filterable by tag.
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -100,6 +101,44 @@ Each item below is scoped to be shippable in a single focused session.
   typography tokens (`--wiki-measure`, `--wiki-leading-body`). Playwright
   test covers home → article golden path, 404, and skip-link focus.
   Shipped as commit `4b6c29b8cfc386e034f2f8064b992626fd668132`.
+- 2026-04-11 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module is a pure, deterministic tokenizer + resolver for the universal
+  wiki-link syntax `[[target]]` / `[[target|Display]]` (Obsidian /
+  MediaWiki / remark-wiki-link / Foam / Dendron). `slugifyTarget`
+  normalizes both slug-form (`coordination-abundance`) and title-form
+  (`Coordination Abundance`) inputs to a single canonical slug, so
+  authors can write either. `createWikiLinkResolver(articles)` builds a
+  lookup from both `article.id` and the slugified `subject.title` — both
+  keys map to the same underlying article. `resolveWikiLinks(text,
+  resolver)` returns a token stream whose link tokens carry an `exists`
+  flag, so renderers can surface unresolved targets as "redlinks"
+  (Wikipedia's name for the legitimate editorial convention that an
+  article should exist but does not yet). New RSC `WikiLinkedText`
+  renders valid targets as `<a class="wiki-link" href="/a/slug">` and
+  broken targets as a non-navigable `<span class="wiki-link
+  wiki-link--broken">` with a visible dashed underline and an `.wiki-sr-
+  only` explanation (" (article not yet written)") for assistive tech.
+  `WikiArticle` now takes an optional `resolver` prop and renders both
+  `content.body` and `paragraphs[].description` through `WikiLinkedText`;
+  `app/a/[slug]/page.jsx` builds the resolver once per server process
+  from the seed article list. Seeded cross-links across all three
+  articles (`age-of-abundance` ↔ `energy-abundance` ↔
+  `coordination-abundance`), plus one intentional redlink to
+  `[[compute-abundance|compute]]` — the third material pillar is a
+  genuine future article, exactly the editorial gap a redlink is meant
+  to surface. Word count and summary derivation in `wiki-meta.js` now
+  flatten wiki-link syntax via a new `stripWikiLinks` helper so
+  `[[energy-abundance|energy]]` contributes "energy" (one real word) and
+  raw `[[…]]` tokens never leak into OG / JSON-LD description fields.
+  27 new vitest cases cover slugify, parser, resolver, and the combined
+  flow; Playwright now asserts cross-link navigation
+  (`coordination-abundance` → `energy-abundance` via the inline lede
+  link) and the redlink DOM contract (span not anchor, `data-wiki-link`,
+  title, SR-only explanation). Backward compatibility: `@dds/types`
+  untouched; existing articles with no `[[…]]` syntax tokenize as a
+  single text token and render unchanged; the core renderer registry is
+  not touched — this is a consumer-app plugin, not a core fork.
+  Shipped as commit `<PENDING_SHA>`.
 - 2026-04-11 — **Article metadata schema** shipped. New
   `content/wiki-meta.js` module is the single source of truth for every
   field under `meta.wiki`: `lastUpdatedISO`, `authors[]`, `tags[]`,

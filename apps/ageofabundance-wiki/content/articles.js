@@ -39,7 +39,7 @@ export const articles = [
         'The Age of Abundance describes the socio-technical transition in which essential human needs — energy, compute, housing, mobility, education, and care — fall to near-zero marginal cost and become available to every person on Earth.',
     },
     content: {
-      body: 'The Age of Abundance describes the socio-technical transition in which essential human needs — energy, compute, housing, mobility, education, and care — fall to near-zero marginal cost and become available to every person on Earth. Unlike earlier post-scarcity visions rooted in pure automation, the contemporary framing treats abundance as a governance problem: the bottleneck is no longer production but coordination, legitimacy, and distribution.',
+      body: 'The Age of Abundance describes the socio-technical transition in which essential human needs — [[energy-abundance|energy]], [[compute-abundance|compute]], housing, mobility, education, and care — fall to near-zero marginal cost and become available to every person on Earth. Unlike earlier post-scarcity visions rooted in pure automation, the contemporary framing treats abundance as a governance problem: the bottleneck is no longer production but [[coordination-abundance|coordination]], legitimacy, and distribution.',
       paragraphs: [
         {
           subtitle: 'Origins of the term',
@@ -49,7 +49,7 @@ export const articles = [
         {
           subtitle: 'Core pillars',
           description:
-            'Commentators commonly identify four pillars: (1) energy abundance, driven by solar, storage, and advanced geothermal; (2) compute abundance, driven by learned models and efficient silicon; (3) atoms abundance, driven by robotics, additive manufacturing, and synthetic biology; and (4) coordination abundance, driven by open protocols, verifiable identity, and legitimate governance. The absence of any single pillar tends to stall the others.',
+            'Commentators commonly identify four pillars: (1) [[energy-abundance|energy abundance]], driven by solar, storage, and advanced geothermal; (2) [[compute-abundance|compute abundance]], driven by learned models and efficient silicon; (3) atoms abundance, driven by robotics, additive manufacturing, and synthetic biology; and (4) [[coordination-abundance|coordination abundance]], driven by open protocols, verifiable identity, and legitimate governance. The absence of any single pillar tends to stall the others.',
         },
         {
           subtitle: 'Critiques and open questions',
@@ -83,7 +83,7 @@ export const articles = [
       category: 'Pillar',
     },
     content: {
-      body: 'Energy abundance is the first and most load-bearing pillar of the Age of Abundance. When electricity drops below one cent per kilowatt-hour at point of use, the marginal cost of most other goods — desalinated water, compute, protein, long-distance mobility — collapses with it. The learning curves of photovoltaic solar and lithium storage are the clearest evidence that this is not a forecast but a trajectory.',
+      body: 'Energy abundance is the first and most load-bearing pillar of the [[age-of-abundance|Age of Abundance]]. When electricity drops below one cent per kilowatt-hour at point of use, the marginal cost of most other goods — desalinated water, compute, protein, long-distance mobility — collapses with it. The learning curves of photovoltaic solar and lithium storage are the clearest evidence that this is not a forecast but a trajectory.',
       paragraphs: [
         {
           subtitle: 'The Wright-curve argument',
@@ -93,7 +93,7 @@ export const articles = [
         {
           subtitle: 'Second-order effects',
           description:
-            'Cheap, clean electrons turn electricity-intensive processes that are economically marginal today into dominant ones tomorrow. Direct-air carbon capture, green hydrogen, thermal desalination, indoor vertical agriculture, and arbitrary-latitude food production all move from speculative to routine as the price of the underlying energy approaches zero. The Age of Abundance framing emphasizes these second-order effects because they are where the lived difference appears.',
+            'Cheap, clean electrons turn electricity-intensive processes that are economically marginal today into dominant ones tomorrow. Direct-air carbon capture, green hydrogen, thermal desalination, indoor vertical agriculture, and arbitrary-latitude food production all move from speculative to routine as the price of the underlying energy approaches zero. The framing emphasizes these second-order effects because they are where the lived difference appears, and where [[coordination-abundance|coordination]] ultimately decides who benefits.',
         },
         {
           subtitle: 'Why this is still contested',
@@ -127,7 +127,7 @@ export const articles = [
       category: 'Pillar',
     },
     content: {
-      body: 'If energy, compute, and atoms are the material pillars of abundance, coordination is the pillar that decides what we do with them. Without legitimate institutions, open protocols, and verifiable identity, cheap electrons and trained models turn into centralized rents. Coordination abundance asks whether the governance layer can scale at the same pace as the underlying capacity.',
+      body: 'If [[energy-abundance|energy]], [[compute-abundance|compute]], and atoms are the material pillars of the [[age-of-abundance|Age of Abundance]], coordination is the pillar that decides what we do with them. Without legitimate institutions, open protocols, and verifiable identity, cheap electrons and trained models turn into centralized rents. Coordination abundance asks whether the governance layer can scale at the same pace as the underlying capacity.',
       paragraphs: [
         {
           subtitle: 'Why coordination is the bottleneck',

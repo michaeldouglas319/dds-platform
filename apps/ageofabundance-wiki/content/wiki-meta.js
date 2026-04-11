@@ -53,6 +53,8 @@
  * the silent-reading average rather than a faster skim rate because wiki
  * articles target comprehension, not skim.
  */
+import { stripWikiLinks } from './wiki-links.js';
+
 export const WORDS_PER_MINUTE = 238;
 
 /**
@@ -67,11 +69,14 @@ export function countWordsInArticle(article) {
   const content = article.content ?? {};
   /** @type {string[]} */
   const parts = [];
-  if (typeof content.body === 'string') parts.push(content.body);
+  // Flatten any inline `[[target|display]]` wiki-link syntax to its
+  // display text so `[[energy-abundance|energy]]` contributes "energy"
+  // (one real word) rather than the literal bracket token.
+  if (typeof content.body === 'string') parts.push(stripWikiLinks(content.body));
   if (Array.isArray(content.paragraphs)) {
     for (const p of content.paragraphs) {
-      if (p && typeof p.subtitle === 'string') parts.push(p.subtitle);
-      if (p && typeof p.description === 'string') parts.push(p.description);
+      if (p && typeof p.subtitle === 'string') parts.push(stripWikiLinks(p.subtitle));
+      if (p && typeof p.description === 'string') parts.push(stripWikiLinks(p.description));
     }
   }
   if (parts.length === 0) return 0;
@@ -207,9 +212,12 @@ export function deriveSummary(article) {
   }
   const body = article.content?.body;
   if (typeof body === 'string' && body.trim()) {
-    // First sentence, clipped to ~240 chars for OG/description fields.
-    const match = body.trim().match(/^.*?[.!?](\s|$)/);
-    const first = match ? match[0].trim() : body.trim();
+    // Strip wiki-link syntax so OG/JSON-LD description never surfaces raw
+    // `[[…]]` tokens. First sentence, clipped to ~240 chars.
+    const flat = stripWikiLinks(body).trim();
+    if (flat.length === 0) return null;
+    const match = flat.match(/^.*?[.!?](\s|$)/);
+    const first = match ? match[0].trim() : flat;
     return first.length > 240 ? first.slice(0, 237).trimEnd() + '…' : first;
   }
   return null;

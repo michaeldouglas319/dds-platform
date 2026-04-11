@@ -112,4 +112,50 @@ test.describe('Age of Abundance wiki', () => {
     await expect(skip).toBeVisible();
     await expect(skip).toContainText(/skip to main content/i);
   });
+
+  test('inline [[target|display]] wiki-links navigate between articles', async ({ page }) => {
+    // coordination-abundance's body links to [[energy-abundance|energy]]
+    // and [[age-of-abundance|Age of Abundance]]. Click the energy link
+    // and verify navigation lands on /a/energy-abundance.
+    await page.goto(`${WIKI}/a/coordination-abundance`);
+
+    const energyLink = page
+      .locator('.wiki-article__lede a.wiki-link[href="/a/energy-abundance"]')
+      .first();
+    await expect(energyLink).toBeVisible();
+    await expect(energyLink).toHaveAttribute('data-wiki-link', 'valid');
+    await expect(energyLink).toContainText(/energy/i);
+
+    await energyLink.click();
+    await page.waitForURL(`${WIKI}/a/energy-abundance`);
+
+    // New article landed; its H1 is the energy title.
+    await expect(
+      page.getByRole('heading', { level: 1, name: /energy abundance/i }),
+    ).toBeVisible();
+  });
+
+  test('unresolved [[compute-abundance]] renders as an accessible redlink', async ({
+    page,
+  }) => {
+    // age-of-abundance intentionally links to the yet-to-be-written
+    // compute-abundance article. It must render as a non-navigable span,
+    // not an <a>, and it must expose an SR-only explanation.
+    await page.goto(`${WIKI}/a/age-of-abundance`);
+
+    const broken = page
+      .locator('span.wiki-link--broken[data-wiki-target="compute-abundance"]')
+      .first();
+    await expect(broken).toBeVisible();
+    await expect(broken).toHaveAttribute('data-wiki-link', 'broken');
+    await expect(broken).toHaveAttribute('title', /not yet written/i);
+
+    // Broken link must NOT be an anchor — clicking it should not navigate.
+    const tag = await broken.evaluate((el) => el.tagName.toLowerCase());
+    expect(tag).toBe('span');
+
+    // Screen-reader-only explanation is present and hidden visually.
+    const srText = broken.locator('.wiki-sr-only');
+    await expect(srText).toHaveText(/article not yet written/i);
+  });
 });
