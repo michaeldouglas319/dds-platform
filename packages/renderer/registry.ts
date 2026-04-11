@@ -7,6 +7,7 @@ import { TimelineRenderer } from './renderers/timeline-renderer';
 import { CTARenderer } from './renderers/cta-renderer';
 import { TwoColumnRenderer } from './renderers/two-column-renderer';
 import { SectorsGridRenderer } from './renderers/sectors-grid-renderer';
+import { WikiArticleRenderer } from './renderers/wiki-article-renderer';
 
 /**
  * Create a custom registry from a map of renderer entries.
@@ -97,6 +98,18 @@ const sectorsGrid: RendererEntry = {
   },
 };
 
+const wikiArticle: RendererEntry = {
+  component: WikiArticleRenderer,
+  metadata: {
+    name: 'wiki-article',
+    displayName: 'Wiki Article',
+    description:
+      'Long-form editorial article with semantic landmarks, slugged heading anchors, citations, and ≤75ch measure',
+    layouts: ['wiki-article', 'article'],
+    themeAware: true,
+  },
+};
+
 export const defaultRegistry: RendererRegistry = createRegistry({
   // Hero variants
   intro: hero,
@@ -118,4 +131,7 @@ export const defaultRegistry: RendererRegistry = createRegistry({
   // Layout
   'two-column': twoColumn,
   'sectors-grid': sectorsGrid,
+  // Wiki
+  'wiki-article': wikiArticle,
+  article: wikiArticle,
 });

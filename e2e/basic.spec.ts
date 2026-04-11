@@ -1,138 +1,126 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Blackdot Dev App', () => {
-  test('home page loads', async ({ page }) => {
+test.describe('ageofabundance.wiki — home article (wiki-article plugin)', () => {
+  test('home renders a semantic <article> landmark with an h1', async ({
+    page,
+  }) => {
     await page.goto('/');
 
-    const heading = page.locator('text=Dev');
-    await expect(heading).toBeVisible();
-  });
+    const article = page.getByRole('article');
+    await expect(article).toBeVisible();
 
-  test('home page has navigation links', async ({ page }) => {
-    await page.goto('/');
-
-    const sectionsLink = page.locator('text=View All Sections');
-    await expect(sectionsLink).toBeVisible();
-
-    const demoLink = page.locator('text=Demo Page');
-    await expect(demoLink).toBeVisible();
-  });
-
-  test('sections page loads and displays sections', async ({ page }) => {
-    await page.goto('/sections');
-
-    const heading = page.locator('text=All Sections');
-    await expect(heading).toBeVisible();
-
-    await page.waitForTimeout(2000);
-
-    const h1 = page.locator('h1');
+    const h1 = article.getByRole('heading', { level: 1, name: 'Age of Abundance' });
     await expect(h1).toBeVisible();
   });
 
-  test('demo page loads', async ({ page }) => {
-    await page.goto('/demo');
-
-    const heading = page.locator('text=Demo Page');
-    await expect(heading).toBeVisible();
-
-    const subtitle = page.locator('text=Theme variant switcher demo');
-    await expect(subtitle).toBeVisible();
-  });
-
-  test('demo page lists theme variants', async ({ page }) => {
-    await page.goto('/demo');
-
-    const minimal = page.locator('text=minimal');
-    await expect(minimal).toBeVisible();
-
-    const vibrant = page.locator('text=vibrant');
-    await expect(vibrant).toBeVisible();
-
-    const neon = page.locator('text=neon');
-    await expect(neon).toBeVisible();
-
-    const midnight = page.locator('text=midnight');
-    await expect(midnight).toBeVisible();
-  });
-
-  test('navigate from home to sections', async ({ page }) => {
+  test('lede, subtitle, and category are surfaced', async ({ page }) => {
     await page.goto('/');
 
-    const link = page.locator('text=View All Sections');
-    await link.click();
-
-    await page.waitForURL('/sections');
-
-    const heading = page.locator('text=All Sections');
-    await expect(heading).toBeVisible();
+    await expect(
+      page.getByText('A post-scarcity civilization operating manual'),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/An open, living wiki about the transition/),
+    ).toBeVisible();
+    await expect(page.getByText('Overview', { exact: true })).toBeVisible();
   });
 
-  test('navigate from home to demo', async ({ page }) => {
+  test('h2 sections have stable slugged anchor IDs and permalinks', async ({
+    page,
+  }) => {
     await page.goto('/');
 
-    const link = page.locator('text=Demo Page');
-    await link.click();
+    const whatIsHeading = page.getByRole('heading', {
+      level: 2,
+      name: /What this wiki is/,
+    });
+    await expect(whatIsHeading).toBeVisible();
+    await expect(whatIsHeading).toHaveAttribute(
+      'id',
+      'wiki-article-home-what-this-wiki-is',
+    );
 
-    await page.waitForURL('/demo');
+    const howBuiltHeading = page.getByRole('heading', {
+      level: 2,
+      name: /How it is built/,
+    });
+    await expect(howBuiltHeading).toHaveAttribute(
+      'id',
+      'wiki-article-home-how-it-is-built',
+    );
 
-    const heading = page.locator('text=Demo Page');
-    await expect(heading).toBeVisible();
+    const permalink = page.getByRole('link', {
+      name: 'Permalink to section: What this wiki is',
+    });
+    await expect(permalink).toHaveAttribute(
+      'href',
+      '#wiki-article-home-what-this-wiki-is',
+    );
   });
 
-  test('sections page renders with proper styling', async ({ page }) => {
-    await page.goto('/sections');
+  test('clicking a permalink scrolls the section into view', async ({ page }) => {
+    await page.goto('/');
 
-    await page.waitForTimeout(2000);
+    await page
+      .getByRole('link', { name: 'Permalink to section: How it is built' })
+      .click();
 
-    const heading = page.locator('h1');
-    await expect(heading).toBeVisible();
-
-    const h2Elements = page.locator('h2');
-    const count = await h2Elements.count();
-
-    expect(count).toBeGreaterThan(0);
+    await expect(page).toHaveURL(/#wiki-article-home-how-it-is-built$/);
+    const heading = page.getByRole('heading', {
+      level: 2,
+      name: /How it is built/,
+    });
+    await expect(heading).toBeInViewport();
   });
 
-  test('responsive design on mobile', async ({ page }) => {
+  test('citations render as an ordered list of outbound links', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    const citations = page.getByRole('list', { name: 'Citations' });
+    await expect(citations).toBeVisible();
+    const citationLink = citations.getByRole('link', {
+      name: 'UniversalSection schema',
+    });
+    await expect(citationLink).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
+  test('see-also label is overridable via meta.seeAlsoLabel', async ({
+    page,
+  }) => {
+    await page.goto('/');
+
+    await expect(
+      page.getByRole('heading', { level: 2, name: 'Further reading' }),
+    ).toBeVisible();
+    await expect(page.getByText('Economic primitives')).toBeVisible();
+    await expect(page.getByText('Governance patterns')).toBeVisible();
+  });
+
+  test('skip link is keyboard-accessible', async ({ page }) => {
+    await page.goto('/');
+    await page.keyboard.press('Tab');
+    const skipLink = page.getByRole('link', { name: 'Skip to article' });
+    await expect(skipLink).toBeFocused();
+  });
+
+  test('layout is responsive on mobile viewport', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-
     await page.goto('/');
-    const main = page.locator('main');
-    await expect(main).toBeVisible();
+    const article = page.getByRole('article');
+    await expect(article).toBeVisible();
+    const box = await article.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      expect(box.width).toBeLessThanOrEqual(375);
+    }
   });
 
-  test('responsive design on tablet', async ({ page }) => {
-    await page.setViewportSize({ width: 768, height: 1024 });
-
-    await page.goto('/sections');
-    const main = page.locator('main');
-    await expect(main).toBeVisible();
-  });
-
-  test('responsive design on desktop', async ({ page }) => {
-    await page.setViewportSize({ width: 1920, height: 1080 });
-
+  test('theme variant attribute is set on <html>', async ({ page }) => {
     await page.goto('/');
-    const main = page.locator('main');
-    await expect(main).toBeVisible();
-  });
-
-  test('theme provider works', async ({ page }) => {
-    await page.goto('/');
-
     const html = page.locator('html');
-    const themeAttr = await html.getAttribute('data-theme');
-
-    expect(themeAttr).toBeTruthy();
-  });
-
-  test('theme variant is set', async ({ page }) => {
-    await page.goto('/');
-
-    const html = page.locator('html');
-    const variantAttr = await html.getAttribute('data-theme-variant');
-
-    expect(variantAttr).toBeTruthy();
+    await expect(html).toHaveAttribute('data-theme', 'light');
+    await expect(html).toHaveAttribute('data-theme-variant', 'minimal');
   });
 });

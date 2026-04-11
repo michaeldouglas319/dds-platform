@@ -20,9 +20,9 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'cd apps/blackdot-dev && pnpm dev',
+    command: 'pnpm --filter @dds/ageofabundance-wiki exec next dev -p 3000',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
+    timeout: 180 * 1000,
   },
 });
