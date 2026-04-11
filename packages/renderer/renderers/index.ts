@@ -6,3 +6,4 @@ export { TimelineRenderer } from './timeline-renderer';
 export { CTARenderer } from './cta-renderer';
 export { TwoColumnRenderer } from './two-column-renderer';
 export { SectorsGridRenderer } from './sectors-grid-renderer';
+export { ArticleRenderer } from './article-renderer';

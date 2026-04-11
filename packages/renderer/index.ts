@@ -21,6 +21,7 @@ export {
   CTARenderer,
   TwoColumnRenderer,
   SectorsGridRenderer,
+  ArticleRenderer,
 } from './renderers';
 
 // Config (re-export everything)

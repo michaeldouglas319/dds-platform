@@ -1,0 +1,421 @@
+/*
+ * theageofabundance.wiki — global styles
+ *
+ * Editorial-first tokens + styles for the @dds/renderer `article` layout.
+ * Every color, size and spacing flows through CSS custom properties so
+ * consumers can retheme without touching the renderer component tree.
+ *
+ * Contract:
+ *  - Light mode by default; dark mode via `prefers-color-scheme: dark`.
+ *  - Reading column ≤ 72ch. Tap targets ≥ 44px. Visible :focus-visible rings.
+ *  - WCAG AAA target on body copy (#0a0a0a on #fcfcfa ≈ 18.5:1; dark mode is
+ *    #fafafa on #0a0a0b ≈ 18.3:1).
+ *  - Any animation is gated by `prefers-reduced-motion`.
+ *  - No hardcoded colors outside :root / the dark-mode override.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Palette — light */
+  --dds-article-bg: #fcfcfa;
+  --dds-article-surface: #ffffff;
+  --dds-article-fg: #0a0a0a;
+  --dds-article-lede: #262626;
+  --dds-article-muted: #595959;
+  --dds-article-border: rgba(10, 10, 10, 0.14);
+  --dds-article-accent: #111111;
+  --dds-article-accent-fg: #ffffff;
+  --dds-article-link: #1d4ed8;
+  --dds-article-focus-ring: #1d4ed8;
+
+  /* Typography */
+  --dds-article-font-body: ui-serif, Georgia, "Times New Roman", "Iowan Old Style",
+    "Palatino Linotype", serif;
+  --dds-article-font-display: var(--dds-article-font-body);
+  --dds-article-font-ui: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Measure + rhythm */
+  --dds-article-measure: 68ch;
+  --dds-article-line-height: 1.65;
+  --dds-article-padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  --dds-article-padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dds-article-bg: #0a0a0b;
+    --dds-article-surface: #141416;
+    --dds-article-fg: #fafafa;
+    --dds-article-lede: #e5e5e5;
+    --dds-article-muted: #a3a3a3;
+    --dds-article-border: rgba(255, 255, 255, 0.16);
+    --dds-article-accent: #f5f5f4;
+    --dds-article-accent-fg: #0a0a0b;
+    --dds-article-link: #93c5fd;
+    --dds-article-focus-ring: #93c5fd;
+  }
+}
+
+/* Honor explicit data-theme overrides (keeps us compatible with @dds/renderer
+   ThemeProvider which sets data-theme on the <html> element). */
+:root[data-theme="dark"] {
+  --dds-article-bg: #0a0a0b;
+  --dds-article-surface: #141416;
+  --dds-article-fg: #fafafa;
+  --dds-article-lede: #e5e5e5;
+  --dds-article-muted: #a3a3a3;
+  --dds-article-border: rgba(255, 255, 255, 0.16);
+  --dds-article-accent: #f5f5f4;
+  --dds-article-accent-fg: #0a0a0b;
+  --dds-article-link: #93c5fd;
+  --dds-article-focus-ring: #93c5fd;
+}
+
+:root[data-theme="light"] {
+  --dds-article-bg: #fcfcfa;
+  --dds-article-surface: #ffffff;
+  --dds-article-fg: #0a0a0a;
+  --dds-article-lede: #262626;
+  --dds-article-muted: #595959;
+  --dds-article-border: rgba(10, 10, 10, 0.14);
+  --dds-article-accent: #111111;
+  --dds-article-accent-fg: #ffffff;
+  --dds-article-link: #1d4ed8;
+  --dds-article-focus-ring: #1d4ed8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--dds-article-bg);
+  color: var(--dds-article-fg);
+  font-family: var(--dds-article-font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dds-article-focus-ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── Skip link ─────────────────────────────────────────────────── */
+
+.dds-skip-link {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  padding: 0.75rem 1rem;
+  background: var(--dds-article-accent);
+  color: var(--dds-article-accent-fg);
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 0.5rem 0;
+  transform: translateY(-120%);
+  transition: transform 140ms ease;
+  z-index: 100;
+}
+
+.dds-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--dds-article-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dds-skip-link {
+    transition: none;
+  }
+}
+
+/* ─── Article container ─────────────────────────────────────────── */
+
+.dds-article {
+  position: relative;
+  max-inline-size: var(--dds-article-measure);
+  margin-inline: auto;
+  padding-inline: var(--dds-article-padding-inline);
+  padding-block: var(--dds-article-padding-block);
+  color: var(--dds-article-fg);
+  background: var(--dds-article-bg);
+  font-family: var(--dds-article-font-body);
+  font-size: clamp(1rem, 0.6vw + 0.9rem, 1.125rem);
+  line-height: var(--dds-article-line-height);
+}
+
+.dds-article__header {
+  margin-block-end: 2.5rem;
+}
+
+.dds-article__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dds-article-muted);
+}
+
+.dds-article__title {
+  margin: 0 0 1rem;
+  font-family: var(--dds-article-font-display);
+  font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--dds-article-fg);
+}
+
+.dds-article__lede {
+  margin: 0 0 1.25rem;
+  font-family: var(--dds-article-font-body);
+  font-size: clamp(1.125rem, 0.7vw + 1rem, 1.375rem);
+  line-height: 1.5;
+  color: var(--dds-article-lede);
+  font-weight: 400;
+}
+
+.dds-article__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.875rem;
+  color: var(--dds-article-muted);
+}
+
+.dds-article__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+}
+
+.dds-article__tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--dds-article-border);
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.75rem;
+  color: var(--dds-article-muted);
+}
+
+.dds-article__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  outline: none; /* body is tabIndex=-1 for skip-link target */
+}
+
+.dds-article__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dds-article__section-title {
+  margin: 0;
+  font-family: var(--dds-article-font-display);
+  font-size: clamp(1.375rem, 0.8vw + 1.1rem, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--dds-article-fg);
+}
+
+.dds-article__paragraph {
+  margin: 0;
+  color: var(--dds-article-fg);
+}
+
+.dds-article__citations {
+  margin: 0.5rem 0 0;
+  padding-inline-start: 1.25rem;
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.8125rem;
+  color: var(--dds-article-muted);
+}
+
+.dds-article__citation {
+  margin-block-end: 0.25rem;
+}
+
+.dds-article__citation-link {
+  color: var(--dds-article-link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.dds-article__citation-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.dds-article__external-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dds-article__empty {
+  margin: 0;
+  padding: 1.5rem;
+  border: 1px dashed var(--dds-article-border);
+  border-radius: 0.5rem;
+  color: var(--dds-article-muted);
+  font-style: italic;
+  background: var(--dds-article-surface);
+}
+
+.dds-article__footer {
+  margin-block-start: 3rem;
+  padding-block-start: 1.5rem;
+  border-block-start: 1px solid var(--dds-article-border);
+}
+
+.dds-article__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  min-block-size: 44px;
+  background: var(--dds-article-accent);
+  color: var(--dds-article-accent-fg);
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: transform 120ms ease;
+}
+
+.dds-article__cta:hover {
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dds-article__cta {
+    transition: none;
+  }
+  .dds-article__cta:hover {
+    transform: none;
+  }
+}
+
+/* ─── Wiki chrome (home + nav) ──────────────────────────────────── */
+
+.wiki-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 100vh;
+  padding: 2rem;
+  background: var(--dds-article-bg);
+  color: var(--dds-article-fg);
+  text-align: center;
+  gap: 2rem;
+}
+
+.wiki-home__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dds-article-fg);
+}
+
+.wiki-home__title {
+  margin: 0;
+  font-family: var(--dds-article-font-ui);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  letter-spacing: 0.08em;
+  font-weight: 400;
+}
+
+.wiki-home__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.wiki-home__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  min-block-size: 44px;
+  min-inline-size: 44px;
+  font-family: var(--dds-article-font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--dds-article-accent-fg);
+  background: var(--dds-article-accent);
+  border-radius: 0.5rem;
+  transition: transform 120ms ease;
+}
+
+.wiki-home__link:hover {
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiki-home__link {
+    transition: none;
+  }
+  .wiki-home__link:hover {
+    transform: none;
+  }
+}
+
+/* 404 / error surface */
+.wiki-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 80vh;
+  padding: 2rem;
+  text-align: center;
+  gap: 1rem;
+  color: var(--dds-article-fg);
+  background: var(--dds-article-bg);
+}
+
+.wiki-status__title {
+  margin: 0;
+  font-family: var(--dds-article-font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+.wiki-status__body {
+  margin: 0;
+  max-inline-size: 40ch;
+  color: var(--dds-article-muted);
+}
