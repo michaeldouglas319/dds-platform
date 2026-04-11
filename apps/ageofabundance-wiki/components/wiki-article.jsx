@@ -9,20 +9,14 @@
  *
  * The component is an RSC: it takes serialized data and emits semantic
  * HTML only. No client JS, no hydration cost.
+ *
+ * All wiki metadata (reading time, updated date, authors, tags, word
+ * count, summary) is read through {@link deriveWikiMeta} so the header
+ * stays consistent for articles that ship with explicit metadata and
+ * those that let the helper derive it.
  */
 
-function formatDate(iso) {
-  if (!iso) return null;
-  // Render in a fixed, locale-stable way so SSR/CSR agree.
-  try {
-    const d = new Date(iso + 'T00:00:00Z');
-    if (Number.isNaN(d.getTime())) return iso;
-    const month = d.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
-    return `${month} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
-  } catch {
-    return iso;
-  }
-}
+import { deriveWikiMeta } from '../content/wiki-meta.js';
 
 export function WikiArticle({ article }) {
   const title = article?.subject?.title;
@@ -30,10 +24,7 @@ export function WikiArticle({ article }) {
   const category = article?.subject?.category;
   const body = article?.content?.body;
   const paragraphs = article?.content?.paragraphs ?? [];
-  const wikiMeta = article?.meta?.wiki ?? {};
-  const tags = wikiMeta.tags ?? [];
-  const updated = formatDate(wikiMeta.lastUpdatedISO);
-  const reading = wikiMeta.readingTimeMinutes;
+  const meta = deriveWikiMeta(article);
 
   return (
     <article className="wiki-article" aria-labelledby="wiki-article-title">
@@ -48,26 +39,57 @@ export function WikiArticle({ article }) {
           <p className="wiki-article__subtitle">{subtitle}</p>
         )}
         <dl className="wiki-article__meta" aria-label="Article metadata">
-          {updated && (
+          {meta.lastUpdatedISO && (
             <div className="wiki-article__meta-row">
               <dt>Last updated</dt>
               <dd>
-                <time dateTime={wikiMeta.lastUpdatedISO}>{updated}</time>
+                <time dateTime={meta.lastUpdatedISO}>{meta.formattedUpdated}</time>
               </dd>
             </div>
           )}
-          {typeof reading === 'number' && (
+          {meta.readingTimeMinutes > 0 && (
             <div className="wiki-article__meta-row">
               <dt>Reading time</dt>
-              <dd>{reading} min</dd>
+              <dd>
+                <span aria-label={`${meta.readingTimeMinutes} minute read`}>
+                  {meta.readingTimeMinutes} min
+                </span>
+              </dd>
             </div>
           )}
-          {tags.length > 0 && (
+          {meta.wordCount > 0 && (
+            <div className="wiki-article__meta-row">
+              <dt>Word count</dt>
+              <dd>
+                <span
+                  className="wiki-article__word-count"
+                  aria-label={`${meta.wordCount} words`}
+                >
+                  {meta.wordCount.toLocaleString('en-US')}
+                </span>
+              </dd>
+            </div>
+          )}
+          {meta.authors.length > 0 && (
+            <div className="wiki-article__meta-row">
+              <dt>Authors</dt>
+              <dd>
+                <ul className="wiki-article__authors" aria-label="Article authors">
+                  {meta.authors.map((author) => (
+                    <li key={author} className="wiki-article__author">
+                      {author}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          )}
+          {meta.tags.length > 0 && (
             <div className="wiki-article__meta-row">
               <dt>Tags</dt>
               <dd>
                 <ul className="wiki-article__tags" aria-label="Article tags">
-                  {tags.map((tag) => (
+                  {meta.tags.map((tag) => (
                     <li key={tag} className="wiki-article__tag">
                       {tag}
                     </li>

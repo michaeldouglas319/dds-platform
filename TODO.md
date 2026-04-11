@@ -13,10 +13,11 @@ Each item below is scoped to be shippable in a single focused session.
   articles, dynamic `/a/[slug]` route, featured-articles homepage,
   `not-found.jsx`, long-form typography tokens, Playwright golden-path test.
   _Shipped: see session log below._
-- [ ] **Article metadata schema** — formalize `meta.wiki` fields
+- [x] **Article metadata schema** — formalize `meta.wiki` fields
   (`lastUpdatedISO`, `authors[]`, `readingTimeMinutes`, `wordCount`,
   `tags[]`, `summary`) so all downstream features share one source of truth.
   Additive — existing articles continue to parse.
+  _Shipped: see session log below._
 - [ ] **Article index (`/a`)** — paginated list of every article, sorted by
   `lastUpdatedISO`, filterable by tag.
 - [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
@@ -99,3 +100,21 @@ Each item below is scoped to be shippable in a single focused session.
   typography tokens (`--wiki-measure`, `--wiki-leading-body`). Playwright
   test covers home → article golden path, 404, and skip-link focus.
   Shipped as commit `4b6c29b8cfc386e034f2f8064b992626fd668132`.
+- 2026-04-11 — **Article metadata schema** shipped. New
+  `content/wiki-meta.js` module is the single source of truth for every
+  field under `meta.wiki`: `lastUpdatedISO`, `authors[]`, `tags[]`,
+  `summary`, `wordCount`, `readingTimeMinutes`, `toc`, `infobox`. Explicit
+  author-provided values always win; the helper fills gaps by counting
+  words in body + paragraphs and dividing by the Brysbaert (2019)
+  meta-analysis average of 238 wpm. Every consumer (article page, article
+  card, `generateMetadata`) now reads through `deriveWikiMeta(article)`;
+  the frozen return object prevents accidental downstream mutation. The
+  article page also emits Schema.org `Article` JSON-LD derived from the
+  same view so search engines see the canonical metadata. 34 new vitest
+  cases cover every derivation edge; Playwright now asserts the derived
+  reading time, word count, author list, tag chips, and JSON-LD payload
+  render on `/a/age-of-abundance`. Backward compatibility: `@dds/types`
+  untouched (meta remains `Record<string, unknown>`); existing articles
+  with or without `meta.wiki` continue to parse. Vitest `include` was
+  extended to pick up tests under `apps/**`. Shipped as commit
+  `<PENDING_SHA>`.
