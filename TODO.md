@@ -13,10 +13,17 @@ Each item below is scoped to be shippable in a single focused session.
   articles, dynamic `/a/[slug]` route, featured-articles homepage,
   `not-found.jsx`, long-form typography tokens, Playwright golden-path test.
   _Shipped: see session log below._
-- [ ] **Article metadata schema** — formalize `meta.wiki` fields
+- [x] **Article metadata schema** — formalize `meta.wiki` fields
   (`lastUpdatedISO`, `authors[]`, `readingTimeMinutes`, `wordCount`,
   `tags[]`, `summary`) so all downstream features share one source of truth.
   Additive — existing articles continue to parse.
+  _Shipped: `normalizeWikiMeta(article)` is now the single source of truth
+  for metadata display. Word count and reading time are derived at build
+  time from `content.body` + `content.paragraphs` at 225 wpm (Medium
+  convention), with explicit `meta.wiki` values always winning. Article
+  header shows updated / authors / reading time / length / tags rows;
+  article card shows tag chips + reading time · word count. 21 unit tests
+  (vitest) + 2 new Playwright assertions. See session log below._
 - [ ] **Article index (`/a`)** — paginated list of every article, sorted by
   `lastUpdatedISO`, filterable by tag.
 - [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
@@ -99,3 +106,18 @@ Each item below is scoped to be shippable in a single focused session.
   typography tokens (`--wiki-measure`, `--wiki-leading-body`). Playwright
   test covers home → article golden path, 404, and skip-link focus.
   Shipped as commit `4b6c29b8cfc386e034f2f8064b992626fd668132`.
+- 2026-04-11 — **Article metadata schema** shipped. New
+  `content/wiki-meta.js` exports `normalizeWikiMeta(article)` — a pure
+  RSC-safe function that returns a stable shape
+  `{ lastUpdatedISO, lastUpdatedDisplay, authors, tags, summary, wordCount,
+  readingTimeMinutes }`. Word count derived from
+  `content.body` + paragraph subtitles + descriptions; reading time =
+  `ceil(wordCount / 225)` (Medium convention), min 1. Explicit
+  `meta.wiki.wordCount` / `readingTimeMinutes` always win so editors can
+  override. `WikiArticle` header now shows five metadata rows
+  (`updated`, `authors`, `reading`, `wordcount`, `tags`), each marked with
+  a `data-meta` attribute for testability. `ArticleCard` shows tag chips
+  + "N min · N,NNN words". Schema is strictly additive — existing
+  articles without `meta.wiki` render through the normalizer's defensive
+  fallback. 21 vitest unit tests + 2 new Playwright assertions (article
+  header meta + card tag chips). Unit tests: 72 pass. Wiki e2e: 6/6.

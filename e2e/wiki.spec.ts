@@ -67,4 +67,57 @@ test.describe('Age of Abundance wiki', () => {
     await expect(skip).toBeVisible();
     await expect(skip).toContainText(/skip to main content/i);
   });
+
+  test('article header renders normalized wiki metadata', async ({ page }) => {
+    // Deep-link to a specific, known article so the assertions are stable.
+    await page.goto(`${WIKI}/a/age-of-abundance`);
+
+    const meta = page.locator('dl.wiki-article__meta');
+    await expect(meta).toBeVisible();
+    await expect(meta).toHaveAttribute('aria-label', /article metadata/i);
+
+    // Last updated row uses a <time> with a valid datetime.
+    const updatedRow = meta.locator('[data-meta="updated"]');
+    await expect(updatedRow).toBeVisible();
+    const time = updatedRow.locator('time');
+    await expect(time).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
+
+    // Authors row renders human-readable byline.
+    const authorsRow = meta.locator('[data-meta="authors"]');
+    await expect(authorsRow).toBeVisible();
+    await expect(authorsRow.locator('dt')).toHaveText(/by/i);
+    await expect(authorsRow.locator('dd')).not.toBeEmpty();
+
+    // Reading-time row: "N min" + aria-label announcing minute read.
+    const readingRow = meta.locator('[data-meta="reading"]');
+    await expect(readingRow).toBeVisible();
+    await expect(readingRow.locator('dd')).toContainText(/\d+\s*min/);
+    await expect(readingRow.locator('[aria-label*="minute read"]')).toBeVisible();
+
+    // Word-count row (derived at build time by the normalizer).
+    const wordRow = meta.locator('[data-meta="wordcount"]');
+    await expect(wordRow).toBeVisible();
+    await expect(wordRow.locator('dd')).toContainText(/\d+\s+words/);
+
+    // Tags row has at least one chip.
+    const tagsRow = meta.locator('[data-meta="tags"]');
+    await expect(tagsRow).toBeVisible();
+    const tagChips = tagsRow.locator('li.wiki-article__tag');
+    expect(await tagChips.count()).toBeGreaterThan(0);
+  });
+
+  test('article card shows tag chips and word count', async ({ page }) => {
+    await page.goto(`${WIKI}/`);
+    const firstCard = page.locator('.article-card').first();
+    await expect(firstCard).toBeVisible();
+
+    // Tags chip list rendered inside the card.
+    const cardTags = firstCard.locator('ul.article-card__tags li.article-card__tag');
+    expect(await cardTags.count()).toBeGreaterThan(0);
+
+    // CTA line includes both reading time ("N min") and word count ("N words").
+    const cta = firstCard.locator('.article-card__reading');
+    await expect(cta).toContainText(/\d+\s*min/);
+    await expect(cta).toContainText(/\d+\s*words/);
+  });
 });

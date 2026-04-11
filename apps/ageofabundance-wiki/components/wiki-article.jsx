@@ -9,19 +9,26 @@
  *
  * The component is an RSC: it takes serialized data and emits semantic
  * HTML only. No client JS, no hydration cost.
+ *
+ * All metadata is resolved through `normalizeWikiMeta` so this file,
+ * the article card, the index, and any future consumer read from the
+ * same source of truth.
  */
 
-function formatDate(iso) {
-  if (!iso) return null;
-  // Render in a fixed, locale-stable way so SSR/CSR agree.
-  try {
-    const d = new Date(iso + 'T00:00:00Z');
-    if (Number.isNaN(d.getTime())) return iso;
-    const month = d.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
-    return `${month} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
-  } catch {
-    return iso;
-  }
+import { formatWordCount, normalizeWikiMeta } from '../content/wiki-meta.js';
+
+/**
+ * Join a list of authors into a natural-language string:
+ *   ['ada']                -> 'ada'
+ *   ['ada', 'grace']       -> 'ada and grace'
+ *   ['ada', 'grace', 'hu'] -> 'ada, grace, and hu'
+ */
+function joinAuthors(authors) {
+  if (!authors || authors.length === 0) return null;
+  if (authors.length === 1) return authors[0];
+  if (authors.length === 2) return `${authors[0]} and ${authors[1]}`;
+  const head = authors.slice(0, -1).join(', ');
+  return `${head}, and ${authors[authors.length - 1]}`;
 }
 
 export function WikiArticle({ article }) {
@@ -30,10 +37,17 @@ export function WikiArticle({ article }) {
   const category = article?.subject?.category;
   const body = article?.content?.body;
   const paragraphs = article?.content?.paragraphs ?? [];
-  const wikiMeta = article?.meta?.wiki ?? {};
-  const tags = wikiMeta.tags ?? [];
-  const updated = formatDate(wikiMeta.lastUpdatedISO);
-  const reading = wikiMeta.readingTimeMinutes;
+
+  const meta = normalizeWikiMeta(article);
+  const {
+    lastUpdatedISO,
+    lastUpdatedDisplay,
+    authors,
+    tags,
+    wordCount,
+    readingTimeMinutes,
+  } = meta;
+  const authorList = joinAuthors(authors);
 
   return (
     <article className="wiki-article" aria-labelledby="wiki-article-title">
@@ -48,22 +62,38 @@ export function WikiArticle({ article }) {
           <p className="wiki-article__subtitle">{subtitle}</p>
         )}
         <dl className="wiki-article__meta" aria-label="Article metadata">
-          {updated && (
-            <div className="wiki-article__meta-row">
+          {lastUpdatedDisplay && (
+            <div className="wiki-article__meta-row" data-meta="updated">
               <dt>Last updated</dt>
               <dd>
-                <time dateTime={wikiMeta.lastUpdatedISO}>{updated}</time>
+                <time dateTime={lastUpdatedISO}>{lastUpdatedDisplay}</time>
               </dd>
             </div>
           )}
-          {typeof reading === 'number' && (
-            <div className="wiki-article__meta-row">
+          {authorList && (
+            <div className="wiki-article__meta-row" data-meta="authors">
+              <dt>By</dt>
+              <dd>{authorList}</dd>
+            </div>
+          )}
+          {readingTimeMinutes > 0 && (
+            <div className="wiki-article__meta-row" data-meta="reading">
               <dt>Reading time</dt>
-              <dd>{reading} min</dd>
+              <dd>
+                <span aria-label={`${readingTimeMinutes} minute read`}>
+                  {readingTimeMinutes} min
+                </span>
+              </dd>
+            </div>
+          )}
+          {wordCount > 0 && (
+            <div className="wiki-article__meta-row" data-meta="wordcount">
+              <dt>Length</dt>
+              <dd>{formatWordCount(wordCount)}</dd>
             </div>
           )}
           {tags.length > 0 && (
-            <div className="wiki-article__meta-row">
+            <div className="wiki-article__meta-row" data-meta="tags">
               <dt>Tags</dt>
               <dd>
                 <ul className="wiki-article__tags" aria-label="Article tags">
