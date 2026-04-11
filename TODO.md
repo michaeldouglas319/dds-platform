@@ -55,7 +55,8 @@ Every page must be expressible as a `UniversalSection`.
 
 <!-- session log: newest on top -->
 
-- **2026-04-11 — wiki-toc-renderer (Priority 0).** Added first wiki primitive
+- **2026-04-11 — wiki-toc-renderer (Priority 0).** Shipped on session branch
+  `claude/fervent-hopper-X6QaX` at commit `88e2333`. Added first wiki primitive
   to `@dds/renderer`: accessible, schema-native "On this page" table of
   contents. Derives items from `meta.tocItems` > `children` (id + subject.title)
   > `content.items` (slug-generated hrefs). Registered under layout keys
@@ -66,5 +67,33 @@ Every page must be expressible as a `UniversalSection`.
   colors. Sticky on desktop (top: var(--wiki-toc-offset)), static on mobile.
   Touch targets ≥ 44px. Empty-state + no-IO-support guards. Additive only —
   no schema changes, no breaking changes to `@dds/types` or existing registry
-  keys. Unit test covers golden path + empty state + custom meta.tocItems.
-  Playwright spec added for future browser-enabled runs.
+  keys. Unit tests: 10 new vitest cases (resolution priority, golden path,
+  empty state, custom meta override, style dedupe, missing-title fallback,
+  no-IntersectionObserver runtime). Registry test expected-keys set updated.
+  Playwright spec added at `e2e/wiki-toc.spec.ts` (feature-detection skip so
+  it never red-builds before a consumer mounts the TOC). Vitest: 63/63 green.
+  Local `pnpm turbo run build --filter=@dds/blackdot-partners` compiled the
+  renderer package successfully (the pre-existing Clerk-env prerender step is
+  env-var related, unrelated to this change). Vercel verification deferred:
+  the dds-platform Vercel project is configured to deploy only from `main`,
+  so no preview deploy is triggered by the session branch push. Risk profile
+  for production is zero — the renderer is a plugin registered under new,
+  unused layout keys; nothing in the current production bundle mounts it.
+
+## Follow-ups discovered during this session
+
+- **blackdot-dev `/sections` is pre-broken.** `apps/blackdot-dev/app/sections/page.jsx`
+  imports `../../data/site.config.json` which was deleted by the
+  `e60f2fc emergency: full purge` and never restored. Playwright's
+  `basic.spec.ts` still hits `/sections` and would fail locally against a real
+  browser. Next session should either restore a minimal
+  `apps/blackdot-dev/data/site.config.json` or repoint the playwright
+  `webServer` target at `apps/blackdot-partners` (which already has the
+  config). Not touched this session to honor "one thing only".
+- **Playwright browsers cannot be installed in the sandboxed dev
+  environment** (`cdn.playwright.dev` returns 403 "Host not allowed"). Vitest
+  + local `next build` compile were used as the test gate; the Playwright
+  spec was validated via `playwright test --list` (parses and lists 4 tests).
+- **dds-platform Vercel project only deploys `main`.** Consider wiring
+  preview deploys for `claude/*` session branches to unblock the session
+  verification protocol.
