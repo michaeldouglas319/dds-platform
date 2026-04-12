@@ -279,4 +279,4 @@ Each item below is scoped to be shippable in a single focused session.
   domains through the unified hub domain router. This unblocks Track A
   (Renderer Unification) and sets the foundation for creating
   @dds/renderer plugins for wiki content in subsequent sessions.
-  Shipped as commit `TBD`.
+  Shipped as commit `e0e8820`.
