@@ -39,17 +39,17 @@ export const articles = [
         'The Age of Abundance describes the socio-technical transition in which essential human needs — energy, compute, housing, mobility, education, and care — fall to near-zero marginal cost and become available to every person on Earth.',
     },
     content: {
-      body: 'The Age of Abundance describes the socio-technical transition in which essential human needs — energy, compute, housing, mobility, education, and care — fall to near-zero marginal cost and become available to every person on Earth. Unlike earlier post-scarcity visions rooted in pure automation, the contemporary framing treats abundance as a governance problem: the bottleneck is no longer production but coordination, legitimacy, and distribution.',
+      body: 'The Age of Abundance describes the socio-technical transition in which essential human needs — energy, compute, housing, mobility, education, and care — fall to near-zero marginal cost and become available to every person on Earth. Unlike earlier post-scarcity visions rooted in pure automation, the contemporary framing treats abundance as a governance problem: the bottleneck is no longer production but [[Coordination Abundance|coordination]], legitimacy, and distribution.',
       paragraphs: [
         {
           subtitle: 'Origins of the term',
           description:
-            'The phrase gained wide currency in the early 2020s alongside the convergence of large-scale machine learning, cheap photovoltaic solar, and programmable biology. Earlier antecedents include Buckminster Fuller\'s "ephemeralization," the 1960s cybernetic-socialism tradition, and late-20th-century post-scarcity economics. The modern synthesis treats these lineages as complementary rather than competing.',
+            'The phrase gained wide currency in the early 2020s alongside the convergence of large-scale machine learning, cheap photovoltaic solar, and programmable biology. Earlier antecedents include Buckminster Fuller\'s "ephemeralization," the 1960s cybernetic-socialism tradition, and late-20th-century [[post-scarcity economics]]. The modern synthesis treats these lineages as complementary rather than competing.',
         },
         {
           subtitle: 'Core pillars',
           description:
-            'Commentators commonly identify four pillars: (1) energy abundance, driven by solar, storage, and advanced geothermal; (2) compute abundance, driven by learned models and efficient silicon; (3) atoms abundance, driven by robotics, additive manufacturing, and synthetic biology; and (4) coordination abundance, driven by open protocols, verifiable identity, and legitimate governance. The absence of any single pillar tends to stall the others.',
+            'Commentators commonly identify four pillars: (1) [[Energy Abundance]], driven by solar, storage, and advanced geothermal; (2) compute abundance, driven by learned models and efficient silicon; (3) atoms abundance, driven by robotics, additive manufacturing, and synthetic biology; and (4) [[Coordination Abundance]], driven by open protocols, verifiable identity, and legitimate governance. The absence of any single pillar tends to stall the others.',
         },
         {
           subtitle: 'Critiques and open questions',
@@ -83,7 +83,7 @@ export const articles = [
       category: 'Pillar',
     },
     content: {
-      body: 'Energy abundance is the first and most load-bearing pillar of the Age of Abundance. When electricity drops below one cent per kilowatt-hour at point of use, the marginal cost of most other goods — desalinated water, compute, protein, long-distance mobility — collapses with it. The learning curves of photovoltaic solar and lithium storage are the clearest evidence that this is not a forecast but a trajectory.',
+      body: 'Energy abundance is the first and most load-bearing pillar of the [[Age of Abundance]]. When electricity drops below one cent per kilowatt-hour at point of use, the marginal cost of most other goods — desalinated water, compute, protein, long-distance mobility — collapses with it. The learning curves of photovoltaic solar and lithium storage are the clearest evidence that this is not a forecast but a trajectory.',
       paragraphs: [
         {
           subtitle: 'The Wright-curve argument',
@@ -93,7 +93,7 @@ export const articles = [
         {
           subtitle: 'Second-order effects',
           description:
-            'Cheap, clean electrons turn electricity-intensive processes that are economically marginal today into dominant ones tomorrow. Direct-air carbon capture, green hydrogen, thermal desalination, indoor vertical agriculture, and arbitrary-latitude food production all move from speculative to routine as the price of the underlying energy approaches zero. The Age of Abundance framing emphasizes these second-order effects because they are where the lived difference appears.',
+            'Cheap, clean electrons turn electricity-intensive processes that are economically marginal today into dominant ones tomorrow. Direct-air carbon capture, [[green-hydrogen|green hydrogen]], thermal desalination, indoor vertical agriculture, and arbitrary-latitude food production all move from speculative to routine as the price of the underlying energy approaches zero. The [[Age of Abundance]] framing emphasizes these second-order effects because they are where the lived difference appears.',
         },
         {
           subtitle: 'Why this is still contested',
@@ -127,12 +127,12 @@ export const articles = [
       category: 'Pillar',
     },
     content: {
-      body: 'If energy, compute, and atoms are the material pillars of abundance, coordination is the pillar that decides what we do with them. Without legitimate institutions, open protocols, and verifiable identity, cheap electrons and trained models turn into centralized rents. Coordination abundance asks whether the governance layer can scale at the same pace as the underlying capacity.',
+      body: 'If [[Energy Abundance|energy]], compute, and atoms are the material pillars of abundance, coordination is the pillar that decides what we do with them. Without legitimate institutions, open protocols, and verifiable identity, cheap electrons and trained models turn into centralized rents. Coordination abundance asks whether the governance layer can scale at the same pace as the underlying capacity.',
       paragraphs: [
         {
           subtitle: 'Why coordination is the bottleneck',
           description:
-            'Historically, technological capacity has outrun our ability to agree on how to use it. Nuclear power, the internet, and ML systems each demonstrate the pattern: the scientific problem is solved decades before the governance problem is. If abundance is shipped without coordination, it arrives as unequal concentration rather than shared flourishing.',
+            'Historically, technological capacity has outrun our ability to agree on how to use it. Nuclear power, the internet, and ML systems each demonstrate the pattern: the scientific problem is solved decades before the governance problem is. If the [[Age of Abundance]] is shipped without coordination, it arrives as unequal concentration rather than shared flourishing.',
         },
         {
           subtitle: 'Open protocols as public infrastructure',

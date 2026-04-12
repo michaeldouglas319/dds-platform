@@ -204,4 +204,86 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Wiki-links', () => {
+    test('valid wiki-links render as anchor elements to /a/<slug>', async ({ page }) => {
+      // The "Age of Abundance" article contains [[Energy Abundance]] and
+      // [[Coordination Abundance]] wiki-links in its body text.
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      await expect(body).toBeVisible();
+
+      // Valid wiki-links should render as <a class="wiki-link"> elements
+      const wikiLinks = body.locator('a.wiki-link');
+      const count = await wikiLinks.count();
+      expect(count).toBeGreaterThanOrEqual(2);
+
+      // At least one link should point to /a/energy-abundance
+      const energyLink = body.locator('a.wiki-link[href="/a/energy-abundance"]');
+      await expect(energyLink.first()).toBeVisible();
+
+      // At least one link should point to /a/coordination-abundance
+      const coordLink = body.locator('a.wiki-link[href="/a/coordination-abundance"]');
+      await expect(coordLink.first()).toBeVisible();
+    });
+
+    test('wiki-link navigates to the target article', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // Find and click the Energy Abundance wiki-link
+      const energyLink = page.locator('a.wiki-link[href="/a/energy-abundance"]').first();
+      await expect(energyLink).toBeVisible();
+      await energyLink.click();
+
+      // Should navigate to the Energy Abundance article
+      await page.waitForURL(`${WIKI}/a/energy-abundance`);
+      const h1 = page.locator('.wiki-article__title');
+      await expect(h1).toContainText(/energy abundance/i);
+    });
+
+    test('broken wiki-links render with broken-link styling', async ({ page }) => {
+      // The "Age of Abundance" article contains [[post-scarcity economics]]
+      // which does not exist as an article, so it should render as a broken link.
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      const brokenLinks = body.locator('.wiki-link--broken');
+      const count = await brokenLinks.count();
+      expect(count).toBeGreaterThanOrEqual(1);
+
+      // Broken link should have a title attribute explaining it doesn't exist
+      const firstBroken = brokenLinks.first();
+      const title = await firstBroken.getAttribute('title');
+      expect(title).toContain('does not exist yet');
+
+      // Broken link should NOT be an anchor element
+      const tagName = await firstBroken.evaluate((el) => el.tagName.toLowerCase());
+      expect(tagName).toBe('span');
+    });
+
+    test('piped wiki-links display custom text', async ({ page }) => {
+      // The "Age of Abundance" body has [[Coordination Abundance|coordination]]
+      // which should display as "coordination" but link to /a/coordination-abundance.
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      const coordLink = body.locator('a.wiki-link[href="/a/coordination-abundance"]').first();
+      await expect(coordLink).toBeVisible();
+
+      // The display text should be "coordination", not "Coordination Abundance"
+      const text = await coordLink.textContent();
+      expect(text).toBe('coordination');
+    });
+
+    test('wiki-links are keyboard accessible', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // Tab to find a wiki-link — it should be focusable
+      const energyLink = page.locator('a.wiki-link[href="/a/energy-abundance"]').first();
+
+      await energyLink.focus();
+      await expect(energyLink).toBeFocused();
+    });
+  });
 });

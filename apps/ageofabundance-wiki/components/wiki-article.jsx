@@ -17,6 +17,11 @@
  */
 
 import { deriveWikiMeta } from '../content/wiki-meta.js';
+import { listArticleSlugs } from '../content/articles.js';
+import { WikiLinkText } from './wiki-link-text.jsx';
+
+/** Cached slug set — rebuilt once per server render cycle. */
+const knownSlugs = new Set(listArticleSlugs());
 
 export function WikiArticle({ article }) {
   const title = article?.subject?.title;
@@ -102,7 +107,11 @@ export function WikiArticle({ article }) {
       </header>
 
       <div className="wiki-article__body">
-        {body && <p className="wiki-article__lede">{body}</p>}
+        {body && (
+          <p className="wiki-article__lede">
+            <WikiLinkText text={body} knownSlugs={knownSlugs} />
+          </p>
+        )}
 
         {paragraphs.map((p, i) => (
           <section key={i} className="wiki-article__section">
@@ -110,7 +119,9 @@ export function WikiArticle({ article }) {
               <h2 className="wiki-article__h2">{p.subtitle}</h2>
             )}
             {p.description && (
-              <p className="wiki-article__p">{p.description}</p>
+              <p className="wiki-article__p">
+                <WikiLinkText text={p.description} knownSlugs={knownSlugs} />
+              </p>
             )}
           </section>
         ))}

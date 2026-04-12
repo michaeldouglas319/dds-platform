@@ -22,9 +22,10 @@ Each item below is scoped to be shippable in a single focused session.
   (newest first), client-side tag filter with `aria-pressed` toggle
   buttons, article count with `aria-live` announcements, clear-filter
   control, statically generated. _Shipped: see session log below._
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -136,3 +137,28 @@ Each item below is scoped to be shippable in a single focused session.
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
   Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
+- 2026-04-12 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module recognizes `[[Page Name]]` and `[[slug|Display Text]]` syntax
+  in article body text and paragraph descriptions. Links resolve against
+  the known article slug set at render time (RSC — zero client JS cost).
+  Valid links render as `<a class="wiki-link" href="/a/<slug>">` elements;
+  unresolvable slugs render as `<span class="wiki-link wiki-link--broken">`
+  with a `title` tooltip and `data-wiki-target` attribute (Wikipedia-style
+  red-link convention adapted to the design system). New
+  `components/wiki-link-text.jsx` RSC splits text into segments and link
+  elements; `wiki-article.jsx` passes body and paragraph text through it.
+  CSS uses `--wiki-broken-link` / `--wiki-broken-link-hover` custom
+  properties (light + dark tokens) with a dashed underline for WCAG
+  compliance beyond color alone. The module also exports
+  `buildWikiLinkGraph()` and `collectArticleLinks()` for the future
+  backlinks feature. Seed articles now contain cross-references
+  (`[[Energy Abundance]]`, `[[Coordination Abundance|coordination]]`)
+  plus intentional broken links (`[[post-scarcity economics]]`,
+  `[[green-hydrogen|green hydrogen]]`) to exercise both states.
+  26 new vitest cases cover slug normalization, link extraction, broken-link
+  detection, graph building, and deduplication. 5 new Playwright tests
+  cover: valid link rendering, navigation, broken-link styling, piped
+  display text, and keyboard accessibility. Backward compatibility:
+  `@dds/types` untouched; articles without wiki-links render identically;
+  all 9 existing Playwright tests + 34 existing vitest cases continue to
+  pass. Shipped as commit `PENDING`.
