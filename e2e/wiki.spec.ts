@@ -443,4 +443,135 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Tag index (/t)', () => {
+    test('renders all tags with article counts', async ({ page }) => {
+      await page.goto(`${WIKI}/t`);
+
+      await expect(
+        page.getByRole('heading', { level: 1, name: /all tags/i }),
+      ).toBeVisible();
+      await expect(page.getByRole('navigation', { name: /breadcrumb/i })).toBeVisible();
+
+      // At least 5 unique tags exist across the seed articles
+      const items = page.locator('.wiki-tag-index__item');
+      expect(await items.count()).toBeGreaterThanOrEqual(5);
+
+      // Each tag link has a name and a numeric count badge
+      const firstLink = page.locator('.wiki-tag-index__link').first();
+      await expect(firstLink).toBeVisible();
+      const name = firstLink.locator('.wiki-tag-index__name');
+      await expect(name).toBeVisible();
+      const count = firstLink.locator('.wiki-tag-index__count');
+      await expect(count).toBeVisible();
+      const countText = (await count.textContent()) ?? '';
+      expect(Number(countText)).toBeGreaterThan(0);
+    });
+
+    test('tag link navigates to the tag detail page', async ({ page }) => {
+      await page.goto(`${WIKI}/t`);
+
+      const firstLink = page.locator('.wiki-tag-index__link').first();
+      const tagName = await firstLink.locator('.wiki-tag-index__name').textContent();
+      await firstLink.click();
+
+      await page.waitForURL(new RegExp(`${WIKI}/t/.+`));
+      await expect(
+        page.getByRole('heading', { level: 1, name: tagName!.trim() }),
+      ).toBeVisible();
+    });
+
+    test('tag index has 44px minimum touch targets', async ({ page }) => {
+      await page.goto(`${WIKI}/t`);
+
+      const firstLink = page.locator('.wiki-tag-index__link').first();
+      await expect(firstLink).toBeVisible();
+      const box = await firstLink.boundingBox();
+      expect(box).toBeTruthy();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    });
+  });
+
+  test.describe('Tag detail page (/t/[tag])', () => {
+    test('renders articles for a specific tag', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      // Heading shows the tag name
+      await expect(
+        page.getByRole('heading', { level: 1, name: 'governance' }),
+      ).toBeVisible();
+
+      // Kicker identifies this as a tag page
+      await expect(page.locator('.wiki-article__kicker')).toContainText('Tag');
+
+      // Breadcrumb: Home > Tags > governance
+      const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
+      await expect(breadcrumb).toBeVisible();
+      await expect(breadcrumb).toContainText('Tags');
+      await expect(breadcrumb.locator('[aria-current="page"]')).toContainText('governance');
+
+      // Articles with the "governance" tag are listed
+      const cards = page.locator('.article-card');
+      const count = await cards.count();
+      expect(count).toBeGreaterThan(0);
+      expect(count).toBeLessThanOrEqual(3);
+
+      // Article count text matches
+      const lede = page.locator('.wiki-index__lede');
+      await expect(lede).toContainText(new RegExp(`${count} article`));
+      await expect(lede).toContainText('governance');
+    });
+
+    test('tag page shows only articles matching that tag', async ({ page }) => {
+      // "energy" tag — only energy-abundance should appear
+      await page.goto(`${WIKI}/t/energy`);
+
+      const cards = page.locator('.article-card');
+      expect(await cards.count()).toBe(1);
+      await expect(
+        page.getByRole('heading', { level: 2, name: /energy abundance/i }),
+      ).toBeVisible();
+    });
+
+    test('tag page footer has "All tags" back link', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const backLink = page.locator('.wiki-tag-page__footer a.wiki-article__back');
+      await expect(backLink).toBeVisible();
+      await expect(backLink).toContainText('All tags');
+      await expect(backLink).toHaveAttribute('href', '/t');
+    });
+
+    test('unknown tag returns 404', async ({ page }) => {
+      const response = await page.goto(`${WIKI}/t/nonexistent-tag-xyz`);
+      expect(response?.status()).toBe(404);
+    });
+  });
+
+  test.describe('Article tag chips link to category pages', () => {
+    test('tag chips in article header are links to /t/{tag}', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tags = page.locator('.wiki-article__tags .wiki-article__tag');
+      expect(await tags.count()).toBeGreaterThan(0);
+
+      // Each tag chip is an <a> with href="/t/{tag}"
+      const firstTag = tags.first();
+      const tagText = ((await firstTag.textContent()) ?? '').trim();
+      await expect(firstTag).toHaveAttribute('href', `/t/${tagText}`);
+    });
+
+    test('clicking a tag chip navigates to the tag page', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const firstTag = page.locator('.wiki-article__tags .wiki-article__tag').first();
+      const tagText = ((await firstTag.textContent()) ?? '').trim();
+      await firstTag.click();
+
+      await page.waitForURL(new RegExp(`${WIKI}/t/${tagText}`));
+      await expect(
+        page.getByRole('heading', { level: 1, name: tagText }),
+      ).toBeVisible();
+    });
+  });
 });
