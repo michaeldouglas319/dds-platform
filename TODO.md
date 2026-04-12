@@ -30,9 +30,9 @@ Each item below is scoped to be shippable in a single focused session.
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
   _Shipped: see session log below._
-- [ ] **Backlinks panel** — at article footer, list every article that
+- [x] **Backlinks panel** — at article footer, list every article that
   links to the current page. Built by inverting the wiki-link graph at
-  build time.
+  build time. _Shipped: see session log below._
 - [ ] **Wire wiki app into `@dds/hub` domain router** — the hub
   (`apps/hub/config/domains.ts`) currently serves `ageofabundance.wiki`
   via `renderer: 'landing'`, so the article primitive shipped this
@@ -182,3 +182,21 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   article pages still zero client JS.
   Shipped as commit `a8024c0a87be10ef6f7c8ca5fe3a550ccf702161`.
+- 2026-04-12 — **Backlinks panel** shipped. New `components/wiki-backlinks.jsx`
+  RSC renders a `<nav aria-label="Pages that link here">` at the bottom
+  of every article that has incoming wiki-links. The inverted link graph
+  is built once at static generation time via the existing
+  `buildOutboundLinks()` / `buildBacklinks()` helpers in
+  `content/wiki-links.js` — cached lazily in `wiki-article.jsx`. Backlink
+  slugs are resolved to `{ slug, title }` via `findArticleBySlug()` and
+  sorted alphabetically by title. Articles with no backlinks render
+  nothing (no empty container). Each backlink renders as a pill-shaped
+  `<a href="/a/{slug}">` link styled with CSS custom properties only;
+  min-height 44px touch targets; transitions guarded by
+  `prefers-reduced-motion`. 4 new Playwright E2E tests cover: nav
+  landmark + correct backlink count/order, click navigation to linked
+  article, single-backlink article rendering, and 44px touch-target
+  compliance. All 23 wiki E2E + 131 unit tests pass; no regressions.
+  Zero client JS; zero new dependencies. Backward compatibility:
+  `@dds/types` untouched; existing routes unchanged.
+  Shipped as commit `4d7a9d515d534a26692248e5cfd7db9aaead8c79`.
