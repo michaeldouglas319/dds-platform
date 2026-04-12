@@ -190,6 +190,95 @@ test.describe('Age of Abundance wiki', () => {
     });
   });
 
+  test.describe('Table of contents', () => {
+    test('TOC nav renders with all section headings', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // TOC landmark nav is present
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      await expect(tocNav).toBeVisible();
+
+      // All h2 headings from the article appear in the TOC list
+      const tocLinks = tocNav.locator('.wiki-toc__link');
+      expect(await tocLinks.count()).toBe(3);
+
+      await expect(tocLinks.nth(0)).toContainText('Origins of the term');
+      await expect(tocLinks.nth(1)).toContainText('Core pillars');
+      await expect(tocLinks.nth(2)).toContainText('Critiques and open questions');
+    });
+
+    test('TOC links have correct href anchors matching heading IDs', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+
+      // Each TOC link has an href that points to an existing heading id
+      const firstLink = tocNav.locator('.wiki-toc__link').first();
+      const href = await firstLink.getAttribute('href');
+      expect(href).toBe('#origins-of-the-term');
+
+      // The corresponding h2 has a matching id
+      const heading = page.locator('#origins-of-the-term');
+      await expect(heading).toBeVisible();
+      await expect(heading).toContainText('Origins of the term');
+    });
+
+    test('all article h2s have id attributes for anchor linking', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const h2s = page.locator('.wiki-article__h2');
+      const count = await h2s.count();
+      expect(count).toBe(3);
+
+      for (let i = 0; i < count; i++) {
+        const id = await h2s.nth(i).getAttribute('id');
+        expect(id).toBeTruthy();
+        expect(id).toMatch(/^[a-z0-9-]+$/);
+      }
+    });
+
+    test('TOC is present on all articles with sections', async ({ page }) => {
+      // Check a second article to confirm TOC isn't hardcoded
+      await page.goto(`${WIKI}/a/energy-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      await expect(tocNav).toBeVisible();
+
+      const tocLinks = tocNav.locator('.wiki-toc__link');
+      expect(await tocLinks.count()).toBe(3);
+
+      await expect(tocLinks.nth(0)).toContainText('The Wright-curve argument');
+    });
+
+    test('mobile toggle button controls TOC visibility', async ({ page }) => {
+      // Set narrow viewport to trigger mobile layout
+      await page.setViewportSize({ width: 375, height: 812 });
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      await expect(tocNav).toBeVisible();
+
+      // Toggle button is visible on mobile
+      const toggle = tocNav.getByRole('button', { name: /contents/i });
+      await expect(toggle).toBeVisible();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+      // List is hidden by default on mobile
+      const list = tocNav.locator('#wiki-toc-list');
+      await expect(list).not.toBeVisible();
+
+      // Click toggle to open
+      await toggle.click();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+      await expect(list).toBeVisible();
+
+      // Click toggle again to close
+      await toggle.click();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+      await expect(list).not.toBeVisible();
+    });
+  });
+
   test.describe('Article index (/a)', () => {
     test('renders all articles sorted newest-first with article count', async ({ page }) => {
       await page.goto(`${WIKI}/a`);

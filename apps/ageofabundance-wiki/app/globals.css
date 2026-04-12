@@ -78,6 +78,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-padding-top: 2rem;
+}
+
 html,
 body {
   margin: 0;
@@ -529,6 +533,175 @@ video {
   color: var(--wiki-ink);
   text-wrap: pretty;
   hyphens: auto;
+}
+
+/* Focused headings (keyboard navigation via TOC) show no extra outline —
+   the heading text itself is sufficient context. */
+.wiki-article__h2:focus {
+  outline: 2px solid var(--wiki-focus);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.wiki-article__h2:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Article content area & TOC sidebar ──────────────────────── */
+
+.wiki-article__content-area {
+  /* Mobile: single column, no grid needed */
+}
+
+@media (min-width: 1100px) {
+  .wiki-article--has-toc {
+    max-width: calc(var(--wiki-measure) + 16rem);
+  }
+
+  .wiki-article--has-toc .wiki-article__content-area {
+    display: grid;
+    grid-template-columns: 1fr 14rem;
+    gap: var(--wiki-gutter);
+    align-items: start;
+  }
+}
+
+.wiki-article__toc-sidebar {
+  /* Mobile: sits above the body, below the header */
+  margin-bottom: var(--wiki-stack);
+  order: -1;
+}
+
+@media (min-width: 1100px) {
+  .wiki-article__toc-sidebar {
+    order: 0;
+    margin-bottom: 0;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+}
+
+/* ─── Table of Contents component ─────────────────────────────── */
+
+.wiki-toc {
+  font-family: var(--wiki-font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+/* Mobile toggle */
+.wiki-toc__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--wiki-rule);
+  border-radius: var(--wiki-radius);
+  background: var(--wiki-surface-raised);
+  color: var(--wiki-ink);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.wiki-toc__toggle:hover {
+  border-color: var(--wiki-accent);
+}
+
+.wiki-toc__toggle-icon {
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--wiki-ink-faint);
+}
+
+@media (min-width: 1100px) {
+  .wiki-toc__toggle {
+    display: none;
+  }
+}
+
+/* Heading list */
+.wiki-toc__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Mobile: collapsed by default, shown when open */
+.wiki-toc__list {
+  display: none;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.wiki-toc__list--open {
+  display: block;
+}
+
+@media (min-width: 1100px) {
+  .wiki-toc__list {
+    display: block;
+    margin-top: 0;
+    padding: 0;
+    border-left: 2px solid var(--wiki-rule);
+  }
+}
+
+.wiki-toc__item {
+  margin: 0;
+}
+
+.wiki-toc__link {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  color: var(--wiki-ink-muted);
+  text-decoration: none;
+  border-radius: 3px;
+  transition: color 150ms ease, background 150ms ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1100px) {
+  .wiki-toc__link {
+    min-height: auto;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0;
+    margin-left: -2px;
+    border-left: 2px solid transparent;
+  }
+}
+
+.wiki-toc__link:hover {
+  color: var(--wiki-accent-ink);
+  background: var(--wiki-surface-sunken);
+}
+
+@media (min-width: 1100px) {
+  .wiki-toc__link:hover {
+    background: transparent;
+    border-left-color: var(--wiki-ink-faint);
+  }
+}
+
+.wiki-toc__link--active {
+  color: var(--wiki-accent-ink);
+  font-weight: 600;
+  background: var(--wiki-surface-sunken);
+}
+
+@media (min-width: 1100px) {
+  .wiki-toc__link--active {
+    background: transparent;
+    border-left-color: var(--wiki-accent-ink);
+  }
 }
 
 .wiki-article__footer {
