@@ -22,9 +22,10 @@ Each item below is scoped to be shippable in a single focused session.
   (newest first), client-side tag filter with `aria-pressed` toggle
   buttons, article count with `aria-live` announcements, clear-filter
   control, statically generated. _Shipped: see session log below._
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -136,3 +137,24 @@ Each item below is scoped to be shippable in a single focused session.
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
   Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
+- 2026-04-12 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module provides a regex-based parser for `[[Page Name]]` and
+  `[[slug|Display Text]]` syntax. Links are resolved against the article
+  slug index at build time; resolved links render as `<a class="wiki-link"
+  href="/a/{slug}">`, broken links render as `<span class="wiki-link--broken"
+  aria-disabled="true">` with a `title` tooltip. A new `WikiText` RSC
+  component (zero client JS) replaces raw `<p>` text rendering in
+  `wiki-article.jsx`. The word counter in `wiki-meta.js` now strips
+  wiki-link syntax via `stripWikiLinks()` before counting, so bracket
+  notation never inflates reading time or word count. Seed articles now
+  cross-link: age-of-abundance ↔ energy-abundance ↔ coordination-abundance,
+  plus one intentional broken link (`[[Governance Protocols]]`) exercising
+  the broken-link visual state. Includes `buildOutboundLinks()` and
+  `buildBacklinks()` graph helpers for the future backlinks panel. 25 new
+  vitest unit tests; 5 new Playwright E2E tests covering resolved links,
+  aliased links, broken-link state, navigation, and metadata integrity.
+  CSS uses only custom properties; broken links use dashed underline +
+  `cursor: help` for non-color-only differentiation (WCAG). Backward
+  compatibility: `@dds/types` untouched; existing routes unchanged;
+  article pages still 150 B first-load JS (no client cost).
+  Shipped as commit `e3510e07dcbbf4d59b9277ada5c86030c0e40657`.
