@@ -212,3 +212,22 @@ export function listAllTags(deriveWikiMeta) {
   }
   return [...tagSet].sort();
 }
+
+/**
+ * Return articles that carry the given tag, sorted by `lastUpdatedISO`
+ * descending. Returns an empty array when the tag matches nothing.
+ *
+ * @param {string} tag
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {{ article: WikiArticle, meta: ReturnType<typeof import('../content/wiki-meta.js').deriveWikiMeta> }[]}
+ */
+export function listArticlesByTag(tag, deriveWikiMeta) {
+  return articles
+    .map((article) => ({ article, meta: deriveWikiMeta(article) }))
+    .filter((entry) => entry.meta.tags.includes(tag))
+    .sort((a, b) => {
+      const da = a.meta.lastUpdatedISO ?? '';
+      const db = b.meta.lastUpdatedISO ?? '';
+      return db.localeCompare(da);
+    });
+}
