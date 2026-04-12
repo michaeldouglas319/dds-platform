@@ -46,8 +46,9 @@ Each item below is scoped to be shippable in a single focused session.
 
 ## P0 — Navigation & discovery
 
-- [ ] **Categories** — tag pages at `/t/[tag]` listing all articles with
-  that tag; tag chips in article header.
+- [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
+  that tag; tag chips in article header. Plus `/t` tags index with counts.
+  _Shipped: see session log below._
 - [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
   Target: static-indexed, <150kb bundle, keyboard-driven combobox,
   AA-compliant results listbox.
@@ -205,3 +206,20 @@ Each item below is scoped to be shippable in a single focused session.
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
   Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
+- 2026-04-12 — **Categories** shipped. New `/t` tags index page lists all
+  topic tags with article counts via `listTagsWithCounts()` helper; each tag
+  card links to `/t/[tag]`. New `/t/[tag]` route shows articles filtered by
+  tag via `listArticlesForTag()` helper, sorted newest-first. Both routes
+  use `generateStaticParams()` + `dynamicParams: false` for static generation
+  and proper 404 on unknown tags. Tag chips in article headers
+  (`wiki-article.jsx`) are now `<a>` links to `/t/{tag}` instead of plain
+  `<li>` elements. Breadcrumb trail: Home > All tags > {Tag}. CSS uses only
+  custom properties; tag cards are 44px min-height touch targets with hover
+  states via `--wiki-accent`. All pages zero client JS. 8 new Playwright E2E
+  tests cover: tags index rendering + count + navigation, tag page filtered
+  articles + back-link, article header tag chip links, 44px touch targets,
+  unknown tag 404. 8 new vitest unit tests cover: listArticlesForTag
+  filtering + sorting + empty, listTagsWithCounts shape + cross-check with
+  listAllTags. All 31 wiki E2E + 152 unit tests pass, no regressions.
+  Backward compatibility: `@dds/types` untouched; existing routes unchanged.
+  Shipped as commit `d660ce1`.
