@@ -161,4 +161,4 @@ Each item below is scoped to be shippable in a single focused session.
   display text, and keyboard accessibility. Backward compatibility:
   `@dds/types` untouched; articles without wiki-links render identically;
   all 9 existing Playwright tests + 34 existing vitest cases continue to
-  pass. Shipped as commit `PENDING`.
+  pass. Shipped as commit `2a7e12284ba0b278840dc8fe3a8d66eb89983426`.
