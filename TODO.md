@@ -157,4 +157,4 @@ Each item below is scoped to be shippable in a single focused session.
   focus. CSS uses only custom properties; dark-mode variant for redlinks
   provided. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or any existing route; existing articles without
-  `[[…]]` syntax render identically. Shipped as commit `PENDING`.
+  `[[…]]` syntax render identically. Shipped as commit `49aa12f`.
