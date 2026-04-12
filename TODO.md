@@ -22,9 +22,10 @@ Each item below is scoped to be shippable in a single focused session.
   (newest first), client-side tag filter with `aria-pressed` toggle
   buttons, article count with `aria-live` announcements, clear-filter
   control, statically generated. _Shipped: see session log below._
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
-  rewriter that resolves to internal `/a/<slug>` links at build time,
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+  rewriter that resolves to internal `/a/<slug>` links at render time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -136,3 +137,24 @@ Each item below is scoped to be shippable in a single focused session.
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
   Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
+- 2026-04-12 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module provides `parseWikiLinks(text)` (regex: `/\[\[([^\[\]|]+?)(?:\|
+  ([^\[\]]+?))?\]\]/g`), `resolveWikiLink(target, slugs)` (exact match →
+  slugified match → broken), `slugify()`, `extractLinksFromArticle()`,
+  `buildLinkGraph()`, and `invertLinkGraph()` for the future backlinks
+  panel. New `components/wiki-text.jsx` RSC renders text with `[[…]]`
+  syntax as `<a class="wiki-link">` (existing pages) or
+  `<span class="wiki-link wiki-link--broken" aria-disabled="true">`
+  (missing pages, styled with dashed red underline per MediaWiki
+  convention). `wiki-article.jsx` now wraps body + paragraph descriptions
+  in `<WikiText>` so all cross-references resolve at render time. Seed
+  articles updated with natural wiki-links: `[[Energy Abundance]]`,
+  `[[Coordination Abundance|coordination]]`, `[[Compute Abundance]]`
+  (broken — article does not yet exist). 30 vitest cases cover parser,
+  resolver, slugifier, article extractor, and forward/backward link graph.
+  5 new Playwright tests cover: resolved link rendering, navigation,
+  broken-link redlink + aria-disabled, cross-references, and keyboard
+  focus. CSS uses only custom properties; dark-mode variant for redlinks
+  provided. Backward compatibility: no changes to `@dds/types`,
+  `@dds/renderer`, or any existing route; existing articles without
+  `[[…]]` syntax render identically. Shipped as commit `PENDING`.
