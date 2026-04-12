@@ -40,6 +40,7 @@ describe('defaultRegistry', () => {
     'centered-text',
     'two-column',
     'sectors-grid',
+    'wiki-article',
   ];
 
   it('contains all expected layout keys', () => {
