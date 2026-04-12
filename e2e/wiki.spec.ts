@@ -443,4 +443,94 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Tag pages (/t/[tag])', () => {
+    test('tag page renders with correct heading, count, and articles', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      // Breadcrumb is present with three levels
+      const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
+      await expect(breadcrumb).toBeVisible();
+      await expect(breadcrumb).toContainText('All articles');
+
+      // Page heading is the tag name
+      const h1 = page.getByRole('heading', { level: 1 });
+      await expect(h1).toBeVisible();
+      await expect(h1).toContainText('governance');
+
+      // Lede shows article count and tag name
+      const lede = page.locator('.wiki-index__lede');
+      await expect(lede).toContainText(/articles?\s+tagged/);
+      await expect(lede).toContainText('governance');
+
+      // Article cards are rendered — governance tag appears on both
+      // "age-of-abundance" and "coordination-abundance"
+      const cards = page.locator('.article-card');
+      expect(await cards.count()).toBe(2);
+    });
+
+    test('tag page shows all-tags navigation with current tag highlighted', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const tagNav = page.getByRole('navigation', { name: /browse other tags/i });
+      await expect(tagNav).toBeVisible();
+
+      // Multiple tag chips are rendered
+      const chips = tagNav.locator('.wiki-tag-page__tag-chip');
+      expect(await chips.count()).toBeGreaterThan(2);
+
+      // The current tag has aria-current="page"
+      const currentChip = tagNav.locator('.wiki-tag-page__tag-chip[aria-current="page"]');
+      await expect(currentChip).toBeVisible();
+      await expect(currentChip).toContainText('governance');
+    });
+
+    test('clicking a different tag chip navigates to that tag page', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const tagNav = page.getByRole('navigation', { name: /browse other tags/i });
+      // Find a tag chip that is NOT the current one (no aria-current)
+      const otherChip = tagNav.locator('.wiki-tag-page__tag-chip:not([aria-current])').first();
+      const tagText = (await otherChip.textContent()) ?? '';
+      await otherChip.click();
+
+      await page.waitForURL(new RegExp(`${WIKI}/t/${tagText}`));
+      await expect(
+        page.getByRole('heading', { level: 1, name: tagText }),
+      ).toBeVisible();
+    });
+
+    test('article tag chips link to tag pages', async ({ page }) => {
+      // Tags in the article header should now be links to /t/[tag]
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tagList = page.locator('.wiki-article__tags');
+      await expect(tagList).toBeVisible();
+
+      const tagLinks = tagList.locator('a.wiki-article__tag');
+      expect(await tagLinks.count()).toBeGreaterThan(0);
+
+      // First tag chip is a link to the correct tag page
+      const firstTag = tagLinks.first();
+      const href = await firstTag.getAttribute('href');
+      expect(href).toMatch(/^\/t\//);
+
+      // Click it to navigate
+      await firstTag.click();
+      await page.waitForURL(new RegExp(`${WIKI}/t/`));
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    });
+
+    test('tag page has 44px minimum touch targets on tag chips', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const tagNav = page.getByRole('navigation', { name: /browse other tags/i });
+      const firstChip = tagNav.locator('.wiki-tag-page__tag-chip').first();
+      await expect(firstChip).toBeVisible();
+
+      const box = await firstChip.boundingBox();
+      expect(box).toBeTruthy();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    });
+  });
 });
