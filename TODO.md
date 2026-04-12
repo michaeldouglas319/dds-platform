@@ -46,8 +46,9 @@ Each item below is scoped to be shippable in a single focused session.
 
 ## P0 — Navigation & discovery
 
-- [ ] **Categories** — tag pages at `/t/[tag]` listing all articles with
+- [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header.
+  _Shipped: see session log below._
 - [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
   Target: static-indexed, <150kb bundle, keyboard-driven combobox,
   AA-compliant results listbox.
@@ -205,3 +206,21 @@ Each item below is scoped to be shippable in a single focused session.
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
   Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
+- 2026-04-12 — **Categories** shipped. New `/t/[tag]` dynamic route
+  provides a dedicated page for each tag, statically generated via
+  `generateStaticParams()` from `listAllTags()`. New `listArticlesByTag()`
+  helper in `content/articles.js` returns articles filtered and sorted by
+  `lastUpdatedISO` descending. Tag chips in the article header
+  (`wiki-article.jsx`) are now `<a>` links to `/t/{tag}` with hover
+  styles matching the active-tag visual from the index page. Category
+  page includes: breadcrumb (home → all articles → tag), kicker label,
+  `<h1>` tag name, article count, article card grid (reusing
+  `ArticleCard`), and a "back to all articles" nav link. CSS uses only
+  custom properties; layout reuses the existing card grid pattern. 8 new
+  vitest unit tests for `listArticlesByTag` and `listAllTags`; 5 new
+  Playwright E2E tests covering: tag page heading + count + cards, tag
+  filtering (energy → 1 article), breadcrumb links, back navigation, and
+  article tag chip → category page click navigation. All 29 wiki E2E +
+  152 unit tests pass, no regressions. Backward compatibility: `@dds/types`
+  untouched; existing routes unchanged; article pages still zero client JS.
+  Shipped as commit `402363b`.
