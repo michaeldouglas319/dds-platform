@@ -190,6 +190,91 @@ test.describe('Age of Abundance wiki', () => {
     });
   });
 
+  test.describe('Table of contents', () => {
+    test('TOC renders as a nav landmark with correct entries', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // TOC is a <nav> with the correct aria-label
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      await expect(tocNav).toBeVisible();
+
+      // TOC contains an ordered list of links matching the article h2 headings
+      const tocLinks = tocNav.locator('.wiki-toc__link');
+      const expectedHeadings = [
+        'Origins of the term',
+        'Core pillars',
+        'Critiques and open questions',
+      ];
+      expect(await tocLinks.count()).toBe(expectedHeadings.length);
+
+      for (let i = 0; i < expectedHeadings.length; i++) {
+        await expect(tocLinks.nth(i)).toContainText(expectedHeadings[i]);
+      }
+    });
+
+    test('TOC links point to anchored headings with matching IDs', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      const tocLinks = tocNav.locator('.wiki-toc__link');
+      const count = await tocLinks.count();
+      expect(count).toBeGreaterThan(0);
+
+      // Each TOC link's href fragment matches an h2 id in the article body
+      for (let i = 0; i < count; i++) {
+        const href = await tocLinks.nth(i).getAttribute('href');
+        expect(href).toBeTruthy();
+        expect(href).toMatch(/^#/);
+
+        const targetId = href!.slice(1);
+        const targetH2 = page.locator(`.wiki-article__h2[id="${targetId}"]`);
+        await expect(targetH2).toBeVisible();
+      }
+    });
+
+    test('clicking a TOC link navigates to the heading', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      const secondLink = tocNav.locator('.wiki-toc__link').nth(1);
+      const href = await secondLink.getAttribute('href');
+      expect(href).toBeTruthy();
+
+      await secondLink.click();
+
+      // URL fragment updates
+      await expect(page).toHaveURL(new RegExp(`#${href!.slice(1)}$`));
+    });
+
+    test('TOC is inside a collapsible details element', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const details = page.locator('.wiki-toc__details');
+      await expect(details).toBeVisible();
+
+      // Starts open
+      await expect(details).toHaveAttribute('open', '');
+
+      // Summary toggle is present and accessible
+      const summary = details.locator('.wiki-toc__toggle');
+      await expect(summary).toBeVisible();
+      await expect(summary).toContainText(/contents/i);
+    });
+
+    test('article headings have scroll-margin for anchor offset', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const h2WithId = page.locator('.wiki-article__h2[id]').first();
+      await expect(h2WithId).toBeVisible();
+
+      const scrollMargin = await h2WithId.evaluate(
+        (el) => getComputedStyle(el).scrollMarginTop,
+      );
+      // Should have some scroll margin (1.5rem = 24px at default font size)
+      expect(parseFloat(scrollMargin)).toBeGreaterThan(0);
+    });
+  });
+
   test.describe('Article index (/a)', () => {
     test('renders all articles sorted newest-first with article count', async ({ page }) => {
       await page.goto(`${WIKI}/a`);
