@@ -22,9 +22,10 @@ Each item below is scoped to be shippable in a single focused session.
   (newest first), client-side tag filter with `aria-pressed` toggle
   buttons, article count with `aria-live` announcements, clear-filter
   control, statically generated. _Shipped: see session log below._
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -136,3 +137,26 @@ Each item below is scoped to be shippable in a single focused session.
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
   Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
+- 2026-04-12 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module provides `[[Page Name]]` and `[[slug|Display Text]]` syntax
+  parsing following MediaWiki/Obsidian conventions. The parser normalizes
+  targets to URL-safe slugs (lowercase, spaces→hyphens, strip special
+  chars) and resolves them against the known article set at build time.
+  `segmentWikiContent()` splits text into alternating plain-text and
+  resolved-link segments; the new `WikiContent` RSC component renders
+  valid links as `<a class="wiki-link">` and broken links as
+  `<span class="wiki-link wiki-link--broken" aria-disabled="true">` with
+  a `title` tooltip. The broken-link visual uses dashed underlines (not
+  color alone) for WCAG compliance. `buildWikiLinkGraph()` computes the
+  full outgoing-link graph for all articles — ready for the backlinks
+  panel to invert in a future session. Seed articles now cross-reference
+  each other (Age of Abundance ↔ Energy Abundance ↔ Coordination
+  Abundance) plus one intentional broken link (`[[Artificial General
+  Intelligence|ML systems]]`) to exercise the broken state. 20 new vitest
+  cases cover slug normalization, parsing, resolution, segmentation, and
+  graph building; 5 new Playwright tests cover valid-link rendering,
+  navigation, broken-link a11y state, `data-wiki-target` attributes, and
+  metadata preservation. All existing tests continue to pass. Backward
+  compatibility: no changes to `@dds/types`, `@dds/renderer`, or existing
+  routes. The parser is additive — articles without `[[…]]` syntax
+  render exactly as before.

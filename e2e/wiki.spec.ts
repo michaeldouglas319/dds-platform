@@ -204,4 +204,68 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Wiki-links', () => {
+    test('valid wiki-link renders as an internal anchor with correct href', async ({ page }) => {
+      // The age-of-abundance article body contains [[Coordination Abundance|coordination]]
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const wikiLink = page.locator('.wiki-link').first();
+      await expect(wikiLink).toBeVisible();
+      await expect(wikiLink).toHaveAttribute('href', /^\/a\//);
+
+      // It should be an <a> element
+      expect(await wikiLink.evaluate((el) => el.tagName.toLowerCase())).toBe('a');
+    });
+
+    test('valid wiki-link navigates to the target article', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // The "Core pillars" paragraph has [[Energy Abundance]] which is a valid link
+      const energyLink = page.locator('a.wiki-link[data-wiki-target="energy-abundance"]');
+      await expect(energyLink).toBeVisible();
+      await expect(energyLink).toHaveAttribute('href', '/a/energy-abundance');
+
+      await energyLink.click();
+      await page.waitForURL(`${WIKI}/a/energy-abundance`);
+
+      // Verify we landed on the right article
+      await expect(
+        page.getByRole('heading', { level: 1, name: /energy abundance/i }),
+      ).toBeVisible();
+    });
+
+    test('broken wiki-link renders with broken state and aria-disabled', async ({ page }) => {
+      // The coordination-abundance article contains [[Artificial General Intelligence|ML systems]]
+      // which should be a broken link (no article with that slug exists)
+      await page.goto(`${WIKI}/a/coordination-abundance`);
+
+      const brokenLink = page.locator('.wiki-link--broken');
+      await expect(brokenLink).toBeVisible();
+
+      // Broken links are <span> with aria-disabled, not <a>
+      expect(await brokenLink.evaluate((el) => el.tagName.toLowerCase())).toBe('span');
+      await expect(brokenLink).toHaveAttribute('aria-disabled', 'true');
+      await expect(brokenLink).toHaveAttribute('title', /page not found/i);
+    });
+
+    test('wiki-links carry data-wiki-target attribute for testing and styling', async ({ page }) => {
+      await page.goto(`${WIKI}/a/energy-abundance`);
+
+      // The body has [[Age of Abundance]] → slug "age-of-abundance" (appears multiple times)
+      const links = page.locator('[data-wiki-target="age-of-abundance"]');
+      expect(await links.count()).toBeGreaterThan(0);
+      await expect(links.first()).toBeVisible();
+    });
+
+    test('article with wiki-links preserves existing metadata tests', async ({ page }) => {
+      // Ensure adding wiki-links didn't break article metadata rendering
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const metaList = page.locator('.wiki-article__meta');
+      await expect(metaList).toBeVisible();
+      await expect(metaList).toContainText(/reading time/i);
+      await expect(metaList).toContainText(/\d+\s*min/);
+    });
+  });
 });

@@ -673,6 +673,46 @@ video {
   font-variant-numeric: tabular-nums;
 }
 
+/* ─── Wiki-links ──────────────────────────────────────────────── */
+
+/*
+ * Valid wiki-link — internal cross-reference to an existing article.
+ * Subtle visual cue: solid underline, accent color. Inherits the
+ * article body's serif font when inside .wiki-article__body.
+ */
+.wiki-link {
+  color: var(--wiki-accent-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-skip-ink: auto;
+  border-radius: 2px;
+  transition: color 150ms ease;
+}
+
+.wiki-link:hover {
+  color: var(--wiki-accent);
+}
+
+/*
+ * Broken wiki-link — target article does not exist. Uses dashed
+ * underline + muted red tone so the signal goes beyond color alone
+ * (WCAG). `cursor: help` hints that the destination is missing.
+ * Screen readers receive `aria-disabled="true"` + a title tooltip.
+ */
+.wiki-link--broken {
+  color: var(--wiki-ink-faint);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  cursor: help;
+}
+
+.wiki-link--broken:hover {
+  color: var(--wiki-ink-muted);
+}
+
 /* ─── Motion-safety ────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
