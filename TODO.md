@@ -46,8 +46,10 @@ Each item below is scoped to be shippable in a single focused session.
 
 ## P0 — Navigation & discovery
 
-- [ ] **Categories** — tag pages at `/t/[tag]` listing all articles with
-  that tag; tag chips in article header.
+- [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
+  that tag; tag chips in article header link to category pages; "All tags"
+  cross-navigation nav at footer of each category page.
+  _Shipped: see session log below._
 - [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
   Target: static-indexed, <150kb bundle, keyboard-driven combobox,
   AA-compliant results listbox.
@@ -205,3 +207,28 @@ Each item below is scoped to be shippable in a single focused session.
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
   Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
+- 2026-04-12 — **Categories** shipped. New statically-generated tag
+  category pages at `/t/[tag]` list every article carrying the tag,
+  sorted newest-first. New `listArticlesByTag(tag, deriveWikiMeta)`
+  helper in `content/articles.js` filters and sorts by date; tag
+  comparison is case-insensitive (tags are already normalized lowercase
+  by `deriveWikiMeta`). Each category page includes: breadcrumb (home →
+  All articles → Tag: {tag}), kicker + title + article count header,
+  article card grid, and an "All tags" cross-navigation nav with the
+  current tag highlighted via `aria-current="page"`. Article header tag
+  chips in `wiki-article.jsx` are now `<a>` links to `/t/{tag}` instead
+  of plain `<li>` text, with hover states (border-color + text-color
+  transition). Category page tag chips meet 44px touch-target minimum.
+  CSS uses only custom properties; transitions guarded by
+  `prefers-reduced-motion`. `dynamicParams = false` + `generateStaticParams`
+  ensure unknown tags return 404. 6 new vitest unit tests for
+  `listArticlesByTag` (tag match, empty result, case-insensitive,
+  entry shape) + `listAllTags` + `listArticlesSortedByDate`. 7 new
+  Playwright E2E tests cover: category page rendering + article count,
+  breadcrumb structure, "All tags" nav with current highlight,
+  cross-navigation between tags, article header tag-chip linking,
+  44px touch targets, unknown-tag 404. All 31 wiki E2E + 148 unit
+  tests pass, no regressions. Backward compatibility: `@dds/types`
+  untouched; existing routes unchanged; article pages still zero
+  client JS (category pages also zero client JS — pure RSC).
+  Shipped as commit `9e83295`.
