@@ -22,9 +22,10 @@ Each item below is scoped to be shippable in a single focused session.
   (newest first), client-side tag filter with `aria-pressed` toggle
   buttons, article count with `aria-live` announcements, clear-filter
   control, statically generated. _Shipped: see session log below._
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
-  rewriter that resolves to internal `/a/<slug>` links at build time,
-  surfaces broken-link warnings, and supports a "broken link" visual state.
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+  rewriter that resolves to internal `/a/<slug>` links at render time,
+  surfaces broken-link warnings, and supports a "broken link" visual state
+  (Wikipedia-style "redlinks"). _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -136,3 +137,16 @@ Each item below is scoped to be shippable in a single focused session.
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
   Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
+- 2026-04-12 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module provides pure-function parsing of `[[Page Name]]` and
+  `[[slug|Display Text]]` wiki-link syntax. `parseWikiText(text, knownSlugs)`
+  splits plain text into text and wiki-link segments; links whose target
+  slug does not exist are flagged `exists: false` for the "redlink"
+  treatment. `WikiText` RSC component renders segments as `<a>` (valid) or
+  `<span role="link" aria-disabled>` (broken). CSS uses only custom
+  properties: valid links inherit `--wiki-accent-ink` underline, broken
+  links get dashed `--wiki-ink-faint` underline with `cursor: help`.
+  Seed articles now cross-reference each other; two intentional broken
+  links (`Compute Abundance`, `Atoms Abundance`) demonstrate redlinks.
+  21 vitest cases + 4 Playwright E2E tests. No changes to `@dds/types`
+  or `@dds/renderer`. Shipped as commit `ee94a22`.
