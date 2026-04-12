@@ -26,9 +26,10 @@ Each item below is scoped to be shippable in a single focused session.
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
   _Shipped: see session log below._
-- [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
+- [x] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
+  _Shipped: see session log below._
 - [ ] **Backlinks panel** — at article footer, list every article that
   links to the current page. Built by inverting the wiki-link graph at
   build time.
@@ -158,3 +159,25 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   article pages still 150 B first-load JS (no client cost).
   Shipped as commit `e3510e07dcbbf4d59b9277ada5c86030c0e40657`.
+- 2026-04-12 — **Table of contents** shipped. New `table-of-contents.jsx`
+  client component renders an auto-generated TOC from article section
+  headings (`content.paragraphs[].subtitle`). Uses IntersectionObserver
+  scroll spy to highlight the active heading as the user scrolls; the
+  active state is indicated by a colored left border and bold weight.
+  Desktop (>= 1100px): sticky sidebar alongside the article body via
+  CSS grid on `.wiki-article__content-area`, with the article widened
+  to `calc(72ch + 16rem)`. Mobile (< 1100px): collapsible toggle
+  button with `aria-expanded`; list hidden by default. Heading IDs are
+  slugified (`slugifyHeading`) with duplicate-safe numeric suffixes.
+  `tabIndex={-1}` on h2 elements allows programmatic focus for
+  keyboard TOC navigation. Scroll-to-heading uses `scrollIntoView()`
+  with behavior gated by `prefers-reduced-motion`. Respects
+  `meta.wiki.toc: 'off'` — when set, TOC and the `--has-toc` layout
+  modifier are suppressed. Article pages grew from 150 B to 961 B
+  first-load JS (TOC scroll spy island); home and index pages are
+  unchanged. 5 new Playwright E2E tests cover: heading rendering,
+  anchor linking, cross-article presence, h2 id attributes, and
+  mobile toggle behavior. All 19 wiki E2E tests pass; all 115 vitest
+  tests pass. Backward compatibility: no changes to `@dds/types`,
+  `@dds/renderer`, or existing routes. CSS uses only custom properties.
+  Shipped as commit `061b85d226c7a8dcc93522d13c8c94c9ccf30e9a`.
