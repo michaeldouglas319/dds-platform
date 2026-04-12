@@ -34,15 +34,16 @@ Each item below is scoped to be shippable in a single focused session.
   links to the current page. Built by inverting the wiki-link graph at
   build time.
   _Shipped: see session log below._
-- [ ] **Wire wiki app into `@dds/hub` domain router** — the hub
-  (`apps/hub/config/domains.ts`) currently serves `ageofabundance.wiki`
-  via `renderer: 'landing'`, so the article primitive shipped this
-  session is not yet reachable at the public domain. Either (a) add a
-  `wiki` renderer in `apps/hub/renderers/` that reads from
-  `apps/ageofabundance-wiki/content/articles.js` (after lifting it to
-  a shared package), or (b) re-point the `ageofabundance-wiki` Vercel
-  project back to `dds-platform/main`. Must not break existing
-  domains' routing.
+- [x] **Wire wiki app into `@dds/hub` domain router** — created a
+  `WikiRenderer` in `apps/hub/renderers/wiki.tsx` that imports and
+  reuses the existing wiki components (`ArticleCard`) and content
+  (`listFeaturedArticles`) from the wiki app. Updated `page.tsx` to
+  handle the `wiki` renderer type, and pointed both
+  `ageofabundance.wiki` and `theageofabundance.wiki` domains to the
+  `wiki` renderer. Hub and wiki app both build cleanly. The wiki home
+  page is now accessible at both wiki domains through the unified hub
+  domain router.
+  _Shipped: see session log below._
 
 ## P0 — Navigation & discovery
 
@@ -265,3 +266,17 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   search adds ~2KB client JS to layout only.
   Shipped as commit `a7d7efaa`.
+- 2026-04-12 — **Wire wiki app into @dds/hub domain router** shipped.
+  New `WikiRenderer` in `apps/hub/renderers/wiki.tsx` imports wiki
+  content (`listFeaturedArticles()`) and components (`ArticleCard`) to
+  render a wiki home page. Updated `apps/hub/app/page.tsx` to route
+  `config.renderer === 'wiki'` to the new renderer. Updated
+  `apps/hub/config/domains.ts` to point `ageofabundance.wiki` and
+  `theageofabundance.wiki` to the `wiki` renderer. No changes to
+  `@dds/types` or wiki app routes. Hub and wiki both build cleanly
+  (pnpm build --filter=@dds/hub and pnpm build --filter=@dds/ageofabundance-wiki).
+  Wiki home page with featured articles is now accessible at both wiki
+  domains through the unified hub domain router. This unblocks Track A
+  (Renderer Unification) and sets the foundation for creating
+  @dds/renderer plugins for wiki content in subsequent sessions.
+  Shipped as commit `TBD`.
