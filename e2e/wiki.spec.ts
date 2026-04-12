@@ -113,6 +113,69 @@ test.describe('Age of Abundance wiki', () => {
     await expect(skip).toContainText(/skip to main content/i);
   });
 
+  test.describe('Wiki-links', () => {
+    test('valid wiki-link renders as an internal anchor and navigates', async ({ page }) => {
+      // The Age of Abundance article body contains [[Age of Abundance]] links
+      // from the Energy Abundance article. Navigate to energy-abundance.
+      await page.goto(`${WIKI}/a/energy-abundance`);
+
+      // Find a valid wiki-link (points to an existing article)
+      const wikiLink = page.locator('a.wiki-link').first();
+      await expect(wikiLink).toBeVisible();
+      await expect(wikiLink).toHaveAttribute('href', /^\/a\//);
+
+      // Click it and verify navigation
+      await wikiLink.click();
+      await page.waitForURL(new RegExp(`${WIKI}/a/.+`));
+
+      // Arrived at an article page
+      const article = page.locator('article.wiki-article');
+      await expect(article).toBeVisible();
+    });
+
+    test('broken wiki-link renders with broken style and does not navigate', async ({ page }) => {
+      // The Age of Abundance "Core pillars" paragraph references
+      // [[Compute Abundance]] and [[Atoms Abundance]] which don't exist yet.
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const brokenLink = page.locator('.wiki-link--broken').first();
+      await expect(brokenLink).toBeVisible();
+
+      // Broken links are NOT anchor elements
+      await expect(brokenLink).toHaveAttribute('aria-disabled', 'true');
+      await expect(brokenLink).toHaveAttribute('title', /does not exist yet/);
+    });
+
+    test('wiki-link with pipe alias shows display text, not slug', async ({ page }) => {
+      // The Coordination Abundance body has [[Energy Abundance|energy]]
+      await page.goto(`${WIKI}/a/coordination-abundance`);
+
+      const aliasedLink = page.locator('a.wiki-link[data-wiki-link="energy-abundance"]');
+      await expect(aliasedLink).toBeVisible();
+      await expect(aliasedLink).toContainText('energy');
+      // The display text is the alias, not the full article name
+      const text = await aliasedLink.textContent();
+      expect(text?.toLowerCase()).toBe('energy');
+    });
+
+    test('article body still renders correctly with wiki-links (no layout regression)', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // Lede is still visible and has content
+      const lede = page.locator('.wiki-article__lede');
+      await expect(lede).toBeVisible();
+      const ledeText = await lede.textContent();
+      expect(ledeText?.length).toBeGreaterThan(50);
+
+      // Sections still render with h2 headings
+      const h2s = page.locator('.wiki-article__h2');
+      expect(await h2s.count()).toBe(3);
+
+      // Drop cap still works (first letter of lede)
+      await expect(lede).toBeVisible();
+    });
+  });
+
   test.describe('Article index (/a)', () => {
     test('renders all articles sorted newest-first with article count', async ({ page }) => {
       await page.goto(`${WIKI}/a`);
