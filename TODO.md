@@ -204,3 +204,4 @@ Each item below is scoped to be shippable in a single focused session.
   44px touch-target minimum. All 25 wiki E2E + 141 unit tests pass,
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
+  Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
