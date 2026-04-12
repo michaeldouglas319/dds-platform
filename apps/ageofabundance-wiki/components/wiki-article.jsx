@@ -18,8 +18,20 @@
 
 import { deriveWikiMeta } from '../content/wiki-meta.js';
 import { buildTocEntries } from '../content/wiki-toc.js';
+import { buildOutboundLinks, buildBacklinks } from '../content/wiki-links.js';
+import { findArticleBySlug } from '../content/articles.js';
 import { WikiText } from './wiki-text.jsx';
 import { WikiToc } from './wiki-toc.jsx';
+import { WikiBacklinks } from './wiki-backlinks.jsx';
+
+// Lazily cached backlink map — built once at static generation time.
+let _backlinkMap = null;
+function getBacklinkMap() {
+  if (!_backlinkMap) {
+    _backlinkMap = buildBacklinks(buildOutboundLinks());
+  }
+  return _backlinkMap;
+}
 
 export function WikiArticle({ article }) {
   const title = article?.subject?.title;
@@ -28,6 +40,16 @@ export function WikiArticle({ article }) {
   const body = article?.content?.body;
   const paragraphs = article?.content?.paragraphs ?? [];
   const meta = deriveWikiMeta(article);
+
+  // Resolve backlinks for this article: slug → { slug, title }
+  const backlinkSlugs = getBacklinkMap()[article?.id] ?? [];
+  const backlinkData = backlinkSlugs
+    .map((slug) => {
+      const linked = findArticleBySlug(slug);
+      return linked ? { slug, title: linked.subject?.title ?? slug } : null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   const tocEntries = meta.toc === 'auto' ? buildTocEntries(paragraphs) : [];
   const hasToc = tocEntries.length > 0;
@@ -154,6 +176,8 @@ export function WikiArticle({ article }) {
           ))}
         </div>
       </div>
+
+      {backlinkData.length > 0 && <WikiBacklinks backlinks={backlinkData} />}
 
       <footer className="wiki-article__footer">
         <a className="wiki-article__back" href="/">

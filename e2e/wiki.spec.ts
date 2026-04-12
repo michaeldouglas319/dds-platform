@@ -366,4 +366,69 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Backlinks panel', () => {
+    test('renders a backlinks nav with correct links on an article with backlinks', async ({ page }) => {
+      // age-of-abundance is linked from energy-abundance and coordination-abundance
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const backlinksNav = page.getByRole('navigation', { name: /pages that link here/i });
+      await expect(backlinksNav).toBeVisible();
+
+      // Heading is present
+      await expect(backlinksNav.locator('.wiki-backlinks__heading')).toContainText(
+        /pages that link here/i,
+      );
+
+      // Exactly 2 backlinks (Coordination Abundance and Energy Abundance)
+      const links = backlinksNav.locator('.wiki-backlinks__link');
+      expect(await links.count()).toBe(2);
+
+      // Links are sorted alphabetically by title
+      await expect(links.nth(0)).toContainText('Coordination Abundance');
+      await expect(links.nth(1)).toContainText('Energy Abundance');
+
+      // Links point to the correct article routes
+      await expect(links.nth(0)).toHaveAttribute('href', '/a/coordination-abundance');
+      await expect(links.nth(1)).toHaveAttribute('href', '/a/energy-abundance');
+    });
+
+    test('backlink navigates to the correct article on click', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const backlinksNav = page.getByRole('navigation', { name: /pages that link here/i });
+      const energyLink = backlinksNav.locator('.wiki-backlinks__link[href="/a/energy-abundance"]');
+      await energyLink.click();
+
+      await page.waitForURL(`${WIKI}/a/energy-abundance`);
+      await expect(
+        page.getByRole('heading', { level: 1, name: /energy abundance/i }),
+      ).toBeVisible();
+    });
+
+    test('article with only one backlink shows exactly one entry', async ({ page }) => {
+      // coordination-abundance is only linked from age-of-abundance
+      await page.goto(`${WIKI}/a/coordination-abundance`);
+
+      const backlinksNav = page.getByRole('navigation', { name: /pages that link here/i });
+      await expect(backlinksNav).toBeVisible();
+
+      const links = backlinksNav.locator('.wiki-backlinks__link');
+      expect(await links.count()).toBe(1);
+      await expect(links.first()).toContainText('Age of Abundance');
+    });
+
+    test('backlink items meet 44px touch target minimum', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const backlinksNav = page.getByRole('navigation', { name: /pages that link here/i });
+      const firstLink = backlinksNav.locator('.wiki-backlinks__link').first();
+      await expect(firstLink).toBeVisible();
+
+      const height = await firstLink.evaluate(
+        (el) => parseFloat(getComputedStyle(el).minHeight),
+      );
+      expect(height).toBeGreaterThanOrEqual(44);
+    });
+  });
 });
