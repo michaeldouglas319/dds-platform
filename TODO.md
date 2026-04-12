@@ -49,9 +49,10 @@ Each item below is scoped to be shippable in a single focused session.
 - [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header link to tag pages.
   _Shipped: see session log below._
-- [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
-  Target: static-indexed, <150kb bundle, keyboard-driven combobox,
-  AA-compliant results listbox.
+- [x] **Full-text search** — client-side in-memory search with ARIA
+  combobox pattern, Cmd+K shortcut, relevance-ranked results. Zero
+  external dependencies; API designed for future FlexSearch/Pagefind swap.
+  _Shipped: see session log below._
 - [ ] **Recent changes feed** — `/recent` page sorted by `lastUpdatedISO`,
   JSON feed at `/recent.json`.
 - [ ] **Random article** — `/random` route that 307-redirects to a
@@ -227,3 +228,34 @@ Each item below is scoped to be shippable in a single focused session.
   unit tests pass, no regressions. Backward compatibility: `@dds/types`
   untouched; existing routes unchanged; zero client JS on tag pages.
   Shipped as commit `de02177185c9fe8a2dd57c9edef44bad6f9bbd41`.
+- 2026-04-12 — **Full-text search** shipped. New `content/wiki-search.js`
+  module builds a pre-computed, in-memory search index from the article
+  dataset (title, summary, body, tags, paragraph descriptions). Wiki-link
+  syntax is stripped via `stripWikiLinks()` before indexing. Search uses
+  case-insensitive substring matching with a relevance heuristic (title
+  match +3, summary +2, body +1). New `components/wiki-search.jsx`
+  client component implements the WAI-ARIA combobox pattern: `role=
+  "combobox"` input with `aria-expanded`, `aria-controls`,
+  `aria-activedescendant`; `role="listbox"` results with `role="option"`
+  items; `aria-live="polite"` status region for SR result count
+  announcements. Keyboard: Ctrl+K / Cmd+K focuses, ArrowDown/Up
+  navigates, Enter selects, Escape closes, Home/End jump. Results show
+  title, category kicker, and 2-line summary clamp. Close on outside
+  click. `app/layout.jsx` now renders a sticky site header (`<header
+  role="banner">`) with logo, "All articles" nav link, and search —
+  available on every page. `getSearchEntries()` pre-populates the
+  client index from the RSC at no extra client cost. CSS: sticky header
+  with `z-index: 50`, search input with focus-within ring, listbox
+  dropdown with shadow, mobile-responsive (≤480px hides nav link,
+  widens listbox). `scroll-margin-top` on `h2[id]` increased to
+  4.5rem to clear the header. Kbd hint (`⌘K`) hidden on touch devices
+  via `@media (hover: hover)`. 13 new vitest unit tests cover: index
+  shape, lowercase, no bracket syntax, title-in-searchText, empty
+  query, title match, tag match, case-insensitive, ranking, limit,
+  no-match, getSearchEntries shape. 7 new Playwright E2E tests cover:
+  header + ARIA attributes, query → listbox with results, no-results
+  state, arrow-key + Enter navigation, Escape close, click navigation,
+  status region count. All 36 wiki E2E + 154 unit tests pass, no
+  regressions. Zero new dependencies. Backward compatible — no
+  `@dds/types` changes; existing routes unchanged.
+  Shipped as commit `734009d`.
