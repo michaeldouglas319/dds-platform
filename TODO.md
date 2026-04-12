@@ -18,8 +18,10 @@ Each item below is scoped to be shippable in a single focused session.
   `tags[]`, `summary`) so all downstream features share one source of truth.
   Additive — existing articles continue to parse.
   _Shipped: see session log below._
-- [ ] **Article index (`/a`)** — paginated list of every article, sorted by
-  `lastUpdatedISO`, filterable by tag.
+- [x] **Article index (`/a`)** — articles sorted by `lastUpdatedISO`
+  (newest first), client-side tag filter with `aria-pressed` toggle
+  buttons, article count with `aria-live` announcements, clear-filter
+  control, statically generated. _Shipped: see session log below._
 - [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
@@ -118,3 +120,19 @@ Each item below is scoped to be shippable in a single focused session.
   with or without `meta.wiki` continue to parse. Vitest `include` was
   extended to pick up tests under `apps/**`. Shipped as commit
   `<PENDING_SHA>`.
+- 2026-04-12 — **Article index (`/a`)** shipped. Rewrote the flat article
+  list at `/a` into a sortable, filterable index page. Articles are sorted
+  by `lastUpdatedISO` descending (newest first) via `deriveWikiMeta`;
+  `listArticlesSortedByDate()` and `listAllTags()` helpers added to
+  `content/articles.js`. A new `TagFilter` client component provides
+  interactive tag-chip filtering: each tag button toggles `aria-pressed`,
+  an `aria-live` paragraph announces the filtered count to screen readers,
+  and a "Clear filter" control resets the view. All tag buttons meet the
+  44px touch-target minimum. The page remains statically generated (0 JS on
+  article and home pages; 1.88 kB client bundle on `/a` only). CSS uses
+  only custom properties; transitions are guarded by
+  `prefers-reduced-motion`. 4 new Playwright tests cover: article count
+  display, tag toggle + active state, filtering by a specific tag, and
+  deselect/reset. Backward compatibility: no changes to `@dds/types`,
+  `@dds/renderer`, or the existing article page / home page.
+  Shipped as commit `<PENDING_SHA>`.

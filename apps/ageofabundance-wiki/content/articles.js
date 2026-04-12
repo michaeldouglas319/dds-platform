@@ -177,3 +177,38 @@ export function listArticleSlugs() {
 export function listFeaturedArticles() {
   return articles;
 }
+
+/**
+ * Return articles sorted by `meta.wiki.lastUpdatedISO` descending (newest
+ * first). Articles without a date sort to the end.
+ *
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {{ article: WikiArticle, meta: ReturnType<typeof import('../content/wiki-meta.js').deriveWikiMeta> }[]}
+ */
+export function listArticlesSortedByDate(deriveWikiMeta) {
+  return articles
+    .map((article) => ({ article, meta: deriveWikiMeta(article) }))
+    .sort((a, b) => {
+      const da = a.meta.lastUpdatedISO ?? '';
+      const db = b.meta.lastUpdatedISO ?? '';
+      return db.localeCompare(da);
+    });
+}
+
+/**
+ * Collect every unique, normalized tag across all articles.
+ * Returns sorted alphabetically for a stable UI order.
+ *
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {string[]}
+ */
+export function listAllTags(deriveWikiMeta) {
+  const tagSet = new Set();
+  for (const article of articles) {
+    const meta = deriveWikiMeta(article);
+    for (const tag of meta.tags) {
+      tagSet.add(tag);
+    }
+  }
+  return [...tagSet].sort();
+}

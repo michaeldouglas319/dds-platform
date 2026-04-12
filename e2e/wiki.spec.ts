@@ -112,4 +112,96 @@ test.describe('Age of Abundance wiki', () => {
     await expect(skip).toBeVisible();
     await expect(skip).toContainText(/skip to main content/i);
   });
+
+  test.describe('Article index (/a)', () => {
+    test('renders all articles sorted newest-first with article count', async ({ page }) => {
+      await page.goto(`${WIKI}/a`);
+
+      // Page has the correct heading and breadcrumb
+      await expect(
+        page.getByRole('heading', { level: 1, name: /all articles/i }),
+      ).toBeVisible();
+      await expect(page.getByRole('navigation', { name: /breadcrumb/i })).toBeVisible();
+
+      // Article count is shown
+      const count = page.locator('.wiki-index__count');
+      await expect(count).toBeVisible();
+      await expect(count).toContainText(/3 articles/);
+
+      // All 3 seed articles are rendered as cards
+      const cards = page.locator('.article-card');
+      expect(await cards.count()).toBe(3);
+    });
+
+    test('tag filter chips are rendered and toggle active state', async ({ page }) => {
+      await page.goto(`${WIKI}/a`);
+
+      // Tag filter group is present
+      const filterGroup = page.getByRole('group', { name: /filter articles by tag/i });
+      await expect(filterGroup).toBeVisible();
+
+      // Tag buttons exist — at least a few from the seed data
+      const tagButtons = filterGroup.getByRole('button');
+      expect(await tagButtons.count()).toBeGreaterThan(2);
+
+      // All tag buttons start as not pressed
+      const firstTag = tagButtons.first();
+      await expect(firstTag).toHaveAttribute('aria-pressed', 'false');
+
+      // Click a tag to filter
+      const tagText = (await firstTag.textContent()) ?? '';
+      await firstTag.click();
+      await expect(firstTag).toHaveAttribute('aria-pressed', 'true');
+
+      // Article count updates to reflect the filter
+      const count = page.locator('.wiki-index__count');
+      await expect(count).toContainText(new RegExp(`tagged "${tagText}"`));
+
+      // Clear filter button appears
+      const clearBtn = page.getByRole('button', { name: /clear filter/i });
+      await expect(clearBtn).toBeVisible();
+
+      // Click clear to reset
+      await clearBtn.click();
+      await expect(firstTag).toHaveAttribute('aria-pressed', 'false');
+      await expect(count).toContainText(/3 articles/);
+    });
+
+    test('filtering by a specific tag narrows the article list', async ({ page }) => {
+      await page.goto(`${WIKI}/a`);
+
+      // Click the "governance" tag — should match Age of Abundance + Coordination Abundance
+      const govTag = page.getByRole('button', { name: 'governance' });
+      await govTag.click();
+
+      // Should show fewer articles than the total
+      const cards = page.locator('.article-card');
+      const filteredCount = await cards.count();
+      expect(filteredCount).toBeGreaterThan(0);
+      expect(filteredCount).toBeLessThan(3);
+
+      // Count reflects the filter
+      const count = page.locator('.wiki-index__count');
+      await expect(count).toContainText(/tagged "governance"/);
+    });
+
+    test('clicking the same tag again deselects it', async ({ page }) => {
+      await page.goto(`${WIKI}/a`);
+
+      const filterGroup = page.getByRole('group', { name: /filter articles by tag/i });
+      const firstTag = filterGroup.getByRole('button').first();
+
+      // Click to activate
+      await firstTag.click();
+      await expect(firstTag).toHaveAttribute('aria-pressed', 'true');
+
+      // Click again to deactivate
+      await firstTag.click();
+      await expect(firstTag).toHaveAttribute('aria-pressed', 'false');
+
+      // All articles are back
+      const cards = page.locator('.article-card');
+      expect(await cards.count()).toBe(3);
+    });
+  });
 });

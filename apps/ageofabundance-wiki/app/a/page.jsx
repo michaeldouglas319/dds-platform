@@ -1,12 +1,19 @@
-import { articles } from '../../content/articles.js';
-import { ArticleCard } from '../../components/article-card.jsx';
+import {
+  listArticlesSortedByDate,
+  listAllTags,
+} from '../../content/articles.js';
+import { deriveWikiMeta } from '../../content/wiki-meta.js';
+import { TagFilter } from '../../components/tag-filter.jsx';
 
 export const metadata = {
   title: 'All articles — ageofabundance.wiki',
-  description: 'Every article in the Age of Abundance wiki.',
+  description: 'Every article in the Age of Abundance wiki, sorted by date and filterable by tag.',
 };
 
 export default function ArticleIndexPage() {
+  const sorted = listArticlesSortedByDate(deriveWikiMeta);
+  const allTags = listAllTags(deriveWikiMeta);
+
   return (
     <main id="main-content" className="wiki-index">
       <nav className="wiki-breadcrumb" aria-label="Breadcrumb">
@@ -25,17 +32,7 @@ export default function ArticleIndexPage() {
         </p>
       </header>
 
-      {articles.length === 0 ? (
-        <p className="wiki-index__empty">No articles yet. Check back soon.</p>
-      ) : (
-        <ul className="wiki-index__grid" role="list">
-          {articles.map((article) => (
-            <li key={article.id}>
-              <ArticleCard article={article} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <TagFilter items={sorted} allTags={allTags} />
     </main>
   );
 }
