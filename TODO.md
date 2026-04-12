@@ -49,9 +49,15 @@ Each item below is scoped to be shippable in a single focused session.
 - [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header link to tag pages.
   _Shipped: see session log below._
-- [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
-  Target: static-indexed, <150kb bundle, keyboard-driven combobox,
-  AA-compliant results listbox.
+- [x] **Full-text search** — evaluated Pagefind, Orama, FlexSearch;
+  shipped a custom lightweight implementation (zero deps, ~2KB client JS)
+  with field-weighted scoring (title 10x > tags 5x > summary 3x > body
+  1x), AND semantics, prefix matching. WAI-ARIA combobox pattern with
+  `role="combobox"`, `role="listbox"`, `aria-activedescendant` keyboard
+  navigation (arrows/enter/escape/home/end), Cmd/Ctrl+K global shortcut.
+  Site header with logo + search trigger added to layout. 44px touch
+  targets. Swap to Pagefind when article count exceeds ~50.
+  _Shipped: see session log below._
 - [ ] **Recent changes feed** — `/recent` page sorted by `lastUpdatedISO`,
   JSON feed at `/recent.json`.
 - [ ] **Random article** — `/random` route that 307-redirects to a
@@ -227,3 +233,35 @@ Each item below is scoped to be shippable in a single focused session.
   unit tests pass, no regressions. Backward compatibility: `@dds/types`
   untouched; existing routes unchanged; zero client JS on tag pages.
   Shipped as commit `de02177185c9fe8a2dd57c9edef44bad6f9bbd41`.
+- 2026-04-12 — **Full-text search** shipped. Evaluated Pagefind (~6KB
+  JS+WASM, best for large static sites), Orama (~45KB, good BM25
+  ranking), and FlexSearch (~6–22KB, weak relevance). Chose a custom
+  zero-dependency implementation (~2KB client JS) suited to the current
+  3-article dataset, with a clear upgrade path to Pagefind at ~50+
+  articles. New `content/wiki-search.js` builds a static search index
+  at RSC render time with field-weighted scoring: title text repeated
+  10x, tags 5x, summary 3x, body 1x — substring matching with AND
+  semantics across query tokens. New `components/wiki-search.jsx`
+  (`'use client'`) implements the WAI-ARIA combobox pattern:
+  `role="combobox"` input with `aria-expanded`, `aria-controls`,
+  `aria-autocomplete="list"`, `aria-activedescendant`; `role="listbox"`
+  results with `role="option"` items; arrow key navigation, Enter to
+  select, Escape to close, Home/End, Cmd/Ctrl+K global shortcut,
+  click-outside dismissal. `aria-live="polite"` region announces result
+  count. Each result shows category kicker, title, and 2-line summary
+  excerpt. New `.wiki-site-header` added to `layout.jsx` with sticky
+  positioning, site logo link, and search trigger button. All
+  interactive elements meet 44px touch-target minimum. CSS uses only
+  custom properties; overlay + dialog use the existing design tokens.
+  `prefers-reduced-motion` guard inherited from the global rule. 24 new
+  vitest unit tests cover: index shape, field contents, lowercasing,
+  wiki-link stripping, scoring (empty/match/miss/AND/weighting/case/
+  prefix), and search ranking (relevance order, multi-word, limit,
+  tag-only queries). 8 new Playwright E2E tests: trigger visibility,
+  dialog open + focus, query results in listbox, keyboard navigation
+  (arrow/enter), escape close, empty state + live region, touch targets,
+  site header on all pages. All 37 existing wiki E2E + 8 new = 45 wiki
+  tests pass; 165 vitest unit tests pass. Zero regressions. Backward
+  compatibility: `@dds/types` untouched; existing routes unchanged;
+  search adds ~2KB client JS to layout only.
+  Shipped as commit `a7d7efaa`.
