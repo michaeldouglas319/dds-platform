@@ -20,6 +20,8 @@
   --wiki-accent: hsl(12 72% 44%);
   --wiki-accent-ink: hsl(12 72% 28%);
   --wiki-focus: hsl(220 90% 42%);
+  --wiki-broken-link: hsl(0 60% 45%);
+  --wiki-broken-link-hover: hsl(0 60% 35%);
 
   /* Typography — evidence-based long-form tokens */
   --wiki-font-sans:
@@ -68,6 +70,8 @@
     --wiki-accent: hsl(30 90% 66%);
     --wiki-accent-ink: hsl(30 90% 76%);
     --wiki-focus: hsl(210 90% 68%);
+    --wiki-broken-link: hsl(0 55% 62%);
+    --wiki-broken-link-hover: hsl(0 55% 72%);
     color-scheme: dark;
   }
 }
@@ -671,6 +675,33 @@ video {
   font-size: 0.8125rem;
   color: var(--wiki-ink-faint);
   font-variant-numeric: tabular-nums;
+}
+
+/* ─── Wiki-links ──────────────────────────────────────────────── */
+
+.wiki-link {
+  color: var(--wiki-accent-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--wiki-accent);
+  border-radius: 2px;
+}
+
+.wiki-link:hover {
+  color: var(--wiki-accent);
+  text-decoration-thickness: 2px;
+}
+
+.wiki-link--broken {
+  color: var(--wiki-broken-link, hsl(0 60% 45%));
+  text-decoration-style: dotted;
+  text-decoration-color: var(--wiki-broken-link, hsl(0 60% 45%));
+}
+
+.wiki-link--broken:hover {
+  color: var(--wiki-broken-link-hover, hsl(0 60% 35%));
+  text-decoration-color: var(--wiki-broken-link-hover, hsl(0 60% 35%));
 }
 
 /* ─── Motion-safety ────────────────────────────────────────────── */

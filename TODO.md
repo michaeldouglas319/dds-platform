@@ -22,9 +22,10 @@ Each item below is scoped to be shippable in a single focused session.
   (newest first), client-side tag filter with `aria-pressed` toggle
   buttons, article count with `aria-live` announcements, clear-filter
   control, statically generated. _Shipped: see session log below._
-- [ ] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
+- [x] **Wiki-link parser** — `[[Page Name]]` and `[[slug|Display Text]]`
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
+  _Shipped: see session log below._
 - [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
@@ -136,3 +137,25 @@ Each item below is scoped to be shippable in a single focused session.
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
   Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
+- 2026-04-12 — **Wiki-link parser** shipped. New `content/wiki-links.js`
+  module parses `[[Page Name]]` and `[[slug|Display Text]]` syntax inside
+  article text, resolving links against the known article dataset at render
+  time. Slug normalization uses NFKD decomposition, diacritic stripping,
+  and kebab-case conversion (case-insensitive, spaces/underscores →
+  hyphens). The `WikiContent` RSC replaces bare `<p>` text in
+  `WikiArticle` body and paragraph descriptions; it emits valid links as
+  `<a class="wiki-link">` and broken links as
+  `<a class="wiki-link wiki-link--broken" data-broken-link>` with
+  `aria-label="… (page does not exist)"` for screen readers. CSS tokens
+  `--wiki-broken-link` / `--wiki-broken-link-hover` provide Wikipedia-style
+  red dotted underlines with light/dark variants meeting WCAG AA contrast.
+  The `findBrokenLinks()` utility enables build-time validation. Seed
+  articles now cross-reference each other; two intentional broken links
+  (`[[Compute Abundance]]`, `[[Atoms Abundance]]`) exercise the broken
+  state. 24 new vitest cases cover slug normalization, parsing, broken-link
+  detection, pipe syntax, edge cases. 5 new Playwright tests cover: valid
+  link rendering + href, broken link visual state + SR label, navigation
+  via wiki-link click, mixed content rendering, and valid/broken link
+  counts in the "Core pillars" paragraph. Backward compatibility:
+  `@dds/types` untouched; existing articles without wiki-links render
+  unchanged (fast path returns plain text).

@@ -204,4 +204,85 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Wiki-links', () => {
+    test('valid wiki-links render as anchor elements linking to /a/<slug>', async ({ page }) => {
+      // The "Age of Abundance" article body contains [[Coordination Abundance|coordination]]
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      await expect(body).toBeVisible();
+
+      // Valid wiki-link: "coordination" display text → /a/coordination-abundance
+      const validLink = body.locator('a.wiki-link').filter({ hasText: 'coordination' }).first();
+      await expect(validLink).toBeVisible();
+      await expect(validLink).toHaveAttribute('href', '/a/coordination-abundance');
+      await expect(validLink).not.toHaveClass(/wiki-link--broken/);
+    });
+
+    test('broken wiki-links render with broken visual state and SR label', async ({ page }) => {
+      // The "Coordination Abundance" article body contains [[Verifiable Identity|verifiable identity]]
+      await page.goto(`${WIKI}/a/coordination-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      await expect(body).toBeVisible();
+
+      // Broken wiki-link: "verifiable identity" display text
+      const brokenLink = body.locator('a.wiki-link--broken').first();
+      await expect(brokenLink).toBeVisible();
+      await expect(brokenLink).toHaveAttribute('data-broken-link', '');
+      await expect(brokenLink).toHaveAttribute(
+        'aria-label',
+        /page does not exist/i,
+      );
+    });
+
+    test('valid wiki-link navigates to the target article', async ({ page }) => {
+      // Energy Abundance article links to [[Age of Abundance]]
+      await page.goto(`${WIKI}/a/energy-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      const link = body.locator('a.wiki-link').filter({ hasText: 'Age of Abundance' }).first();
+      await expect(link).toBeVisible();
+
+      await link.click();
+      await page.waitForURL(`${WIKI}/a/age-of-abundance`);
+
+      // Verify we landed on the correct article
+      const h1 = page.getByRole('heading', { level: 1 });
+      await expect(h1).toContainText(/age of abundance/i);
+    });
+
+    test('article body with wiki-links still renders plain text alongside links', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const lede = page.locator('.wiki-article__lede');
+      await expect(lede).toBeVisible();
+
+      // The lede should contain both plain text and the wiki-link
+      const text = await lede.textContent();
+      expect(text).toContain('socio-technical transition');
+      expect(text).toContain('coordination');
+    });
+
+    test('piped wiki-links in "Core pillars" show both valid and broken links', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // The "Core pillars" paragraph references [[Energy Abundance]] (valid),
+      // [[Compute Abundance]] (broken), [[Atoms Abundance]] (broken),
+      // [[Coordination Abundance]] (valid)
+      const pillarsSection = page.locator('.wiki-article__section').filter({
+        has: page.locator('.wiki-article__h2', { hasText: 'Core pillars' }),
+      });
+      await expect(pillarsSection).toBeVisible();
+
+      const validLinks = pillarsSection.locator('a.wiki-link:not(.wiki-link--broken)');
+      const brokenLinks = pillarsSection.locator('a.wiki-link--broken');
+
+      // Energy Abundance and Coordination Abundance are valid
+      expect(await validLinks.count()).toBe(2);
+      // Compute Abundance and Atoms Abundance are broken
+      expect(await brokenLinks.count()).toBe(2);
+    });
+  });
 });
