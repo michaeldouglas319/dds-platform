@@ -265,3 +265,24 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   search adds ~2KB client JS to layout only.
   Shipped as commit `a7d7efaa`.
+
+---
+
+## TRACK A — RENDERER UNIFICATION
+
+Goal: Every consumer app renders through @dds/renderer + site.config.json.
+
+- 2026-04-12 — **WikiArticleRenderer plugin** shipped. New
+  `packages/renderer/renderers/wiki-article-renderer.tsx` wraps the
+  existing `WikiArticle` component as a @dds/renderer registry entry.
+  Enables wiki content to render through the unified `SectionBatchRenderer`
+  system with `display.layout='wiki-article'`. Registered 'wiki-article'
+  layout in `defaultRegistry` with metadata. Updated registry test to
+  include new renderer entry. All 166 vitest tests pass; no regressions.
+  Backward compatibility: additive only; no changes to @dds/types or
+  existing behavior. This is the first step toward unified rendering across
+  all consumer apps. Future sessions: (A2) define UniversalSection shape
+  extensions (meta.wiki, content.wikiLinks, etc.), (A3-A5) create additional
+  wiki renderers (wiki-index, wiki-toc, wiki-backlinks, wiki-card-grid),
+  (A6+) convert wiki pages to SectionBatchRenderer + site.config.json.
+  Shipped as commit `142e9b3`.
