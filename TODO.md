@@ -46,8 +46,9 @@ Each item below is scoped to be shippable in a single focused session.
 
 ## P0 — Navigation & discovery
 
-- [ ] **Categories** — tag pages at `/t/[tag]` listing all articles with
+- [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header.
+  _Shipped: see session log below._
 - [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
   Target: static-indexed, <150kb bundle, keyboard-driven combobox,
   AA-compliant results listbox.
@@ -205,3 +206,21 @@ Each item below is scoped to be shippable in a single focused session.
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
   Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
+- 2026-04-12 — **Categories** shipped. New `/t` tag index page lists all
+  tags with article counts in a responsive grid; each tag card links to
+  `/t/{tag}`. New `/t/[tag]` tag detail page shows articles filtered by
+  that tag, sorted by `lastUpdatedISO` descending. Both pages are
+  statically generated via `generateStaticParams`; `dynamicParams: false`
+  rejects unknown tags with 404. New `listArticlesForTag()` and
+  `listTagsWithCounts()` helpers in `content/articles.js`. Tag chips in
+  the article header (`wiki-article.jsx`) are now `<a>` links to
+  `/t/{tag}` with hover/transition styles. Tag index cards use 44px
+  min-height touch targets, CSS custom properties only, transitions
+  guarded by `prefers-reduced-motion`. Breadcrumbs: Home > Tags > {tag}.
+  8 new Playwright E2E tests cover: tag index rendering + counts, tag
+  link navigation, 44px touch targets, tag detail filtering, single-tag
+  isolation (energy → 1 article), footer back-link, unknown tag 404,
+  article header tag-chip links + click navigation. All 33 wiki E2E +
+  136 unit tests pass, no regressions. Backward compatibility: `@dds/types`
+  untouched; existing routes unchanged; article pages still zero client JS.
+  Shipped as commit `59cec98756e5af918a11f00b8c1080e5fad686e2`.
