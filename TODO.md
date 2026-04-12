@@ -46,8 +46,9 @@ Each item below is scoped to be shippable in a single focused session.
 
 ## P0 — Navigation & discovery
 
-- [ ] **Categories** — tag pages at `/t/[tag]` listing all articles with
+- [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header.
+  _Shipped: see session log below._
 - [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
   Target: static-indexed, <150kb bundle, keyboard-driven combobox,
   AA-compliant results listbox.
@@ -205,3 +206,22 @@ Each item below is scoped to be shippable in a single focused session.
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
   Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
+- 2026-04-12 — **Categories** shipped. New statically-generated tag pages
+  at `/t/[tag]` via `generateStaticParams` from `listAllTags()`. New
+  `listArticlesByTag(tag, deriveWikiMeta)` helper in `content/articles.js`
+  filters and sorts articles by tag (case-insensitive, newest first).
+  Tag page shows: "Tag" kicker, tag name heading, article count, article
+  grid via existing `ArticleCard`, and a sibling-tags navigation bar
+  with `aria-current="page"` on the active tag. Tag chips in article
+  headers (`wiki-article.jsx`) are now `<a href="/t/{tag}">` links
+  instead of plain `<li>` text, with hover state and `text-decoration:
+  none`. CSS uses only custom properties; all tag-link touch targets
+  meet 44px minimum; transitions guarded by `prefers-reduced-motion`.
+  Breadcrumb shows 3-level path: home → All articles → tag. 5 new
+  Playwright E2E tests cover: heading + count + cards, sibling-tag
+  nav with current highlight, cross-tag navigation, article-header
+  tag-chip linking to tag page, 44px touch targets. All 29 wiki E2E +
+  136 unit tests pass, no regressions. Backward compatibility:
+  `@dds/types` untouched; existing routes unchanged; article pages
+  still zero client JS.
+  Shipped as commit `PENDING`.

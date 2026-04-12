@@ -443,4 +443,89 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Tag pages (/t/[tag])', () => {
+    test('tag page renders with correct heading, count, and articles', async ({ page }) => {
+      // "governance" tag is shared by age-of-abundance and coordination-abundance
+      await page.goto(`${WIKI}/t/governance`);
+
+      // Breadcrumb with 3 levels
+      const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
+      await expect(breadcrumb).toBeVisible();
+      await expect(breadcrumb).toContainText('All articles');
+      await expect(breadcrumb.locator('li[aria-current="page"]')).toContainText('governance');
+
+      // Kicker + heading
+      const kicker = page.locator('.wiki-tag-page__kicker');
+      await expect(kicker).toContainText('Tag');
+
+      const h1 = page.getByRole('heading', { level: 1 });
+      await expect(h1).toBeVisible();
+      await expect(h1).toHaveText('governance');
+
+      // Count text
+      const lede = page.locator('.wiki-index__lede');
+      await expect(lede).toContainText(/2 articles tagged .governance./);
+
+      // Article cards rendered
+      const cards = page.locator('.article-card');
+      expect(await cards.count()).toBe(2);
+    });
+
+    test('tag page shows related-tags navigation with current tag highlighted', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const siblings = page.getByRole('navigation', { name: /related tags/i });
+      await expect(siblings).toBeVisible();
+
+      // All tags from the seed dataset are present
+      const tagLinks = siblings.locator('.wiki-tag-page__tag-link');
+      expect(await tagLinks.count()).toBeGreaterThan(2);
+
+      // Current tag has the --current modifier and aria-current
+      const currentTag = siblings.locator('.wiki-tag-page__tag-link--current');
+      await expect(currentTag).toHaveCount(1);
+      await expect(currentTag).toHaveText('governance');
+      await expect(currentTag).toHaveAttribute('aria-current', 'page');
+    });
+
+    test('clicking a sibling tag navigates to that tag page', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const siblings = page.getByRole('navigation', { name: /related tags/i });
+      const energyLink = siblings.locator('a.wiki-tag-page__tag-link', { hasText: 'energy' });
+      await energyLink.click();
+
+      await page.waitForURL(`${WIKI}/t/energy`);
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('energy');
+    });
+
+    test('article tag chips link to tag pages', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // Tag chips are now <a> elements
+      const tagList = page.locator('.wiki-article__tags');
+      const tagLinks = tagList.locator('a.wiki-article__tag');
+      expect(await tagLinks.count()).toBeGreaterThan(0);
+
+      // Click the first tag chip to navigate to its tag page
+      const firstTag = tagLinks.first();
+      const tagText = (await firstTag.textContent()) ?? '';
+      await firstTag.click();
+
+      await page.waitForURL(new RegExp(`${WIKI}/t/.+`));
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText(tagText);
+    });
+
+    test('tag page has 44px touch targets on sibling tags', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const firstLink = page.locator('.wiki-tag-page__tag-link').first();
+      await expect(firstLink).toBeVisible();
+
+      const box = await firstLink.boundingBox();
+      expect(box).toBeTruthy();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    });
+  });
 });
