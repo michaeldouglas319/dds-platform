@@ -6,6 +6,7 @@ import {
   stripWikiLinks,
   buildOutboundLinks,
   buildBacklinks,
+  getBacklinksForSlug,
 } from '../wiki-links.js';
 
 // ─── slugify ──────────────────────────────────────────────────────
@@ -263,5 +264,49 @@ describe('buildBacklinks', () => {
     };
     const back = buildBacklinks(outbound);
     expect(back.b).toEqual(['a']);
+  });
+});
+
+// ─── getBacklinksForSlug ────────────────────────────────────────────
+
+describe('getBacklinksForSlug', () => {
+  it('returns enriched backlinks for age-of-abundance', () => {
+    // energy-abundance and coordination-abundance both link to age-of-abundance
+    const backlinks = getBacklinksForSlug('age-of-abundance');
+    expect(backlinks.length).toBeGreaterThan(0);
+
+    const slugs = backlinks.map((b) => b.slug);
+    expect(slugs).toContain('energy-abundance');
+    expect(slugs).toContain('coordination-abundance');
+  });
+
+  it('returns title and summary for each backlink', () => {
+    const backlinks = getBacklinksForSlug('age-of-abundance');
+    for (const link of backlinks) {
+      expect(typeof link.slug).toBe('string');
+      expect(link.slug.length).toBeGreaterThan(0);
+      expect(typeof link.title).toBe('string');
+      expect(link.title.length).toBeGreaterThan(0);
+      expect(typeof link.summary).toBe('string');
+    }
+  });
+
+  it('returns an empty array for a slug with no incoming links', () => {
+    const backlinks = getBacklinksForSlug('nonexistent-article');
+    expect(backlinks).toEqual([]);
+  });
+
+  it('does not include self-links', () => {
+    // No article links to itself in the seed data
+    const backlinks = getBacklinksForSlug('energy-abundance');
+    const slugs = backlinks.map((b) => b.slug);
+    expect(slugs).not.toContain('energy-abundance');
+  });
+
+  it('returns the correct title from the article subject', () => {
+    const backlinks = getBacklinksForSlug('energy-abundance');
+    const fromAoA = backlinks.find((b) => b.slug === 'age-of-abundance');
+    expect(fromAoA).toBeTruthy();
+    expect(fromAoA.title).toBe('Age of Abundance');
   });
 });

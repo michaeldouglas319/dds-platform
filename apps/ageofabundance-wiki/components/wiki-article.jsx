@@ -18,8 +18,10 @@
 
 import { deriveWikiMeta } from '../content/wiki-meta.js';
 import { buildTocEntries } from '../content/wiki-toc.js';
+import { getBacklinksForSlug } from '../content/wiki-links.js';
 import { WikiText } from './wiki-text.jsx';
 import { WikiToc } from './wiki-toc.jsx';
+import { WikiBacklinks } from './wiki-backlinks.jsx';
 
 export function WikiArticle({ article }) {
   const title = article?.subject?.title;
@@ -31,6 +33,7 @@ export function WikiArticle({ article }) {
 
   const tocEntries = meta.toc === 'auto' ? buildTocEntries(paragraphs) : [];
   const hasToc = tocEntries.length > 0;
+  const backlinks = getBacklinksForSlug(article.id);
 
   // Pre-build a map from paragraph index → heading anchor ID so the h2
   // elements carry the same IDs the TOC links point at.
@@ -156,6 +159,7 @@ export function WikiArticle({ article }) {
       </div>
 
       <footer className="wiki-article__footer">
+        <WikiBacklinks backlinks={backlinks} />
         <a className="wiki-article__back" href="/">
           <span aria-hidden="true">←</span> Back to the wiki
         </a>

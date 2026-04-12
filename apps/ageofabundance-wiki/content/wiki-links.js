@@ -210,3 +210,32 @@ export function buildBacklinks(outbound) {
 
   return backlinks;
 }
+
+/**
+ * Get enriched backlink data for a specific article slug.
+ *
+ * Builds the full outbound → backlink graph, then looks up and enriches
+ * each source article with its title and summary. Safe for RSC — pure
+ * function, deterministic, no side effects.
+ *
+ * @param {string} slug  — the target article slug
+ * @returns {{ slug: string, title: string, summary: string }[]}
+ */
+export function getBacklinksForSlug(slug) {
+  const outbound = buildOutboundLinks();
+  const backlinksMap = buildBacklinks(outbound);
+  const linking = backlinksMap[slug] ?? [];
+
+  return linking.map((sourceSlug) => {
+    const article = articles.find((a) => a.id === sourceSlug);
+    return {
+      slug: sourceSlug,
+      title: article?.subject?.title ?? sourceSlug,
+      summary:
+        article?.meta?.wiki?.summary ??
+        article?.subject?.summary ??
+        article?.subject?.subtitle ??
+        '',
+    };
+  });
+}

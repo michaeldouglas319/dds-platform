@@ -275,6 +275,83 @@ test.describe('Age of Abundance wiki', () => {
     });
   });
 
+  test.describe('Backlinks panel', () => {
+    test('article with backlinks shows the backlinks section', async ({ page }) => {
+      // age-of-abundance is linked to by energy-abundance and coordination-abundance
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const backlinksSection = page.locator('.wiki-backlinks');
+      await expect(backlinksSection).toBeVisible();
+
+      // Section has the correct heading
+      const heading = backlinksSection.getByRole('heading', { level: 2 });
+      await expect(heading).toContainText(/pages that link here/i);
+
+      // Contains a list of backlinks
+      const items = backlinksSection.locator('.wiki-backlinks__item');
+      expect(await items.count()).toBeGreaterThanOrEqual(2);
+    });
+
+    test('backlink items show title and summary', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const backlinksSection = page.locator('.wiki-backlinks');
+      const firstItem = backlinksSection.locator('.wiki-backlinks__item').first();
+
+      // Title is visible
+      const title = firstItem.locator('.wiki-backlinks__title');
+      await expect(title).toBeVisible();
+      const titleText = await title.textContent();
+      expect(titleText!.length).toBeGreaterThan(0);
+
+      // Summary is visible
+      const summary = firstItem.locator('.wiki-backlinks__summary');
+      await expect(summary).toBeVisible();
+    });
+
+    test('backlink items are clickable links to the source article', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const backlinksSection = page.locator('.wiki-backlinks');
+      // Find the link to energy-abundance
+      const energyLink = backlinksSection.locator('a.wiki-backlinks__link[href="/a/energy-abundance"]');
+      await expect(energyLink).toBeVisible();
+
+      await energyLink.click();
+      await page.waitForURL(`${WIKI}/a/energy-abundance`);
+      await expect(
+        page.getByRole('heading', { level: 1, name: /energy abundance/i }),
+      ).toBeVisible();
+    });
+
+    test('backlinks section has accessible landmark structure', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      // The section is labelled by its heading
+      const section = page.locator('section[aria-labelledby="backlinks-heading"]');
+      await expect(section).toBeVisible();
+
+      // The heading ID matches
+      const heading = page.locator('#backlinks-heading');
+      await expect(heading).toBeVisible();
+
+      // Backlinks are in a list for SR "list of N items" announcement
+      const list = section.locator('ul.wiki-backlinks__list');
+      await expect(list).toBeVisible();
+    });
+
+    test('backlinks panel has 44px minimum touch targets', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const firstLink = page.locator('.wiki-backlinks__link').first();
+      await expect(firstLink).toBeVisible();
+
+      const box = await firstLink.boundingBox();
+      expect(box).toBeTruthy();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    });
+  });
+
   test.describe('Article index (/a)', () => {
     test('renders all articles sorted newest-first with article count', async ({ page }) => {
       await page.goto(`${WIKI}/a`);
