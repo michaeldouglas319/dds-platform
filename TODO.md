@@ -119,7 +119,7 @@ Each item below is scoped to be shippable in a single focused session.
   untouched (meta remains `Record<string, unknown>`); existing articles
   with or without `meta.wiki` continue to parse. Vitest `include` was
   extended to pick up tests under `apps/**`. Shipped as commit
-  `<PENDING_SHA>`.
+  `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
 - 2026-04-12 — **Article index (`/a`)** shipped. Rewrote the flat article
   list at `/a` into a sortable, filterable index page. Articles are sorted
   by `lastUpdatedISO` descending (newest first) via `deriveWikiMeta`;
@@ -135,4 +135,4 @@ Each item below is scoped to be shippable in a single focused session.
   display, tag toggle + active state, filtering by a specific tag, and
   deselect/reset. Backward compatibility: no changes to `@dds/types`,
   `@dds/renderer`, or the existing article page / home page.
-  Shipped as commit `<PENDING_SHA>`.
+  Shipped as commit `c5b72a9cddbaf6bf3e6009f47d1030e3ccea9109`.
