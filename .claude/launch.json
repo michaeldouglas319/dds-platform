@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "blackdot-partners",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "blackdot-partners", "dev"],
+      "port": 3000
+    }
+  ]
+}

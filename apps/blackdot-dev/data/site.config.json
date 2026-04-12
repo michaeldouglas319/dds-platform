@@ -1,0 +1,51 @@
+{
+  "app": {
+    "name": "blackdot.dev",
+    "label": "Dev",
+    "description": "Renderer showcase and development environment",
+    "baseUrl": "https://blackdot.dev",
+    "defaultTheme": "light"
+  },
+  "pages": [
+    {
+      "path": "/",
+      "sections": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "name": "Hero",
+          "subject": {
+            "title": "BlackDot Dev",
+            "subtitle": "Renderer showcase and theme variant testing"
+          },
+          "content": {
+            "body": "A development environment for previewing all @dds/renderer section types and theme variants."
+          },
+          "display": { "layout": "hero" }
+        },
+        {
+          "id": "features",
+          "type": "feature-matrix",
+          "name": "Renderer Catalogue",
+          "subject": {
+            "title": "Available Renderers",
+            "subtitle": "Each section type from @dds/renderer"
+          },
+          "content": {
+            "items": [
+              { "title": "Hero", "description": "Full-width hero with title, subtitle, and CTA" },
+              { "title": "Text", "description": "Rich text content block" },
+              { "title": "Stats", "description": "Metric cards in a grid" },
+              { "title": "Feature Matrix", "description": "Feature comparison grid" },
+              { "title": "Timeline", "description": "Chronological event display" },
+              { "title": "CTA", "description": "Call-to-action banner" },
+              { "title": "Two Column", "description": "Side-by-side content layout" },
+              { "title": "Sectors Grid", "description": "Industry sector cards" }
+            ]
+          },
+          "display": { "layout": "feature-matrix" }
+        }
+      ]
+    }
+  ]
+}

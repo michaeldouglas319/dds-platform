@@ -1,0 +1,12 @@
+## Goal
+Sync dds-platform renderer with canonical dds-renderer — full DDK data-contract compatibility.
+
+## Active (max 8 items)
+- [ ] [RENDERER] Port 8-step fallback router into @dds/renderer batch-renderer
+- [ ] [RENDERER] Add react-markdown dep + Markdown component
+- [ ] [RENDERER] Implement 27 canonical renderer keys (see docs/superpowers/plans/2026-04-10-renderer-sync-forward.md)
+- [ ] [FIX] Align pnpm version: root 10.19.0 vs CI 9.15.0
+- [ ] [FIX] Create .env.example for onboarding
+- [ ] [FIX] THREE.Clock + PCFSoftShadowMap deprecation warnings in blackdot-partners globe
+
+## Backlog
