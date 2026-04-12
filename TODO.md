@@ -224,4 +224,4 @@ Each item below is scoped to be shippable in a single focused session.
   136 unit tests pass, no regressions. Backward compatibility:
   `@dds/types` untouched; existing routes unchanged; article pages
   still zero client JS.
-  Shipped as commit `PENDING`.
+  Shipped as commit `f253eea`.
