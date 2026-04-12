@@ -281,4 +281,96 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Table of contents', () => {
+    test('TOC nav landmark renders with correct entries', async ({ page }) => {
+      // age-of-abundance has 3 h2 sections (≥2 threshold met → TOC shown)
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      await expect(tocNav).toBeVisible();
+
+      // Desktop TOC contains an ordered list of anchor links matching article headings
+      // (both mobile and desktop render a list; scope to the desktop one)
+      const desktopToc = tocNav.locator('.wiki-toc__desktop');
+      const tocLinks = desktopToc.locator('.wiki-toc__link');
+      expect(await tocLinks.count()).toBe(3);
+
+      // Links text matches the paragraph subtitles from the seed data
+      await expect(tocLinks.nth(0)).toContainText('Origins of the term');
+      await expect(tocLinks.nth(1)).toContainText('Core pillars');
+      await expect(tocLinks.nth(2)).toContainText('Critiques and open questions');
+    });
+
+    test('TOC links point to heading anchors that exist in the article', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      const desktopToc = tocNav.locator('.wiki-toc__desktop');
+      const tocLinks = desktopToc.locator('.wiki-toc__link');
+      const count = await tocLinks.count();
+
+      for (let i = 0; i < count; i++) {
+        const href = await tocLinks.nth(i).getAttribute('href');
+        expect(href).toBeTruthy();
+        // href is like "#origins-of-the-term" — the target element should exist
+        const targetId = href!.replace('#', '');
+        const target = page.locator(`[id="${targetId}"]`);
+        await expect(target).toBeVisible();
+      }
+    });
+
+    test('article headings have id attributes for anchor navigation', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const article = page.locator('article.wiki-article');
+      const h2s = article.locator('h2.wiki-article__h2');
+      const count = await h2s.count();
+      expect(count).toBe(3);
+
+      for (let i = 0; i < count; i++) {
+        const id = await h2s.nth(i).getAttribute('id');
+        expect(id).toBeTruthy();
+        expect(id!.length).toBeGreaterThan(0);
+      }
+    });
+
+    test('mobile TOC is collapsible via details/summary', async ({ page }) => {
+      // Set a narrow viewport to trigger mobile layout
+      await page.setViewportSize({ width: 375, height: 812 });
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const details = page.locator('.wiki-toc__mobile');
+      await expect(details).toBeVisible();
+
+      // Summary toggle is visible and contains "Table of contents"
+      const summary = details.locator('.wiki-toc__toggle');
+      await expect(summary).toBeVisible();
+      await expect(summary).toContainText('Table of contents');
+
+      // Initially collapsed — the list inside is not visible
+      const list = details.locator('.wiki-toc__list');
+      await expect(list).not.toBeVisible();
+
+      // Click summary to expand
+      await summary.click();
+      await expect(list).toBeVisible();
+
+      // Click again to collapse
+      await summary.click();
+      await expect(list).not.toBeVisible();
+    });
+
+    test('TOC renders for all articles with enough headings', async ({ page }) => {
+      // energy-abundance also has 3 sections → TOC should render
+      await page.goto(`${WIKI}/a/energy-abundance`);
+
+      const tocNav = page.getByRole('navigation', { name: /table of contents/i });
+      await expect(tocNav).toBeVisible();
+
+      const desktopToc = tocNav.locator('.wiki-toc__desktop');
+      const tocLinks = desktopToc.locator('.wiki-toc__link');
+      expect(await tocLinks.count()).toBe(3);
+    });
+  });
 });

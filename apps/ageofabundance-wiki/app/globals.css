@@ -705,6 +705,164 @@ video {
   text-decoration-color: var(--wiki-ink-muted);
 }
 
+/* ─── Article layout (two-column with TOC) ────────────────────── */
+
+.wiki-article-layout {
+  max-width: var(--wiki-measure);
+  margin: 0 auto;
+}
+
+/*
+ * On wide screens with TOC, switch to a two-column layout:
+ * - Sidebar (TOC) on the right, sticky
+ * - Article body fills the main column
+ */
+@media (min-width: 960px) {
+  .wiki-article-layout--has-toc {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, var(--wiki-measure)) 14rem;
+    gap: clamp(2rem, 1.5rem + 2vw, 4rem);
+    justify-content: center;
+  }
+
+  .wiki-article-layout--has-toc .wiki-article {
+    max-width: var(--wiki-measure);
+    margin: 0;
+  }
+
+  .wiki-article-layout__sidebar {
+    order: 1;
+  }
+
+  .wiki-article-layout--has-toc .wiki-article {
+    order: 0;
+  }
+}
+
+/* ─── Table of Contents ───────────────────────────────────────── */
+
+/* Heading scroll offset to clear any top chrome */
+.wiki-article__h2[id] {
+  scroll-margin-top: 2rem;
+}
+
+/* Mobile: show the <details>/<summary> disclosure */
+.wiki-toc__mobile {
+  display: block;
+  margin-bottom: var(--wiki-stack);
+  border: 1px solid var(--wiki-rule);
+  border-radius: var(--wiki-radius);
+  background: var(--wiki-surface-raised);
+}
+
+.wiki-toc__desktop {
+  display: none;
+}
+
+.wiki-toc__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  font-family: var(--wiki-font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--wiki-ink);
+  cursor: pointer;
+  list-style: none;
+}
+
+/* Custom disclosure marker */
+.wiki-toc__toggle::-webkit-details-marker {
+  display: none;
+}
+
+.wiki-toc__toggle::before {
+  content: '▸';
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--wiki-ink-faint);
+  transition: transform 150ms ease;
+}
+
+details[open] > .wiki-toc__toggle::before {
+  transform: rotate(90deg);
+}
+
+.wiki-toc__body {
+  padding: 0 1rem 0.75rem;
+}
+
+/* Desktop: sticky sidebar */
+@media (min-width: 960px) {
+  .wiki-toc__mobile {
+    display: none;
+  }
+
+  .wiki-toc__desktop {
+    display: block;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+}
+
+.wiki-toc__heading {
+  font-family: var(--wiki-font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wiki-ink-faint);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--wiki-rule);
+}
+
+.wiki-toc__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wiki-toc__item {
+  margin: 0;
+}
+
+.wiki-toc__link {
+  display: block;
+  padding: 0.3125rem 0.625rem;
+  font-family: var(--wiki-font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--wiki-ink-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.wiki-toc__link:hover {
+  color: var(--wiki-accent-ink);
+  background: var(--wiki-surface-sunken);
+}
+
+.wiki-toc__link--active {
+  color: var(--wiki-accent-ink);
+  border-left-color: var(--wiki-accent);
+  font-weight: 500;
+}
+
+/* Smooth scrolling only for users who haven't reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* ─── Motion-safety ────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

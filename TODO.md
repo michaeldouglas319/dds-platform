@@ -26,9 +26,10 @@ Each item below is scoped to be shippable in a single focused session.
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
   _Shipped: see session log below._
-- [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
+- [x] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
+  _Shipped: see session log below._
 - [ ] **Backlinks panel** — at article footer, list every article that
   links to the current page. Built by inverting the wiki-link graph at
   build time.
@@ -158,3 +159,27 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   article pages still 150 B first-load JS (no client cost).
   Shipped as commit `e3510e07dcbbf4d59b9277ada5c86030c0e40657`.
+- 2026-04-12 — **Table of contents** shipped. New `content/wiki-toc.js`
+  module extracts heading entries from article paragraphs with stable slug
+  IDs (collision-safe via suffix numbering). A new `TocTracker` client
+  component (`components/toc-tracker.jsx`) provides:
+  (1) on wide screens (≥960px), a sticky sidebar with active-heading
+  tracking via IntersectionObserver (`rootMargin: "0px 0px -70% 0px"`,
+  bottom-of-page edge-case handled via passive scroll listener);
+  (2) on mobile, a native `<details>/<summary>` disclosure widget
+  requiring zero custom JS for expand/collapse. Active link receives
+  `aria-current="true"` and a left-border accent highlight.
+  `wiki-article.jsx` now wraps in a `wiki-article-layout` grid container
+  that switches from single-column to `[article | toc]` at ≥960px. All
+  `<h2>` headings receive stable `id` attributes for anchor links. TOC
+  only renders when `meta.wiki.toc !== 'off'` AND there are ≥2 headings.
+  CSS uses only custom properties; `scroll-behavior: smooth` is gated by
+  `@media (prefers-reduced-motion: no-preference)`; headings have
+  `scroll-margin-top: 2rem`. All transitions guarded by reduced-motion.
+  12 new vitest unit tests cover slugification, entry extraction, empty
+  states, and duplicate-heading deduplication. 5 new Playwright E2E tests
+  cover TOC landmark presence, link-to-heading mapping, heading IDs,
+  mobile details/summary toggle, and cross-article rendering. Backward
+  compatibility: `@dds/types` untouched; existing routes unchanged;
+  no changes to `@dds/renderer` core.
+  Shipped as commit `364a122`.
