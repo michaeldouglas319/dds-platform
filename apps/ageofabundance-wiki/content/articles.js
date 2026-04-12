@@ -212,3 +212,22 @@ export function listAllTags(deriveWikiMeta) {
   }
   return [...tagSet].sort();
 }
+
+/**
+ * Return articles whose normalized tags include `tag`, sorted by
+ * `meta.wiki.lastUpdatedISO` descending (newest first).
+ *
+ * @param {string} tag  Normalized tag to filter by.
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {{ article: WikiArticle, meta: ReturnType<typeof import('../content/wiki-meta.js').deriveWikiMeta> }[]}
+ */
+export function listArticlesByTag(tag, deriveWikiMeta) {
+  return articles
+    .map((article) => ({ article, meta: deriveWikiMeta(article) }))
+    .filter((entry) => entry.meta.tags.includes(tag))
+    .sort((a, b) => {
+      const da = a.meta.lastUpdatedISO ?? '';
+      const db = b.meta.lastUpdatedISO ?? '';
+      return db.localeCompare(da);
+    });
+}

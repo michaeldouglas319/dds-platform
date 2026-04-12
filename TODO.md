@@ -46,8 +46,9 @@ Each item below is scoped to be shippable in a single focused session.
 
 ## P0 — Navigation & discovery
 
-- [ ] **Categories** — tag pages at `/t/[tag]` listing all articles with
-  that tag; tag chips in article header.
+- [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
+  that tag; tag chips in article header link to tag pages.
+  _Shipped: see session log below._
 - [ ] **Full-text search** — evaluate Pagefind vs Orama vs FlexSearch.
   Target: static-indexed, <150kb bundle, keyboard-driven combobox,
   AA-compliant results listbox.
@@ -205,3 +206,24 @@ Each item below is scoped to be shippable in a single focused session.
   no regressions. Backward compatibility: `@dds/types` untouched;
   existing routes unchanged; article pages still zero client JS.
   Shipped as commit `24332fa7a8189f465709705166b78cad074ca267`.
+- 2026-04-12 — **Categories (tag pages)** shipped. New `/t/[tag]` route
+  statically generated via `generateStaticParams` from `listAllTags()`.
+  Each tag page shows a heading with the tag name, article count, a grid
+  of matching `ArticleCard` components sorted by `lastUpdatedISO`
+  descending, and a full all-tags navigation bar where the current tag
+  is highlighted with `aria-current="page"`. Breadcrumb trail:
+  `home → All articles → Tag: {tag}`. New `listArticlesByTag(tag,
+  deriveWikiMeta)` helper in `content/articles.js` filters + sorts in
+  one pass. Tag chips in article headers (`wiki-article.jsx`) are now
+  `<a>` links to `/t/{tag}` instead of plain `<li>` text — hover shows
+  accent border, existing pill styling preserved. CSS additions:
+  `.wiki-tag-page__*` classes for kicker, related-tags nav, tag chips
+  (pill buttons with 44px min-height), and footer — all using CSS custom
+  properties only. 5 new vitest unit tests for `listArticlesByTag`
+  (match, empty, sort order, entry shape, `listAllTags` coverage). 5
+  new Playwright E2E tests: tag page heading + count + articles, all-tags
+  nav with current highlighted, cross-tag navigation, article header tag
+  links to `/t/`, 44px touch-target minimum. All 29 wiki E2E + 141
+  unit tests pass, no regressions. Backward compatibility: `@dds/types`
+  untouched; existing routes unchanged; zero client JS on tag pages.
+  Shipped as commit `de02177185c9fe8a2dd57c9edef44bad6f9bbd41`.
