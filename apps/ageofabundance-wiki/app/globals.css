@@ -673,6 +673,38 @@ video {
   font-variant-numeric: tabular-nums;
 }
 
+/* ─── Wiki-links ─────────────────────────────────────────────────── */
+
+.wiki-link {
+  color: var(--wiki-accent-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--wiki-accent);
+  border-radius: 2px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+
+.wiki-link:hover {
+  color: var(--wiki-accent);
+  text-decoration-color: currentColor;
+}
+
+.wiki-link--broken {
+  color: var(--wiki-ink-faint);
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--wiki-ink-faint);
+  cursor: help;
+}
+
+.wiki-link--broken:hover {
+  color: var(--wiki-ink-muted);
+  text-decoration-color: var(--wiki-ink-muted);
+}
+
 /* ─── Motion-safety ────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

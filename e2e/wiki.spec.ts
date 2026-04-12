@@ -113,6 +113,83 @@ test.describe('Age of Abundance wiki', () => {
     await expect(skip).toContainText(/skip to main content/i);
   });
 
+  test.describe('Wiki-links', () => {
+    test('resolved wiki-links render as internal links', async ({ page }) => {
+      // The "age-of-abundance" article links to [[Energy Abundance]] and
+      // [[Coordination Abundance]] via wiki-link syntax in the body text.
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      await expect(body).toBeVisible();
+
+      // Resolved links render as <a class="wiki-link" href="/a/...">
+      const wikiLinks = body.locator('a.wiki-link');
+      expect(await wikiLinks.count()).toBeGreaterThan(0);
+
+      // Check one specific resolved link: [[Energy Abundance]]
+      const energyLink = body.locator('a.wiki-link[href="/a/energy-abundance"]');
+      await expect(energyLink).toBeVisible();
+      await expect(energyLink).toContainText('Energy Abundance');
+    });
+
+    test('aliased wiki-links render with display text', async ({ page }) => {
+      // [[Coordination Abundance|coordination]] in age-of-abundance lede
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const lede = page.locator('.wiki-article__lede');
+      const aliasedLink = lede.locator('a.wiki-link[href="/a/coordination-abundance"]');
+      await expect(aliasedLink).toBeVisible();
+      await expect(aliasedLink).toContainText('coordination');
+    });
+
+    test('broken wiki-links render with broken visual state', async ({ page }) => {
+      // [[Governance Protocols|protocols]] in age-of-abundance is broken
+      // (no article with slug "governance-protocols" exists).
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      const brokenLink = body.locator('.wiki-link--broken');
+      await expect(brokenLink.first()).toBeVisible();
+      await expect(brokenLink.first()).toContainText('protocols');
+
+      // Broken links have a title tooltip explaining the issue
+      await expect(brokenLink.first()).toHaveAttribute(
+        'title',
+        /page not found/i,
+      );
+
+      // Broken links are aria-disabled
+      await expect(brokenLink.first()).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    test('wiki-link navigates to correct article on click', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const body = page.locator('.wiki-article__body');
+      const energyLink = body.locator('a.wiki-link[href="/a/energy-abundance"]');
+      await energyLink.click();
+
+      await page.waitForURL(`${WIKI}/a/energy-abundance`);
+      await expect(
+        page.getByRole('heading', { level: 1, name: /energy abundance/i }),
+      ).toBeVisible();
+    });
+
+    test('articles with wiki-links still show correct word count and reading time', async ({ page }) => {
+      // Verify that wiki-link syntax doesn't inflate word count
+      // (the raw [[...]] brackets should be stripped by deriveWikiMeta)
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const metaList = page.locator('.wiki-article__meta');
+      await expect(metaList).toContainText(/\d+\s*min/);
+
+      const wordCountEl = metaList.locator('.wiki-article__word-count');
+      const text = (await wordCountEl.textContent()) ?? '';
+      const count = Number(text.replace(/,/g, ''));
+      expect(count).toBeGreaterThan(100);
+    });
+  });
+
   test.describe('Article index (/a)', () => {
     test('renders all articles sorted newest-first with article count', async ({ page }) => {
       await page.goto(`${WIKI}/a`);

@@ -17,6 +17,7 @@
  */
 
 import { deriveWikiMeta } from '../content/wiki-meta.js';
+import { WikiText } from './wiki-text.jsx';
 
 export function WikiArticle({ article }) {
   const title = article?.subject?.title;
@@ -102,7 +103,9 @@ export function WikiArticle({ article }) {
       </header>
 
       <div className="wiki-article__body">
-        {body && <p className="wiki-article__lede">{body}</p>}
+        {body && (
+          <WikiText text={body} as="p" className="wiki-article__lede" />
+        )}
 
         {paragraphs.map((p, i) => (
           <section key={i} className="wiki-article__section">
@@ -110,7 +113,7 @@ export function WikiArticle({ article }) {
               <h2 className="wiki-article__h2">{p.subtitle}</h2>
             )}
             {p.description && (
-              <p className="wiki-article__p">{p.description}</p>
+              <WikiText text={p.description} as="p" className="wiki-article__p" />
             )}
           </section>
         ))}

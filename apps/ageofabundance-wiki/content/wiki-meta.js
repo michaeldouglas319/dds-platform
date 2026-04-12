@@ -53,6 +53,8 @@
  * the silent-reading average rather than a faster skim rate because wiki
  * articles target comprehension, not skim.
  */
+import { stripWikiLinks } from './wiki-links.js';
+
 export const WORDS_PER_MINUTE = 238;
 
 /**
@@ -75,7 +77,7 @@ export function countWordsInArticle(article) {
     }
   }
   if (parts.length === 0) return 0;
-  return countWords(parts.join(' '));
+  return countWords(stripWikiLinks(parts.join(' ')));
 }
 
 /**
