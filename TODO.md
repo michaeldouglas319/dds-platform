@@ -26,9 +26,10 @@ Each item below is scoped to be shippable in a single focused session.
   rewriter that resolves to internal `/a/<slug>` links at build time,
   surfaces broken-link warnings, and supports a "broken link" visual state.
   _Shipped: see session log below._
-- [ ] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
+- [x] **Table of contents** — auto-generated from `<h2>`/`<h3>` inside
   article body, sticky sidebar on wide screens, collapsible on mobile.
   Anchor scroll must respect `prefers-reduced-motion`.
+  _Shipped: see session log below._
 - [ ] **Backlinks panel** — at article footer, list every article that
   links to the current page. Built by inverting the wiki-link graph at
   build time.
@@ -158,3 +159,26 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   article pages still 150 B first-load JS (no client cost).
   Shipped as commit `e3510e07dcbbf4d59b9277ada5c86030c0e40657`.
+- 2026-04-12 — **Table of contents** shipped. New `content/wiki-toc.js`
+  module provides `slugifyHeading()` and `buildTocEntries()` utilities
+  for deterministic anchor ID generation with duplicate-heading dedup.
+  New `components/wiki-toc.jsx` RSC renders a `<nav aria-label="Table
+  of contents">` with native `<details>/<summary>` disclosure — zero
+  client JS. On mobile, the TOC starts expanded and is user-collapsible;
+  on wide screens (≥72rem), CSS Grid places it as a sticky sidebar
+  alongside the article body. Modified `wiki-article.jsx` stamps matching
+  `id` attributes on `<h2>` headings, wraps body+TOC in a
+  `.wiki-article__content` grid container, and applies a
+  `.wiki-article--has-toc` modifier that widens the article to
+  `calc(72ch + 16rem)` on desktop. CSS additions: `scroll-behavior:
+  smooth` on `<html>` (guarded by the existing `prefers-reduced-motion`
+  rule), `scroll-margin-top: 1.5rem` on anchored headings, numbered
+  TOC links with CSS counters, 44px touch targets. Respects
+  `meta.wiki.toc === 'off'` to suppress per article. 10 new vitest
+  unit tests for slug/buildTocEntries edge cases; 5 new Playwright E2E
+  tests covering: nav landmark + entry count, anchor-to-heading matching,
+  click navigation, details disclosure state, scroll-margin offset.
+  All 19 wiki E2E + 131 unit tests pass, no regressions. Backward
+  compatibility: `@dds/types` untouched; existing routes unchanged;
+  article pages still zero client JS.
+  Shipped as commit `a8024c0a87be10ef6f7c8ca5fe3a550ccf702161`.
