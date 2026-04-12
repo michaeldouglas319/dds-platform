@@ -121,8 +121,13 @@ export function WikiArticle({ article }) {
               <dd>
                 <ul className="wiki-article__tags" aria-label="Article tags">
                   {meta.tags.map((tag) => (
-                    <li key={tag} className="wiki-article__tag">
-                      {tag}
+                    <li key={tag}>
+                      <a
+                        href={`/t/${encodeURIComponent(tag)}`}
+                        className="wiki-article__tag"
+                      >
+                        {tag}
+                      </a>
                     </li>
                   ))}
                 </ul>

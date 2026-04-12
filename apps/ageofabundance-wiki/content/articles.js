@@ -196,6 +196,27 @@ export function listArticlesSortedByDate(deriveWikiMeta) {
 }
 
 /**
+ * Return articles matching a given tag, sorted by `meta.wiki.lastUpdatedISO`
+ * descending (newest first). Tag comparison is case-insensitive after
+ * normalization (tags are already lowercased by deriveWikiMeta).
+ *
+ * @param {string} tag
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {{ article: WikiArticle, meta: ReturnType<typeof import('../content/wiki-meta.js').deriveWikiMeta> }[]}
+ */
+export function listArticlesByTag(tag, deriveWikiMeta) {
+  const normalized = tag.toLowerCase().trim();
+  return articles
+    .map((article) => ({ article, meta: deriveWikiMeta(article) }))
+    .filter((entry) => entry.meta.tags.includes(normalized))
+    .sort((a, b) => {
+      const da = a.meta.lastUpdatedISO ?? '';
+      const db = b.meta.lastUpdatedISO ?? '';
+      return db.localeCompare(da);
+    });
+}
+
+/**
  * Collect every unique, normalized tag across all articles.
  * Returns sorted alphabetically for a stable UI order.
  *

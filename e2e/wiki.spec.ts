@@ -443,4 +443,117 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Tag category pages (/t/[tag])', () => {
+    test('renders category page with articles matching the tag', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      // Kicker + title
+      const kicker = page.locator('.wiki-category__kicker');
+      await expect(kicker).toBeVisible();
+      await expect(kicker).toContainText('Tag');
+
+      const h1 = page.getByRole('heading', { level: 1 });
+      await expect(h1).toBeVisible();
+      await expect(h1).toContainText('governance');
+
+      // Article count
+      const count = page.locator('.wiki-category__count');
+      await expect(count).toBeVisible();
+      await expect(count).toContainText(/\d+ articles?/);
+
+      // At least one article card
+      const cards = page.locator('.article-card');
+      expect(await cards.count()).toBeGreaterThan(0);
+    });
+
+    test('breadcrumb navigates home → all articles → tag', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
+      await expect(breadcrumb).toBeVisible();
+
+      // Has home link, "All articles" link, and current tag
+      const homeLink = breadcrumb.locator('a[href="/"]');
+      await expect(homeLink).toBeVisible();
+
+      const allLink = breadcrumb.locator('a[href="/a"]');
+      await expect(allLink).toBeVisible();
+
+      const current = breadcrumb.locator('[aria-current="page"]');
+      await expect(current).toContainText(/tag:\s*governance/i);
+    });
+
+    test('"All tags" nav lists all tags with current highlighted', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const allTagsNav = page.getByRole('navigation', { name: /all tags/i });
+      await expect(allTagsNav).toBeVisible();
+
+      // The current tag chip is highlighted
+      const currentChip = allTagsNav.locator('.wiki-category__tag-chip--current');
+      await expect(currentChip).toBeVisible();
+      await expect(currentChip).toContainText('governance');
+      await expect(currentChip).toHaveAttribute('aria-current', 'page');
+
+      // Other tags are present as links
+      const allChips = allTagsNav.locator('.wiki-category__tag-chip');
+      expect(await allChips.count()).toBeGreaterThan(1);
+    });
+
+    test('clicking a tag chip navigates to its category page', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const allTagsNav = page.getByRole('navigation', { name: /all tags/i });
+      // Click a non-current tag chip
+      const otherChip = allTagsNav.locator('.wiki-category__tag-chip:not(.wiki-category__tag-chip--current)').first();
+      const tagText = (await otherChip.textContent())?.trim() ?? '';
+      expect(tagText.length).toBeGreaterThan(0);
+
+      await otherChip.click();
+      await page.waitForURL(new RegExp(`/t/${tagText}`));
+
+      // New page shows the selected tag
+      await expect(
+        page.getByRole('heading', { level: 1, name: new RegExp(tagText, 'i') }),
+      ).toBeVisible();
+    });
+
+    test('article header tag chips link to category pages', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tags = page.locator('.wiki-article__tag');
+      expect(await tags.count()).toBeGreaterThan(0);
+
+      // Tags are now links (anchor elements)
+      const firstTag = tags.first();
+      const tagName = (await firstTag.textContent())?.trim() ?? '';
+      const href = await firstTag.getAttribute('href');
+      expect(href).toBe(`/t/${tagName}`);
+
+      // Click navigates to the category page
+      await firstTag.click();
+      await page.waitForURL(new RegExp(`/t/${tagName}`));
+      await expect(
+        page.getByRole('heading', { level: 1, name: new RegExp(tagName, 'i') }),
+      ).toBeVisible();
+    });
+
+    test('category page has 44px minimum touch targets on tag chips', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const allTagsNav = page.getByRole('navigation', { name: /all tags/i });
+      const firstChip = allTagsNav.locator('.wiki-category__tag-chip').first();
+      await expect(firstChip).toBeVisible();
+
+      const box = await firstChip.boundingBox();
+      expect(box).toBeTruthy();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    });
+
+    test('unknown tag returns 404', async ({ page }) => {
+      const response = await page.goto(`${WIKI}/t/nonexistent-tag-xyz`);
+      expect(response?.status()).toBe(404);
+    });
+  });
 });
