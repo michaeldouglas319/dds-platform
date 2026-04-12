@@ -443,4 +443,120 @@ test.describe('Age of Abundance wiki', () => {
       expect(await cards.count()).toBe(3);
     });
   });
+
+  test.describe('Tags index (/t)', () => {
+    test('renders all tags with article counts', async ({ page }) => {
+      await page.goto(`${WIKI}/t`);
+
+      // Page heading and breadcrumb
+      await expect(
+        page.getByRole('heading', { level: 1, name: /all tags/i }),
+      ).toBeVisible();
+      await expect(page.getByRole('navigation', { name: /breadcrumb/i })).toBeVisible();
+
+      // Tag count summary
+      const lede = page.locator('.wiki-tags-index__lede');
+      await expect(lede).toBeVisible();
+      await expect(lede).toContainText(/\d+ topic tags/);
+
+      // Tag cards rendered as a list
+      const tagCards = page.locator('.wiki-tag-card');
+      expect(await tagCards.count()).toBeGreaterThan(0);
+
+      // Each card has a name and a count badge
+      const firstCard = tagCards.first();
+      await expect(firstCard.locator('.wiki-tag-card__name')).toBeVisible();
+      await expect(firstCard.locator('.wiki-tag-card__count')).toBeVisible();
+    });
+
+    test('tag cards link to /t/[tag] pages', async ({ page }) => {
+      await page.goto(`${WIKI}/t`);
+
+      const firstCard = page.locator('.wiki-tag-card').first();
+      const href = await firstCard.getAttribute('href');
+      expect(href).toMatch(/^\/t\/.+/);
+
+      await firstCard.click();
+      await page.waitForURL(new RegExp(`${WIKI}/t/.+`));
+
+      // The tag page has a heading
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    });
+
+    test('tag cards meet 44px touch target minimum', async ({ page }) => {
+      await page.goto(`${WIKI}/t`);
+
+      const firstCard = page.locator('.wiki-tag-card').first();
+      await expect(firstCard).toBeVisible();
+
+      const box = await firstCard.boundingBox();
+      expect(box).toBeTruthy();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+    });
+  });
+
+  test.describe('Tag page (/t/[tag])', () => {
+    test('renders articles filtered by tag with correct count', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      // Page heading shows the tag name
+      await expect(
+        page.getByRole('heading', { level: 1, name: /governance/i }),
+      ).toBeVisible();
+
+      // Breadcrumb trail: Home > All tags > Governance
+      const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
+      await expect(breadcrumb).toBeVisible();
+      await expect(breadcrumb).toContainText(/all tags/i);
+
+      // Article count in lede text
+      const lede = page.locator('.wiki-tag-page__lede');
+      await expect(lede).toBeVisible();
+      await expect(lede).toContainText(/\d+ articles? tagged/);
+
+      // Article cards are shown
+      const cards = page.locator('.article-card');
+      const cardCount = await cards.count();
+      expect(cardCount).toBeGreaterThan(0);
+      // "governance" tag: age-of-abundance + coordination-abundance = 2
+      expect(cardCount).toBe(2);
+    });
+
+    test('tag page has back link to all tags', async ({ page }) => {
+      await page.goto(`${WIKI}/t/governance`);
+
+      const backLink = page.locator('.wiki-tag-page__back');
+      await expect(backLink).toBeVisible();
+      await expect(backLink).toContainText(/all tags/i);
+
+      await backLink.click();
+      await page.waitForURL(`${WIKI}/t`);
+      await expect(
+        page.getByRole('heading', { level: 1, name: /all tags/i }),
+      ).toBeVisible();
+    });
+
+    test('article tag chips in article header link to /t/[tag]', async ({ page }) => {
+      await page.goto(`${WIKI}/a/age-of-abundance`);
+
+      const tagChips = page.locator('a.wiki-article__tag');
+      expect(await tagChips.count()).toBeGreaterThan(0);
+
+      // Each tag chip links to /t/{tag}
+      const firstChip = tagChips.first();
+      const href = await firstChip.getAttribute('href');
+      expect(href).toMatch(/^\/t\/.+/);
+
+      // Click navigates to the tag page
+      const chipText = (await firstChip.textContent()) ?? '';
+      await firstChip.click();
+      await page.waitForURL(new RegExp(`${WIKI}/t/.+`));
+      await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    });
+
+    test('unknown tag 404s', async ({ page }) => {
+      const response = await page.goto(`${WIKI}/t/nonexistent-tag-xyz`);
+      expect(response?.status()).toBe(404);
+    });
+  });
 });

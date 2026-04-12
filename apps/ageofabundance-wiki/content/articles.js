@@ -212,3 +212,42 @@ export function listAllTags(deriveWikiMeta) {
   }
   return [...tagSet].sort();
 }
+
+/**
+ * Return articles that carry a specific tag, sorted newest-first.
+ *
+ * @param {string} tag — normalized tag to filter by
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {{ article: WikiArticle, meta: ReturnType<typeof import('../content/wiki-meta.js').deriveWikiMeta> }[]}
+ */
+export function listArticlesForTag(tag, deriveWikiMeta) {
+  return articles
+    .map((article) => ({ article, meta: deriveWikiMeta(article) }))
+    .filter((entry) => entry.meta.tags.includes(tag))
+    .sort((a, b) => {
+      const da = a.meta.lastUpdatedISO ?? '';
+      const db = b.meta.lastUpdatedISO ?? '';
+      return db.localeCompare(da);
+    });
+}
+
+/**
+ * Return every tag with its article count, sorted alphabetically.
+ * Used by the tags index page.
+ *
+ * @param {import('../content/wiki-meta.js').deriveWikiMeta} deriveWikiMeta
+ * @returns {{ tag: string, count: number }[]}
+ */
+export function listTagsWithCounts(deriveWikiMeta) {
+  /** @type {Map<string, number>} */
+  const counts = new Map();
+  for (const article of articles) {
+    const meta = deriveWikiMeta(article);
+    for (const tag of meta.tags) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => a.tag.localeCompare(b.tag));
+}
