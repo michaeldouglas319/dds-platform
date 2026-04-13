@@ -15,6 +15,7 @@
     "@dds/renderer": "workspace:*",
     "@dds/tailwind-config": "workspace:*",
     "@dds/types": "workspace:*",
+    "@dds/wiki-data": "workspace:*",
     "next": "^14.2.0"
   },
   "devDependencies": {

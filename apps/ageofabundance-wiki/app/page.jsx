@@ -1,4 +1,4 @@
-import { listFeaturedArticles } from '../content/articles.js';
+import { listFeaturedArticles } from '@dds/wiki-data/articles';
 import { ArticleCard } from '../components/article-card.jsx';
 
 export const metadata = {
