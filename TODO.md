@@ -94,6 +94,62 @@ Each item below is scoped to be shippable in a single focused session.
 - [ ] **OG image generation** — per-article dynamic OG cards via
   `@vercel/og`.
 
+---
+
+## Strategic Tracks — Renderer Unification, Visual Vocabulary, Chat
+
+### Track A — Renderer Unification
+
+Goal: Every consumer app renders through @dds/renderer + site.config.json.
+
+- [x] **A1: Wiki renderer plugins** — wrap existing wiki components
+  (WikiArticle, ArticleCard, WikiToc, WikiBacklinks, WikiText) as
+  @dds/renderer registry entries: `wiki-article`, `wiki-card-grid`,
+  `wiki-index`, `wiki-toc`, `wiki-backlinks`. Extended registry at
+  `renderers/wiki-registry.js` preserves all 13 default layout keys
+  and adds 5 wiki-specific keys. 28 new vitest tests.
+  _Shipped: see session log below._
+- [ ] **A2: UniversalSection schema extensions** — formalize `meta.wiki`,
+  `content.wikiLinks` in @dds/types as optional typed fields. Additive
+  only; existing sections must still parse.
+- [ ] **A3: Convert wiki home page** to render via SectionBatchRenderer
+  + site.config.json.
+- [ ] **A4: Convert wiki article page** (`/a/[slug]`) to render via
+  SectionBatchRenderer.
+- [ ] **A5: Convert wiki article index** (`/a`) to render via
+  SectionBatchRenderer.
+- [ ] **A6: Convert stub apps** (info, net, others) to site.config.json
+  + SectionBatchRenderer.
+- [ ] **A7: Extract shared wiki layout** (breadcrumbs, metadata bar,
+  footer) into a shared renderer plugin.
+
+### Track B — Visual Vocabulary & Fluid Navigation
+
+- [ ] **B1: VariantSwitcher** — strip of variant thumbnails for cycling
+  through layout variations of the same section data.
+- [ ] **B2: Alternate layout variants** for existing renderers
+  (hero-minimal/cinematic/split, text-prose/columns/highlight,
+  stats-radial/ticker).
+- [ ] **B3: Drill-down mechanics** — in-place card/section expansion
+  via View Transitions API or Framer Motion layout animations.
+- [ ] **B4: Section-level theme variant picker** — floating pill selector.
+- [ ] **B5: Presentation mode** — full-screen, keyboard-navigable
+  section-by-section walkthrough.
+- [ ] **B6: Micro-interactions** — hover reveals, parallax depth,
+  scroll-triggered entrances (behind prefers-reduced-motion).
+
+### Track C — Chat Provider Interface
+
+- [ ] **C1: ChatProvider interface** in @dds/types.
+- [ ] **C2: @dds/chat package** — ChatProvider, useChatContext, ChatPanel.
+- [ ] **C3: Wire ChatProvider** to current page's UniversalSection data.
+- [ ] **C4: ChatTrigger renderer plugin**.
+- [ ] **C5: Vercel AI SDK integration**.
+- [ ] **C6: Chat-to-navigation** — deep links in chat responses.
+- [ ] **C7: Chat memory** across sections/navigation.
+
+---
+
 ## Schema extensions (proposed, deferred)
 
 - `meta.wiki` — `{ lastUpdatedISO, authors[], readingTimeMinutes,
@@ -265,3 +321,31 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   search adds ~2KB client JS to layout only.
   Shipped as commit `a7d7efaa`.
+- 2026-04-13 — **Track A1: Wiki renderer plugins** shipped. Created 5
+  renderer plugin components that wrap existing wiki components as
+  @dds/renderer registry entries: `WikiArticleRenderer` (wraps
+  `WikiArticle`), `WikiCardGridRenderer` (renders `ArticleCard` grid
+  from `section.children`), `WikiIndexRenderer` (loads all articles +
+  tags, wraps `TagFilter`), `WikiTocRenderer` (builds TOC entries from
+  `content.paragraphs`, wraps `WikiToc`), `WikiBacklinksRenderer`
+  (resolves target slug from `meta.wiki.targetSlug` or `section.id`,
+  wraps `WikiBacklinks`). New `wiki-registry.js` extends
+  `defaultRegistry` with 5 wiki layout keys while preserving all 13
+  default keys. `wikiEntries` standalone map exported for custom
+  registry composition. Each plugin follows the `RendererComponent`
+  contract: `({ section: UniversalSection }) => ReactNode`. Barrel
+  export at `renderers/index.js`. Vitest config updated with
+  `esbuild: { jsx: 'automatic' }` to support JSX in `.jsx` test files
+  without explicit React imports. 28 new vitest tests cover: registry
+  structure (5 wiki keys present, 13 default keys preserved, no key
+  collisions), `wikiEntries` shape (5 entries, metadata completeness),
+  and component rendering for all 5 renderers (article title/headings/
+  category/metadata, card grid from children + empty states, index
+  title/lede/defaults, TOC entries + navigation landmark + empty
+  states, backlinks with targetSlug + fallback + empty state). All 193
+  vitest tests pass (28 new + 165 existing), zero regressions. E2E
+  tests not runnable in sandbox (Playwright browser binary unavailable)
+  but no code paths in existing pages were modified. Backward
+  compatibility: `@dds/types` untouched; existing pages continue to
+  use direct component imports; new renderers are opt-in via
+  `wikiRegistry`.
