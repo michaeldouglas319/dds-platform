@@ -25,8 +25,12 @@
  * @property {{ wiki: WikiMeta }} meta
  */
 
+import { expandedArticles } from './articles-expanded.js';
+import { futureArticles } from './articles-future.js';
+import { innovatorArticles } from './articles-innovators.js';
+
 /** @type {WikiArticle[]} */
-export const articles = [
+const seedArticles = [
   {
     id: 'age-of-abundance',
     type: 'section',
@@ -161,6 +165,14 @@ export const articles = [
       },
     },
   },
+];
+
+/** @type {WikiArticle[]} */
+export const articles = [
+  ...seedArticles,
+  ...expandedArticles,
+  ...futureArticles,
+  ...innovatorArticles,
 ];
 
 /** Look up an article by its id (slug). */
