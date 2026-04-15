@@ -28,6 +28,10 @@
 import { expandedArticles } from './articles-expanded.js';
 import { futureArticles } from './articles-future.js';
 import { innovatorArticles } from './articles-innovators.js';
+import { conflictEconomicsArticles } from './articles-conflict-economics.js';
+import { militaryInnovationArticles } from './articles-military-innovation.js';
+import { contemporaryConflictArticles } from './articles-contemporary-conflicts.js';
+import { peaceInfrastructureArticles } from './articles-peace-infrastructure.js';
 
 /** @type {WikiArticle[]} */
 const seedArticles = [
@@ -173,6 +177,10 @@ export const articles = [
   ...expandedArticles,
   ...futureArticles,
   ...innovatorArticles,
+  ...conflictEconomicsArticles,
+  ...militaryInnovationArticles,
+  ...contemporaryConflictArticles,
+  ...peaceInfrastructureArticles,
 ];
 
 /** Look up an article by its id (slug). */
