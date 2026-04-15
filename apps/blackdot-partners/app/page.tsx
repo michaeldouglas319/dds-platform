@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { PartnershipPitch } from '@dds/ui';
 import { SignIn, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { AppChip, getCuneiformByTLD, extractTLD } from '@dds/icons';
 import { DOMAINS } from '@dds/config/domains';
@@ -122,19 +121,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* ── Registration (hidden once signed in) ─── */}
-      <SignedOut>
-        <div id="partner">
-          <PartnershipPitch
-            headline="Join the Wait List"
-            subheadline="Or show your interest by registering for a Partnership."
-            stats={[]}
-            tiers={[]}
-            registerEndpoint="/api/register-partner"
-          />
-        </div>
-      </SignedOut>
-
       {/* ── Sign in / account ─── */}
       <div
         id="sign-in"
@@ -205,19 +191,6 @@ export default function Home() {
                     <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'rgba(0,0,0,0.7)' }}>
                       {d.label}
                     </span>
-                    {d.status && (
-                      <span
-                        style={{
-                          fontSize: '0.65rem',
-                          fontWeight: 600,
-                          letterSpacing: '0.05em',
-                          textTransform: 'uppercase',
-                          color: d.status === 'live' ? '#059669' : 'rgba(0,0,0,0.3)',
-                        }}
-                      >
-                        {d.status === 'live' ? 'Live' : 'Soon'}
-                      </span>
-                    )}
                   </a>
                 );
               })}
