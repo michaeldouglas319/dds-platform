@@ -7,9 +7,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "@dds/auth": "workspace:*",
     "@dds/config": "workspace:*",
     "@dds/hooks": "workspace:*",
     "@dds/renderer": "workspace:*",
@@ -20,8 +23,12 @@
   "devDependencies": {
     "@dds/tsconfig": "workspace:*",
     "@tailwindcss/postcss": "^4.2.0",
+    "@vitest/ui": "^1.0.0",
+    "axios": "^1.6.0",
+    "node-fetch": "^3.3.0",
     "postcss": "^8.5.0",
     "tailwindcss": "^4.2.0",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "vitest": "^1.0.0"
   }
 }
