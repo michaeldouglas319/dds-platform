@@ -1,0 +1,19 @@
+{
+  "name": "@dds/globe",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./math": "./math/index.ts",
+    "./types": "./types.ts"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.183.0",
+    "@react-three/fiber": "^8.0.0",
+    "@react-three/drei": "^9.0.0"
+  }
+}

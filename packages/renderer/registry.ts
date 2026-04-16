@@ -7,6 +7,8 @@ import { TimelineRenderer } from './renderers/timeline-renderer';
 import { CTARenderer } from './renderers/cta-renderer';
 import { TwoColumnRenderer } from './renderers/two-column-renderer';
 import { SectorsGridRenderer } from './renderers/sectors-grid-renderer';
+import { EntryHighlightRenderer } from './renderers/entry-highlight-renderer';
+import { EntryGridRenderer } from './renderers/entry-grid-renderer';
 
 /**
  * Create a custom registry from a map of renderer entries.
@@ -97,6 +99,26 @@ const sectorsGrid: RendererEntry = {
   },
 };
 
+const entryHighlight: RendererEntry = {
+  component: EntryHighlightRenderer,
+  metadata: {
+    name: 'entry-highlight',
+    displayName: 'Entry Highlight',
+    description: 'Single featured entry card (UniversalSection-shaped)',
+    layouts: ['entry-highlight'],
+  },
+};
+
+const entryGrid: RendererEntry = {
+  component: EntryGridRenderer,
+  metadata: {
+    name: 'entry-grid',
+    displayName: 'Entry Grid',
+    description: 'Grid of entry cards; content.items holds an array of UniversalSection cards',
+    layouts: ['entry-grid'],
+  },
+};
+
 export const defaultRegistry: RendererRegistry = createRegistry({
   // Hero variants
   intro: hero,
@@ -118,4 +140,7 @@ export const defaultRegistry: RendererRegistry = createRegistry({
   // Layout
   'two-column': twoColumn,
   'sectors-grid': sectorsGrid,
+  // Entry cards (knowledge table)
+  'entry-highlight': entryHighlight,
+  'entry-grid': entryGrid,
 });

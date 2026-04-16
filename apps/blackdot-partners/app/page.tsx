@@ -11,6 +11,7 @@ import siteConfig from '../data/site.config.json';
 import type { ConflictEvent, DebugSettings } from '../components/PoimandresScene';
 import { defaultDebugSettings } from '../components/PoimandresScene';
 import DebugPanel from '../components/DebugPanel';
+import SignedInInsightGlobe from '../components/SignedInInsightGlobe';
 
 const PoimandresScene = dynamic(() => import('../components/PoimandresScene'), {
   ssr: false,
@@ -122,7 +123,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* ── Registration (hidden once signed in) ─── */}
+      {/* ── Partnership pitch (copy only; form handled by Clerk below) ─── */}
       <SignedOut>
         <div id="partner">
           <PartnershipPitch
@@ -130,7 +131,7 @@ export default function Home() {
             subheadline="Or show your interest by registering for a Partnership."
             stats={[]}
             tiers={[]}
-            registerEndpoint="/api/register-partner"
+            hideForm
           />
         </div>
       </SignedOut>
@@ -157,8 +158,13 @@ export default function Home() {
               gap: '1.5rem',
               textAlign: 'center',
               maxWidth: '52rem',
+              width: '100%',
             }}
           >
+            {/* Expanded insight view — signed-in only. Does not touch the backdrop globe above. */}
+            <div style={{ width: '100%', maxWidth: '1100px' }}>
+              <SignedInInsightGlobe events={events} />
+            </div>
             <div
               style={{
                 display: 'grid',

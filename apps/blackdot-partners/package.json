@@ -13,6 +13,7 @@
     "@clerk/nextjs": "^6.36.8",
     "@dds/auth": "workspace:*",
     "@dds/config": "workspace:*",
+    "@dds/globe": "workspace:*",
     "@dds/hooks": "workspace:*",
     "@dds/icons": "workspace:*",
     "@dds/renderer": "workspace:*",

@@ -1,0 +1,42 @@
+<h2>Which template should we pull visuals from?</h2>
+<p class="subtitle">The layout we port into <code>@dds/renderer</code> will inherit this template's tri-column structure, typography, and dark aesthetic. All three are MIT-licensed and Next.js-native. Click to select.</p>
+
+<div class="options">
+  <div class="option" data-choice="fumadocs" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Fumadocs <span class="label" style="margin-left:8px">roadmap pick · 11.3K★</span></h3>
+      <p><strong>What it is:</strong> Modern Next.js-native docs framework. Powers <em>shadcn/ui</em> docs and many modern OSS projects.</p>
+      <p><strong>Visual vibe:</strong> Dark-first, editorial, sharp typography, subtle borders. Reads like a technical wiki. Tri-column: hierarchical left nav + content + right TOC.</p>
+      <p><strong>3D compatibility:</strong> ★★★★★ — dark theme, low-contrast chrome, plays well behind a subtle scene.</p>
+      <p><strong>Portability:</strong> Built on MDX + Next.js App Router. Components are unstyled primitives + Tailwind — easy to lift the shell, throw away MDX, feed our UniversalSection.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="protocol" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Tailwind Plus · Protocol <span class="label" style="margin-left:8px">premium · API-docs flagship</span></h3>
+      <p><strong>What it is:</strong> Paid Tailwind Plus template. The reference design for modern API documentation.</p>
+      <p><strong>Visual vibe:</strong> Extremely polished. Frosted-glass nav, subtle radial glow behind headings, typography-first. Used as the gold standard by Stripe, Linear, Resend docs.</p>
+      <p><strong>3D compatibility:</strong> ★★★★★ — already ships with ambient "glow" effects; a WebGL scene replaces those gradients cleanly.</p>
+      <p><strong>Portability:</strong> Pure Tailwind + Headless UI. No MDX dependency. Highest-fidelity starting point, but paid license — we'd lift patterns, not fork the repo.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="nextra" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Nextra <span class="label" style="margin-left:8px">Vercel-maintained · 13K★</span></h3>
+      <p><strong>What it is:</strong> Vercel's official Next.js docs framework. Powers the Turbo, SWR, and React Flow docs.</p>
+      <p><strong>Visual vibe:</strong> Clean, minimal, Vercel-adjacent. Light-first (dark mode fine), narrower editorial feel, less atmospheric.</p>
+      <p><strong>3D compatibility:</strong> ★★★ — more content-dense, less "ambient" space. Scene would fight for attention.</p>
+      <p><strong>Portability:</strong> Tightly coupled to MDX theming and its own theme system. Lifting the shell means undoing more framework assumptions.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:32px">
+  <p class="label">My recommendation</p>
+  <p>Fumadocs (A). It matches the roadmap, its chrome is the least "opinionated" so our brand tokens can drive visual identity, and its dark-first defaults mean the three.js scene reads as design, not decoration. Protocol (B) is higher fidelity but the paid license makes "just clone it" awkward — we'd recreate the patterns in our own components anyway, so pulling from Fumadocs and borrowing Protocol's atmosphere is the pragmatic path.</p>
+</div>
