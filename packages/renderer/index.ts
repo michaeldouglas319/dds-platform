@@ -38,3 +38,76 @@ export {
   type ConfigPageProps,
   type ConfigNavigationProps,
 } from './config/index';
+
+// Graph utilities (types, context, hooks, reducer)
+export {
+  // Types
+  type GraphNode,
+  type GraphEdge,
+  type GraphData,
+  type UnifiedGraphSection,
+  type SelectedNode,
+  type GraphFilter,
+  type FilteredGraphData,
+  type GraphViewport,
+  type GraphTooltip,
+  type GraphViewState,
+  type GraphViewAction,
+  type GraphViewContextType,
+  type GraphViewContextValue,
+  // Context and Hooks
+  GraphViewContext,
+  useGraphView,
+  useGraphViewState,
+  useGraphViewDispatch,
+  useGraphViewSelection,
+  useGraphViewFilter,
+  useGraphViewport,
+  useGraphViewTooltip,
+  useGraphViewLoading,
+  useGraphViewConfig,
+  useIsNodeSelected,
+  useIsNodeHovered,
+  createGraphViewContextValue,
+  createInitialGraphViewState,
+  // Reducer
+  graphViewReducer,
+} from './lib/graph-utils';
+
+// Graph views
+export {
+  // EntryGridView
+  EntryGridView,
+  type EntryGridViewProps,
+  type EntryGridViewConfig,
+} from './lib/graph-views/entry-grid-view/index';
+
+export {
+  // ForceDirectedGraphView
+  ForceDirectedGraphView,
+  type ForceDirectedGraphViewProps,
+  type ForceDirectedGraphViewConfig,
+} from './lib/graph-views/force-graph-view/index';
+
+export {
+  // Force simulation hook
+  useForceSimulation,
+  type ForceSimulationConfig,
+} from './lib/graph-views/force-graph-view/useForceSimulation';
+
+// Grid utilities
+export {
+  useGridLayout,
+  generateGridMediaQuery,
+  type GridLayoutStyles,
+  RESPONSIVE_BREAKPOINTS,
+} from './lib/graph-views/entry-grid-view/useGridLayout';
+
+// Core graph types
+export {
+  type KnowledgeGraphSection,
+  isKnowledgeGraphSection,
+  hasGraphData,
+  getGraphData,
+  shouldRenderGraph,
+} from './core/types';
