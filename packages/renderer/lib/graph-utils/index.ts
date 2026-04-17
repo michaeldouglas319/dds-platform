@@ -122,3 +122,18 @@ export type {
   HoverState,
   GraphTooltipComponentProps,
 } from './interaction.tsx';
+
+// ─── Debounce Utilities ────────────────────────────────────────────
+export {
+  useDebounce,
+  useDebouncedCallback,
+} from './useDebounce';
+
+// ─── Keyboard Navigation Utilities ────────────────────────────────
+export {
+  handleKeyboardNavigation,
+  getGridPosition,
+  getIndexFromGridPosition,
+  handleGridKeyboardNavigation,
+  generateAriaLabel,
+} from './keyboard-nav';

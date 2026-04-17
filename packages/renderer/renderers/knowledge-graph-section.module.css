@@ -98,6 +98,20 @@
   transform: scale(0.98);
 }
 
+.viewButton:focus {
+  outline: 2px solid rgb(100, 150, 255);
+  outline-offset: 2px;
+}
+
+.viewButton:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.viewButton:focus-visible {
+  outline: 2px solid rgb(100, 150, 255);
+  outline-offset: 2px;
+}
+
 .viewButtonIcon {
   font-size: 1.1em;
   display: inline-block;
@@ -178,6 +192,15 @@
   50% {
     opacity: 0.5;
     transform: scale(0.8);
+  }
+}
+
+@keyframes fadeInView {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -281,6 +304,47 @@
     flex: 1;
     min-width: 70px;
     justify-content: center;
+  }
+}
+
+/* ─── Accessibility: Reduced Motion ────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .viewContainer {
+    animation: none;
+  }
+
+  .viewButton {
+    transition: none;
+  }
+
+  .viewButton:active {
+    transform: none;
+  }
+
+  .spinnerDot {
+    animation: none;
+  }
+}
+
+/* ─── Accessibility: High Contrast Mode ───────────────────────────── */
+
+@media (prefers-contrast: more) {
+  .viewButton {
+    border-width: 2px;
+    font-weight: 600;
+  }
+
+  .viewButtonActive {
+    border-width: 2px;
+  }
+
+  .viewContainer {
+    border-width: 2px;
+  }
+
+  .title {
+    font-weight: 800;
   }
 }
 

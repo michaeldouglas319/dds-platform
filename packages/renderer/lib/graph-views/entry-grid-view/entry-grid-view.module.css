@@ -14,10 +14,33 @@
   padding: 0;
 }
 
-/* Responsive columns via CSS media queries */
+/* ─── Virtualized Container ─────────────────────────────────────────── */
+
+.virtualizedContainer {
+  display: grid;
+  grid-auto-flow: row;
+  width: 100%;
+  padding: 1rem;
+  scroll-behavior: smooth;
+}
+
+/* ─── Mobile Accessibility: Touch Targets ──────────────────────── */
+
+/* Ensure touch targets are at least 44x44px for mobile accessibility */
 @media (max-width: 640px) {
   .container {
     grid-template-columns: 1fr;
+  }
+
+  .readLink {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .card {
+    min-height: 280px;
   }
 }
 
@@ -92,8 +115,9 @@
 }
 
 .card:focus-visible {
-  outline: 2px solid var(--color-focus, #3b82f6);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-focus, #3b82f6);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
 
 /* ─── Card States ───────────────────────────────────────────────────── */
@@ -333,7 +357,7 @@
 .card:nth-child(4) { animation-delay: 75ms; }
 .card:nth-child(n + 5) { animation-delay: 100ms; }
 
-/* ─── Accessibility ─────────────────────────────────────────────────── */
+/* ─── Accessibility: Reduced Motion ─────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   .card,
@@ -350,16 +374,29 @@
   .cardHovered {
     transform: none;
   }
+
+  .selectionIndicator {
+    animation: none;
+  }
 }
 
-/* High contrast mode */
+/* ─── Accessibility: High Contrast Mode ────────────────────────── */
+
 @media (prefers-contrast: more) {
   .card {
     border-width: 2px;
   }
 
+  .card:focus-visible {
+    outline-width: 3px;
+  }
+
   .cardTitle {
     font-weight: 700;
+  }
+
+  .cardDescription {
+    font-weight: 500;
   }
 
   .tagBadge {
@@ -368,6 +405,36 @@
 
   .readLink {
     border-width: 2px;
+    font-weight: 700;
+  }
+
+  .typeIndicator {
+    height: 4px;
+  }
+}
+
+/* ─── Accessibility: Forced Colors Mode ────────────────────────── */
+
+@media (forced-colors: active) {
+  .card {
+    border: 1px solid CanvasText;
+  }
+
+  .card:focus-visible {
+    outline: 2px solid Highlight;
+  }
+
+  .cardTitle {
+    color: CanvasText;
+  }
+
+  .cardDescription {
+    color: CanvasText;
+  }
+
+  .readLink {
+    border: 1px solid LinkText;
+    color: LinkText;
   }
 }
 

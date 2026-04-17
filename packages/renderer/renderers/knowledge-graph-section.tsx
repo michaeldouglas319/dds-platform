@@ -127,9 +127,9 @@ function LoadingSpinner() {
 /**
  * KnowledgeGraphSection - Main renderer component
  *
- * Manages knowledge graph state and view switching.
- * Initializes context with nodes/edges from section.content.
- * Renders the active graph view based on display.graphView or user selection.
+ * Manages knowledge graph state and view switching with smooth transitions.
+ * Implements lazy loading for views, full keyboard navigation, and accessibility.
+ * Uses React.useTransition for smooth view switching without blocking UI.
  */
 export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
   const nodes = (section.content?.nodes ?? []) as GraphNode[];
@@ -158,14 +158,24 @@ export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
   // Create context value with state and dispatch
   const contextValue = createGraphViewContextValue(state, dispatch);
 
-  // Track current view - start with default from section or 'grid'
-  const [currentView, setCurrentView] = React.useState(defaultView);
+  // Track current view with smooth transitions
+  const [currentView, setCurrentView] = useState(defaultView);
+  const [isPending, startTransition] = useTransition();
+
+  // Handle view changes with smooth transition
+  const handleViewChange = (newView: string) => {
+    startTransition(() => {
+      setCurrentView(newView);
+    });
+  };
 
   if (nodes.length === 0) {
     return (
       <section className={styles.section}>
         <div className={styles.container}>
-          {title && <h2 className={styles.title}>{title}</h2>}
+          {title && (
+            <h2 className={styles.title}>{title}</h2>
+          )}
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
           <div className={styles.emptyState}>
             <p>No graph data available.</p>
@@ -182,9 +192,19 @@ export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
           {title && <h2 className={styles.title}>{title}</h2>}
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
-          <ViewSwitcher currentView={currentView} onViewChange={setCurrentView} />
+          <ViewSwitcher
+            currentView={currentView}
+            onViewChange={handleViewChange}
+          />
 
-          <div className={styles.viewContainer}>
+          <div
+            className={`${styles.viewContainer} ${
+              isPending ? styles.viewContainerLoading : ''
+            }`}
+            role="main"
+            aria-busy={isPending}
+            aria-label={`${currentView} graph view`}
+          >
             <Suspense fallback={<LoadingSpinner />}>
               {currentView === 'grid' && (
                 <EntryGridView nodes={nodes} edges={edges} />
@@ -196,7 +216,11 @@ export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
                 <ForceDirectedGraphView nodes={nodes} edges={edges} />
               )}
               {currentView === 'layered' && (
-                <div className={styles.placeholder}>
+                <div
+                  className={styles.placeholder}
+                  role="status"
+                  aria-live="polite"
+                >
                   Layered Universe View coming soon...
                 </div>
               )}

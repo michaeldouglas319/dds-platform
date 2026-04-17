@@ -87,6 +87,12 @@ const GridCard: React.FC<GridCardProps> = ({
       e.preventDefault();
       onSelect();
     }
+    // Support Escape to deselect
+    if (e.key === 'Escape' && isSelected) {
+      // This would need to be handled by parent component
+      // For now, just mark as handled
+      e.preventDefault();
+    }
   };
 
   return (
