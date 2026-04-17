@@ -14,7 +14,8 @@
   "dependencies": {
     "@dds/types": "workspace:*",
     "@dds/ui": "workspace:*",
-    "@dds/globe": "workspace:*"
+    "@dds/globe": "workspace:*",
+    "three": "^0.161.0"
   },
   "devDependencies": {
     "@dds/tsconfig": "workspace:*"

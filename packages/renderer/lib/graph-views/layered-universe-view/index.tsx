@@ -14,6 +14,7 @@ import React, { Suspense, useRef, useMemo, useCallback } from 'react';
 import type { GraphNode, GraphEdge } from '../../graph-utils/types';
 import { useGraphView, useGraphViewFilter } from '../../graph-utils/context';
 import { GraphLoadingSpinner } from '../../components';
+import { LayerVisualization } from './LayerVisualization';
 import styles from './layered-universe-view.module.css';
 
 /**
@@ -52,42 +53,7 @@ export interface LayeredUniverseViewProps {
   className?: string;
 }
 
-/**
- * Organization of nodes into layers based on type
- */
-interface NodeLayer {
-  type: string;
-  nodes: GraphNode[];
-  label: string;
-}
 
-/**
- * Calculate node layers from graph nodes
- */
-const calculateLayers = (nodes: GraphNode[]): NodeLayer[] => {
-  const typeGroups = new Map<string, GraphNode[]>();
-  const typeLabels: Record<string, string> = {
-    entry: 'Entries',
-    signal: 'Signals',
-    person: 'People',
-    organization: 'Organizations',
-    concept: 'Concepts',
-    event: 'Events',
-  };
-
-  nodes.forEach((node) => {
-    if (!typeGroups.has(node.type)) {
-      typeGroups.set(node.type, []);
-    }
-    typeGroups.get(node.type)!.push(node);
-  });
-
-  return Array.from(typeGroups.entries()).map(([type, groupNodes]) => ({
-    type,
-    nodes: groupNodes,
-    label: typeLabels[type] || type,
-  }));
-};
 
 /**
  * LayeredUniverseView - Stratified graph visualization with type-based layers
@@ -125,7 +91,6 @@ export const LayeredUniverseView: React.FC<LayeredUniverseViewProps> = ({
   className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { selectNode, hoverNode } = useGraphView();
   const { filteredData } = useGraphViewFilter();
 
   // Merge with defaults
@@ -147,25 +112,6 @@ export const LayeredUniverseView: React.FC<LayeredUniverseViewProps> = ({
   const displayNodes = filteredData.nodes.length > 0 ? filteredData.nodes : nodes;
   const displayEdges = filteredData.edges.length > 0 ? filteredData.edges : edges;
 
-  // Calculate layers
-  const layers = useMemo(() => calculateLayers(displayNodes), [displayNodes]);
-
-  // Handle node click
-  const handleNodeClick = useCallback(
-    (nodeId: string, nodeType: GraphNode['type']) => {
-      selectNode(nodeId, nodeType);
-    },
-    [selectNode]
-  );
-
-  // Handle node hover
-  const handleNodeHover = useCallback(
-    (nodeId: string | undefined) => {
-      hoverNode(nodeId);
-    },
-    [hoverNode]
-  );
-
   if (displayNodes.length === 0) {
     return (
       <div className={`${styles.emptyState} ${className}`}>
@@ -184,58 +130,18 @@ export const LayeredUniverseView: React.FC<LayeredUniverseViewProps> = ({
       }}
     >
       <Suspense fallback={<GraphLoadingSpinner message="Loading layered universe..." />}>
-        <div className={styles.canvas}>
-          {layers.map((layer, layerIndex) => (
-            <div
-              key={layer.type}
-              className={styles.layer}
-              data-layer-type={layer.type}
-              style={{
-                top: `${layerIndex * mergedConfig.layerGap}px`,
-              }}
-            >
-              {mergedConfig.showLayerLabels && (
-                <div className={styles.layerLabel}>{layer.label}</div>
-              )}
-
-              <div className={styles.nodeRow}>
-                {layer.nodes.map((node, nodeIndex) => (
-                  <div
-                    key={node.id}
-                    className={styles.node}
-                    data-node-type={node.type}
-                    style={{
-                      left: `${nodeIndex * mergedConfig.nodeSpacing}px`,
-                      width: `${mergedConfig.nodeSize}px`,
-                      height: `${mergedConfig.nodeSize}px`,
-                    }}
-                    onClick={() => handleNodeClick(node.id, node.type)}
-                    onMouseEnter={() => handleNodeHover(node.id)}
-                    onMouseLeave={() => handleNodeHover(undefined)}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`${node.label} (${node.type})`}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        handleNodeClick(node.id, node.type);
-                      }
-                    }}
-                  >
-                    <div className={styles.nodeContent} />
-
-                    {mergedConfig.showLabels && (
-                      <div className={styles.nodeLabel}>{node.label}</div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <LayerVisualization
+          nodes={displayNodes}
+          edges={displayEdges}
+          containerRef={containerRef}
+        />
       </Suspense>
     </div>
   );
 };
+
+// Export LayerVisualization for advanced usage
+export { LayerVisualization } from './LayerVisualization';
+export type { LayerVisualizationProps } from './LayerVisualization';
 
 export default LayeredUniverseView;
