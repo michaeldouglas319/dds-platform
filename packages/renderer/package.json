@@ -6,11 +6,15 @@
   "main": "./index.ts",
   "exports": {
     ".": "./index.ts",
-    "./config": "./config/index.tsx"
+    "./config": "./config/index.tsx",
+    "./graph-views": "./lib/graph-views/index.ts",
+    "./graph-utils": "./lib/graph-utils/index.ts",
+    "./components": "./lib/components/index.ts"
   },
   "dependencies": {
     "@dds/types": "workspace:*",
-    "@dds/ui": "workspace:*"
+    "@dds/ui": "workspace:*",
+    "@dds/globe": "workspace:*"
   },
   "devDependencies": {
     "@dds/tsconfig": "workspace:*"

@@ -1,0 +1,136 @@
+/**
+ * LoadingSpinner Component Styles
+ * Animated loading indicator for graph views
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  min-height: 200px;
+}
+
+/* SVG Spinner */
+.spinner {
+  display: block;
+  width: 40px;
+  height: 40px;
+  color: var(--color-primary, #0066ff);
+}
+
+/* Background circle - subtle */
+.spinnerCircle {
+  stroke: var(--color-border, #333);
+  opacity: 0.3;
+}
+
+/* Animated progress circle */
+.spinnerProgress {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-origin: 50% 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+/* Spin animation - smooth continuous rotation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+    stroke-dashoffset: 0;
+  }
+  to {
+    transform: rotate(360deg);
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Loading message */
+.message {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-secondary, #999);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Pulse animation for text */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+  .spinnerCircle {
+    stroke: var(--color-border, #ddd);
+    opacity: 0.4;
+  }
+
+  .message {
+    color: var(--color-text-secondary, #666);
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .spinnerCircle {
+    stroke: var(--color-border, #2a2a2a);
+    opacity: 0.3;
+  }
+
+  .message {
+    color: var(--color-text-secondary, #aaa);
+  }
+}
+
+/* Reduce motion - slower spin for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .spinnerProgress {
+    animation: spin 3s linear infinite;
+  }
+
+  .message {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+/* Mobile - slightly smaller */
+@media (max-width: 640px) {
+  .container {
+    min-height: 150px;
+    padding: 1.5rem;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .message {
+    font-size: 0.875rem;
+  }
+}
+
+/* Center in full viewport (when used as page loader) */
+.container:has(.spinner) {
+  /* Can be overridden by parent container */
+  position: relative;
+}
+
+/* Accessibility - ensure visible focus if needed */
+.spinner:focus-visible {
+  outline: 2px solid var(--color-focus, #00d9ff);
+  outline-offset: 2px;
+}

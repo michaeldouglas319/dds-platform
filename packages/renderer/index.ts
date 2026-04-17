@@ -82,18 +82,19 @@ export {
   type EntryGridViewConfig,
 } from './lib/graph-views/entry-grid-view/index';
 
-export {
-  // ForceDirectedGraphView
-  ForceDirectedGraphView,
-  type ForceDirectedGraphViewProps,
-  type ForceDirectedGraphViewConfig,
-} from './lib/graph-views/force-graph-view/index';
+// ForceDirectedGraphView - TODO: implement in Task #17
+// export {
+//   ForceDirectedGraphView,
+//   type ForceDirectedGraphViewProps,
+//   type ForceDirectedGraphViewConfig,
+// } from './lib/graph-views/force-graph-view/index';
 
-export {
-  // Force simulation hook
-  useForceSimulation,
-  type ForceSimulationConfig,
-} from './lib/graph-views/force-graph-view/useForceSimulation';
+// GlobeView - TODO: implement in Task #15
+// export {
+//   GlobeView,
+//   type GlobeViewProps,
+//   type GlobeViewConfig,
+// } from './lib/graph-views/globe-view/index';
 
 // Grid utilities
 export {
@@ -111,3 +112,17 @@ export {
   getGraphData,
   shouldRenderGraph,
 } from './core/types';
+
+// Graph UI Components
+export {
+  // View Switcher
+  ViewSwitcher,
+  type ViewSwitcherProps,
+  type ViewType,
+  // Filter Panel
+  FilterPanel,
+  type FilterPanelProps,
+  // Loading Spinner
+  GraphLoadingSpinner,
+  type GraphLoadingSpinnerProps,
+} from './lib/components';

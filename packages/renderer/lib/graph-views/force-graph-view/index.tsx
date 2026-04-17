@@ -10,10 +10,9 @@
  * @module @dds/renderer/lib/graph-views/force-graph-view
  */
 
-import React, { useMemo, useCallback, useEffect, useRef } from 'react';
+import React, { useMemo, useCallback, useEffect } from 'react';
 import type { GraphNode, GraphEdge } from '../../graph-utils/types';
 import { useGraphView, useGraphViewFilter } from '../../graph-utils/context';
-import { calculateDegreeCentrality } from '../../graph-utils/selection';
 import { useForceSimulation, type ForceSimulationConfig } from './useForceSimulation';
 import { ForceGraphScene } from './ForceGraphScene';
 import styles from './force-graph-view.module.css';
@@ -143,11 +142,6 @@ export const ForceDirectedGraphView: React.FC<ForceDirectedGraphViewProps> = ({
       pause();
     }
   }, [isSettled, isSimulating, mergedConfig.autoPause, pause]);
-
-  // Calculate degree centrality for node sizes
-  const degreeCentrality = useMemo(() => {
-    return calculateDegreeCentrality(displayNodes, displayEdges);
-  }, [displayNodes, displayEdges]);
 
   // Handle node click
   const handleNodeClick = useCallback(

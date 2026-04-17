@@ -2,11 +2,10 @@
 
 import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import { Suspense } from 'react';
-import { InteractiveGlobeScene } from '@dds/globe/components/InteractiveGlobeScene';
-import type { GlobePoint } from '@dds/globe/types';
+import { InteractiveGlobeScene, CATEGORY_COLORS } from '@dds/globe';
+import type { GlobePoint } from '@dds/globe';
 import type { GraphNode, GraphEdge } from '../../graph-utils/types';
 import { useGraphView, useIsNodeSelected, useIsNodeHovered } from '../../graph-utils/context';
-import { categoryColorMap } from '@dds/globe/category-colors';
 import styles from './globe-view.module.css';
 
 /**
@@ -77,10 +76,11 @@ function nodeToGlobePoint(node: GraphNode, radius: number): GlobePoint {
   // Determine color from node metadata or type
   let color = node.metadata?.color;
   if (!color && node.tags?.[0]) {
-    color = categoryColorMap[node.tags[0] as keyof typeof categoryColorMap];
+    color = CATEGORY_COLORS[node.tags[0]];
   }
   if (!color) {
-    color = categoryColorMap['default'];
+    // Fallback to a default color
+    color = '#4a90e2';
   }
 
   // Size based on node metadata or default

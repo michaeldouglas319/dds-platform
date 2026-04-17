@@ -9,6 +9,7 @@ import { TwoColumnRenderer } from './renderers/two-column-renderer';
 import { SectorsGridRenderer } from './renderers/sectors-grid-renderer';
 import { EntryHighlightRenderer } from './renderers/entry-highlight-renderer';
 import { EntryGridRenderer } from './renderers/entry-grid-renderer';
+import { KnowledgeGraphSection } from './renderers/knowledge-graph-section';
 
 /**
  * Create a custom registry from a map of renderer entries.
@@ -119,6 +120,25 @@ const entryGrid: RendererEntry = {
   },
 };
 
+const knowledgeGraph: RendererEntry = {
+  component: KnowledgeGraphSection,
+  metadata: {
+    name: 'knowledge-graph',
+    displayName: 'Interactive Knowledge Graph',
+    description:
+      'Multi-view graph visualization with globe, force-directed, grid, and layered layouts. Supports node selection, filtering, and interactive exploration.',
+    required: {
+      content: ['nodes', 'edges'],
+    },
+    optional: {
+      subject: ['title', 'subtitle'],
+      display: ['graphView'],
+    },
+    layouts: ['knowledge-graph'],
+    composable: true,
+  },
+};
+
 export const defaultRegistry: RendererRegistry = createRegistry({
   // Hero variants
   intro: hero,
@@ -143,4 +163,6 @@ export const defaultRegistry: RendererRegistry = createRegistry({
   // Entry cards (knowledge table)
   'entry-highlight': entryHighlight,
   'entry-grid': entryGrid,
+  // Knowledge graph (multi-view graph visualization)
+  'knowledge-graph': knowledgeGraph,
 });
