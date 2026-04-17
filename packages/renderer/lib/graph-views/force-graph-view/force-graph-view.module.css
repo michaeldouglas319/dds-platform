@@ -154,6 +154,89 @@
   margin: 0;
 }
 
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a1a;
+  }
+
+  .sceneContainer {
+    background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+  }
+
+  .canvas {
+    background-color: #0d0d0d;
+  }
+
+  .controls {
+    background-color: #1f1f1f;
+    border-top-color: #3a3a3a;
+  }
+
+  .controlButton {
+    background-color: #6366f1;
+  }
+
+  .controlButton:hover {
+    background-color: #4f46e5;
+  }
+
+  .status {
+    color: #a0aec0;
+  }
+
+  .status::before {
+    background-color: #10b981;
+  }
+
+  .emptyState {
+    background-color: #1a1a1a;
+    color: #6b7280;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .canvas {
+    transition: none;
+  }
+
+  .controlButton {
+    transition: none;
+  }
+
+  .tooltip {
+    animation: none;
+    opacity: 1;
+  }
+
+  .status::before {
+    animation: none;
+    opacity: 1;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .controls {
