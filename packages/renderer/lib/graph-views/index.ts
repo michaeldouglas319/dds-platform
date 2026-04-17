@@ -34,5 +34,9 @@ export {
 export {
   GlobeView,
   type GlobeViewProps,
-  type GlobeViewConfig,
 } from './globe-view/index';
+
+export {
+  GlobeCanvas,
+  type GlobeCanvasProps,
+} from './globe-view/GlobeCanvas';

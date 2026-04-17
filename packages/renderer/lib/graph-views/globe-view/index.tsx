@@ -3,6 +3,7 @@
 import React, { Suspense, useRef } from 'react';
 import type { GraphNode, GraphEdge } from '../../graph-utils/types';
 import { GraphLoadingSpinner } from '../../components/graph-loading-spinner';
+import { GlobeCanvas } from './GlobeCanvas';
 import styles from './globe-view.module.css';
 
 /**
@@ -46,7 +47,7 @@ export const GlobeView: React.FC<GlobeViewProps> = ({
       className={`${styles.container} ${className}`.trim()}
     >
       <Suspense fallback={<GraphLoadingSpinner message="Loading globe..." />}>
-        <canvas className={styles.canvas} />
+        <GlobeCanvas nodes={nodes} edges={edges} containerRef={containerRef} />
       </Suspense>
     </div>
   );
