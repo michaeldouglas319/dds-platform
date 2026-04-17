@@ -6,12 +6,14 @@ import { GraphViewContext } from '../lib/graph-utils/context';
 import { createGraphViewContextValue } from '../lib/graph-utils/context';
 import { graphViewReducer, createInitialGraphViewState } from '../lib/graph-utils/reducer';
 import type { GraphNode, GraphEdge, GraphViewState } from '../lib/graph-utils/types';
+import type { ViewType } from '../lib/components/graph-view-switcher/index';
 import styles from './knowledge-graph-section.module.css';
 
 // Lazy load views for code splitting (only load when selected)
 const EntryGridView = lazy(() => import('../lib/graph-views/entry-grid-view/index'));
 const ForceDirectedGraphView = lazy(() => import('../lib/graph-views/force-graph-view/index'));
 const GlobeView = lazy(() => import('../lib/graph-views/globe-view/index'));
+const LayeredUniverseView = lazy(() => import('../lib/graph-views/layered-universe-view/index'));
 
 /**
  * UnifiedGraphSection extends UniversalSection with graph-specific data
@@ -43,10 +45,10 @@ function ViewSwitcher({
   currentView,
   onViewChange,
 }: {
-  currentView: string;
-  onViewChange: (view: string) => void;
+  currentView: ViewType;
+  onViewChange: (view: ViewType) => void;
 }) {
-  const views = [
+  const views: Array<{ id: ViewType; label: string; icon: string }> = [
     { id: 'grid', label: 'Grid View', icon: '⊞' },
     { id: 'globe', label: 'Globe View', icon: '🌍' },
     { id: 'force-graph', label: 'Force Graph View', icon: '⊗' },
@@ -159,11 +161,11 @@ export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
   const contextValue = createGraphViewContextValue(state, dispatch);
 
   // Track current view with smooth transitions
-  const [currentView, setCurrentView] = useState(defaultView);
+  const [currentView, setCurrentView] = useState<ViewType>(defaultView as ViewType);
   const [isPending, startTransition] = useTransition();
 
   // Handle view changes with smooth transition
-  const handleViewChange = (newView: string) => {
+  const handleViewChange = (newView: ViewType) => {
     startTransition(() => {
       setCurrentView(newView);
     });
@@ -198,12 +200,11 @@ export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
           />
 
           <div
-            className={`${styles.viewContainer} ${
-              isPending ? styles.viewContainerLoading : ''
-            }`}
+            className={styles.viewContainer}
             role="main"
             aria-busy={isPending}
             aria-label={`${currentView} graph view`}
+            style={{ opacity: isPending ? 0.6 : 1, transition: 'opacity 0.2s' } as React.CSSProperties}
           >
             <Suspense fallback={<LoadingSpinner />}>
               {currentView === 'grid' && (
@@ -216,13 +217,7 @@ export function KnowledgeGraphSection({ section }: KnowledgeGraphSectionProps) {
                 <ForceDirectedGraphView nodes={nodes} edges={edges} />
               )}
               {currentView === 'layered' && (
-                <div
-                  className={styles.placeholder}
-                  role="status"
-                  aria-live="polite"
-                >
-                  Layered Universe View coming soon...
-                </div>
+                <LayeredUniverseView nodes={nodes} edges={edges} />
               )}
             </Suspense>
           </div>
