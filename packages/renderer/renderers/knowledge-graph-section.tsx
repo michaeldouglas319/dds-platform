@@ -1,15 +1,17 @@
 'use client';
 
-import React, { Suspense, useReducer } from 'react';
+import React, { Suspense, useReducer, lazy, useState, useTransition } from 'react';
 import type { RendererProps, UniversalSection } from '@dds/types';
 import { GraphViewContext } from '../lib/graph-utils/context';
 import { createGraphViewContextValue } from '../lib/graph-utils/context';
 import { graphViewReducer, createInitialGraphViewState } from '../lib/graph-utils/reducer';
 import type { GraphNode, GraphEdge, GraphViewState } from '../lib/graph-utils/types';
-import { EntryGridView } from '../lib/graph-views/entry-grid-view/index';
-import { ForceDirectedGraphView } from '../lib/graph-views/force-graph-view/index';
-import { GlobeView } from '../lib/graph-views/globe-view/index';
 import styles from './knowledge-graph-section.module.css';
+
+// Lazy load views for code splitting (only load when selected)
+const EntryGridView = lazy(() => import('../lib/graph-views/entry-grid-view/index'));
+const ForceDirectedGraphView = lazy(() => import('../lib/graph-views/force-graph-view/index'));
+const GlobeView = lazy(() => import('../lib/graph-views/globe-view/index'));
 
 /**
  * UnifiedGraphSection extends UniversalSection with graph-specific data
@@ -35,6 +37,7 @@ interface KnowledgeGraphSectionProps extends RendererProps {
 
 /**
  * View Switcher Component - UI controls for switching between graph views
+ * Fully accessible with keyboard navigation and ARIA labels
  */
 function ViewSwitcher({
   currentView,
@@ -44,27 +47,59 @@ function ViewSwitcher({
   onViewChange: (view: string) => void;
 }) {
   const views = [
-    { id: 'grid', label: 'Grid', icon: '⊞' },
-    { id: 'globe', label: 'Globe', icon: '🌍' },
-    { id: 'force-graph', label: 'Force Graph', icon: '⊗' },
-    { id: 'layered', label: 'Layered', icon: '≡' },
+    { id: 'grid', label: 'Grid View', icon: '⊞' },
+    { id: 'globe', label: 'Globe View', icon: '🌍' },
+    { id: 'force-graph', label: 'Force Graph View', icon: '⊗' },
+    { id: 'layered', label: 'Layered View', icon: '≡' },
   ];
 
+  // Handle keyboard navigation (arrow keys)
+  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
+    let nextIndex = index;
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      nextIndex = (index + 1) % views.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      nextIndex = (index - 1 + views.length) % views.length;
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      nextIndex = 0;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      nextIndex = views.length - 1;
+    } else {
+      return;
+    }
+
+    onViewChange(views[nextIndex].id);
+  };
+
+  const currentIndex = views.findIndex(v => v.id === currentView);
+
   return (
-    <div className={styles.viewSwitcher}>
-      <div className={styles.viewSwitcherLabel}>View:</div>
-      <div className={styles.viewSwitcherButtons}>
-        {views.map((view) => (
+    <div className={styles.viewSwitcher} role="group" aria-label="Graph view options">
+      <div className={styles.viewSwitcherLabel} id="view-label">
+        View:
+      </div>
+      <div className={styles.viewSwitcherButtons} role="toolbar" aria-labelledby="view-label">
+        {views.map((view, index) => (
           <button
             key={view.id}
             onClick={() => onViewChange(view.id)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
             className={`${styles.viewButton} ${
               currentView === view.id ? styles.viewButtonActive : ''
             }`}
             aria-pressed={currentView === view.id}
+            aria-label={view.label}
             title={view.label}
+            type="button"
           >
-            <span className={styles.viewButtonIcon}>{view.icon}</span>
+            <span className={styles.viewButtonIcon} aria-hidden="true">
+              {view.icon}
+            </span>
             <span className={styles.viewButtonLabel}>{view.label}</span>
           </button>
         ))}

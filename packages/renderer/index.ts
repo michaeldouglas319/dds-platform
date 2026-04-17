@@ -23,6 +23,7 @@ export {
   SectorsGridRenderer,
   EntryHighlightRenderer,
   EntryGridRenderer,
+  KnowledgeGraphSection,
 } from './renderers';
 
 // Config (re-export everything)
