@@ -83,19 +83,25 @@ export {
   type EntryGridViewConfig,
 } from './lib/graph-views/entry-grid-view/index';
 
-// ForceDirectedGraphView - TODO: implement in Task #17
-// export {
-//   ForceDirectedGraphView,
-//   type ForceDirectedGraphViewProps,
-//   type ForceDirectedGraphViewConfig,
-// } from './lib/graph-views/force-graph-view/index';
+export {
+  // ForceDirectedGraphView
+  ForceDirectedGraphView,
+  type ForceDirectedGraphViewProps,
+  type ForceDirectedGraphViewConfig,
+} from './lib/graph-views/force-graph-view/index';
 
-// GlobeView - TODO: implement in Task #15
-// export {
-//   GlobeView,
-//   type GlobeViewProps,
-//   type GlobeViewConfig,
-// } from './lib/graph-views/globe-view/index';
+export {
+  // GlobeView
+  GlobeView,
+  type GlobeViewProps,
+} from './lib/graph-views/globe-view/index';
+
+export {
+  // LayeredUniverseView
+  LayeredUniverseView,
+  type LayeredUniverseViewProps,
+  type LayeredUniverseViewConfig,
+} from './lib/graph-views/layered-universe-view/index';
 
 // Grid utilities
 export {
@@ -105,9 +111,8 @@ export {
   RESPONSIVE_BREAKPOINTS,
 } from './lib/graph-views/entry-grid-view/useGridLayout';
 
-// Core graph types
+// Core graph type helpers
 export {
-  type KnowledgeGraphSection,
   isKnowledgeGraphSection,
   hasGraphData,
   getGraphData,
