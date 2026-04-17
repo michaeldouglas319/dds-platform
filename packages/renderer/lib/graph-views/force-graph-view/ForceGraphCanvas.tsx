@@ -40,7 +40,7 @@ export const ForceGraphCanvas: React.FC<ForceGraphCanvasProps> = ({
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const nodeMapRef = useRef<Map<string, NodePhysics>>(new Map());
   const [hoveredNodeId, setHoveredNodeId] = useState<string | null>(null);
-  const { state, selectNode, setHovered } = useGraphView();
+  const { selectNode } = useGraphView();
 
   // Physics parameters
   const REPULSION = 100;
