@@ -131,8 +131,8 @@ export default function ArmsExperience() {
         <div className="arms-canvas-wrapper">
           <ArmsMapScene
             filteredEvents={filteredEvents}
-            selectedIndex={state.selectedIndex}
-            onPointSelect={handlePointSelect}
+            focusedIndex={state.selectedIndex}
+            onPointSelect={(index, event) => handlePointSelect(event, index)}
           />
         </div>
       ) : (
