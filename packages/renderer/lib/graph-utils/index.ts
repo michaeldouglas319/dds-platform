@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Graph Utils Index
  *
