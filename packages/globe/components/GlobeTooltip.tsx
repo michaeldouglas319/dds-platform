@@ -61,19 +61,6 @@ function DefaultCard({ point }: { point: GlobePoint }) {
         transform: 'translateY(-80px)',
       }}
     >
-      {point.tag && (
-        <div
-          style={{
-            fontSize: 10,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            opacity: 0.55,
-            marginBottom: 4,
-          }}
-        >
-          {point.tag}
-        </div>
-      )}
       <div style={{ fontWeight: 600, marginBottom: 4 }}>{point.name ?? 'Event'}</div>
       <div style={{ display: 'flex', gap: 10, opacity: 0.7, fontSize: 11 }}>
         <span>weight {point.weight.toLocaleString()}</span>
