@@ -208,50 +208,6 @@ export default function SignedInInsightGlobe({ events }: Props) {
           </CircleButton>
         </div>
 
-        {/* Category legend */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 16,
-            left: 16,
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 8,
-            maxWidth: 'calc(100% - 32px)',
-            zIndex: 10,
-          }}
-        >
-          {presentTags(insightEvents).map((tag) => (
-            <span
-              key={tag}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '4px 10px',
-                borderRadius: 999,
-                background: 'rgba(255,255,255,0.75)',
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
-                border: '1px solid rgba(0,0,0,0.06)',
-                fontSize: 11,
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                color: 'rgba(0,0,0,0.7)',
-              }}
-            >
-              <span
-                style={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: 999,
-                  background: CATEGORY_COLORS[tag] ?? '#888',
-                }}
-              />
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
 
       {/* Detail card below globe — mirrors focused point */}
@@ -355,10 +311,4 @@ function CircleButton({
       {children}
     </button>
   )
-}
-
-function presentTags(events: GlobePoint[]): string[] {
-  const s = new Set<string>()
-  for (const e of events) if (e.tag) s.add(e.tag)
-  return Array.from(s).sort()
 }
