@@ -1,5 +1,5 @@
-import { SectionBatchRenderer } from '@dds/renderer';
 import { fetchEntries, fetchFeaturedEntry } from '../../lib/entries';
+import { EntriesRenderer } from './EntriesRenderer';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
@@ -49,9 +49,5 @@ export default async function EntriesIndexPage() {
     display: { layout: 'entry-grid' },
   };
 
-  return (
-    <main id="main-content">
-      <SectionBatchRenderer sections={[...highlight, gridSection]} />
-    </main>
-  );
+  return <EntriesRenderer sections={[...highlight, gridSection]} />;
 }

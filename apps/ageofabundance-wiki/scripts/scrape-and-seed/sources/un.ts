@@ -4,7 +4,7 @@ const UN_OCHA_RSS = 'https://www.unocha.org/node/all/crises/feed';
 
 export async function fetchUnHumanitarian(): Promise<RawArticle[]> {
   try {
-    const response = await fetch(UN_OCHA_RSS, { timeout: 10000 });
+    const response = await fetch(UN_OCHA_RSS);
 
     if (!response.ok) {
       console.error(`UN OCHA RSS fetch failed: ${response.status}`);

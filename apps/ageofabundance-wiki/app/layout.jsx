@@ -23,6 +23,10 @@ export default function RootLayout({ children }) {
             <a href="/" className="wiki-site-header__logo">
               ageofabundance.wiki
             </a>
+            <a href="/arms" className="wiki-site-header__arms-link" aria-label="Abundance at Arms — conflict map">
+              <span aria-hidden="true">⚔</span>
+              <span>Arms</span>
+            </a>
             <WikiSearch index={searchIndex} />
           </nav>
         </header>

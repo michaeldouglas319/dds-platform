@@ -4,7 +4,7 @@ const WHO_ALERTS_RSS = 'https://www.who.int/feeds/entity/cmo/feed/rss2.0.xml';
 
 export async function fetchWhoAlerts(): Promise<RawArticle[]> {
   try {
-    const response = await fetch(WHO_ALERTS_RSS, { timeout: 10000 });
+    const response = await fetch(WHO_ALERTS_RSS);
 
     if (!response.ok) {
       console.error(`WHO RSS fetch failed: ${response.status}`);

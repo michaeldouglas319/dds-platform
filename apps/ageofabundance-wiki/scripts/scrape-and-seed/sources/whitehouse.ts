@@ -4,7 +4,7 @@ const WHITEHOUSE_RSS = 'https://www.whitehouse.gov/feed/';
 
 export async function fetchWhiteHouseNews(): Promise<RawArticle[]> {
   try {
-    const response = await fetch(WHITEHOUSE_RSS, { timeout: 10000 });
+    const response = await fetch(WHITEHOUSE_RSS);
 
     if (!response.ok) {
       console.error(`White House RSS fetch failed: ${response.status}`);

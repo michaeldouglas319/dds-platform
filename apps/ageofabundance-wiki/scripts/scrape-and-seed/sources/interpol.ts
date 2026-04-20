@@ -4,7 +4,7 @@ const INTERPOL_RSS = 'https://www.interpol.int/en/news-and-events/feed';
 
 export async function fetchInterpolNotices(): Promise<RawArticle[]> {
   try {
-    const response = await fetch(INTERPOL_RSS, { timeout: 10000 });
+    const response = await fetch(INTERPOL_RSS);
 
     if (!response.ok) {
       console.error(`INTERPOL RSS fetch failed: ${response.status}`);
