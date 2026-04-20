@@ -17,10 +17,10 @@ export type {
   GraphFilter,
   FilteredGraphData,
   GraphViewport,
-  GraphTooltip,
   GraphViewState,
   GraphViewAction,
   GraphViewContextType,
+  GraphTooltip as GraphTooltipState,
 } from './types';
 
 // ─── Reducer ──────────────────────────────────────────────────────
@@ -116,12 +116,12 @@ export {
   getSelectionAnimationStyle,
   getNodeAriaLabel,
   getEdgeAriaLabel,
-} from './interaction.tsx';
+} from './interaction';
 
 export type {
   HoverState,
   GraphTooltipComponentProps,
-} from './interaction.tsx';
+} from './interaction';
 
 // ─── Debounce Utilities ────────────────────────────────────────────
 export {
