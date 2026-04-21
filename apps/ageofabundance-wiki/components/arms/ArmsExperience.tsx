@@ -72,6 +72,18 @@ export default function ArmsExperience() {
     fetchEvents()
   }, [state.activeTag, state.dateRange])
 
+  // Extract unique tags from events data
+  const availableTags = useMemo(() => {
+    const tags = new Set<string>()
+    state.events.forEach((event) => {
+      if (event.tag) {
+        tags.add(event.tag)
+      }
+    })
+    // Sort alphabetically for consistent display
+    return Array.from(tags).sort()
+  }, [state.events])
+
   // Compute filtered events based on tag + date
   const filteredEvents = useMemo(() => {
     return state.events.filter((e) => {
@@ -178,20 +190,23 @@ export default function ArmsExperience() {
             data-active={state.activeTag === null || state.activeTag === 'all'}
             onClick={() => handleTagChange(null)}
           >
-            All Events
+            All Events ({state.events.length})
           </button>
-          {['lethal', 'protest', 'political', 'infrastructure', 'cyber', 'displacement', 'famine', 'disease', 'disaster', 'science'].map(
-            (tag) => (
-              <button
-                key={tag}
-                className="arms-tag-chip"
-                data-active={state.activeTag === tag}
-                onClick={() => handleTagChange(state.activeTag === tag ? null : tag)}
-              >
-                <span className="dot"></span>
-                {tag}
-              </button>
-            )
+          {availableTags.map(
+            (tag) => {
+              const count = state.events.filter((e) => e.tag === tag).length
+              return (
+                <button
+                  key={tag}
+                  className="arms-tag-chip"
+                  data-active={state.activeTag === tag}
+                  onClick={() => handleTagChange(state.activeTag === tag ? null : tag)}
+                >
+                  <span className="dot"></span>
+                  {tag} ({count})
+                </button>
+              )
+            }
           )}
         </div>
 
