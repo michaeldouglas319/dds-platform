@@ -77,5 +77,3 @@ export const GraphLoadingSpinner: React.FC<GraphLoadingSpinnerProps> = ({
     </div>
   );
 };
-
-export type { GraphLoadingSpinnerProps };

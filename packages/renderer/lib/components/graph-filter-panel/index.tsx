@@ -2,7 +2,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react';
 import { useGraphView, useGraphViewFilter } from '../../graph-utils/context';
-import { filterGraphData } from '../../graph-utils/filtering';
+import { applyGraphFilter } from '../../graph-utils/filtering';
 import type { GraphFilter, GraphNode } from '../../graph-utils/types';
 import styles from './graph-filter-panel.module.css';
 
@@ -48,8 +48,8 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   className = '',
   isOpen = true,
 }) => {
-  const { state, setFilter, clearFilters } = useGraphView();
-  const filter = state.filters;
+  const { state, setFilter, clearFilter } = useGraphView();
+  const filter = state.filter;
 
   // Debounced search state
   const [searchInput, setSearchInput] = useState(filter.searchQuery || '');
@@ -112,8 +112,8 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
    */
   const handleClearFilters = useCallback(() => {
     setSearchInput('');
-    clearFilters();
-  }, [clearFilters]);
+    clearFilter();
+  }, [clearFilter]);
 
   /**
    * Calculate visible node count based on current filters
@@ -121,7 +121,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   const visibleNodeCount = useMemo(() => {
     if (nodes.length === 0) return 0;
 
-    const filtered = filterGraphData(
+    const filtered = applyGraphFilter(
       { nodes, edges: [] },
       filter
     );

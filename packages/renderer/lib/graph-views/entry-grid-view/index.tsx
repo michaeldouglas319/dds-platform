@@ -130,7 +130,7 @@ const VirtualizedGridContainer: React.FC<{
   return (
     <div
       ref={containerRef}
-      className={`${styles.virtualizedContainer} ${className}`}
+      className={`${styles.container} ${className}`}
       style={{
         ...gridStyles.container,
         overflowY: 'auto',
