@@ -49,9 +49,14 @@ Each item below is scoped to be shippable in a single focused session.
 - [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header link to tag pages.
   _Shipped: see session log below._
-- [x] **Full-text search** — client-side in-memory search with ARIA
-  combobox pattern, Cmd+K shortcut, relevance-ranked results. Zero
-  external dependencies; API designed for future FlexSearch/Pagefind swap.
+- [x] **Full-text search** — evaluated Pagefind, Orama, FlexSearch;
+  shipped a custom lightweight implementation (zero deps, ~2KB client JS)
+  with field-weighted scoring (title 10x > tags 5x > summary 3x > body
+  1x), AND semantics, prefix matching. WAI-ARIA combobox pattern with
+  `role="combobox"`, `role="listbox"`, `aria-activedescendant` keyboard
+  navigation (arrows/enter/escape/home/end), Cmd/Ctrl+K global shortcut.
+  Site header with logo + search trigger added to layout. 44px touch
+  targets. Swap to Pagefind when article count exceeds ~50.
   _Shipped: see session log below._
 - [ ] **Recent changes feed** — `/recent` page sorted by `lastUpdatedISO`,
   JSON feed at `/recent.json`.
@@ -88,6 +93,62 @@ Each item below is scoped to be shippable in a single focused session.
   white, show wiki-link hrefs.
 - [ ] **OG image generation** — per-article dynamic OG cards via
   `@vercel/og`.
+
+---
+
+## Strategic Tracks — Renderer Unification, Visual Vocabulary, Chat
+
+### Track A — Renderer Unification
+
+Goal: Every consumer app renders through @dds/renderer + site.config.json.
+
+- [x] **A1: Wiki renderer plugins** — wrap existing wiki components
+  (WikiArticle, ArticleCard, WikiToc, WikiBacklinks, WikiText) as
+  @dds/renderer registry entries: `wiki-article`, `wiki-card-grid`,
+  `wiki-index`, `wiki-toc`, `wiki-backlinks`. Extended registry at
+  `renderers/wiki-registry.js` preserves all 13 default layout keys
+  and adds 5 wiki-specific keys. 28 new vitest tests.
+  _Shipped: see session log below._
+- [ ] **A2: UniversalSection schema extensions** — formalize `meta.wiki`,
+  `content.wikiLinks` in @dds/types as optional typed fields. Additive
+  only; existing sections must still parse.
+- [ ] **A3: Convert wiki home page** to render via SectionBatchRenderer
+  + site.config.json.
+- [ ] **A4: Convert wiki article page** (`/a/[slug]`) to render via
+  SectionBatchRenderer.
+- [ ] **A5: Convert wiki article index** (`/a`) to render via
+  SectionBatchRenderer.
+- [ ] **A6: Convert stub apps** (info, net, others) to site.config.json
+  + SectionBatchRenderer.
+- [ ] **A7: Extract shared wiki layout** (breadcrumbs, metadata bar,
+  footer) into a shared renderer plugin.
+
+### Track B — Visual Vocabulary & Fluid Navigation
+
+- [ ] **B1: VariantSwitcher** — strip of variant thumbnails for cycling
+  through layout variations of the same section data.
+- [ ] **B2: Alternate layout variants** for existing renderers
+  (hero-minimal/cinematic/split, text-prose/columns/highlight,
+  stats-radial/ticker).
+- [ ] **B3: Drill-down mechanics** — in-place card/section expansion
+  via View Transitions API or Framer Motion layout animations.
+- [ ] **B4: Section-level theme variant picker** — floating pill selector.
+- [ ] **B5: Presentation mode** — full-screen, keyboard-navigable
+  section-by-section walkthrough.
+- [ ] **B6: Micro-interactions** — hover reveals, parallax depth,
+  scroll-triggered entrances (behind prefers-reduced-motion).
+
+### Track C — Chat Provider Interface
+
+- [ ] **C1: ChatProvider interface** in @dds/types.
+- [ ] **C2: @dds/chat package** — ChatProvider, useChatContext, ChatPanel.
+- [ ] **C3: Wire ChatProvider** to current page's UniversalSection data.
+- [ ] **C4: ChatTrigger renderer plugin**.
+- [ ] **C5: Vercel AI SDK integration**.
+- [ ] **C6: Chat-to-navigation** — deep links in chat responses.
+- [ ] **C7: Chat memory** across sections/navigation.
+
+---
 
 ## Schema extensions (proposed, deferred)
 
@@ -228,34 +289,63 @@ Each item below is scoped to be shippable in a single focused session.
   unit tests pass, no regressions. Backward compatibility: `@dds/types`
   untouched; existing routes unchanged; zero client JS on tag pages.
   Shipped as commit `de02177185c9fe8a2dd57c9edef44bad6f9bbd41`.
-- 2026-04-12 — **Full-text search** shipped. New `content/wiki-search.js`
-  module builds a pre-computed, in-memory search index from the article
-  dataset (title, summary, body, tags, paragraph descriptions). Wiki-link
-  syntax is stripped via `stripWikiLinks()` before indexing. Search uses
-  case-insensitive substring matching with a relevance heuristic (title
-  match +3, summary +2, body +1). New `components/wiki-search.jsx`
-  client component implements the WAI-ARIA combobox pattern: `role=
-  "combobox"` input with `aria-expanded`, `aria-controls`,
-  `aria-activedescendant`; `role="listbox"` results with `role="option"`
-  items; `aria-live="polite"` status region for SR result count
-  announcements. Keyboard: Ctrl+K / Cmd+K focuses, ArrowDown/Up
-  navigates, Enter selects, Escape closes, Home/End jump. Results show
-  title, category kicker, and 2-line summary clamp. Close on outside
-  click. `app/layout.jsx` now renders a sticky site header (`<header
-  role="banner">`) with logo, "All articles" nav link, and search —
-  available on every page. `getSearchEntries()` pre-populates the
-  client index from the RSC at no extra client cost. CSS: sticky header
-  with `z-index: 50`, search input with focus-within ring, listbox
-  dropdown with shadow, mobile-responsive (≤480px hides nav link,
-  widens listbox). `scroll-margin-top` on `h2[id]` increased to
-  4.5rem to clear the header. Kbd hint (`⌘K`) hidden on touch devices
-  via `@media (hover: hover)`. 13 new vitest unit tests cover: index
-  shape, lowercase, no bracket syntax, title-in-searchText, empty
-  query, title match, tag match, case-insensitive, ranking, limit,
-  no-match, getSearchEntries shape. 7 new Playwright E2E tests cover:
-  header + ARIA attributes, query → listbox with results, no-results
-  state, arrow-key + Enter navigation, Escape close, click navigation,
-  status region count. All 36 wiki E2E + 154 unit tests pass, no
-  regressions. Zero new dependencies. Backward compatible — no
-  `@dds/types` changes; existing routes unchanged.
-  Shipped as commit `734009d`.
+- 2026-04-12 — **Full-text search** shipped. Evaluated Pagefind (~6KB
+  JS+WASM, best for large static sites), Orama (~45KB, good BM25
+  ranking), and FlexSearch (~6–22KB, weak relevance). Chose a custom
+  zero-dependency implementation (~2KB client JS) suited to the current
+  3-article dataset, with a clear upgrade path to Pagefind at ~50+
+  articles. New `content/wiki-search.js` builds a static search index
+  at RSC render time with field-weighted scoring: title text repeated
+  10x, tags 5x, summary 3x, body 1x — substring matching with AND
+  semantics across query tokens. New `components/wiki-search.jsx`
+  (`'use client'`) implements the WAI-ARIA combobox pattern:
+  `role="combobox"` input with `aria-expanded`, `aria-controls`,
+  `aria-autocomplete="list"`, `aria-activedescendant`; `role="listbox"`
+  results with `role="option"` items; arrow key navigation, Enter to
+  select, Escape to close, Home/End, Cmd/Ctrl+K global shortcut,
+  click-outside dismissal. `aria-live="polite"` region announces result
+  count. Each result shows category kicker, title, and 2-line summary
+  excerpt. New `.wiki-site-header` added to `layout.jsx` with sticky
+  positioning, site logo link, and search trigger button. All
+  interactive elements meet 44px touch-target minimum. CSS uses only
+  custom properties; overlay + dialog use the existing design tokens.
+  `prefers-reduced-motion` guard inherited from the global rule. 24 new
+  vitest unit tests cover: index shape, field contents, lowercasing,
+  wiki-link stripping, scoring (empty/match/miss/AND/weighting/case/
+  prefix), and search ranking (relevance order, multi-word, limit,
+  tag-only queries). 8 new Playwright E2E tests: trigger visibility,
+  dialog open + focus, query results in listbox, keyboard navigation
+  (arrow/enter), escape close, empty state + live region, touch targets,
+  site header on all pages. All 37 existing wiki E2E + 8 new = 45 wiki
+  tests pass; 165 vitest unit tests pass. Zero regressions. Backward
+  compatibility: `@dds/types` untouched; existing routes unchanged;
+  search adds ~2KB client JS to layout only.
+  Shipped as commit `a7d7efaa`.
+- 2026-04-13 — **Track A1: Wiki renderer plugins** shipped. Created 5
+  renderer plugin components that wrap existing wiki components as
+  @dds/renderer registry entries: `WikiArticleRenderer` (wraps
+  `WikiArticle`), `WikiCardGridRenderer` (renders `ArticleCard` grid
+  from `section.children`), `WikiIndexRenderer` (loads all articles +
+  tags, wraps `TagFilter`), `WikiTocRenderer` (builds TOC entries from
+  `content.paragraphs`, wraps `WikiToc`), `WikiBacklinksRenderer`
+  (resolves target slug from `meta.wiki.targetSlug` or `section.id`,
+  wraps `WikiBacklinks`). New `wiki-registry.js` extends
+  `defaultRegistry` with 5 wiki layout keys while preserving all 13
+  default keys. `wikiEntries` standalone map exported for custom
+  registry composition. Each plugin follows the `RendererComponent`
+  contract: `({ section: UniversalSection }) => ReactNode`. Barrel
+  export at `renderers/index.js`. Vitest config updated with
+  `esbuild: { jsx: 'automatic' }` to support JSX in `.jsx` test files
+  without explicit React imports. 28 new vitest tests cover: registry
+  structure (5 wiki keys present, 13 default keys preserved, no key
+  collisions), `wikiEntries` shape (5 entries, metadata completeness),
+  and component rendering for all 5 renderers (article title/headings/
+  category/metadata, card grid from children + empty states, index
+  title/lede/defaults, TOC entries + navigation landmark + empty
+  states, backlinks with targetSlug + fallback + empty state). All 193
+  vitest tests pass (28 new + 165 existing), zero regressions. E2E
+  tests not runnable in sandbox (Playwright browser binary unavailable)
+  but no code paths in existing pages were modified. Backward
+  compatibility: `@dds/types` untouched; existing pages continue to
+  use direct component imports; new renderers are opt-in via
+  `wikiRegistry`.
