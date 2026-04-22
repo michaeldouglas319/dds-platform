@@ -24,12 +24,14 @@ export {
   Sheet,
   SheetTrigger,
   SheetClose,
+  SheetPortal,
   SheetOverlay,
   SheetContent,
   SheetHeader,
   SheetFooter,
   SheetTitle,
   SheetDescription,
+  type SheetTriggerProps,
   type SheetContentProps,
 } from './components/sheet';
 export {

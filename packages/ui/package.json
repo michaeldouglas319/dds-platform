@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@dds/types": "workspace:*",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/primitive": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "tailwind-merge": "^2.6.0"
