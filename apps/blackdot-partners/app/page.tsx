@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { PartnershipPitch } from '@dds/ui';
 import { SignIn, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { AppChip, getCuneiformByTLD, extractTLD } from '@dds/icons';
 import { DOMAINS } from '@dds/config/domains';
@@ -11,7 +10,6 @@ import siteConfig from '../data/site.config.json';
 import type { ConflictEvent, DebugSettings } from '../components/PoimandresScene';
 import { defaultDebugSettings } from '../components/PoimandresScene';
 import DebugPanel from '../components/DebugPanel';
-import SignedInInsightGlobe from '../components/SignedInInsightGlobe';
 
 const PoimandresScene = dynamic(() => import('../components/PoimandresScene'), {
   ssr: false,
@@ -123,19 +121,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* ── Partnership pitch (copy only; form handled by Clerk below) ─── */}
-      <SignedOut>
-        <div id="partner">
-          <PartnershipPitch
-            headline="Join the Wait List"
-            subheadline="Or show your interest by registering for a Partnership."
-            stats={[]}
-            tiers={[]}
-            hideForm
-          />
-        </div>
-      </SignedOut>
-
       {/* ── Sign in / account ─── */}
       <div
         id="sign-in"
@@ -158,13 +143,8 @@ export default function Home() {
               gap: '1.5rem',
               textAlign: 'center',
               maxWidth: '52rem',
-              width: '100%',
             }}
           >
-            {/* Expanded insight view — signed-in only. Does not touch the backdrop globe above. */}
-            <div style={{ width: '100%', maxWidth: '1100px' }}>
-              <SignedInInsightGlobe events={events} />
-            </div>
             <div
               style={{
                 display: 'grid',
@@ -211,19 +191,6 @@ export default function Home() {
                     <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'rgba(0,0,0,0.7)' }}>
                       {d.label}
                     </span>
-                    {d.status && (
-                      <span
-                        style={{
-                          fontSize: '0.65rem',
-                          fontWeight: 600,
-                          letterSpacing: '0.05em',
-                          textTransform: 'uppercase',
-                          color: d.status === 'live' ? '#059669' : 'rgba(0,0,0,0.3)',
-                        }}
-                      >
-                        {d.status === 'live' ? 'Live' : 'Soon'}
-                      </span>
-                    )}
                   </a>
                 );
               })}
