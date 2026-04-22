@@ -34,26 +34,24 @@ Each item below is scoped to be shippable in a single focused session.
   links to the current page. Built by inverting the wiki-link graph at
   build time.
   _Shipped: see session log below._
-- [x] **Wire wiki app into `@dds/hub` domain router** — created
-  `@dds/wiki-data` shared package with articles dataset, built wiki
-  renderer in hub that displays featured articles, updated domain
-  routing to serve `ageofabundance.wiki` via wiki renderer. Both hub
-  and wiki app now import from shared package. Shipped as commit
-  `a7518ab`.
+- [ ] **Wire wiki app into `@dds/hub` domain router** — the hub
+  (`apps/hub/config/domains.ts`) currently serves `ageofabundance.wiki`
+  via `renderer: 'landing'`, so the article primitive shipped this
+  session is not yet reachable at the public domain. Either (a) add a
+  `wiki` renderer in `apps/hub/renderers/` that reads from
+  `apps/ageofabundance-wiki/content/articles.js` (after lifting it to
+  a shared package), or (b) re-point the `ageofabundance-wiki` Vercel
+  project back to `dds-platform/main`. Must not break existing
+  domains' routing.
 
 ## P0 — Navigation & discovery
 
 - [x] **Categories** — tag pages at `/t/[tag]` listing all articles with
   that tag; tag chips in article header link to tag pages.
   _Shipped: see session log below._
-- [x] **Full-text search** — evaluated Pagefind, Orama, FlexSearch;
-  shipped a custom lightweight implementation (zero deps, ~2KB client JS)
-  with field-weighted scoring (title 10x > tags 5x > summary 3x > body
-  1x), AND semantics, prefix matching. WAI-ARIA combobox pattern with
-  `role="combobox"`, `role="listbox"`, `aria-activedescendant` keyboard
-  navigation (arrows/enter/escape/home/end), Cmd/Ctrl+K global shortcut.
-  Site header with logo + search trigger added to layout. 44px touch
-  targets. Swap to Pagefind when article count exceeds ~50.
+- [x] **Full-text search** — client-side in-memory search with ARIA
+  combobox pattern, Cmd+K shortcut, relevance-ranked results. Zero
+  external dependencies; API designed for future FlexSearch/Pagefind swap.
   _Shipped: see session log below._
 - [ ] **Recent changes feed** — `/recent` page sorted by `lastUpdatedISO`,
   JSON feed at `/recent.json`.
@@ -230,51 +228,34 @@ Each item below is scoped to be shippable in a single focused session.
   unit tests pass, no regressions. Backward compatibility: `@dds/types`
   untouched; existing routes unchanged; zero client JS on tag pages.
   Shipped as commit `de02177185c9fe8a2dd57c9edef44bad6f9bbd41`.
-- 2026-04-12 — **Full-text search** shipped. Evaluated Pagefind (~6KB
-  JS+WASM, best for large static sites), Orama (~45KB, good BM25
-  ranking), and FlexSearch (~6–22KB, weak relevance). Chose a custom
-  zero-dependency implementation (~2KB client JS) suited to the current
-  3-article dataset, with a clear upgrade path to Pagefind at ~50+
-  articles. New `content/wiki-search.js` builds a static search index
-  at RSC render time with field-weighted scoring: title text repeated
-  10x, tags 5x, summary 3x, body 1x — substring matching with AND
-  semantics across query tokens. New `components/wiki-search.jsx`
-  (`'use client'`) implements the WAI-ARIA combobox pattern:
-  `role="combobox"` input with `aria-expanded`, `aria-controls`,
-  `aria-autocomplete="list"`, `aria-activedescendant`; `role="listbox"`
-  results with `role="option"` items; arrow key navigation, Enter to
-  select, Escape to close, Home/End, Cmd/Ctrl+K global shortcut,
-  click-outside dismissal. `aria-live="polite"` region announces result
-  count. Each result shows category kicker, title, and 2-line summary
-  excerpt. New `.wiki-site-header` added to `layout.jsx` with sticky
-  positioning, site logo link, and search trigger button. All
-  interactive elements meet 44px touch-target minimum. CSS uses only
-  custom properties; overlay + dialog use the existing design tokens.
-  `prefers-reduced-motion` guard inherited from the global rule. 24 new
-  vitest unit tests cover: index shape, field contents, lowercasing,
-  wiki-link stripping, scoring (empty/match/miss/AND/weighting/case/
-  prefix), and search ranking (relevance order, multi-word, limit,
-  tag-only queries). 8 new Playwright E2E tests: trigger visibility,
-  dialog open + focus, query results in listbox, keyboard navigation
-  (arrow/enter), escape close, empty state + live region, touch targets,
-  site header on all pages. All 37 existing wiki E2E + 8 new = 45 wiki
-  tests pass; 165 vitest unit tests pass. Zero regressions. Backward
-  compatibility: `@dds/types` untouched; existing routes unchanged;
-  search adds ~2KB client JS to layout only.
-  Shipped as commit `a7d7efaa`.
-- 2026-04-13 — **Wire wiki app into @dds/hub domain router** shipped.
-  Created new `@dds/wiki-data` shared package (`packages/wiki-data/`)
-  with articles.ts (seed dataset + helpers), types (WikiMeta, WikiArticle),
-  and index.ts exports. Created `apps/hub/renderers/wiki.tsx` wiki renderer
-  that displays featured articles in a styled grid on the root page. Updated
-  `apps/hub/config/domains.ts` to route `ageofabundance.wiki` and
-  `theageofabundance.wiki` to use the 'wiki' renderer. Updated
-  `apps/hub/app/page.tsx` to handle wiki renderer case. Migrated
-  `apps/ageofabundance-wiki/app/page.jsx` to import from shared package
-  instead of local articles.js. Updated `@dds/types/package.json` exports
-  to include section and config subpaths. Both hub and wiki apps build
-  successfully; all 165 unit tests pass. Zero regressions. Backward
-  compatibility: `@dds/types` remains compatible (subpath exports are
-  additive); UniversalSection schema unchanged; no breaking API changes.
-  Wiki articles now reachable at public domain through hub routing.
-  Shipped as commit `a7518ab`.
+- 2026-04-12 — **Full-text search** shipped. New `content/wiki-search.js`
+  module builds a pre-computed, in-memory search index from the article
+  dataset (title, summary, body, tags, paragraph descriptions). Wiki-link
+  syntax is stripped via `stripWikiLinks()` before indexing. Search uses
+  case-insensitive substring matching with a relevance heuristic (title
+  match +3, summary +2, body +1). New `components/wiki-search.jsx`
+  client component implements the WAI-ARIA combobox pattern: `role=
+  "combobox"` input with `aria-expanded`, `aria-controls`,
+  `aria-activedescendant`; `role="listbox"` results with `role="option"`
+  items; `aria-live="polite"` status region for SR result count
+  announcements. Keyboard: Ctrl+K / Cmd+K focuses, ArrowDown/Up
+  navigates, Enter selects, Escape closes, Home/End jump. Results show
+  title, category kicker, and 2-line summary clamp. Close on outside
+  click. `app/layout.jsx` now renders a sticky site header (`<header
+  role="banner">`) with logo, "All articles" nav link, and search —
+  available on every page. `getSearchEntries()` pre-populates the
+  client index from the RSC at no extra client cost. CSS: sticky header
+  with `z-index: 50`, search input with focus-within ring, listbox
+  dropdown with shadow, mobile-responsive (≤480px hides nav link,
+  widens listbox). `scroll-margin-top` on `h2[id]` increased to
+  4.5rem to clear the header. Kbd hint (`⌘K`) hidden on touch devices
+  via `@media (hover: hover)`. 13 new vitest unit tests cover: index
+  shape, lowercase, no bracket syntax, title-in-searchText, empty
+  query, title match, tag match, case-insensitive, ranking, limit,
+  no-match, getSearchEntries shape. 7 new Playwright E2E tests cover:
+  header + ARIA attributes, query → listbox with results, no-results
+  state, arrow-key + Enter navigation, Escape close, click navigation,
+  status region count. All 36 wiki E2E + 154 unit tests pass, no
+  regressions. Zero new dependencies. Backward compatible — no
+  `@dds/types` changes; existing routes unchanged.
+  Shipped as commit `734009d`.

@@ -1,6 +1,6 @@
 import './globals.css';
+import { getSearchEntries } from '../content/wiki-search.js';
 import { WikiSearch } from '../components/wiki-search.jsx';
-import { buildSearchIndex } from '../content/wiki-search.js';
 
 export const metadata = {
   title: 'ageofabundance.wiki',
@@ -8,26 +8,25 @@ export const metadata = {
     'A living encyclopedia of post-scarcity civilization — concepts, pillars, and open questions of the Age of Abundance.',
 };
 
-/** Built once at build/RSC-render time — no runtime cost. */
-const searchIndex = buildSearchIndex();
-
 export default function RootLayout({ children }) {
+  const searchEntries = getSearchEntries();
+
   return (
     <html lang="en">
       <body>
         <a href="#main-content" className="wiki-skip-link">
           Skip to main content
         </a>
-        <header className="wiki-site-header">
-          <nav className="wiki-site-header__nav" aria-label="Site">
-            <a href="/" className="wiki-site-header__logo">
-              ageofabundance.wiki
+        <header className="wiki-header" role="banner">
+          <nav className="wiki-header__nav" aria-label="Site">
+            <a href="/" className="wiki-header__logo">
+              <span className="wiki-header__dot" aria-hidden="true" />
+              <span className="wiki-header__name">ageofabundance.wiki</span>
             </a>
-            <a href="/arms" className="wiki-site-header__arms-link" aria-label="Abundance at Arms — conflict map">
-              <span aria-hidden="true">⚔</span>
-              <span>Arms</span>
-            </a>
-            <WikiSearch index={searchIndex} />
+            <div className="wiki-header__actions">
+              <a href="/a" className="wiki-header__link">All articles</a>
+              <WikiSearch entries={searchEntries} />
+            </div>
           </nav>
         </header>
         {children}

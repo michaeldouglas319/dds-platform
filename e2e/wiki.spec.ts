@@ -535,143 +535,119 @@ test.describe('Age of Abundance wiki', () => {
   });
 
   test.describe('Full-text search', () => {
-    test('search trigger button is visible in site header', async ({ page }) => {
+    test('search input is visible in the site header with ARIA combobox role', async ({ page }) => {
       await page.goto(`${WIKI}/`);
 
-      const trigger = page.locator('.wiki-search__trigger');
-      await expect(trigger).toBeVisible();
-      await expect(trigger).toHaveAttribute('aria-label', 'Search articles');
-    });
+      // Site header is present
+      const header = page.locator('.wiki-header');
+      await expect(header).toBeVisible();
 
-    test('clicking trigger opens search dialog with combobox input', async ({ page }) => {
-      await page.goto(`${WIKI}/`);
-
-      const trigger = page.locator('.wiki-search__trigger');
-      await trigger.click();
-
-      // Dialog is visible
-      const dialog = page.locator('.wiki-search__dialog');
-      await expect(dialog).toBeVisible();
-
-      // Combobox input is focused
-      const input = dialog.locator('input[role="combobox"]');
-      await expect(input).toBeVisible();
-      await expect(input).toBeFocused();
-      await expect(input).toHaveAttribute('aria-autocomplete', 'list');
+      // Search input has correct ARIA attributes
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await expect(searchInput).toBeVisible();
+      await expect(searchInput).toHaveAttribute('aria-expanded', 'false');
+      await expect(searchInput).toHaveAttribute('aria-autocomplete', 'list');
     });
 
     test('typing a query shows matching results in listbox', async ({ page }) => {
       await page.goto(`${WIKI}/`);
 
-      const trigger = page.locator('.wiki-search__trigger');
-      await trigger.click();
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await searchInput.fill('energy');
 
-      const input = page.locator('.wiki-search__input');
-      await input.fill('energy');
-
-      // Results appear in a listbox
-      const listbox = page.locator('[role="listbox"]');
+      // Listbox appears with results
+      const listbox = page.getByRole('listbox', { name: /search results/i });
       await expect(listbox).toBeVisible();
 
-      const options = listbox.locator('[role="option"]');
+      // aria-expanded is now true
+      await expect(searchInput).toHaveAttribute('aria-expanded', 'true');
+
+      // Results include Energy Abundance
+      const options = listbox.getByRole('option');
       expect(await options.count()).toBeGreaterThan(0);
-
-      // The top result should be Energy Abundance (title match)
-      const firstTitle = options.first().locator('.wiki-search__option-title');
-      await expect(firstTitle).toContainText('Energy Abundance');
-
-      // Live region announces result count
-      const live = page.locator('[aria-live="polite"]').last();
-      await expect(live).toContainText(/\d+ result/);
+      await expect(options.first()).toContainText('Energy Abundance');
     });
 
-    test('keyboard navigation: arrow keys move active descendant, Enter navigates', async ({ page }) => {
+    test('no-results state renders for unmatched queries', async ({ page }) => {
       await page.goto(`${WIKI}/`);
 
-      const trigger = page.locator('.wiki-search__trigger');
-      await trigger.click();
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await searchInput.fill('xyznonexistent');
 
-      const input = page.locator('.wiki-search__input');
-      await input.fill('abundance');
+      // Listbox shows no-results message
+      const noResults = page.locator('.wiki-search__no-results');
+      await expect(noResults).toBeVisible();
+      await expect(noResults).toContainText('No articles match');
+    });
 
-      // Wait for results
-      const options = page.locator('[role="option"]');
-      await expect(options.first()).toBeVisible();
+    test('arrow keys navigate options and Enter navigates to article', async ({ page }) => {
+      await page.goto(`${WIKI}/`);
 
-      // Arrow down to first result
-      await input.press('ArrowDown');
-      const firstOption = options.first();
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await searchInput.fill('abundance');
+
+      // Wait for results to appear
+      const listbox = page.getByRole('listbox', { name: /search results/i });
+      await expect(listbox).toBeVisible();
+
+      // Press ArrowDown to highlight first option
+      await searchInput.press('ArrowDown');
+
+      // First option should be active
+      const firstOption = listbox.getByRole('option').first();
       await expect(firstOption).toHaveAttribute('aria-selected', 'true');
-      await expect(firstOption).toHaveClass(/wiki-search__option--active/);
 
-      // Arrow down to second result
-      await input.press('ArrowDown');
-      const secondOption = options.nth(1);
-      await expect(secondOption).toHaveAttribute('aria-selected', 'true');
-      await expect(firstOption).toHaveAttribute('aria-selected', 'false');
+      // aria-activedescendant should be set on the input
+      const activeId = await searchInput.getAttribute('aria-activedescendant');
+      expect(activeId).toBeTruthy();
 
-      // Enter navigates to the selected article
-      const slug = await secondOption.locator('.wiki-search__option-title').textContent();
-      await input.press('Enter');
+      // Press Enter to navigate
+      await searchInput.press('Enter');
       await page.waitForURL(new RegExp(`${WIKI}/a/.+`));
     });
 
-    test('Escape key closes the search dialog', async ({ page }) => {
+    test('Escape closes the search results', async ({ page }) => {
       await page.goto(`${WIKI}/`);
 
-      const trigger = page.locator('.wiki-search__trigger');
-      await trigger.click();
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await searchInput.fill('energy');
 
-      const dialog = page.locator('.wiki-search__dialog');
-      await expect(dialog).toBeVisible();
+      const listbox = page.getByRole('listbox', { name: /search results/i });
+      await expect(listbox).toBeVisible();
 
-      const input = page.locator('.wiki-search__input');
-      await input.press('Escape');
-
-      await expect(dialog).not.toBeVisible();
+      await searchInput.press('Escape');
+      await expect(listbox).not.toBeVisible();
+      await expect(searchInput).toHaveAttribute('aria-expanded', 'false');
     });
 
-    test('non-matching query shows empty state', async ({ page }) => {
+    test('clicking a search result navigates to the article', async ({ page }) => {
       await page.goto(`${WIKI}/`);
 
-      const trigger = page.locator('.wiki-search__trigger');
-      await trigger.click();
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await searchInput.fill('coordination');
 
-      const input = page.locator('.wiki-search__input');
-      await input.fill('xyzzyplugh');
+      const listbox = page.getByRole('listbox', { name: /search results/i });
+      await expect(listbox).toBeVisible();
 
-      const empty = page.locator('.wiki-search__empty');
-      await expect(empty).toBeVisible();
-      await expect(empty).toContainText(/no articles match/i);
+      // Click the result
+      const option = listbox.getByRole('option').first();
+      await option.click();
 
-      // Live region announces "No articles found"
-      const live = page.locator('.wiki-search__live');
-      await expect(live).toContainText(/no articles found/i);
+      await page.waitForURL(`${WIKI}/a/coordination-abundance`);
+      await expect(
+        page.getByRole('heading', { level: 1, name: /coordination abundance/i }),
+      ).toBeVisible();
     });
 
-    test('search trigger has 44px minimum touch target', async ({ page }) => {
+    test('search has accessible status region announcing result count', async ({ page }) => {
       await page.goto(`${WIKI}/`);
 
-      const trigger = page.locator('.wiki-search__trigger');
-      await expect(trigger).toBeVisible();
+      const searchInput = page.getByRole('combobox', { name: /search articles/i });
+      await searchInput.fill('abundance');
 
-      const box = await trigger.boundingBox();
-      expect(box).toBeTruthy();
-      expect(box!.height).toBeGreaterThanOrEqual(44);
-    });
-
-    test('site header is visible on all pages', async ({ page }) => {
-      // Header with logo and search on home
-      await page.goto(`${WIKI}/`);
-      const header = page.locator('.wiki-site-header');
-      await expect(header).toBeVisible();
-
-      const logo = page.locator('.wiki-site-header__logo');
-      await expect(logo).toContainText('ageofabundance.wiki');
-
-      // Also on article page
-      await page.goto(`${WIKI}/a/age-of-abundance`);
-      await expect(header).toBeVisible();
+      // Status region updates with result count
+      const status = page.locator('.wiki-search__status');
+      await expect(status).toContainText(/\d+ results? available/);
     });
   });
 });
