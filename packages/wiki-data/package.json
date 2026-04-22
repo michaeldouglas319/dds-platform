@@ -1,0 +1,14 @@
+{
+  "name": "@dds/wiki-data",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./articles": "./articles.ts"
+  },
+  "dependencies": {
+    "@dds/types": "workspace:*"
+  }
+}

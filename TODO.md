@@ -34,15 +34,12 @@ Each item below is scoped to be shippable in a single focused session.
   links to the current page. Built by inverting the wiki-link graph at
   build time.
   _Shipped: see session log below._
-- [ ] **Wire wiki app into `@dds/hub` domain router** — the hub
-  (`apps/hub/config/domains.ts`) currently serves `ageofabundance.wiki`
-  via `renderer: 'landing'`, so the article primitive shipped this
-  session is not yet reachable at the public domain. Either (a) add a
-  `wiki` renderer in `apps/hub/renderers/` that reads from
-  `apps/ageofabundance-wiki/content/articles.js` (after lifting it to
-  a shared package), or (b) re-point the `ageofabundance-wiki` Vercel
-  project back to `dds-platform/main`. Must not break existing
-  domains' routing.
+- [x] **Wire wiki app into `@dds/hub` domain router** — created
+  `@dds/wiki-data` shared package with articles dataset, built wiki
+  renderer in hub that displays featured articles, updated domain
+  routing to serve `ageofabundance.wiki` via wiki renderer. Both hub
+  and wiki app now import from shared package. Shipped as commit
+  `a7518ab`.
 
 ## P0 — Navigation & discovery
 
@@ -265,3 +262,19 @@ Each item below is scoped to be shippable in a single focused session.
   compatibility: `@dds/types` untouched; existing routes unchanged;
   search adds ~2KB client JS to layout only.
   Shipped as commit `a7d7efaa`.
+- 2026-04-13 — **Wire wiki app into @dds/hub domain router** shipped.
+  Created new `@dds/wiki-data` shared package (`packages/wiki-data/`)
+  with articles.ts (seed dataset + helpers), types (WikiMeta, WikiArticle),
+  and index.ts exports. Created `apps/hub/renderers/wiki.tsx` wiki renderer
+  that displays featured articles in a styled grid on the root page. Updated
+  `apps/hub/config/domains.ts` to route `ageofabundance.wiki` and
+  `theageofabundance.wiki` to use the 'wiki' renderer. Updated
+  `apps/hub/app/page.tsx` to handle wiki renderer case. Migrated
+  `apps/ageofabundance-wiki/app/page.jsx` to import from shared package
+  instead of local articles.js. Updated `@dds/types/package.json` exports
+  to include section and config subpaths. Both hub and wiki apps build
+  successfully; all 165 unit tests pass. Zero regressions. Backward
+  compatibility: `@dds/types` remains compatible (subpath exports are
+  additive); UniversalSection schema unchanged; no breaking API changes.
+  Wiki articles now reachable at public domain through hub routing.
+  Shipped as commit `a7518ab`.
