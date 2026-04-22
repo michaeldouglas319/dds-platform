@@ -10,6 +10,9 @@ import { SectorsGridRenderer } from './renderers/sectors-grid-renderer';
 import { EntryHighlightRenderer } from './renderers/entry-highlight-renderer';
 import { EntryGridRenderer } from './renderers/entry-grid-renderer';
 import { KnowledgeGraphSection } from './renderers/knowledge-graph-section';
+import { CarouselR3F } from './renderers/carousel-r3f';
+import { CodeDiffR3F } from './renderers/code-diff-r3f';
+import { IntroR3F } from './renderers/intro-r3f';
 
 /**
  * Create a custom registry from a map of renderer entries.
@@ -139,6 +142,57 @@ const knowledgeGraph: RendererEntry = {
   },
 };
 
+// ─── Interactive R3F Renderers ──────────────────────────────────
+
+const carouselR3F: RendererEntry = {
+  component: CarouselR3F,
+  metadata: {
+    name: 'carousel-r3f',
+    displayName: 'Interactive 3D Carousel',
+    description: 'Interactive 3D carousel with prev/next navigation and circular image arrangement',
+    required: {
+      media: ['image'],
+    },
+    optional: {
+      meta: ['autoplay', 'itemCount'],
+    },
+    layouts: ['carousel', 'carousel-r3f'],
+  },
+};
+
+const codeDiffR3F: RendererEntry = {
+  component: CodeDiffR3F,
+  metadata: {
+    name: 'code-diff-r3f',
+    displayName: 'Interactive Code Diff',
+    description: 'Side-by-side or stacked code comparison with toggle view',
+    required: {
+      content: ['body'],
+    },
+    optional: {
+      content: ['items'],
+      meta: ['language', 'lineNumbers'],
+    },
+    layouts: ['code-diff', 'code-diff-r3f'],
+  },
+};
+
+const introR3F: RendererEntry = {
+  component: IntroR3F,
+  metadata: {
+    name: 'intro-r3f',
+    displayName: 'Animated Intro Section',
+    description: 'Full-page intro with staggered text reveal and morphing geometry background',
+    optional: {
+      subject: ['title', 'subtitle'],
+      content: ['body'],
+      display: ['animate', 'animationDuration'],
+      meta: ['staggerDelay'],
+    },
+    layouts: ['intro-animated', 'intro-r3f'],
+  },
+};
+
 export const defaultRegistry: RendererRegistry = createRegistry({
   // Hero variants
   intro: hero,
@@ -165,4 +219,11 @@ export const defaultRegistry: RendererRegistry = createRegistry({
   'entry-grid': entryGrid,
   // Knowledge graph (multi-view graph visualization)
   'knowledge-graph': knowledgeGraph,
+  // Interactive R3F Renderers
+  'carousel-r3f': carouselR3F,
+  carousel: carouselR3F,
+  'code-diff-r3f': codeDiffR3F,
+  'code-diff': codeDiffR3F,
+  'intro-r3f': introR3F,
+  'intro-animated': introR3F,
 });

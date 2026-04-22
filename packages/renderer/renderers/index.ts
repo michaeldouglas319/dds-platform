@@ -9,3 +9,8 @@ export { SectorsGridRenderer } from './sectors-grid-renderer';
 export { EntryHighlightRenderer } from './entry-highlight-renderer';
 export { EntryGridRenderer } from './entry-grid-renderer';
 export { KnowledgeGraphSection } from './knowledge-graph-section';
+
+// Interactive R3F Renderers
+export { CarouselR3F } from './carousel-r3f';
+export { CodeDiffR3F } from './code-diff-r3f';
+export { IntroR3F } from './intro-r3f';

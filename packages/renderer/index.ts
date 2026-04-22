@@ -24,6 +24,10 @@ export {
   EntryHighlightRenderer,
   EntryGridRenderer,
   KnowledgeGraphSection,
+  // Interactive R3F Renderers
+  CarouselR3F,
+  CodeDiffR3F,
+  IntroR3F,
 } from './renderers';
 
 // Config (re-export everything)

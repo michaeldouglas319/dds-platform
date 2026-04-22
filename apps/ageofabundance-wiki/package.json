@@ -30,6 +30,8 @@
     "@dds/tsconfig": "workspace:*",
     "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4.2.0",
+    "@types/node": "25.6.0",
+    "@types/react": "18.3.28",
     "@vitest/ui": "^1.0.0",
     "axios": "^1.6.0",
     "node-fetch": "^3.3.0",
