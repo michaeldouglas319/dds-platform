@@ -14,3 +14,8 @@ export { KnowledgeGraphSection } from './knowledge-graph-section';
 export { CarouselR3F } from './carousel-r3f';
 export { CodeDiffR3F } from './code-diff-r3f';
 export { IntroR3F } from './intro-r3f';
+
+// Spatial R3F Renderers (Phase 2)
+export { GlobeR3F } from './globe-r3f';
+export { EarthR3F } from './earth-r3f';
+export { ModelR3F } from './model-r3f';
