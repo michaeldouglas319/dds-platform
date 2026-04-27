@@ -1,15 +1,20 @@
 'use client';
 
+import { getCuneiformForDomain, AppChip } from '@dds/icons';
 import type { RendererProps } from '@dds/types';
 import { cn } from '../lib/utils';
 
 export function HeroRenderer({ section }: RendererProps) {
-  const { subject, content, links, display } = section;
+  const { subject, content, links, display, meta, name } = section;
   const title = subject?.title;
   const subtitle = subject?.subtitle;
   const body = content?.body;
   const highlights = content?.highlights;
   const primaryLink = links?.primary;
+
+  // AppChip integration: extract domain for icon display
+  const domainForIcon = meta?.domain ?? name ?? primaryLink?.href;
+  const cuneiformEntry = domainForIcon ? getCuneiformForDomain(domainForIcon) : undefined;
 
   return (
     <section
@@ -24,11 +29,24 @@ export function HeroRenderer({ section }: RendererProps) {
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl">
-        {subject?.category && (
-          <span className="mb-4 inline-block rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-indigo-400">
-            {subject.category}
-          </span>
-        )}
+        <div className="mb-4 flex items-center justify-center gap-3">
+          {/* AppChip: Large cuneiform icon in hero */}
+          {cuneiformEntry && (
+            <div className="text-indigo-400" title={`${cuneiformEntry.name} — ${cuneiformEntry.meaning}`}>
+              <AppChip
+                entry={cuneiformEntry}
+                size={64}
+                flipDelay={1600}
+                flipDuration={700}
+              />
+            </div>
+          )}
+          {subject?.category && (
+            <span className="inline-block rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-indigo-400">
+              {subject.category}
+            </span>
+          )}
+        </div>
 
         {title && (
           <h1 className="mb-6 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-5xl font-bold leading-tight tracking-tight text-transparent sm:text-6xl lg:text-7xl">

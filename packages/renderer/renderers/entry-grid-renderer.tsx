@@ -1,5 +1,6 @@
 'use client';
 
+import { getCuneiformForDomain, AppChip } from '@dds/icons';
 import type { RendererProps, UniversalSection } from '@dds/types';
 
 type EntryCardItem = Pick<UniversalSection, 'id' | 'name' | 'subject' | 'links' | 'media'>;
@@ -33,6 +34,10 @@ export function EntryGridRenderer({ section }: RendererProps) {
               const href = item.links?.primary?.href ?? item.links?.url;
               const image = typeof item.media?.image === 'string' ? item.media?.image : item.media?.image?.src;
 
+              // AppChip integration: extract domain for icon
+              const domainForIcon = item.name ?? href;
+              const cuneiformEntry = domainForIcon ? getCuneiformForDomain(domainForIcon) : undefined;
+
               const card = (
                 <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-5 transition-all hover:border-neutral-700 hover:bg-neutral-900">
                   {image && (
@@ -42,11 +47,25 @@ export function EntryGridRenderer({ section }: RendererProps) {
                       aria-hidden
                     />
                   )}
-                  {category && (
-                    <span className="mb-2 inline-block self-start rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-neutral-400">
-                      {category}
-                    </span>
-                  )}
+                  <div className="mb-2 flex items-center gap-2">
+                    {/* AppChip: Small cuneiform icon in grid */}
+                    {cuneiformEntry && (
+                      <div className="text-neutral-400" title={`${cuneiformEntry.name} — ${cuneiformEntry.meaning}`}>
+                        <AppChip
+                          entry={cuneiformEntry}
+                          size={32}
+                          flipDelay={1200 + Math.random() * 400}
+                          flipDuration={500}
+                          disableAutoFlip={false}
+                        />
+                      </div>
+                    )}
+                    {category && (
+                      <span className="inline-block rounded-full bg-white/5 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-neutral-400">
+                        {category}
+                      </span>
+                    )}
+                  </div>
                   <h3 className="mb-2 text-base font-semibold text-white group-hover:text-white">
                     {title}
                   </h3>

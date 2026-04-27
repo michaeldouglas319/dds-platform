@@ -1,14 +1,20 @@
 'use client';
 
+import { getCuneiformForDomain } from '@dds/icons';
+import { AppChip } from '@dds/icons';
 import type { RendererProps } from '@dds/types';
 
 export function EntryHighlightRenderer({ section }: RendererProps) {
-  const { subject, content, links, media } = section;
+  const { subject, content, links, media, meta } = section;
   const title = subject?.title ?? section.name ?? 'Untitled';
   const summary = subject?.summary ?? content?.body ?? subject?.subtitle;
   const category = subject?.category;
   const href = links?.primary?.href ?? links?.url;
   const image = typeof media?.image === 'string' ? media?.image : media?.image?.src;
+
+  // AppChip integration: extract domain from URL or use vertical name
+  const domainForIcon = meta?.domain ?? links?.primary?.domain ?? section.name;
+  const cuneiformEntry = domainForIcon ? getCuneiformForDomain(domainForIcon) : undefined;
 
   return (
     <section className="px-6 py-12">
@@ -23,6 +29,17 @@ export function EntryHighlightRenderer({ section }: RendererProps) {
           )}
           <div className="relative p-8 sm:p-12">
             <div className="mb-4 flex items-center gap-3">
+              {/* AppChip: Cuneiform icon with flip-to-badge animation */}
+              {cuneiformEntry && (
+                <div className="text-red-400" title={`${cuneiformEntry.name} — ${cuneiformEntry.meaning}`}>
+                  <AppChip
+                    entry={cuneiformEntry}
+                    size={48}
+                    flipDelay={2000}
+                    flipDuration={600}
+                  />
+                </div>
+              )}
               <span className="inline-block rounded-full bg-red-500/15 px-3 py-1 text-xs font-medium uppercase tracking-wider text-red-300">
                 Featured
               </span>
