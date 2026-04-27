@@ -23,3 +23,12 @@
   - Created: dropdown-menu.tsx, popover.tsx, tooltip.tsx, components.test.tsx
   - Modified: tabs.tsx, index.ts, package.json, TODO.md, pnpm-lock.yaml
 - **Follow-ups**: none — feature is complete, tests included, exports updated, docs current
+
+## 2026-04-27 (pr-approver scheduled task)
+
+- **Target**: `origin/claude/beautiful-maxwell-LY1xQ` — 1 commit ahead of main (Label component)
+- **Action**: Squash merged to main and pushed
+- **Diff**: 4 files changed, 63 insertions, 2 deletions
+  - Created: packages/ui/components/label.tsx (+25 lines)
+  - Modified: packages/ui/__tests__/components.test.tsx (+26 lines), packages/ui/index.ts (+1 line), TODO.md (+13 lines, -2 lines)
+- **Follow-ups**: none — component is production-ready, includes tests, exports current
