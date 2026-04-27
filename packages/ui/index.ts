@@ -19,6 +19,7 @@ export {
 } from './components/card';
 export { Badge, badgeVariants, type BadgeProps } from './components/badge';
 export { Input, type InputProps } from './components/input';
+export { Label, type LabelProps } from './components/label';
 export { Separator, type SeparatorProps } from './components/separator';
 export {
   Sheet,

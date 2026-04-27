@@ -5,7 +5,7 @@
 | Layer | Target | Status | Purpose |
 |---|---|---|---|
 | Primitives | Radix UI | [DONE 2026-04-27] | Accessible headless primitives (Dialog, Tooltip, Popover, DropdownMenu, Tabs) |
-| Components | shadcn/ui | [ ] | Production-ready component skin over Radix |
+| Components | shadcn/ui | [DONE 2026-04-27] | Production-ready component skin over Radix — Label added |
 | 3D | Three.js r155+ | [ ] | Generative scenes, parametric renderers, WebGL display |
 | Bridge | CSS custom properties | [ ] | Single token set for shadcn + Three.js material uniforms |
 | Testing | Vitest + Playwright | [ ] | Component unit tests + E2E scene smoke tests |
@@ -13,7 +13,7 @@
 ## Integration Registry
 
 ### shadcn Components
-(None yet)
+- ✅ Label — Styled `<label>` element for form accessibility (htmlFor, className forwarding)
 
 ### Radix Primitives
 - ✅ Dialog (@radix-ui/react-dialog v1.1.2) — Already integrated via Sheet component
@@ -32,6 +32,15 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 2 (2026-04-27)
+- [DONE 2026-04-27] Added Label component (shadcn/ui production component)
+  - New Label component: styled `<label>` element with htmlFor, className, ref forwarding
+  - Follows established pattern: React.forwardRef + cn utility + JSDoc
+  - Added 3 unit tests: rendering, htmlFor association, className application
+  - All 21 UI component tests pass
+  - Pattern: simple form labels, accessibility-first (works with Input via htmlFor)
+  - **Next:** Dialog (centered modal) or other shadcn form components (Select, Checkbox, etc.)
 
 ### Session 1 (2026-04-27)
 - [DONE 2026-04-27] Integrated Radix UI Primitives foundation layer

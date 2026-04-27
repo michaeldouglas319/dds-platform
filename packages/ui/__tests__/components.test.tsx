@@ -5,6 +5,7 @@ import { Button } from '../components/button';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/card';
 import { Badge } from '../components/badge';
 import { Input } from '../components/input';
+import { Label } from '../components/label';
 import { Separator } from '../components/separator';
 import {
   Sheet,
@@ -81,6 +82,31 @@ describe('Input', () => {
     render(<Input defaultValue="hello" data-testid="input" />);
     const input = screen.getByTestId('input') as HTMLInputElement;
     expect(input.value).toBe('hello');
+  });
+});
+
+describe('Label', () => {
+  it('renders with text content', () => {
+    render(<Label>Username</Label>);
+    expect(screen.getByText('Username')).toBeInTheDocument();
+  });
+
+  it('associates with input via htmlFor prop', () => {
+    render(
+      <>
+        <Label htmlFor="username-input">Username</Label>
+        <Input id="username-input" data-testid="input" />
+      </>
+    );
+    const label = screen.getByText('Username') as HTMLLabelElement;
+    expect(label.htmlFor).toBe('username-input');
+  });
+
+  it('accepts and applies className prop', () => {
+    const { container } = render(<Label className="custom-label">Label</Label>);
+    const label = container.querySelector('label')!;
+    expect(label.className).toContain('custom-label');
+    expect(label.className).toContain('text-sm');
   });
 });
 
