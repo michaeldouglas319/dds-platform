@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * React hook to access and update tokens from Three.js materials.
  * Subscribes to theme changes and automatically updates uniforms.
