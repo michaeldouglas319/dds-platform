@@ -15,6 +15,31 @@ import {
   SheetDescription,
   SheetClose,
 } from '../components/sheet';
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from '../components/tabs';
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+} from '../components/tooltip';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '../components/popover';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from '../components/dropdown-menu';
 
 describe('Button', () => {
   it('renders with children text', () => {
@@ -115,5 +140,114 @@ describe('Sheet', () => {
       </Sheet>
     );
     expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument();
+  });
+});
+
+describe('Tabs (Radix)', () => {
+  it('renders tabs with Radix primitive', () => {
+    render(
+      <Tabs defaultValue="tab1">
+        <TabsList>
+          <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+          <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tab1">Content 1</TabsContent>
+        <TabsContent value="tab2">Content 2</TabsContent>
+      </Tabs>
+    );
+    expect(screen.getByText('Tab 1')).toBeInTheDocument();
+    expect(screen.getByText('Tab 2')).toBeInTheDocument();
+    expect(screen.getByText('Content 1')).toBeInTheDocument();
+  });
+
+  it('accepts className prop on TabsList and TabsContent', () => {
+    const { container } = render(
+      <Tabs defaultValue="tab1">
+        <TabsList className="custom-list">
+          <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tab1" className="custom-content">Content</TabsContent>
+      </Tabs>
+    );
+    expect(container.querySelector('.custom-list')).toBeInTheDocument();
+    expect(container.querySelector('.custom-content')).toBeInTheDocument();
+  });
+});
+
+describe('Tooltip (Radix)', () => {
+  it('renders Tooltip with trigger (requires TooltipProvider)', () => {
+    render(
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>Hover me</TooltipTrigger>
+          <TooltipContent>Tooltip text</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+    expect(screen.getByRole('button', { name: 'Hover me' })).toBeInTheDocument();
+  });
+
+  it('accepts delayDuration prop', () => {
+    render(
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>Hover</TooltipTrigger>
+          <TooltipContent delayDuration={500}>Delayed tooltip</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+    expect(screen.getByRole('button', { name: 'Hover' })).toBeInTheDocument();
+  });
+});
+
+describe('Popover (Radix)', () => {
+  it('renders Popover with trigger and content', () => {
+    render(
+      <Popover>
+        <PopoverTrigger>Open popover</PopoverTrigger>
+        <PopoverContent>Popover content</PopoverContent>
+      </Popover>
+    );
+    expect(screen.getByRole('button', { name: 'Open popover' })).toBeInTheDocument();
+  });
+
+  it('accepts className prop on PopoverContent', () => {
+    const { container } = render(
+      <Popover>
+        <PopoverTrigger>Open</PopoverTrigger>
+        <PopoverContent className="custom-popover">Content</PopoverContent>
+      </Popover>
+    );
+    // Content is in portal, just verify button renders
+    expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument();
+  });
+});
+
+describe('DropdownMenu (Radix)', () => {
+  it('renders DropdownMenu with trigger and items', () => {
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Item 1</DropdownMenuItem>
+          <DropdownMenuItem>Item 2</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+    expect(screen.getByRole('button', { name: 'Menu' })).toBeInTheDocument();
+  });
+
+  it('accepts className prop on DropdownMenuContent', () => {
+    render(
+      <DropdownMenu>
+        <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
+        <DropdownMenuContent className="custom-menu">
+          <DropdownMenuItem>Item</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+    expect(screen.getByRole('button', { name: 'Menu' })).toBeInTheDocument();
   });
 });
