@@ -75,9 +75,10 @@ function Card3D({ title, description, color, position, index }: Card3DProps) {
       </mesh>
 
       {/* Card border (edges) */}
-      <edges>
-        <lineBasicMaterial color="#ffffff" linewidth={1} />
-      </edges>
+      <lineSegments position={[0, 0, 0.1]}>
+        <edgesGeometry args={[new THREE.BoxGeometry(2, 3, 0.2)]} />
+        <lineBasicMaterial attach="material" color="#ffffff" linewidth={1} />
+      </lineSegments>
     </group>
   );
 }

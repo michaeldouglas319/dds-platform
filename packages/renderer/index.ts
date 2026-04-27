@@ -8,6 +8,20 @@ export { SectionBatchRenderer, type SectionBatchRendererProps } from './batch-re
 // Theme
 export { ThemeProvider, useTheme, type ThemeProviderProps } from './theme/index';
 
+// Token Bridge
+export {
+  getColorToken,
+  getNumericToken,
+  getStringToken,
+  bridgeColorUniform,
+  applyColorTokens,
+  subscribeToThemeChanges,
+  getCurrentTheme,
+  type TokenBridgeConfig,
+} from './lib/token-bridge';
+
+export { useTokenBridge, type UseTokenBridgeOptions } from './lib/useTokenBridge';
+
 // Registry
 export { createRegistry, defaultRegistry } from './registry';
 
