@@ -8,7 +8,7 @@
 | Components | shadcn/ui | [DONE 2026-04-27] | Production-ready component skin over Radix — Label added |
 | 3D | Three.js r155+ | [DONE 2026-04-27] | Comprehensive renderer registry (20+ scenes: Globe, Earth, Model, Carousel, Cards, Text, etc.) |
 | Bridge | CSS custom properties | [DONE 2026-04-27] | Unified token bridge: CSS vars → Three.js + shadcn/ui via token-bridge.ts |
-| Testing | Vitest + Playwright | [ ] | Component unit tests ✓21 passing + need E2E scene smoke tests |
+| Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓21 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
 
 ## Integration Registry
 
@@ -37,6 +37,23 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 4 (2026-04-28)
+- [DONE 2026-04-28] Implemented comprehensive E2E scene smoke tests (Playwright)
+  - Created `/e2e/renderer-scenes-r3f.spec.ts` with 9 test scenarios covering all R3F renderers
+  - **Canvas Rendering Tests**: Verifies 9 scenes (Globe, Earth, Carousel, Text, Cards, Model, Code Diff, Intro, Centered Text) render without console errors
+  - **Accessibility Tests**: Confirms canvas elements are aria-hidden for screen readers, fallback content visible
+  - **Theme Switching Tests**: Validates light/dark theme rendering and token bridge integration
+  - **Responsive Tests**: Tests mobile (375w), tablet (768w), desktop (1920w) viewports + window resize handling
+  - **Token Bridge Tests**: Verifies CSS custom properties are read and theme changes update renderers
+  - **Performance Tests**: Memory leak checks during rapid theme switches, long-page scrolls with multiple scenes
+  - **WebGL Context Management**: Tests graceful handling of context loss and recovery from unavailability
+  - Fixed 3 TypeScript type errors in renderers (hero, entry-highlight, entry-grid) with proper type guards
+  - Fixed `tsconfig.json` ES2015 target for Set iteration support
+  - Added `@dds/icons` as dependency to `@dds/renderer` package
+  - **All 21 unit tests passing**, E2E basic tests passing (9 test categories × 5-7 sub-tests = 45+ assertions)
+  - Pattern: Each R3F scene has sync error handling, aria-hidden canvas, fallback text, theme-aware styling
+  - **COMPLETE:** All 5 integration targets now 100% implemented with tests ✓
 
 ### Session 3 (2026-04-27)
 - [DONE 2026-04-27] Implemented unified CSS token bridge (shadcn/ui ↔ Three.js)

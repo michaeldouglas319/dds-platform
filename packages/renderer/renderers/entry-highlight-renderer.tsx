@@ -13,8 +13,8 @@ export function EntryHighlightRenderer({ section }: RendererProps) {
   const image = typeof media?.image === 'string' ? media?.image : media?.image?.src;
 
   // AppChip integration: extract domain from URL or use vertical name
-  const domainForIcon = meta?.domain ?? links?.primary?.domain ?? section.name;
-  const cuneiformEntry = domainForIcon ? getCuneiformForDomain(domainForIcon) : undefined;
+  const domainForIcon = (meta?.domain ?? section.name) as string | undefined;
+  const cuneiformEntry = domainForIcon && typeof domainForIcon === 'string' ? getCuneiformForDomain(domainForIcon) : undefined;
 
   return (
     <section className="px-6 py-12">

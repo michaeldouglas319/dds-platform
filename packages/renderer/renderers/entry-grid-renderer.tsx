@@ -35,8 +35,8 @@ export function EntryGridRenderer({ section }: RendererProps) {
               const image = typeof item.media?.image === 'string' ? item.media?.image : item.media?.image?.src;
 
               // AppChip integration: extract domain for icon
-              const domainForIcon = item.name ?? href;
-              const cuneiformEntry = domainForIcon ? getCuneiformForDomain(domainForIcon) : undefined;
+              const domainForIcon = (item.name ?? href) as string | undefined;
+              const cuneiformEntry = domainForIcon && typeof domainForIcon === 'string' ? getCuneiformForDomain(domainForIcon) : undefined;
 
               const card = (
                 <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 p-5 transition-all hover:border-neutral-700 hover:bg-neutral-900">

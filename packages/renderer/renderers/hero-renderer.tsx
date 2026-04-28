@@ -13,8 +13,8 @@ export function HeroRenderer({ section }: RendererProps) {
   const primaryLink = links?.primary;
 
   // AppChip integration: extract domain for icon display
-  const domainForIcon = meta?.domain ?? name ?? primaryLink?.href;
-  const cuneiformEntry = domainForIcon ? getCuneiformForDomain(domainForIcon) : undefined;
+  const domainForIcon = (meta?.domain ?? name ?? primaryLink?.href) as string | undefined;
+  const cuneiformEntry = domainForIcon && typeof domainForIcon === 'string' ? getCuneiformForDomain(domainForIcon) : undefined;
 
   return (
     <section
