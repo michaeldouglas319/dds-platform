@@ -82,7 +82,7 @@ export function findRelatedNodes(
       continue;
     }
 
-    const neighbors = adjacencyList.get(currentId) ?? new Set();
+    const neighbors = adjacencyList.get(currentId) ?? new Set<string>();
     for (const neighborId of neighbors) {
       if (!visitedNodes.has(neighborId)) {
         visitedNodes.add(neighborId);
@@ -175,7 +175,7 @@ export function highlightConnectedComponent(
 
   while (stack.length > 0) {
     const currentId = stack.pop()!;
-    const neighbors = adjacencyList.get(currentId) ?? new Set();
+    const neighbors = adjacencyList.get(currentId) ?? new Set<string>();
 
     for (const neighborId of neighbors) {
       if (!componentNodeIds.has(neighborId)) {
@@ -236,7 +236,7 @@ export function findShortestPath(
       return path;
     }
 
-    const neighbors = adjacencyList.get(currentId) ?? new Set();
+    const neighbors = adjacencyList.get(currentId) ?? new Set<string>();
     for (const neighborId of neighbors) {
       if (!visited.has(neighborId)) {
         visited.add(neighborId);

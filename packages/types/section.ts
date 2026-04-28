@@ -197,6 +197,7 @@ export interface UniversalSection {
 
 export interface RendererProps {
   section: UniversalSection;
+  onError?: (error: Error) => void;
   [key: string]: unknown;
 }
 
