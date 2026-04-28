@@ -22,6 +22,11 @@ export {
 
 export { useTokenBridge, type UseTokenBridgeOptions } from './lib/useTokenBridge';
 
+// WebGL Fallbacks
+export { useWebGLSupport, checkWebGLSupport } from './lib/useWebGLSupport';
+export { CanvasErrorBoundary } from './lib/CanvasErrorBoundary';
+export { SceneWithFallback } from './lib/SceneWithFallback';
+
 // Registry
 export { createRegistry, defaultRegistry } from './registry';
 
