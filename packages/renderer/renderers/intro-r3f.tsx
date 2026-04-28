@@ -5,6 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import type { Mesh, Group } from 'three';
 import * as THREE from 'three';
 import type { RendererProps } from '@dds/types';
+import { SceneWithFallback } from '../lib/SceneWithFallback';
 
 /**
  * IntroR3F - Animated intro section with staggered text reveal and 3D effects
@@ -240,9 +241,12 @@ export const IntroR3F = ({ section }: RendererProps) => {
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950">
-      {/* 3D Canvas */}
-      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
+    <SceneWithFallback height="100vh" className="relative w-full overflow-hidden bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950">
+      {/* 3D Canvas with error boundary and Suspense */}
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 50 }}
+        aria-hidden
+      >
         <IntroScene
           title={title}
           subtitle={subtitle}
@@ -280,7 +284,7 @@ export const IntroR3F = ({ section }: RendererProps) => {
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-20 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/5 blur-3xl" />
       </div>
-    </div>
+    </SceneWithFallback>
   );
 };
 
