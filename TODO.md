@@ -5,7 +5,7 @@
 | Layer | Target | Status | Purpose |
 |---|---|---|---|
 | Primitives | Radix UI | [DONE 2026-04-27] | Accessible headless primitives (Dialog, Tooltip, Popover, DropdownMenu, Tabs) |
-| Components | shadcn/ui | [DONE 2026-04-27] | Production-ready component skin over Radix — Label added |
+| Components | shadcn/ui | [IN PROGRESS 2026-04-29] | Production-ready component skin over Radix — Button + asChild (Radix Slot) added |
 | 3D | Three.js r155+ | [DONE 2026-04-27] | Comprehensive renderer registry (20+ scenes: Globe, Earth, Model, Carousel, Cards, Text, etc.) |
 | Bridge | CSS custom properties | [DONE 2026-04-27] | Unified token bridge: CSS vars → Three.js + shadcn/ui via token-bridge.ts |
 | Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓21 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
@@ -14,6 +14,7 @@
 ## Integration Registry
 
 ### shadcn Components
+- ✅ Button — Radix Slot wrapper with `asChild` prop for composition (Session 6)
 - ✅ Label — Styled `<label>` element for form accessibility (htmlFor, className forwarding)
 - ✅ Skeleton — Animated pulse loader for async content + Canvas fallback
 
@@ -44,6 +45,18 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 6 (2026-04-29)
+- [DONE 2026-04-29] Integrated Radix Slot into Button component for shadcn/ui foundation
+  - Added `@radix-ui/react-slot` dependency to `@dds/ui`
+  - Updated `/packages/ui/components/button.tsx` with Radix Slot support via `asChild` prop
+  - Created `/packages/ui/components.json` for future shadcn/ui CLI integration
+  - Enhanced Button tests with 4 new test cases: className forwarding, asChild composition, size variants
+  - Pattern: Button now supports composition with other Radix primitives while maintaining existing styling
+  - Backward compatible: All existing Button usage unchanged
+  - JSDoc documentation added for `asChild` prop with usage example
+  - **Progress:** Radix-first architecture established; Button is now composition-aware
+  - **Next:** Refactor remaining components (Dialog, DropdownMenu, Popover, Tooltip, Tabs) with shadcn styling
 
 ### Session 5 (2026-04-28)
 - [DONE 2026-04-28] Implemented WebGL fallback system with Skeleton loader

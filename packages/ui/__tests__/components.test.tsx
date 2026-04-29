@@ -53,6 +53,33 @@ describe('Button', () => {
     const button = container.querySelector('button')!;
     expect(button.className).toContain('destructive');
   });
+
+  it('forwards className prop', () => {
+    const { container } = render(<Button className="custom-button">Custom</Button>);
+    const button = container.querySelector('button')!;
+    expect(button.className).toContain('custom-button');
+  });
+
+  it('supports asChild prop for Radix Slot composition', () => {
+    render(
+      <Button asChild>
+        <a href="/test">Link Button</a>
+      </Button>
+    );
+    const link = screen.getByRole('link', { name: 'Link Button' });
+    expect(link).toBeInTheDocument();
+    expect(link.getAttribute('href')).toBe('/test');
+  });
+
+  it('applies size variants', () => {
+    const { container: smContainer } = render(<Button size="sm">Small</Button>);
+    const smButton = smContainer.querySelector('button')!;
+    expect(smButton.className).toContain('h-9');
+
+    const { container: lgContainer } = render(<Button size="lg">Large</Button>);
+    const lgButton = lgContainer.querySelector('button')!;
+    expect(lgButton.className).toContain('h-11');
+  });
 });
 
 describe('Card', () => {
