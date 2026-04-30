@@ -5,10 +5,10 @@
 | Layer | Target | Status | Purpose |
 |---|---|---|---|
 | Primitives | Radix UI | [DONE 2026-04-27] | Accessible headless primitives (Dialog, Tooltip, Popover, DropdownMenu, Tabs) |
-| Components | shadcn/ui | [IN PROGRESS 2026-04-29] | Production-ready component skin over Radix — Button + asChild (Radix Slot) added |
+| Components | shadcn/ui | [IN PROGRESS 2026-04-30] | Production-ready component skin over Radix — Button + asChild, Select with scroll controls |
 | 3D | Three.js r155+ | [DONE 2026-04-27] | Comprehensive renderer registry (20+ scenes: Globe, Earth, Model, Carousel, Cards, Text, etc.) |
 | Bridge | CSS custom properties | [DONE 2026-04-27] | Unified token bridge: CSS vars → Three.js + shadcn/ui via token-bridge.ts |
-| Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓21 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
+| Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓39 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
 | Fallbacks | WebGL error handling | [DONE 2026-04-28] | Graceful Canvas fallbacks with Skeleton loader + Suspense boundary |
 
 ## Integration Registry
@@ -17,6 +17,7 @@
 - ✅ Button — Radix Slot wrapper with `asChild` prop for composition (Session 6)
 - ✅ Label — Styled `<label>` element for form accessibility (htmlFor, className forwarding)
 - ✅ Skeleton — Animated pulse loader for async content + Canvas fallback
+- ✅ Select — Full Radix Select wrapper with scroll controls, grouped items, icons (Session 7)
 
 ### Radix Primitives
 - ✅ Dialog (@radix-ui/react-dialog v1.1.2) — Already integrated via Sheet component
@@ -45,6 +46,19 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 7 (2026-04-30)
+- [DONE 2026-04-30] Added Select component (Radix-based form dropdown)
+  - Created `/packages/ui/components/select.tsx` with full Radix Select integration
+  - Implements 8 sub-components: SelectTrigger, SelectContent, SelectItem, SelectLabel, SelectGroup, SelectSeparator, SelectScrollUpButton, SelectScrollDownButton
+  - Added `@radix-ui/react-select@2.1.1` and `lucide-react` dependencies to @dds/ui
+  - Icon controls with ChevronDown/Up for scroll buttons
+  - Supports grouped items, separators, disabled items, custom styling via className
+  - Full ref forwarding, CVA-pattern Tailwind styling (consistent with Button/Tabs)
+  - Created 9 comprehensive unit tests covering rendering, variants, composition, accessibility
+  - All 39 UI component tests passing (9 new Select tests + 30 existing)
+  - Pattern: Maintains consistency with Button (Radix primitive wrapper, className composition, forwardRef)
+  - **Next:** Add Checkbox or Textarea component, or enhance composability of existing components (asChild support for Popover/Tooltip with workaround for known Radix issue)
 
 ### Session 6 (2026-04-29)
 - [DONE 2026-04-29] Integrated Radix Slot into Button component for shadcn/ui foundation

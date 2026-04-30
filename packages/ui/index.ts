@@ -86,6 +86,25 @@ export {
   type DropdownMenuLabelProps,
   type DropdownMenuShortcutProps,
 } from './components/dropdown-menu';
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+  type SelectTriggerProps,
+  type SelectContentProps,
+  type SelectItemProps,
+  type SelectLabelProps,
+  type SelectSeparatorProps,
+  type SelectScrollUpButtonProps,
+  type SelectScrollDownButtonProps,
+} from './components/select';
 
 // Partnership
 export { PartnershipPitch, type PartnershipPitchProps, type PartnershipTier, type RegistrationData } from './partnership-pitch';
