@@ -18,6 +18,7 @@ export {
   CardFooter,
 } from './components/card';
 export { Badge, badgeVariants, type BadgeProps } from './components/badge';
+export { Checkbox, type CheckboxProps } from './components/checkbox';
 export { Input, type InputProps } from './components/input';
 export { Label, type LabelProps } from './components/label';
 export { Skeleton } from './components/skeleton';
