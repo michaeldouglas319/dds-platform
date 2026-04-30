@@ -1,9 +1,10 @@
 import React from 'react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { Button } from '../components/button';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/card';
 import { Badge } from '../components/badge';
+import { Checkbox } from '../components/checkbox';
 import { Input } from '../components/input';
 import { Label } from '../components/label';
 import { Separator } from '../components/separator';
@@ -302,5 +303,60 @@ describe('DropdownMenu (Radix)', () => {
       </DropdownMenu>
     );
     expect(screen.getByRole('button', { name: 'Menu' })).toBeInTheDocument();
+  });
+});
+
+describe('Checkbox', () => {
+  it('renders checkbox without throwing', () => {
+    render(<Checkbox />);
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toBeInTheDocument();
+  });
+
+  it('renders with default unchecked state', () => {
+    render(<Checkbox />);
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toHaveAttribute('data-state', 'unchecked');
+  });
+
+  it('supports defaultChecked prop', () => {
+    render(<Checkbox defaultChecked />);
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toHaveAttribute('data-state', 'checked');
+  });
+
+  it('accepts onCheckedChange prop', () => {
+    const onChange = vi.fn();
+    render(<Checkbox onCheckedChange={onChange} />);
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toBeInTheDocument();
+  });
+
+  it('respects disabled state', () => {
+    render(<Checkbox disabled />);
+    const checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toHaveAttribute('disabled');
+  });
+
+  it('forwards className prop', () => {
+    const { container } = render(<Checkbox className="custom-checkbox" />);
+    const checkboxDiv = container.querySelector('button');
+    expect(checkboxDiv?.className).toContain('custom-checkbox');
+  });
+
+  it('supports controlled checked state', () => {
+    const { rerender } = render(<Checkbox checked={false} />);
+    let checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toHaveAttribute('data-state', 'unchecked');
+
+    rerender(<Checkbox checked={true} />);
+    checkbox = screen.getByRole('checkbox');
+    expect(checkbox).toHaveAttribute('data-state', 'checked');
+  });
+
+  it('forwards ref correctly', () => {
+    const ref = React.createRef<HTMLButtonElement>();
+    render(<Checkbox ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
   });
 });

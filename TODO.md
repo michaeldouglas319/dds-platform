@@ -5,16 +5,17 @@
 | Layer | Target | Status | Purpose |
 |---|---|---|---|
 | Primitives | Radix UI | [DONE 2026-04-27] | Accessible headless primitives (Dialog, Tooltip, Popover, DropdownMenu, Tabs) |
-| Components | shadcn/ui | [IN PROGRESS 2026-04-30] | Production-ready component skin over Radix — Button + asChild, Select with scroll controls |
+| Components | shadcn/ui | [IN PROGRESS 2026-04-30] | Production-ready component skin over Radix — Button, Checkbox, Select with scroll controls |
 | 3D | Three.js r155+ | [DONE 2026-04-27] | Comprehensive renderer registry (20+ scenes: Globe, Earth, Model, Carousel, Cards, Text, etc.) |
 | Bridge | CSS custom properties | [DONE 2026-04-27] | Unified token bridge: CSS vars → Three.js + shadcn/ui via token-bridge.ts |
-| Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓39 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
+| Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓48 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
 | Fallbacks | WebGL error handling | [DONE 2026-04-28] | Graceful Canvas fallbacks with Skeleton loader + Suspense boundary |
 
 ## Integration Registry
 
 ### shadcn Components
 - ✅ Button — Radix Slot wrapper with `asChild` prop for composition (Session 6)
+- ✅ Checkbox — Radix Checkbox wrapper with Tailwind styling, checked/disabled/onChange support (Session 8)
 - ✅ Label — Styled `<label>` element for form accessibility (htmlFor, className forwarding)
 - ✅ Skeleton — Animated pulse loader for async content + Canvas fallback
 - ✅ Select — Full Radix Select wrapper with scroll controls, grouped items, icons (Session 7)
@@ -46,6 +47,18 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 8 (2026-04-30)
+- [DONE 2026-04-30] Added Checkbox component (Radix-based form input)
+  - Created `/packages/ui/components/checkbox.tsx` wrapping @radix-ui/react-checkbox
+  - Implements Checkbox with indicators, Tailwind styling, focus ring, disabled states
+  - Added `@radix-ui/react-checkbox@^1.1.0` dependency to @dds/ui
+  - Supports checked/defaultChecked/onCheckedChange/disabled/className/ref forwarding
+  - Full JSDoc documentation for the checked prop (controlled/uncontrolled patterns)
+  - Created 8 comprehensive unit tests covering rendering, state, props, accessibility
+  - All 48 UI component tests passing (8 new Checkbox tests + 40 existing)
+  - Pattern: Maintains consistency with Button/Select (Radix primitive wrapper, CVA styling, forwardRef)
+  - **Next:** Add Textarea or additional form components (Radio, Switch), or enhance composability (asChild support for Popover/Tooltip)
 
 ### Session 7 (2026-04-30)
 - [DONE 2026-04-30] Added Select component (Radix-based form dropdown)
