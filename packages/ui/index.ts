@@ -21,6 +21,7 @@ export { Badge, badgeVariants, type BadgeProps } from './components/badge';
 export { Checkbox, type CheckboxProps } from './components/checkbox';
 export { Input, type InputProps } from './components/input';
 export { RadioGroup, RadioGroupItem, type RadioGroupItemProps } from './components/radio-group';
+export { Switch, type SwitchProps } from './components/switch';
 export { Textarea, type TextareaProps } from './components/textarea';
 export { Label, type LabelProps } from './components/label';
 export { Skeleton } from './components/skeleton';

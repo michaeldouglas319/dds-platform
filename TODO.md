@@ -21,6 +21,7 @@
 - ✅ Select — Full Radix Select wrapper with scroll controls, grouped items, icons (Session 7)
 - ✅ Textarea — Styled textarea for multiline input, forwardRef + className support (Session 9)
 - ✅ RadioGroup — Radix RadioGroup wrapper with single-selection radio items, defaultValue/controlled value support (Session 10)
+- ✅ Switch — Radix Switch wrapper with thumb animation, checked/disabled/onChange support (Session 11)
 
 ### Radix Primitives
 - ✅ Dialog (@radix-ui/react-dialog v1.1.2) — Already integrated via Sheet component
@@ -49,6 +50,21 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 11 (2026-05-01)
+- [DONE 2026-05-01] Added Switch component (Radix-based toggle control)
+  - Created `/packages/ui/components/switch.tsx` wrapping @radix-ui/react-switch
+  - Implements Switch with thumb animation, Tailwind styling, focus ring, disabled states
+  - Added `@radix-ui/react-switch@^1.1.0` dependency to @dds/ui
+  - Supports checked/defaultChecked/onCheckedChange/disabled/className/ref forwarding
+  - Animated thumb with data-state attributes: `data-[state=checked]:translate-x-4` for smooth transitions
+  - Styled for light/dark mode using CSS custom properties (--color-primary, --color-input, --color-background)
+  - Full JSDoc documentation for controlled/uncontrolled patterns
+  - Created 8 comprehensive unit tests: rendering, default/controlled state, disabled, className, ref forwarding
+  - All 71 UI component tests passing (8 new Switch tests + 63 existing)
+  - Pattern: Maintains consistency with Checkbox/RadioGroup (Radix primitive wrapper, forwardRef, Tailwind styling)
+  - Token bridge compatible: Uses CSS custom properties for colors and dark mode support
+  - **Complete form control set:** Button, Checkbox, RadioGroup, Select, Switch, Textarea, Label now available
 
 ### Session 10 (2026-05-01)
 - [DONE 2026-05-01] Added RadioGroup component (Radix-based form input)
