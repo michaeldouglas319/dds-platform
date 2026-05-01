@@ -5,7 +5,7 @@
 | Layer | Target | Status | Purpose |
 |---|---|---|---|
 | Primitives | Radix UI | [DONE 2026-04-27] | Accessible headless primitives (Dialog, Tooltip, Popover, DropdownMenu, Tabs) |
-| Components | shadcn/ui | [IN PROGRESS 2026-04-30] | Production-ready component skin over Radix — Button, Checkbox, Select with scroll controls |
+| Components | shadcn/ui | [IN PROGRESS 2026-05-01] | Production-ready component skin over Radix — Button, Checkbox, Select, Textarea with scroll controls |
 | 3D | Three.js r155+ | [DONE 2026-04-27] | Comprehensive renderer registry (20+ scenes: Globe, Earth, Model, Carousel, Cards, Text, etc.) |
 | Bridge | CSS custom properties | [DONE 2026-04-27] | Unified token bridge: CSS vars → Three.js + shadcn/ui via token-bridge.ts |
 | Testing | Vitest + Playwright | [DONE 2026-04-28] | Component unit tests ✓48 passing + E2E scene smoke tests (9 scenarios × 5 test categories) |
@@ -19,6 +19,7 @@
 - ✅ Label — Styled `<label>` element for form accessibility (htmlFor, className forwarding)
 - ✅ Skeleton — Animated pulse loader for async content + Canvas fallback
 - ✅ Select — Full Radix Select wrapper with scroll controls, grouped items, icons (Session 7)
+- ✅ Textarea — Styled textarea for multiline input, forwardRef + className support (Session 9)
 
 ### Radix Primitives
 - ✅ Dialog (@radix-ui/react-dialog v1.1.2) — Already integrated via Sheet component
@@ -47,6 +48,18 @@
 - DropdownMenu + Tooltip composability issue: When combining via asChild, Tooltip delayDuration is ignored (known Radix issue #1920)
 
 ## Session Log
+
+### Session 9 (2026-05-01)
+- [DONE 2026-05-01] Added Textarea component (shadcn/ui form input)
+  - Created `/packages/ui/components/textarea.tsx` — styled multiline text input
+  - Follows established Input pattern: React.forwardRef, cn() utility, Tailwind styling
+  - Supports all textarea attributes: rows, cols, spellCheck, wrap, disabled, placeholder
+  - Token bridge compatible: Uses CSS custom properties for colors (--color-input, --color-background, --color-ring)
+  - Maintains design consistency with focus ring, disabled opacity, placeholder text color
+  - Created 8 comprehensive unit tests: rendering, placeholder, defaultValue, onChange, disabled, className, ref forwarding, rows/cols
+  - All 55 UI component tests passing (increased from 47: 8 new Textarea tests)
+  - Pattern: Simple, non-Radix styled textarea (unlike Checkbox/Select which wrap Radix primitives)
+  - **Next:** Add Radio/RadioGroup (Radix primitive wrapper) or Switch component for complete form control set
 
 ### Session 8 (2026-04-30)
 - [DONE 2026-04-30] Added Checkbox component (Radix-based form input)

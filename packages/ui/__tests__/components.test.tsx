@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../components/card';
 import { Badge } from '../components/badge';
 import { Checkbox } from '../components/checkbox';
 import { Input } from '../components/input';
+import { Textarea } from '../components/textarea';
 import { Label } from '../components/label';
 import { Separator } from '../components/separator';
 import {
@@ -358,5 +359,57 @@ describe('Checkbox', () => {
     const ref = React.createRef<HTMLButtonElement>();
     render(<Checkbox ref={ref} />);
     expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
+});
+
+describe('Textarea', () => {
+  it('renders textarea without throwing', () => {
+    render(<Textarea />);
+    const textarea = screen.getByRole('textbox');
+    expect(textarea).toBeInTheDocument();
+  });
+
+  it('renders with placeholder text', () => {
+    render(<Textarea placeholder="Enter message..." />);
+    const textarea = screen.getByPlaceholderText('Enter message...');
+    expect(textarea).toBeInTheDocument();
+  });
+
+  it('renders with default value', () => {
+    render(<Textarea defaultValue="Some text" />);
+    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+    expect(textarea.value).toBe('Some text');
+  });
+
+  it('accepts onChange prop', () => {
+    const onChange = vi.fn();
+    const { container } = render(<Textarea onChange={onChange} />);
+    const textarea = container.querySelector('textarea');
+    expect(textarea).toBeInTheDocument();
+  });
+
+  it('respects disabled state', () => {
+    render(<Textarea disabled />);
+    const textarea = screen.getByRole('textbox');
+    expect(textarea).toHaveAttribute('disabled');
+  });
+
+  it('forwards className prop', () => {
+    const { container } = render(<Textarea className="custom-textarea" />);
+    const textarea = container.querySelector('textarea');
+    expect(textarea?.className).toContain('custom-textarea');
+  });
+
+  it('forwards ref correctly', () => {
+    const ref = React.createRef<HTMLTextAreaElement>();
+    render(<Textarea ref={ref} />);
+    expect(ref.current).toBeInstanceOf(HTMLTextAreaElement);
+  });
+
+  it('supports rows and cols attributes', () => {
+    const { container } = render(<Textarea rows={10} cols={50} />);
+    const textarea = container.querySelector('textarea');
+    expect(textarea).toHaveAttribute('rows', '10');
+    expect(textarea).toHaveAttribute('cols', '50');
   });
 });

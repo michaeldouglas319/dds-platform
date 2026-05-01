@@ -20,6 +20,7 @@ export {
 export { Badge, badgeVariants, type BadgeProps } from './components/badge';
 export { Checkbox, type CheckboxProps } from './components/checkbox';
 export { Input, type InputProps } from './components/input';
+export { Textarea, type TextareaProps } from './components/textarea';
 export { Label, type LabelProps } from './components/label';
 export { Skeleton } from './components/skeleton';
 export { Separator, type SeparatorProps } from './components/separator';
