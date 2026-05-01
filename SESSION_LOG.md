@@ -112,3 +112,25 @@
 
 - Cleanup: Deleted orphaned remote branches (KlgcI, LQ2ly)
 - Follow-ups: None — main is clean, PR #8 pending review
+
+## 2026-05-01 01:15 — Merged RadioGroup Component
+
+**Target:** PR #8 feat/radio-group-component  
+**Action:** Merged with squash via `gh pr merge --admin`  
+**Status:** ✅ Complete — RadioGroup feature merged to main
+
+**Changes:**
+- Added RadioGroup component wrapping @radix-ui/react-radio-group
+- 8 comprehensive unit tests (all passing)
+- Dependency: @radix-ui/react-radio-group@1.2.0 (already in deps)
+- Files: radio-group.tsx (new, 61 lines), radio-group.test.tsx (+128 lines), index.ts, package.json, pnpm-lock.yaml, TODO.md
+- Diff: +496/-1 lines
+
+**Verification:**
+- ✅ RadioGroup tests: 8/8 pass
+- ✅ No type errors in component
+- ✅ Properly exported in index.ts
+- ✅ No breaking changes
+- ✅ Pre-existing build failure in my-v0-project (unrelated font config issue)
+
+**Follow-ups:** None — repository clean, main branch, 0 open branches, 0 open PRs
