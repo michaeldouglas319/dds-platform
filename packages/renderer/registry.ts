@@ -19,6 +19,7 @@ import { CenteredTextR3F } from './renderers/centered-text-r3f';
 import { GlobeR3F } from './renderers/globe-r3f';
 import { EarthR3F } from './renderers/earth-r3f';
 import { ModelR3F } from './renderers/model-r3f';
+import { ThemeShowcaseRenderer } from './renderers/theme-showcase';
 
 /**
  * Create a custom registry from a map of renderer entries.
@@ -306,6 +307,28 @@ const modelR3F: RendererEntry = {
   },
 };
 
+/**
+ * Theme Showcase: Unified design system demonstration
+ * Shows shadcn/ui components and Three.js scene using shared CSS tokens
+ * Demonstrates automatic theme switching affecting both UI and 3D simultaneously
+ */
+const themeShowcase: RendererEntry = {
+  component: ThemeShowcaseRenderer,
+  metadata: {
+    name: 'theme-showcase',
+    displayName: 'Theme Showcase',
+    description:
+      'Interactive demonstration of the unified design system. Shows shadcn/ui components and a Three.js scene sharing CSS tokens with live theme switching.',
+    optional: {
+      subject: ['title', 'subtitle'],
+      content: ['body'],
+      spatial: ['autoRotate'],
+    },
+    layouts: ['theme-showcase', 'design-system'],
+    themeAware: true,
+  },
+};
+
 export const defaultRegistry: RendererRegistry = createRegistry({
   // Hero variants
   intro: hero,
@@ -353,4 +376,7 @@ export const defaultRegistry: RendererRegistry = createRegistry({
   earth: earthR3F,
   'model-r3f': modelR3F,
   model: modelR3F,
+  // Unified Design System Showcase
+  'theme-showcase': themeShowcase,
+  'design-system': themeShowcase,
 });
