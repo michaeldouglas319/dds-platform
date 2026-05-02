@@ -149,10 +149,13 @@ export default function Dashboard({ onRefresh }: DashboardProps) {
           <div>
             <p className="text-slate-400">Average Compliance Score</p>
             <p className="text-3xl font-bold text-green-400">
-              {Math.round(
-                heatmapData.reduce((acc, p) => acc + (p.performance + p.ux + p.accessibility + p.seo + p.quality) / 5, 0) /
-                  heatmapData.length
-              )}
+              {heatmapData.length > 0
+                ? Math.round(
+                    heatmapData.reduce((acc, p) => acc + (p.performance + p.ux + p.accessibility + p.seo + p.quality) / 5, 0) /
+                      heatmapData.length
+                  )
+                : 0
+              }
             </p>
           </div>
         </div>
