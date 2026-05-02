@@ -9,6 +9,7 @@ interface Product {
   has_rules: boolean;
   is_active: boolean;
   created_at: string;
+  updated_at: string;
 }
 
 interface ProductListProps {
