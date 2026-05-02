@@ -51,3 +51,7 @@ watch-deploy:
 # Emergency kill all deploy processes
 kill-deploy:
 	bash scripts/deploy-kill.sh
+
+# Monitor Vercel build minutes (must stay < $5/month)
+cost:
+	bash scripts/cost-monitor.sh
