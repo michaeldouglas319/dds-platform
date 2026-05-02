@@ -4,5 +4,15 @@
   "installCommand": "echo 'Skipped: all builds are local, not on Vercel. Use make deploy.'",
   "env": {
     "VERCEL_BUILD_GUARD": "1"
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/discover-domains",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/run-enhancement",
+      "schedule": "0 */6 * * *"
+    }
+  ]
 }
