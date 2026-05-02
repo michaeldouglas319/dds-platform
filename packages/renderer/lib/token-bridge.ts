@@ -1,6 +1,26 @@
 /**
  * Token Bridge: Read CSS custom properties and convert to Three.js-compatible values.
- * Enables unified design tokens shared between shadcn/ui and 3D scenes.
+ *
+ * Enables unified design tokens shared between shadcn/ui components and Three.js materials.
+ * CSS custom properties defined in your theme (via Tailwind or globals.css) are automatically
+ * accessible to 3D scenes, ensuring visual coherence across UI and 3D.
+ *
+ * @module token-bridge
+ * @example
+ * ```tsx
+ * // Define token in CSS:
+ * // :root { --color-primary: #6366f1; }
+ *
+ * // Use in shadcn/ui via Tailwind:
+ * <Button className="bg-[var(--color-primary)]">Click</Button>
+ *
+ * // Use in Three.js via bridge:
+ * const color = getColorToken('--color-primary', '#6366f1');
+ * material.uniforms.uColor.value = color;
+ * ```
+ *
+ * @see {@link https://github.com/michaeldouglas319/dds-platform/blob/main/packages/renderer/lib/token-bridge-example.tsx}
+ * for detailed examples.
  */
 
 import type { Uniform, Color } from 'three';
@@ -14,7 +34,12 @@ export interface TokenBridgeConfig {
 
 /**
  * Read a CSS custom property from the document root.
- * Falls back to provided default if not found.
+ *
+ * @param propertyName - CSS variable name (e.g., '--color-primary')
+ * @param fallback - Default value if token not found
+ * @returns The computed CSS property value, or fallback
+ *
+ * @internal - Use getColorToken, getNumericToken, or getStringToken instead
  */
 function getCSSProperty(propertyName: string, fallback = ''): string {
   if (typeof document === 'undefined') return fallback;
@@ -93,7 +118,25 @@ function rgbToColor(rgbString: string): THREE.Color {
 
 /**
  * Read a color token and convert to THREE.Color.
- * Tries HSL first, then RGB, then hex.
+ *
+ * Supports multiple color formats for flexibility:
+ * - HSL: "hsl(226 71% 55%)" (Tailwind default with Tailwind v4)
+ * - RGB: "99 102 241" (spaced RGB values, from --color-primary-rgb)
+ * - Hex: "#6366f1" (traditional hex color)
+ *
+ * @param tokenName - CSS variable name (e.g., '--color-primary')
+ * @param fallback - Default hex color if token not found (default: '#ffffff')
+ * @returns THREE.Color ready for shader uniforms
+ *
+ * @example
+ * ```tsx
+ * const primaryColor = getColorToken('--color-primary', '#6366f1');
+ * material.uniforms.uColor.value = primaryColor;
+ * ```
+ *
+ * @remarks
+ * Always provide a fallback color for SSR safety. If the token doesn't exist
+ * in the document, the fallback is used instead.
  */
 export function getColorToken(
   tokenName: string,
@@ -117,6 +160,19 @@ export function getColorToken(
 
 /**
  * Read a numeric token from CSS custom property.
+ *
+ * Useful for spacing, timing, opacity, and other numeric values
+ * that should be consistent between UI and 3D scenes.
+ *
+ * @param tokenName - CSS variable name (e.g., '--animation-duration')
+ * @param fallback - Default numeric value (default: 0)
+ * @returns Parsed number, or fallback if invalid
+ *
+ * @example
+ * ```tsx
+ * const duration = getNumericToken('--animation-duration', 1.0);
+ * material.uniforms.uDuration.value = duration;
+ * ```
  */
 export function getNumericToken(
   tokenName: string,
@@ -129,6 +185,18 @@ export function getNumericToken(
 
 /**
  * Read a string token (e.g., font family).
+ *
+ * Use for typography, font families, and other string-based tokens.
+ *
+ * @param tokenName - CSS variable name (e.g., '--font-sans')
+ * @param fallback - Default string value
+ * @returns CSS property value as string
+ *
+ * @example
+ * ```tsx
+ * const fontFamily = getStringToken('--font-sans', 'system-ui');
+ * material.uniforms.uFontFamily.value = fontFamily;
+ * ```
  */
 export function getStringToken(
   tokenName: string,
@@ -138,8 +206,23 @@ export function getStringToken(
 }
 
 /**
- * Bridge a single token to a Three.js uniform.
- * Automatically converts CSS values to appropriate Three.js types.
+ * Bridge a single color token to a Three.js shader uniform.
+ *
+ * Updates a shader uniform's color value from a CSS token.
+ * Safe to call if uniform is undefined.
+ *
+ * @param uniform - THREE.ShaderMaterial uniform with Color value
+ * @param tokenName - CSS variable name
+ * @param fallback - Hex color fallback
+ *
+ * @example
+ * ```tsx
+ * const material = new THREE.ShaderMaterial({
+ *   uniforms: { uColor: { value: new THREE.Color() } }
+ * });
+ *
+ * bridgeColorUniform(material.uniforms.uColor, '--color-primary', '#6366f1');
+ * ```
  */
 export function bridgeColorUniform(
   uniform: Uniform<THREE.Color>,
@@ -153,8 +236,28 @@ export function bridgeColorUniform(
 }
 
 /**
- * Update all color-based uniforms in a material from CSS tokens.
- * Maps token names to uniform names.
+ * Update multiple color uniforms in a shader material from CSS tokens.
+ *
+ * Maps uniform names to CSS token names. Only processes Color-type uniforms.
+ * Safe to call with any THREE.Material (returns early if not ShaderMaterial).
+ *
+ * @param material - THREE.ShaderMaterial to update
+ * @param tokenMap - Record mapping uniform name → CSS variable name
+ *
+ * @example
+ * ```tsx
+ * const material = new THREE.ShaderMaterial({
+ *   uniforms: {
+ *     uPrimaryColor: { value: new THREE.Color() },
+ *     uAccentColor: { value: new THREE.Color() }
+ *   }
+ * });
+ *
+ * applyColorTokens(material, {
+ *   uPrimaryColor: '--color-primary',
+ *   uAccentColor: '--color-accent'
+ * });
+ * ```
  */
 export function applyColorTokens(
   material: THREE.Material,
@@ -174,8 +277,33 @@ export function applyColorTokens(
 }
 
 /**
- * Listen for theme changes and update all materials in a scene.
- * Returns an unsubscribe function.
+ * Listen for theme changes (light/dark) and call callback.
+ *
+ * Observes:
+ * 1. Changes to `data-theme` attribute on `<html>`
+ * 2. System preference changes (prefers-color-scheme)
+ *
+ * When theme changes, call your callback to update materials, re-apply tokens, etc.
+ *
+ * @param callback - Function called when theme changes (light or dark)
+ * @returns Unsubscribe function to clean up listeners
+ *
+ * @example
+ * ```tsx
+ * useEffect(() => {
+ *   const unsubscribe = subscribeToThemeChanges((theme) => {
+ *     console.log(`Theme switched to: ${theme}`);
+ *     // Re-apply tokens to materials here
+ *     applyColorTokens(material, tokenMap);
+ *   });
+ *
+ *   return () => unsubscribe();
+ * }, []);
+ * ```
+ *
+ * @remarks
+ * Safe to call during SSR (returns no-op unsubscribe if document unavailable).
+ * Use with useTokenBridge hook for automatic updates instead of manual handling.
  */
 export function subscribeToThemeChanges(
   callback: (theme: 'light' | 'dark') => void,
@@ -213,7 +341,27 @@ export function subscribeToThemeChanges(
 }
 
 /**
- * Convenience hook-like export for getting current theme.
+ * Get the current theme (light or dark).
+ *
+ * Checks:
+ * 1. `data-theme` attribute on `<html>`
+ * 2. System preference (prefers-color-scheme media query)
+ * 3. Defaults to 'dark' if unavailable
+ *
+ * @returns Current theme: 'light' or 'dark'
+ *
+ * @example
+ * ```tsx
+ * const theme = getCurrentTheme();
+ * // Use theme to select appropriate token fallbacks
+ * const bgColor = getColorToken(
+ *   `--color-bg-${theme}`,
+ *   theme === 'dark' ? '#000' : '#fff'
+ * );
+ * ```
+ *
+ * @remarks
+ * Safe for SSR (returns 'dark' if document unavailable).
  */
 export function getCurrentTheme(): 'light' | 'dark' {
   if (typeof document === 'undefined') return 'dark';
