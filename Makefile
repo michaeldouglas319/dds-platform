@@ -43,3 +43,11 @@ clean:
 # One-time setup: link all app folders to Vercel projects
 setup:
 	bash scripts/setup-vercel-projects.sh
+
+# Watch deploy logs live (tail -f /tmp/deploy.log)
+watch-deploy:
+	@tail -f /tmp/deploy.log
+
+# Emergency kill all deploy processes
+kill-deploy:
+	bash scripts/deploy-kill.sh

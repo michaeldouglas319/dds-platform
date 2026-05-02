@@ -1,8 +1,17 @@
 #!/bin/bash
 set -e
 
-# Deploy only changed apps
-# Detects changes via git, builds locally, ships prebuilt to Vercel
+# Deploy only changed apps with strict timeout enforcement
+# Hard rule: nothing runs longer than 10 minutes
+# Lock: only one deploy at a time
+
+# Load lock mechanism
+source "$(dirname "$0")/deploy-lock.sh"
+acquire_lock
+
+# One deploy at a time, hard 10-minute ceiling
+APP_TIMEOUT=${APP_TIMEOUT:-600}
+DEPLOY_LOG=${DEPLOY_LOG:-/tmp/deploy.log}
 
 # Find all unique app directories changed since last commit
 if [ ! -d ".git" ]; then
