@@ -1,0 +1,8 @@
+{
+  "buildCommand": "bash scripts/vercel-build-guard.sh",
+  "framework": null,
+  "installCommand": "echo 'Skipped: all builds are local, not on Vercel. Use make deploy.'",
+  "env": {
+    "VERCEL_BUILD_GUARD": "1"
+  }
+}
