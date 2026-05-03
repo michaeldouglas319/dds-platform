@@ -15,7 +15,7 @@ export function ArmsDrilldown() {
     dateFrom: null,
     dateTo: null,
   })
-  const [mapMode, setMapMode] = useState('globe') // globe | flat
+  const [mapMode, setMapMode] = useState('flat') // globe | flat
   const [basemap, setBasemap] = useState('positron') // positron | dark | satellite
   const [isLoading, setIsLoading] = useState(true)
 
