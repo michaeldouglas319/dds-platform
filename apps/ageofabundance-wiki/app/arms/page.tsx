@@ -1,30 +1,18 @@
-import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
-import './arms.css'
 
-const ArmsExperience = dynamic(
-  () => import('../../components/arms/ArmsExperience'),
-  { ssr: false, loading: () => <div className="arms-loading-shell" /> }
+const ArmsDrilldown = dynamic(
+  () => import('../../components/arms-drilldown').then(m => m.ArmsDrilldown),
+  { ssr: false, loading: () => <div style={{ width: '100%', height: '100vh', background: '#0a0a0a' }} /> }
 )
 
 export const metadata: Metadata = {
   title: 'Abundance at Arms — Global Conflict Map',
   description:
-    'Real-time conflict mapping with integrated intelligence, research articles, and source data.',
-  robots: 'noindex, nofollow', // Not for search indexing
+    'Global conflict mapping with real-time intelligence, data layers, and source integration.',
+  robots: 'noindex, nofollow',
 }
 
 export default function ArmsPage() {
-  return (
-    <main className="arms-page-root" data-arms-experience>
-      <div className="arms-layout">
-        <div className="arms-canvas-wrapper">
-          <Suspense fallback={<div className="arms-loading-shell" />}>
-            <ArmsExperience />
-          </Suspense>
-        </div>
-      </div>
-    </main>
-  )
+  return <ArmsDrilldown />
 }

@@ -1,0 +1,313 @@
+.arms-drilldown {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+}
+
+/* Header */
+.arms-drilldown__header {
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(30, 50, 80, 0.3) 0%, rgba(15, 25, 45, 0.3) 100%);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arms-drilldown__header-content {
+  flex: 1;
+}
+
+.arms-drilldown__title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.arms-drilldown__subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.arms-drilldown__back {
+  padding: 0.75rem 1.5rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 8px;
+  color: rgba(100, 150, 200, 1);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.arms-drilldown__back:hover {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+/* Main Layout */
+.arms-drilldown__main {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.arms-drilldown__sidebar {
+  width: 280px;
+  padding: 1.5rem;
+  background: rgba(15, 25, 45, 0.5);
+  border-right: 1px solid rgba(100, 150, 200, 0.1);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.arms-drilldown__sidebar-section {
+  margin-bottom: 2rem;
+}
+
+.arms-drilldown__sidebar-title {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(100, 150, 200, 1);
+}
+
+.arms-drilldown__mode-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.arms-drilldown__mode-btn {
+  flex: 1;
+  padding: 0.75rem;
+  background: rgba(30, 50, 80, 0.4);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.arms-drilldown__mode-btn:hover {
+  background: rgba(30, 50, 80, 0.6);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+.arms-drilldown__mode-btn.active {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+  color: #fff;
+}
+
+.arms-drilldown__tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.arms-drilldown__tag {
+  padding: 0.75rem;
+  background: rgba(30, 50, 80, 0.3);
+  border: 1px solid rgba(100, 150, 200, 0.15);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: left;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.arms-drilldown__tag:hover {
+  background: rgba(30, 50, 80, 0.5);
+  border-color: rgba(100, 150, 200, 0.3);
+}
+
+.arms-drilldown__tag.active {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.5);
+  color: #fff;
+}
+
+.arms-drilldown__date-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: rgba(30, 50, 80, 0.4);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+.arms-drilldown__date-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.arms-drilldown__result-count {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(100, 150, 200, 1);
+}
+
+/* Viewport */
+.arms-drilldown__viewport {
+  flex: 1;
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+
+.arms-drilldown__loading,
+.arms-drilldown__loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.arms-drilldown__flat-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Details Panel */
+.arms-drilldown__details {
+  width: 320px;
+  padding: 1.5rem;
+  background: rgba(15, 25, 45, 0.5);
+  border-left: 1px solid rgba(100, 150, 200, 0.1);
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.arms-drilldown__details.open {
+  transform: translateX(0);
+}
+
+.arms-drilldown__detail-close {
+  all: unset;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.2s;
+}
+
+.arms-drilldown__detail-close:hover {
+  color: #fff;
+}
+
+.arms-drilldown__event-tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.4);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(100, 150, 200, 1);
+}
+
+.arms-drilldown__event-name {
+  margin: 0 0 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.arms-drilldown__event-meta {
+  margin-bottom: 1.5rem;
+}
+
+.arms-drilldown__meta-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.1);
+  font-size: 0.9rem;
+}
+
+.arms-drilldown__meta-label {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.arms-drilldown__source-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.4);
+  border-radius: 6px;
+  color: rgba(100, 150, 200, 1);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.arms-drilldown__source-link:hover {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.arms-drilldown__details-empty {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .arms-drilldown__sidebar {
+    width: 240px;
+  }
+
+  .arms-drilldown__details {
+    width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .arms-drilldown__main {
+    flex-direction: column;
+  }
+
+  .arms-drilldown__sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(100, 150, 200, 0.1);
+    max-height: 200px;
+  }
+
+  .arms-drilldown__details {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid rgba(100, 150, 200, 0.1);
+    position: absolute;
+    height: 300px;
+    bottom: 0;
+  }
+}
