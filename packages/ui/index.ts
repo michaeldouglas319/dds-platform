@@ -50,6 +50,24 @@ export {
   type TabsContentProps,
 } from './components/tabs';
 export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  type DialogOverlayProps,
+  type DialogContentProps,
+  type DialogHeaderProps,
+  type DialogFooterProps,
+  type DialogTitleProps,
+  type DialogDescriptionProps,
+} from './components/dialog';
+export {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
