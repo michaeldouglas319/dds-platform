@@ -16,6 +16,7 @@ export function ArmsDrilldown() {
     dateTo: null,
   })
   const [mapMode, setMapMode] = useState('globe') // globe | flat
+  const [basemap, setBasemap] = useState('positron') // positron | dark | satellite
   const [isLoading, setIsLoading] = useState(true)
 
   // Fetch events
@@ -163,6 +164,8 @@ export function ArmsDrilldown() {
               events={filteredEvents}
               selectedEventId={selectedEvent?.id}
               onEventSelect={setSelectedEvent}
+              basemap={basemap}
+              onBasemapChange={setBasemap}
             />
           )}
         </div>
