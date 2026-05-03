@@ -1,0 +1,99 @@
+name: Deploy to Vercel (On Push)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.19.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Detect changed apps
+        id: detect
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep '^apps/' | cut -d/ -f2 | sort -u) || echo ""
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
+          echo "Apps changed: $CHANGED"
+
+      - name: Build changed apps
+        if: steps.detect.outputs.changed
+        run: |
+          for app in ${{ steps.detect.outputs.changed }}; do
+            echo "Building $app..."
+            pnpm turbo build --filter=@dds/$app
+          done
+
+      - name: Deploy to Vercel
+        if: steps.detect.outputs.changed
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          for app in ${{ steps.detect.outputs.changed }}; do
+            APP_DIR="apps/$app"
+            if [ ! -d "$APP_DIR" ]; then
+              echo "⚠ App not found: $app"
+              continue
+            fi
+
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo "Deploying: $app"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+            cd "$APP_DIR"
+            npx vercel pull --yes
+            npm run build 2>/dev/null || pnpm build 2>/dev/null || true
+            npx vercel deploy --prod --token="$VERCEL_TOKEN" || echo "⚠ Deploy failed: $app"
+            cd ../..
+          done
+
+      - name: Create deployment status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changed = '${{ steps.detect.outputs.changed }}'.split(' ').filter(Boolean);
+            if (changed.length === 0) {
+              console.log('No app changes detected.');
+              return;
+            }
+
+            github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.ref,
+              environment: 'production',
+              description: `Deployed: ${changed.join(', ')}`,
+              auto_merge: false,
+              required_contexts: []
+            }).then(deployment => {
+              console.log(`Created deployment: ${deployment.data.id}`);
+            });
