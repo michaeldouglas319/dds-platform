@@ -1,0 +1,5 @@
+{
+  "framework": "nextjs",
+  "installCommand": "echo 'deps already installed by CI'",
+  "buildCommand": "pnpm turbo build --filter=@dds/ageofabundance-wiki"
+}
