@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
-  "installCommand": "echo 'deps already installed by CI'",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "buildCommand": "pnpm turbo build --filter=@dds/ageofabundance-wiki"
 }
