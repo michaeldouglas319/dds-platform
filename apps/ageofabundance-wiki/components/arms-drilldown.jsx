@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { InteractiveGlobeScene } from '@dds/globe'
 import { FlatMap } from './flat-map'
+import { ArmsEventDetail } from './arms-event-detail'
 import './arms-drilldown.css'
 
 export function ArmsDrilldown() {
@@ -173,42 +174,10 @@ export function ArmsDrilldown() {
         {/* Right - Detail Panel */}
         <aside className={`arms-drilldown__details ${selectedEvent ? 'open' : ''}`}>
           {selectedEvent ? (
-            <div className="arms-drilldown__event-detail">
-              <button
-                className="arms-drilldown__detail-close"
-                onClick={() => setSelectedEvent(null)}
-              >
-                ✕
-              </button>
-              <div className="arms-drilldown__event-tag">{selectedEvent.tag || 'Event'}</div>
-              <h2 className="arms-drilldown__event-name">{selectedEvent.name}</h2>
-
-              <div className="arms-drilldown__event-meta">
-                {selectedEvent.date && (
-                  <div className="arms-drilldown__meta-item">
-                    <span className="arms-drilldown__meta-label">Date:</span>
-                    <span>{selectedEvent.date}</span>
-                  </div>
-                )}
-                <div className="arms-drilldown__meta-item">
-                  <span className="arms-drilldown__meta-label">Severity:</span>
-                  <span>{Math.round(selectedEvent.weight)}</span>
-                </div>
-                <div className="arms-drilldown__meta-item">
-                  <span className="arms-drilldown__meta-label">Source:</span>
-                  <span>{selectedEvent.source}</span>
-                </div>
-              </div>
-
-              {selectedEvent.url && (
-                <a href={selectedEvent.url} target="_blank" rel="noreferrer" className="arms-drilldown__source-link">
-                  View source ↗
-                </a>
-              )}
-            </div>
+            <ArmsEventDetail event={selectedEvent} onClose={() => setSelectedEvent(null)} />
           ) : (
             <div className="arms-drilldown__details-empty">
-              <p>Click an event on the globe to view details</p>
+              <p>Click an event to view details</p>
             </div>
           )}
         </aside>
