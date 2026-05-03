@@ -25,7 +25,6 @@ import * as THREE from 'three';
 import type { RendererProps } from '@dds/types';
 import {
   getColorToken,
-  useTokenBridge,
   subscribeToThemeChanges,
   getCurrentTheme,
 } from '../lib/token-bridge';
@@ -103,19 +102,14 @@ function ThemeShowcaseScene({ autoRotate = true }: ThemeShowcaseSceneProps) {
   const frameRef = useRef<number>(0);
 
   // Wire token bridge to material
-  useTokenBridge({
-    material: materialRef.current ?? undefined,
-    colorTokens: {
-      uPrimaryColor: '--color-primary',
-      uSecondaryColor: '--color-secondary',
-    },
-    onThemeChange: (theme) => {
+  useEffect(() => {
+    return subscribeToThemeChanges((theme) => {
       if (materialRef.current && 'uniforms' in materialRef.current) {
         materialRef.current.uniforms.uTheme.value =
           theme === 'dark' ? 1.0 : 0.0;
       }
-    },
-  });
+    });
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current) return;
