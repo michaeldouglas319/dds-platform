@@ -165,3 +165,194 @@ section.display.variant → theme.variantOverrides[layout] → theme.defaultVari
 1. Puck integration for .online
 2. Payload CMS for .site
 3. New renderers: page-builder-canvas, cms-block
+
+---
+
+## ARMS Platform — Geopolitical Conflict Mapping
+
+### Overview
+
+ARMS (Abundance at Arms) is a real-time geopolitical conflict mapping application within the DDS platform. It aggregates conflict event data from multiple sources and visualizes them across interactive 3D globe and 2D flat map views.
+
+### Data Architecture
+
+**Sources:** Multi-source aggregation from 5 free APIs:
+- GDELT (Global Event, Language, and Tone Database) — 15-minute event freshness
+- NewsAPI — Global news aggregation
+- Reddit — Real-time discussions
+- RSS Feeds — Custom sources
+- HackerNews — Tech-related events
+
+**Storage:** Supabase PostgreSQL
+- Table: `globe_events`
+- Schema: `[id, source, external_id, lat, lon, weight, name, url, tag, date]`
+- Index: `(tag, date)` for filtering performance
+
+**Type System:** Shared `@dds/types` package
+- `GlobeEventRow` — Event data structure
+- `EventTag` — Tagged enum (lethal, disaster, geopolitical, military, news, social, tech-news)
+- `TAG_COLORS` — Color mapping for visualization
+- `AggregationResponse` — Multi-source aggregation response
+
+**API Endpoints:**
+- `GET /api/arms-events` — Fetch events with optional filtering (tag, date range, limit)
+- `POST /api/aggregate-events` — Cron job endpoint for multi-source aggregation (runs every 15 minutes)
+
+### Visualization Layers
+
+**3D Globe View:**
+- Three.js + react-three-fiber rendering
+- Event points as colored circles with sizing by weight
+- Interactive rotation, zoom, camera control
+- Optional 3D tiles layer (Google buildings/terrain)
+- 415+ events visible at default zoom
+
+**2D Flat Map View:**
+- MapLibre GL base map with OpenFreeMap tiles
+- deck.gl ScatterplotLayer for event points (high-performance geospatial)
+- Three basemap options:
+  - **Positron** (light theme) — OpenFreeMap Positron style
+  - **Dark** — OpenFreeMap Dark style
+  - **Satellite** — Esri World Imagery
+- Event clustering and interaction on hover/click
+
+**Event Styling:**
+- Color by tag (red=lethal, orange=disaster, blue=news, green=social, etc.)
+- Size by weight (logarithmic scale, 8-100px)
+- Opacity by recency (fade out for older events)
+- Stroke outline on selection
+
+### UI Architecture
+
+**Container:** `apps/ageofabundance-wiki/components/arms-drilldown.jsx`
+- State management for: events, filters, selected event, view mode, basemap
+- Fetch events on mount from `/api/arms-events`
+- Apply client-side filtering (tags, date range)
+
+**Sidebar Controls:**
+- View mode toggle (🌍 Globe / 🗺️ Map buttons)
+- Event types filter (checkboxes + counts)
+- Date range pickers (optional from/to)
+- Results counter
+- View-specific controls (basemap toggle for flat map)
+
+**Viewport:**
+- Conditional rendering: `mapMode === 'globe' ? <InteractiveGlobeScene /> : <FlatMap />`
+- Full-screen responsive container
+- Smooth transition on mode switch
+
+**Detail Panel:**
+- Event metadata on click
+- Source attribution
+- External link to news source
+- Clickable lat/lon coordinates
+
+### File Structure
+
+```
+apps/ageofabundance-wiki/
+├── app/
+│   ├── api/
+│   │   ├── arms-events/route.ts              # Event fetching endpoint
+│   │   └── aggregate-events/route.ts         # Multi-source aggregation (cron)
+│   └── arms/
+│       └── page.jsx                          # ARMS drilldown page
+├── components/
+│   ├── arms-drilldown.jsx                    # Main container
+│   ├── flat-map.tsx                          # MapLibre + deck.gl
+│   ├── flat-map.css
+│   └── globe-3d-tiles.tsx                    # 3D tiles support (optional)
+
+packages/types/
+├── index.ts                                  # Barrel export
+├── globe-events.ts                           # Event types
+└── event-tags.ts                             # Tag definitions + colors
+```
+
+### Type Hierarchy
+
+All types imported from centralized `@dds/types`:
+
+```typescript
+// Single source of truth
+import {
+  GlobeEventRow,
+  EventTag,
+  TAG_COLORS,
+  TAG_NAMES,
+  AggregationResponse
+} from '@dds/types'
+
+// Component usage
+const event: GlobeEventRow = { source, external_id, lat, lon, weight, name, url, tag, date }
+const color: [number, number, number] = TAG_COLORS[event.tag || 'social']
+```
+
+### Deployment Pipeline
+
+**GitHub Actions Workflow:** `.github/workflows/deploy-on-push.yml`
+1. Trigger on push to main with app/package changes
+2. Detect changed apps via `git diff`
+3. Build locally: `pnpm turbo build --filter=@dds/ageofabundance-wiki`
+4. Deploy prebuilt artifacts to Vercel
+5. Create GitHub deployment status
+
+**No Vercel Cloud Build:** All builds happen locally (free), only artifacts deployed.
+
+**Environment Variables:**
+- `NEXT_PUBLIC_DDS_SUPABASE_URL` — Supabase project URL
+- `NEXT_PUBLIC_DDS_SUPABASE_ANON_KEY` — Supabase public key
+- `DDS_SUPABASE_SERVICE_ROLE_KEY` — Server-side key (for aggregation)
+- `CRON_SECRET` — Vercel cron authentication
+
+### Adding New Data Sources
+
+Extend `apps/ageofabundance-wiki/app/api/aggregate-events/route.ts`:
+
+```typescript
+async function fetchFromSource(): Promise<GlobeEventRow[]> {
+  try {
+    // Fetch from API
+    // Transform to GlobeEventRow format
+    // Deduplicate by external_id
+    return events
+  } catch (err) {
+    console.error('[aggregate] Source failed:', err)
+    return [] // Graceful fallback
+  }
+}
+
+const SOURCES = {
+  newSource: { fetch: fetchFromSource, weight: 0.7 }
+}
+```
+
+**Expected effort:** ~50 lines per source
+
+### Adding New Visualizations
+
+Create new component accepting `events: GlobeEventRow[]`:
+
+1. Define component in `components/`
+2. Add mode toggle to sidebar
+3. Conditionally render in viewport
+4. Import types from `@dds/types`
+
+**Expected effort:** 2-3 hours per visualization
+
+### Caching & Performance
+
+- **ISR:** 5-minute revalidation for `/api/arms-events`
+- **Browser Cache:** `Cache-Control: public, s-maxage=300, stale-while-revalidate=60`
+- **Rendering:** 60 FPS on deck.gl + Three.js
+- **Load Time:** Target < 3 seconds (globe + 415 events)
+
+### Next Agents
+
+- **Agent 2:** Data Layer System (45+ configurable layers)
+- **Agent 3:** Intelligence Index (event correlation)
+- **Agent 4:** Cross-Stream Correlation
+- **Agent 5:** Financial Radar
+- **Agents 6-10:** Flight tracking, multilingual support, offline AI, performance optimization
+
+See `AGENT_2_DATA_LAYER_SYSTEM.md` and `NEXT_AGENTS.md` for implementation roadmap.
