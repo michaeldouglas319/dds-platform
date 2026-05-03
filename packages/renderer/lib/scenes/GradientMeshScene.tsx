@@ -20,7 +20,7 @@ import { useTokenBridge } from '../useTokenBridge';
 import { SceneWithFallback } from '../SceneWithFallback';
 import { getColorToken } from '../token-bridge';
 
-interface GradientMeshSceneProps {
+export interface GradientMeshSceneProps {
   /** Canvas height (default: '100vh') */
   height?: string | number;
   /** Container class name */

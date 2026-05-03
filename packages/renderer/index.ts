@@ -27,6 +27,9 @@ export { useWebGLSupport, checkWebGLSupport } from './lib/useWebGLSupport';
 export { CanvasErrorBoundary } from './lib/CanvasErrorBoundary';
 export { SceneWithFallback } from './lib/SceneWithFallback';
 
+// Scenes
+export { GradientMeshScene, type GradientMeshSceneProps } from './lib/scenes/GradientMeshScene';
+
 // Registry
 export { createRegistry, defaultRegistry } from './registry';
 
