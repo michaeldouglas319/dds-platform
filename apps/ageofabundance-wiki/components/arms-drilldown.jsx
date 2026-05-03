@@ -1,13 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
+import { InteractiveGlobeScene } from '@dds/globe'
 import './arms-drilldown.css'
-
-const InteractiveGlobeScene = dynamic(
-  () => import('@dds/globe').then(m => m.InteractiveGlobeScene),
-  { ssr: false, loading: () => <div className="arms-drilldown__loading">Loading globe...</div> }
-)
 
 export function ArmsDrilldown() {
   const [events, setEvents] = useState([])
@@ -153,12 +149,14 @@ export function ArmsDrilldown() {
           {isLoading ? (
             <div className="arms-drilldown__loading-screen">Loading globe...</div>
           ) : mapMode === 'globe' ? (
-            <InteractiveGlobeScene
-              events={filteredEvents}
-              focusedIndex={selectedEvent ? filteredEvents.findIndex(e => e.id === selectedEvent.id) : null}
-              onPointSelect={(index, event) => setSelectedEvent(event)}
-              background={null}
-            />
+            <Suspense fallback={<div className="arms-drilldown__loading-screen">Loading globe...</div>}>
+              <InteractiveGlobeScene
+                events={filteredEvents}
+                focusedIndex={selectedEvent ? filteredEvents.findIndex(e => e.id === selectedEvent.id) : null}
+                onPointSelect={(index, event) => setSelectedEvent(event)}
+                background={null}
+              />
+            </Suspense>
           ) : (
             <div className="arms-drilldown__flat-map">
               <p>Flat map coming soon — deck.gl/maplibre integration</p>
