@@ -52,34 +52,6 @@ jobs:
             pnpm turbo build --filter=@dds/$app
           done
 
-      - name: Stage prebuilt artifacts for Vercel
-        if: steps.detect.outputs.changed
-        run: |
-          for app in ${{ steps.detect.outputs.changed }}; do
-            APP_DIR="apps/$app"
-            if [ ! -d "$APP_DIR" ]; then
-              echo "⚠ App not found: $app"
-              continue
-            fi
-
-            echo "Staging prebuilt artifacts for $app..."
-            cd "$APP_DIR"
-
-            # Create .vercel/output directory structure for prebuilt deployment
-            mkdir -p .vercel/output
-            if [ -d ".next" ]; then
-              cp -r .next .vercel/output/functions
-              echo "✓ Staged .next build artifacts"
-            elif [ -d "dist" ]; then
-              cp -r dist .vercel/output/static
-              echo "✓ Staged dist artifacts"
-            else
-              echo "⚠ No build artifacts found (.next or dist)"
-            fi
-
-            cd ../..
-          done
-
       - name: Deploy to Vercel (prebuilt, zero cloud build cost)
         if: steps.detect.outputs.changed
         env:
@@ -96,9 +68,22 @@ jobs:
             echo "Deploying prebuilt: $app"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-            cd "$APP_DIR"
+            # Create .vercel/output directory at root with app artifacts
+            mkdir -p .vercel/output/functions
+
+            if [ -d "$APP_DIR/.next" ]; then
+              cp -r "$APP_DIR/.next" .vercel/output/functions/
+              echo "✓ Staged .next build artifacts for $app"
+            elif [ -d "$APP_DIR/dist" ]; then
+              cp -r "$APP_DIR/dist" .vercel/output/static
+              echo "✓ Staged dist artifacts for $app"
+            else
+              echo "⚠ No build artifacts found for $app"
+              continue
+            fi
+
+            # Deploy from root directory (where .vercel config is)
             npx vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" || echo "⚠ Deploy failed: $app"
-            cd ../..
           done
 
       - name: Create deployment status
