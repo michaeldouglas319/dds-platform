@@ -9,22 +9,21 @@ All builds are local (free). Vercel only does hosting (cheap).
 
 ## How We Achieve This
 
-### 1. All Builds Are Local
-```bash
-make deploy    # Runs pnpm turbo build on YOUR machine (free)
-               # Then uploads prebuilt artifact to Vercel
+### 1. All Builds Run on GitHub Actions (Free)
+Push to `main` → GitHub Actions runs on Ubuntu → builds with `vercel build --prod` → uploads prebuilt artifacts with `vercel deploy --prebuilt --prod`.
+
+Vercel never builds. GitHub Actions provides free build minutes.
+
+```
+GitHub push → Actions runner → vercel build (free) → vercel deploy --prebuilt (free)
 ```
 
-Vercel never builds. It only serves.
+### 2. Double Build Guard
+**Root project:** `vercel.json` `buildCommand` runs `scripts/vercel-build-guard.sh` — exits 1 immediately.
 
-### 2. Vercel Build Guard
-If Vercel somehow tries to build (shouldn't happen), it fails immediately with:
-```
-🚨 CRITICAL: Vercel tried to build on the cloud!
-This is consuming your $5/month budget!
-```
+**Per-app:** Each app's `vercel.json` `buildCommand` checks for `ALLOW_VERCEL_BUILD=1`. GitHub Actions sets this; Vercel cloud never has it. Any Vercel-triggered cloud build exits 1 instantly.
 
-This prevents accidental cloud builds from eating your budget.
+If Vercel somehow tries to build it fails immediately — no minutes consumed.
 
 ### 3. Cost Monitoring
 Check your current spend:
@@ -70,33 +69,31 @@ Budget usage:           21%
 
 ## What to Avoid
 
-❌ **Don't push to main without `make deploy` first**
-→ Vercel might trigger a rebuild (old habit from before)
-
 ❌ **Don't manually trigger Vercel rebuilds in dashboard**
 → That's a cloud build (costs money)
 
-❌ **Don't commit to main, expect Vercel to handle it**
-→ GitHub Actions are deleted, nothing auto-deploys (by design)
+❌ **Don't use `vercel build` from macOS directly**
+→ Broken on macOS (`spawn sh ENOENT` bug in vercel CLI). Use GitHub Actions.
+
+❌ **Don't disable the GitHub Actions workflow thinking Vercel handles it**
+→ Vercel's build guard blocks all cloud builds. Only GitHub Actions deploys.
 
 ---
 
 ## Workflow (Always This)
 
 ```bash
-# 1. Make changes locally
-vim apps/ageofabundance-info/src/page.tsx
+# 1. Make changes
+vim apps/ageofabundance-wiki/components/arms-drilldown.jsx
 
-# 2. Build locally (free, cached)
-make build    # or just: make deploy (does build + deploy)
+# 2. Test build locally (optional, free)
+pnpm turbo build --filter=@dds/ageofabundance-wiki
 
-# 3. Test locally (free)
-make dev
+# 3. Deploy — just push to main
+git push origin main
+# GitHub Actions detects changed apps, builds on Ubuntu, deploys prebuilt
 
-# 4. Ship to Vercel (cheap, prebuilt)
-make deploy   # Detects changed apps, uploads prebuilt
-
-# 5. Done. Check cost occasionally
+# 4. Check cost occasionally
 make cost     # Verify you're still under budget
 ```
 

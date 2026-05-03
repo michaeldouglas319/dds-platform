@@ -24,22 +24,26 @@ This applies whether you're:
 
 No exceptions. Always ask first.
 
-## Build Strategy - LOCAL ONLY
+## Build & Deploy Strategy
 
-**CRITICAL: Never build on Vercel cloud.** Vercel cloud builds are disabled via `vercel-build-guard.sh`.
+**Never build on Vercel cloud** — all builds run on GitHub Actions (Ubuntu, free minutes).
 
-- ✅ Build locally on your device with `pnpm turbo build --filter=@dds/<app-name>`
-- ✅ Build in Claude cloud (Claude Code sessions)
-- ❌ Never trigger cloud builds on Vercel
-- ❌ Never use `vercel build` from macOS directly (shell compatibility issues)
+- ✅ Test builds locally: `pnpm turbo build --filter=@dds/<app-name>`
+- ✅ Production deploys: push to `main` → GitHub Actions handles it automatically
+- ❌ Never use `vercel build` from macOS directly (broken: `spawn sh ENOENT` on macOS)
+- ❌ Never trigger builds from the Vercel dashboard
 
-**Deployment workflow (always use this):**
+**Deployment workflow:**
 1. Make changes to an app in `/apps/<app-name>`
-2. Build locally: `pnpm turbo build --filter=@dds/<app-name>`
-3. Deploy prebuilt artifacts: `make deploy` (detects changed apps and deploys only those)
-4. Or deploy all: `make deploy-all` if no git changes detected
+2. Test the build: `pnpm turbo build --filter=@dds/<app-name>`
+3. Push to `main` — GitHub Actions detects changed apps and deploys only those
 
-**Why:** Building locally is free. Vercel charges for build minutes. By building locally and uploading only prebuilt artifacts, we pay 0 build costs and only for artifact storage/bandwidth.
+**How GitHub Actions deploys with zero Vercel cost:**
+- Runs `pnpm install` at monorepo root (workspace deps available)
+- `VERCEL_INSTALL_COMPLETED=1 vercel build --prod` — skips Vercel's install step, builds on the free Ubuntu runner
+- `vercel deploy --prebuilt --prod` — uploads artifacts only, Vercel never builds
+
+**Why not `make deploy` locally:** `vercel build` has a macOS shell compatibility bug (`spawn sh ENOENT`). CI uses Ubuntu where it works correctly.
 
 ## Project Structure
 

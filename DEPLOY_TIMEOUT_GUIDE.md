@@ -1,5 +1,11 @@
 # Deploy Watcher & Timeout Guide
 
+> **Deprecated:** This guide describes the old `make deploy` local-build workflow.
+> Deployments now run automatically via GitHub Actions on push to `main`.
+> See `COST_CONTROL.md` for the current workflow.
+
+---
+
 ## What It Does
 
 The deploy watcher ensures **no deploy step ever runs longer than its time limit**.

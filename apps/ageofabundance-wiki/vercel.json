@@ -1,5 +1,5 @@
 {
   "framework": "nextjs",
-  "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm turbo build --filter=@dds/ageofabundance-wiki"
+  "buildCommand": "[ \"$ALLOW_VERCEL_BUILD\" = '1' ] && (cd ../.. && pnpm turbo build --filter=@dds/ageofabundance-wiki) || (echo 'BLOCKED: use GitHub Actions to deploy, not Vercel cloud builds' && exit 1)",
+  "outputDirectory": ".next"
 }

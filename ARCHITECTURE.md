@@ -291,13 +291,17 @@ const color: [number, number, number] = TAG_COLORS[event.tag || 'social']
 ### Deployment Pipeline
 
 **GitHub Actions Workflow:** `.github/workflows/deploy-on-push.yml`
-1. Trigger on push to main with app/package changes
-2. Detect changed apps via `git diff`
-3. Build locally: `pnpm turbo build --filter=@dds/ageofabundance-wiki`
-4. Deploy prebuilt artifacts to Vercel
-5. Create GitHub deployment status
+1. Trigger on push to `main` with `apps/**` or `packages/**` changes
+2. `pnpm install --frozen-lockfile` at monorepo root (workspace deps)
+3. Detect changed apps via `git diff`
+4. For each changed app (that has `.vercel/project.json`):
+   - `vercel pull --yes --environment=production` — download prod env vars
+   - `VERCEL_INSTALL_COMPLETED=1 ALLOW_VERCEL_BUILD=1 vercel build --prod` — build on the Ubuntu runner
+   - `vercel deploy --prebuilt --prod` — upload artifacts, no cloud build
 
-**No Vercel Cloud Build:** All builds happen locally (free), only artifacts deployed.
+**Zero Vercel Build Cost:** All builds run on GitHub Actions (free Ubuntu runners). Vercel only serves prebuilt artifacts.
+
+**Build Guard:** `apps/ageofabundance-wiki/vercel.json` `buildCommand` checks for `ALLOW_VERCEL_BUILD=1`. If Vercel's GitHub integration ever triggers a cloud build, it exits 1 immediately. Only GitHub Actions (which sets this var) can successfully build.
 
 **Environment Variables:**
 - `NEXT_PUBLIC_DDS_SUPABASE_URL` — Supabase project URL
