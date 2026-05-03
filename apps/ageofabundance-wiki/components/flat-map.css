@@ -1,0 +1,81 @@
+.flat-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+}
+
+.flat-map__container {
+  width: 100%;
+  height: 100%;
+}
+
+.flat-map__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.95);
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.flat-map__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(100, 150, 200, 0.3);
+  border-top-color: rgba(100, 150, 200, 0.8);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.flat-map__info {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(15, 25, 45, 0.8);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: rgba(100, 150, 200, 1);
+  font-weight: 600;
+  z-index: 5;
+}
+
+.flat-map__info p {
+  margin: 0;
+}
+
+.maplibregl-ctrl {
+  background: rgba(15, 25, 45, 0.8) !important;
+  border: 1px solid rgba(100, 150, 200, 0.2) !important;
+}
+
+.maplibregl-ctrl button {
+  background: rgba(30, 50, 80, 0.5) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.maplibregl-ctrl button:hover {
+  background: rgba(30, 50, 80, 0.8) !important;
+}
+
+.maplibregl-ctrl-attrib {
+  background: rgba(15, 25, 45, 0.6) !important;
+  font-size: 0.75rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: rgba(100, 150, 200, 1) !important;
+}

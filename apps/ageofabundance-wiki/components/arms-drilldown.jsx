@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { InteractiveGlobeScene } from '@dds/globe'
+import { FlatMap } from './flat-map'
 import './arms-drilldown.css'
 
 export function ArmsDrilldown() {
@@ -158,9 +159,11 @@ export function ArmsDrilldown() {
               />
             </Suspense>
           ) : (
-            <div className="arms-drilldown__flat-map">
-              <p>Flat map coming soon — deck.gl/maplibre integration</p>
-            </div>
+            <FlatMap
+              events={filteredEvents}
+              selectedEventId={selectedEvent?.id}
+              onEventSelect={setSelectedEvent}
+            />
           )}
         </div>
 
