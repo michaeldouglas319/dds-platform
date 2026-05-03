@@ -44,15 +44,7 @@ jobs:
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
           echo "Apps changed: $CHANGED"
 
-      - name: Build changed apps
-        if: steps.detect.outputs.changed
-        run: |
-          for app in ${{ steps.detect.outputs.changed }}; do
-            echo "Building $app..."
-            pnpm turbo build --filter=@dds/$app
-          done
-
-      - name: Deploy to Vercel (prebuilt, zero cloud build cost)
+      - name: Build and deploy changed apps
         if: steps.detect.outputs.changed
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -65,25 +57,21 @@ jobs:
             fi
 
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-            echo "Deploying prebuilt: $app"
+            echo "Building and deploying: $app"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-            # Create .vercel/output directory at root with app artifacts
-            mkdir -p .vercel/output/functions
+            cd "$APP_DIR"
 
-            if [ -d "$APP_DIR/.next" ]; then
-              cp -r "$APP_DIR/.next" .vercel/output/functions/
-              echo "✓ Staged .next build artifacts for $app"
-            elif [ -d "$APP_DIR/dist" ]; then
-              cp -r "$APP_DIR/dist" .vercel/output/static
-              echo "✓ Staged dist artifacts for $app"
-            else
-              echo "⚠ No build artifacts found for $app"
-              continue
-            fi
+            # Pull project env + settings (reads .vercel/project.json here, not root)
+            npx vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
 
-            # Deploy from root directory (where .vercel config is)
+            # Build locally on Actions runner (free) — produces .vercel/output in correct format
+            npx vercel build --prod --token="$VERCEL_TOKEN"
+
+            # Upload prebuilt artifacts — Vercel cloud does NOT run a build
             npx vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" || echo "⚠ Deploy failed: $app"
+
+            cd ../..
           done
 
       - name: Create deployment status
