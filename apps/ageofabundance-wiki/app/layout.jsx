@@ -1,5 +1,5 @@
 import './globals.css';
-import { getSearchEntries } from '../content/wiki-search.js';
+import { buildSearchIndex } from '../content/wiki-search.js';
 import { WikiSearch } from '../components/wiki-search.jsx';
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const searchEntries = getSearchEntries();
+  const searchEntries = buildSearchIndex();
 
   return (
     <html lang="en">

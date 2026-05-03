@@ -1,5 +1,6 @@
 import { listFeaturedArticles } from '@dds/wiki-data/articles';
 import { ArticleCard } from '../components/article-card.jsx';
+import { ArmsCard } from '../components/arms-card.jsx';
 
 export const metadata = {
   title: 'ageofabundance.wiki — a living encyclopedia of post-scarcity civilization',
@@ -12,6 +13,9 @@ export default function HomePage() {
 
   return (
     <main id="main-content" className="wiki-home">
+      <section style={{ marginBottom: '4rem' }}>
+        <ArmsCard />
+      </section>
       <header className="wiki-home__hero" aria-labelledby="wiki-home-title">
         <span className="wiki-home__dot" aria-hidden="true" />
         <p className="wiki-home__kicker">ageofabundance.wiki</p>
