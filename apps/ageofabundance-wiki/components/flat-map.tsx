@@ -4,20 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import maplibregl from 'maplibre-gl'
 import { MapboxOverlay } from '@deck.gl/mapbox'
 import { ScatterplotLayer } from '@deck.gl/layers'
+import { GlobeEventRow, TAG_COLORS } from '@dds/types'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import './flat-map.css'
-
-type GlobeEventRow = {
-  source: string
-  external_id: string
-  lat: number
-  lon: number
-  weight: number
-  name: string
-  url: string | null
-  tag: string | null
-  date: string | null
-}
 
 export interface FlatMapProps {
   events: GlobeEventRow[]
@@ -158,13 +147,6 @@ export function FlatMap({
 }
 
 function getEventColor(tag: string | null): [number, number, number] {
-  const colors: Record<string, [number, number, number]> = {
-    geopolitical: [255, 100, 100],
-    military: [255, 80, 80],
-    disaster: [255, 150, 0],
-    news: [100, 150, 255],
-    social: [100, 255, 100],
-    'tech-news': [255, 200, 100],
-  }
-  return colors[tag || ''] || [150, 150, 150]
+  if (!tag || !(tag in TAG_COLORS)) return [150, 150, 150]
+  return TAG_COLORS[tag as keyof typeof TAG_COLORS]
 }

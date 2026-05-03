@@ -49,3 +49,17 @@ export type {
 } from './config';
 
 export { isAppConfig } from './config';
+
+export type {
+  GlobeEventRow,
+  SourceResult,
+  AggregationResponse,
+  ArmsEventsResponse,
+} from './globe-events';
+
+export {
+  EVENT_TAGS,
+  TAG_COLORS,
+  TAG_NAMES,
+  type EventTag,
+} from './event-tags';
