@@ -8,6 +8,7 @@ on:
       - 'apps/**'
       - 'packages/**'
       - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-on-push.yml'
 
 jobs:
   deploy:
