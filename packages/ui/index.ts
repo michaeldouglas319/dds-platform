@@ -68,6 +68,27 @@ export {
   type DialogDescriptionProps,
 } from './components/dialog';
 export {
+  AlertDialog,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+  type AlertDialogOverlayProps,
+  type AlertDialogContentProps,
+  type AlertDialogHeaderProps,
+  type AlertDialogFooterProps,
+  type AlertDialogTitleProps,
+  type AlertDialogDescriptionProps,
+  type AlertDialogActionProps,
+  type AlertDialogCancelProps,
+} from './components/alert-dialog';
+export {
   Tooltip,
   TooltipTrigger,
   TooltipContent,

@@ -14,16 +14,19 @@
 
 ## Completed Integrations
 
+- [DONE 2026-05-03] AlertDialog component — Radix UI primitive + shadcn/ui skin for critical user actions, with 6 comprehensive Vitest tests
 - [DONE 2026-05-03] GradientMeshScene — parametric Three.js shader scene with token bridge integration, Vitest tests, and E2E smoke tests
 - [DONE 2026-05-03] Dialog component (Radix UI primitive + shadcn/ui skin) with full TypeScript types and test coverage
 
 ## shadcn Registry
 
+- **AlertDialog** (AlertDialog, AlertDialogTrigger, AlertDialogPortal, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel)
 - **Dialog** (DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription, DialogClose)
 - Button, Card, Badge, Checkbox, Input, RadioGroup, Switch, Textarea, Label, Skeleton, Separator, Sheet, Tabs, Tooltip, Popover, DropdownMenu, Select
 
 ## Radix Primitives
 
+- **AlertDialog** (from @radix-ui/react-alert-dialog v1.1.1)
 - **Dialog** (from @radix-ui/react-dialog v1.1.2)
 - Tabs, Tooltip, Popover, DropdownMenu, Select (from respective @radix-ui packages)
 - Checkbox, RadioGroup, Switch (from respective @radix-ui packages)
@@ -62,10 +65,10 @@
 - ✅ Git state — Clean, one branch, committed & pushed
 
 ### Next Session Items
-- [ ] Add Alert component (Dialog variant for critical user actions)
-- [ ] Create Three.js scene smoke tests (Playwright E2E)
+- [ ] Create comprehensive Playwright E2E tests for AlertDialog
+- [ ] Complete Playwright E2E tests for GradientMeshScene (theme switching, reduced motion)
 - [ ] Expand token bridge tests for 3D material uniforms
-- [ ] Document theme switching with Three.js scenes
+- [ ] Document token bridge pattern in README
 
 ---
 
