@@ -1,0 +1,13 @@
+{
+  "projectId": "prj_Fmnxk0Ej7NhnX5Ytktq2g8HvlQYp",
+  "orgId": "team_PDFieAJX8zfdDS6PQzvwRTTz",
+  "projectName": "blackdot-dev",
+  "settings": {
+    "framework": "nextjs",
+    "installCommand": "pnpm install --frozen-lockfile",
+    "buildCommand": "pnpm turbo build --filter=@dds/blackdot-dev",
+    "outputDirectory": ".next",
+    "rootDirectory": "apps/blackdot-dev",
+    "nodeVersion": "20.x"
+  }
+}

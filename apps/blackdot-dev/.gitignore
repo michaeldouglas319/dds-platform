@@ -26,8 +26,9 @@ lerna-debug.log*
 .env
 .env*.local
 
-# Vercel
-.vercel
+# Vercel — ignore build output but commit project.json so CI can deploy
+.vercel/*
+!.vercel/project.json
 
 # Next.js
 .next/

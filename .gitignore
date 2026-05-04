@@ -4,8 +4,9 @@ dist/
 .turbo/
 .env*.local
 *.tsbuildinfo
-.vercel
 .vercel/output/
 apps/*/.vercel/output/
+# Allow project.json so CI can detect which Vercel project to deploy
+!apps/*/.vercel/project.json
 test-results/
 playwright-report/
