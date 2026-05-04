@@ -1,3 +1,7 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 /** @type {import('next').NextConfig} */
 
 /**
@@ -20,6 +24,11 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+  },
+  experimental: {
+    // Tell Next.js file tracing to root at the monorepo root so pnpm symlinks resolve correctly.
+    // Without this, vercel build resolves node_modules paths as /node_modules/... (wrong).
+    outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   webpack(config) {
     // R3F 8.x pre-built ESM dist files use `import { unstable_act } from 'react'`
