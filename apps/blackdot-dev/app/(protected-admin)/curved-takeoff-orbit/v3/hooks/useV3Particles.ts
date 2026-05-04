@@ -31,7 +31,7 @@ export type { ExtendedParticle as V3Particle };
 
 export interface V3ParticlesState {
   particles: ExtendedParticle[];
-  instanceMatrixRef: React.RefObject<THREE.InstancedMesh | null>;
+  instanceMatrixRef: React.MutableRefObject<THREE.InstancedMesh | null>;
 }
 
 /**

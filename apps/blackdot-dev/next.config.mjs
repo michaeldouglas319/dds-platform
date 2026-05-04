@@ -11,13 +11,6 @@
  * - Centralized access control
  */
 
-const r3fPackages = [
-  '@react-three/fiber',
-  '@react-three/drei',
-  '@react-three/rapier',
-  '@react-spring/three',
-];
-
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
@@ -25,17 +18,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  webpack(config, { isServer }) {
-    if (isServer) {
-      // R3F and Three.js use browser APIs — stub them out on the server bundle
-      // so webpack doesn't try to SSR-analyze them (avoids unstable_act errors etc.)
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        ...Object.fromEntries(r3fPackages.map((pkg) => [pkg, false])),
-      };
-    }
-    return config;
-  },
+  // Transpile R3F/Three packages so webpack converts their ESM to CJS,
+  // avoiding strict named-export validation (e.g. React.unstable_act in R3F 8.x)
+  transpilePackages: [
+    '@react-three/fiber',
+    '@react-three/drei',
+    '@react-three/rapier',
+    '@react-spring/three',
+    '@react-spring/core',
+  ],
 };
 
 export default nextConfig
