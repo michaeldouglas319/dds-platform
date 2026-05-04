@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, type ThreeEvent } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { easing } from 'maath';
@@ -63,7 +63,7 @@ export function AnnotationMarker({
     return null;
   }
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (onClick) {
       onClick(annotation.id);

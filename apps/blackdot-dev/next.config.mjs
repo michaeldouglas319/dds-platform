@@ -18,15 +18,17 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Transpile R3F/Three packages so webpack converts their ESM to CJS,
-  // avoiding strict named-export validation (e.g. React.unstable_act in R3F 8.x)
-  transpilePackages: [
-    '@react-three/fiber',
-    '@react-three/drei',
-    '@react-three/rapier',
-    '@react-spring/three',
-    '@react-spring/core',
-  ],
+  webpack(config) {
+    // R3F 8.x pre-built ESM dist files use `import { unstable_act } from 'react'`
+    // which fails webpack 5 strict named-export validation (unstable_act is only
+    // in React's CJS build, not the ESM exports map).
+    // Marking as javascript/auto treats the files as CommonJS, bypassing ESM validation.
+    config.module.rules.push({
+      test: /node_modules\/@react-three\/(fiber|drei|rapier)/,
+      type: 'javascript/auto',
+    });
+    return config;
+  },
 };
 
 export default nextConfig
