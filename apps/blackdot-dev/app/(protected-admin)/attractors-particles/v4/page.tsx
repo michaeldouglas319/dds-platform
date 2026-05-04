@@ -9,14 +9,12 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 
 // Default Configuration - override from parent page
-export interface AttractorsV4Config {
+interface AttractorsV4Config {
   particleMode?: 'simple-particles' | 'advanced-mesh'
 }
 
-export const DEFAULT_ATTRACTORS_V4_CONFIG: AttractorsV4Config = {
-  particleMode: 'simple-particles', // Toggle particle rendering
-  // 'simple-particles' - Basic spheres with vertex colors (like Three.js tiled lighting example)
-  // 'advanced-mesh' - Complex sphere geometry with more detail
+const DEFAULT_ATTRACTORS_V4_CONFIG: AttractorsV4Config = {
+  particleMode: 'simple-particles',
 }
 
 const particleCount = 10000 // CPU-managed particles

@@ -294,9 +294,7 @@ export function init(renderer: THREE.WebGLRenderer, hand: HandData): void {
     depthTest: false,
   });
 
-  // Use PlaneBufferGeometry for compatibility (PlaneGeometry in newer Three.js)
-  const PlaneGeo = (THREE as any).PlaneBufferGeometry || THREE.PlaneGeometry;
-  _fboMesh = new THREE.Mesh(new PlaneGeo(2, 2), _copyShader);
+  _fboMesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), _copyShader);
   _fboScene.add(_fboMesh);
 
   _velocityRenderTarget = new THREE.WebGLRenderTarget(
