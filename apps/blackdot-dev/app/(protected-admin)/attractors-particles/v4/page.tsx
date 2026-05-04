@@ -20,13 +20,9 @@ const DEFAULT_ATTRACTORS_V4_CONFIG: AttractorsV4Config = {
 const particleCount = 10000 // CPU-managed particles
 const sourceSpawnInterval = 0.05 // 20 spawns per second per source
 
-interface AttractorsParticlesV4Props {
-  config?: AttractorsV4Config
-}
-
-export default function AttractorsParticlesV4(props: AttractorsParticlesV4Props) {
+export default function AttractorsParticlesV4() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const CONFIG = { ...DEFAULT_ATTRACTORS_V4_CONFIG, ...props.config }
+  const CONFIG = { ...DEFAULT_ATTRACTORS_V4_CONFIG }
 
   useEffect(() => {
     if (!containerRef.current) return
