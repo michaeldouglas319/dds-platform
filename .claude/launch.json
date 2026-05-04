@@ -13,5 +13,17 @@
       "runtimeArgs": ["--filter", "ageofabundance-wiki", "dev"],
       "port": 3001
     }
+    ,{
+      "name": "blackdot-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@dds/blackdot-dev", "exec", "next", "dev", "-p", "3002"],
+      "port": 3002
+    }
+    ,{
+      "name": "michaeldouglas-app",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "my-v0-project", "exec", "next", "dev", "-p", "3003"],
+      "port": 3003
+    }
   ]
 }

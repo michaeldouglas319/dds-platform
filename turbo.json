@@ -7,13 +7,21 @@
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": [
         "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+        "CLERK_SECRET_KEY",
+        "CLERK_WEBHOOK_SECRET",
         "NEXT_PUBLIC_SITE_URL",
         "NODE_ENV",
         "NEXT_PUBLIC_DDS_SUPABASE_URL",
         "NEXT_PUBLIC_DDS_SUPABASE_ANON_KEY",
         "DDS_SUPABASE_URL",
         "DDS_SUPABASE_SERVICE_ROLE_KEY",
-        "CRON_SECRET"
+        "CRON_SECRET",
+        "NEXT_PUBLIC_dds_SUPABASE_URL",
+        "NEXT_PUBLIC_dds_SUPABASE_ANON_KEY",
+        "dds_SUPABASE_URL",
+        "dds_SUPABASE_SERVICE_ROLE_KEY",
+        "dds_POSTGRES_URL",
+        "dds_POSTGRES_URL_NON_POOLING"
       ]
     },
     "dev": {

@@ -1,0 +1,32 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Pre-commit validation: typecheck + build
+# Prevents broken code from being committed to the repository
+#
+# This ensures:
+# - All TypeScript type errors are caught
+# - Production build succeeds
+# - Next.js build process completes without errors
+
+echo "🔍 Running pre-commit validation (typecheck + build)..."
+echo "   This may take 1-2 minutes..."
+npm run validate
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Validation failed. Commit aborted."
+  echo ""
+  echo "Fix errors and try again:"
+  echo "  - npm run typecheck   (Check TypeScript types)"
+  echo "  - npm run build       (Test production build)"
+  echo "  - npm run lint        (Optional: check code style)"
+  echo ""
+  exit 1
+fi
+
+echo ""
+echo "✅ Pre-commit validation passed!"
+echo "   Typecheck: OK"
+echo "   Build: OK"
+exit 0

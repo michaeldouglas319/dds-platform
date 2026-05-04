@@ -1,0 +1,45 @@
+{
+  "extends": ["./.eslintrc.json"],
+  "rules": {
+    "no-hardcoded-glass-morphism": [
+      "warn",
+      {
+        "pattern": "bg-background/\\d+ backdrop-blur",
+        "message": "Use <GlassCard> from @/components/primitives instead of hardcoded glass-morphism classes",
+        "suggestedFix": "<GlassCard variant=\"medium\" padding=\"spacious\">"
+      }
+    ],
+    "no-hardcoded-interactive-cards": [
+      "warn",
+      {
+        "pattern": "hover:scale-\\d+ active:scale",
+        "message": "Use <InteractiveCard> from @/components/primitives instead of hardcoded hover effects",
+        "suggestedFix": "<InteractiveCard variant=\"scale\">"
+      }
+    ],
+    "no-hardcoded-badge-colors": [
+      "warn",
+      {
+        "pattern": "bg-\\w+/20 text-\\w+",
+        "message": "Use <StatusBadge> from @/components/primitives instead of hardcoded badge colors",
+        "suggestedFix": "<StatusBadge role=\"admin\"> or <StatusBadge status=\"success\">"
+      }
+    ],
+    "prefer-primitive-floating-button": [
+      "warn",
+      {
+        "pattern": "fixed.*rounded-full.*bg-primary",
+        "message": "Use <FloatingAction> from @/components/primitives instead of hardcoded floating buttons",
+        "suggestedFix": "<FloatingAction variant=\"primary\" position=\"bottom-right\">"
+      }
+    ],
+    "prefer-primitive-nav-header": [
+      "warn",
+      {
+        "pattern": "sticky.*top-0.*backdrop-blur",
+        "message": "Use <NavHeader> from @/components/primitives instead of hardcoded sticky headers",
+        "suggestedFix": "<NavHeader variant=\"glass\" sticky>"
+      }
+    ]
+  }
+}

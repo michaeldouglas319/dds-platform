@@ -1,0 +1,89 @@
+{
+  "models": {
+    "/assets/models/super_cam__-_rusian_reconnaissance_drone.glb": {
+      "targetSize": 60,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "dynamic_source_area": true
+    },
+    "/assets/models/dron_low_poly_3d_model_gltf/scene.gltf": {
+      "targetSize": 60,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "dynamic_source_area": true
+    },
+    "/assets/models/drone_uav_wing_desert_camo_gltf/scene.gltf": {
+      "targetSize": 60,
+      "position": {
+        "x": 10,
+        "y": 90,
+        "z": 50
+      },
+      "rotation": {
+        "x": 0.1745,
+        "y": 1.5708,
+        "z": 0.8727
+      },
+      "dynamic_source_area": true
+    },
+    "/assets/models/uav/Meshy_AI_Make_a_engineering_ap_1230052632_generate.glb": {
+      "targetSize": 60,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "dynamic_source_area": true
+    },
+    "/assets/models/2_plane.glb": {
+      "targetSize": 80,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "dynamic_source_area": true
+    }
+  },
+  "defaults": {
+    "targetSize": 60,
+    "position": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "dynamic_source_area": true
+  }
+}
+

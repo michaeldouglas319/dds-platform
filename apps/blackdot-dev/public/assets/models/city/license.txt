@@ -1,0 +1,11 @@
+Model Information:
+* title:	City
+* source:	https://sketchfab.com/3d-models/city-c49442a8f4c240ca8c79cbb2a1c550ba
+* author:	Pinguale (https://sketchfab.com/Pinguale)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "City" (https://sketchfab.com/3d-models/city-c49442a8f4c240ca8c79cbb2a1c550ba) by Pinguale (https://sketchfab.com/Pinguale) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

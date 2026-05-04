@@ -1,0 +1,3092 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-04T00:15:00.748Z",
+  "totalComponents": 40,
+  "byCategory": {
+    "ui": [
+      {
+        "id": "theme-toggle",
+        "name": "theme-toggle",
+        "path": "components/ui/theme-toggle.tsx",
+        "category": "ui",
+        "layer": 1,
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "ThemeToggle",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          },
+          {
+            "name": "next-themes",
+            "isInternal": false
+          },
+          {
+            "name": "./button",
+            "isInternal": true,
+            "internalPath": "components/ui/button"
+          }
+        ]
+      }
+    ],
+    "composite": [
+      {
+        "id": "BrandButton",
+        "name": "Brand Button",
+        "path": "components/primitives/BrandButton.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "BrandButton - Extended button component with brand variants Enhanced button component extending the base Button with glass-morphism and floating action variants while preserving all original Button variants.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "BrandButtonProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@radix-ui/react-slot",
+            "isInternal": false
+          },
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "FloatingAction",
+        "name": "Floating Action",
+        "path": "components/primitives/FloatingAction.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "FloatingAction - Floating action button primitive A fixed-position floating action button with multiple variants and positions. Captures the 8+ floating button instances across the codebase.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "FloatingActionProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "GlassCard",
+        "name": "Glass Card",
+        "path": "components/primitives/GlassCard.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "GlassCard - Reusable glass-morphism card component A flexible card component with glass-morphism effects and multiple variants. Captures the 23+ glass-morphism pattern instances across the codebase.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "GlassCardProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "InteractiveCard",
+        "name": "Interactive Card",
+        "path": "components/primitives/InteractiveCard.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "InteractiveCard - Interactive card component with hover/click states A flexible card component with predefined interactive behaviors. Captures the 20+ interactive card pattern instances across the codebase.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "InteractiveCardProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "job-card",
+        "name": "job-card",
+        "path": "components/sections/job-card.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "JobCard",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/components/ui/card",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/badge",
+            "isInternal": false
+          }
+        ]
+      },
+      {
+        "id": "NavHeader",
+        "name": "Nav Header",
+        "path": "components/primitives/NavHeader.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "NavHeader - Navigation header primitive A flexible navigation header component with glass-morphism and floating variants. Captures the 12+ navigation header instances across the codebase.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "NavHeaderProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "NavigationButtonBlock",
+        "name": "Navigation Button Block",
+        "path": "components/primitives/NavigationButtonBlock.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "NavigationButton",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "NavigationButtonBlockProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "NavigationButtonBlock",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "next/navigation",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ]
+      },
+      {
+        "id": "OverviewContent",
+        "name": "Overview Content",
+        "path": "components/PitchDeck/OverviewContent.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "Generic Overview Content Component Consolidated replacement for BusinessOverviewContent and IdeasOverviewContent Renders a hero section followed by section cards with navigation",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "OverviewContent",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/PitchDeckSection",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/button",
+            "isInternal": false
+          },
+          {
+            "name": "./PitchDeckHero",
+            "isInternal": true,
+            "internalPath": "components/PitchDeck/PitchDeckHero"
+          },
+          {
+            "name": "./PitchDeckContentRenderer",
+            "isInternal": true,
+            "internalPath": "components/PitchDeck/PitchDeckContentRenderer"
+          },
+          {
+            "name": "@/hooks/useScrollNavigation",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "PitchDeckContentRenderer",
+        "name": "Pitch Deck Content Renderer",
+        "path": "components/PitchDeck/PitchDeckContentRenderer.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "Renders paragraph and highlight content for pitch deck sections Handles both simple strings and complex content objects",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "PitchDeckContentRenderer",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "PitchDeckHero",
+        "name": "Pitch Deck Hero",
+        "path": "components/PitchDeck/PitchDeckHero.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "Hero section component for pitch deck presentations Displays avatar, title, subtitle, stats, and optional custom content",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "PitchDeckHero",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/avatar",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "PitchDeckSectionCard",
+        "name": "Pitch Deck Section Card",
+        "path": "components/PitchDeck/PitchDeckSectionCard.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "Reusable section card component for pitch deck presentations Provides consistent glass-morphism styling and navigation",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "PitchDeckSectionCard",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/button",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "ResumePdfPreview",
+        "name": "Resume Pdf Preview",
+        "path": "components/resume/ResumePdfPreview.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "ResumePdfPreview",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/button",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/dialog",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils/resumePdfGenerator",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ]
+      },
+      {
+        "id": "section-card",
+        "name": "section-card",
+        "path": "components/sections/section-card.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "SectionCard",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/components/ui/card",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/hooks/use-navigation",
+            "isInternal": false
+          }
+        ]
+      },
+      {
+        "id": "section-grid",
+        "name": "section-grid",
+        "path": "components/sections/section-grid.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "SectionGrid",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "./section-card",
+            "isInternal": true,
+            "internalPath": "components/sections/section-card"
+          },
+          {
+            "name": "./job-card",
+            "isInternal": true,
+            "internalPath": "components/sections/job-card"
+          },
+          {
+            "name": "next/navigation",
+            "isInternal": false
+          }
+        ]
+      },
+      {
+        "id": "StatusBadge",
+        "name": "Status Badge",
+        "path": "components/primitives/StatusBadge.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "StatusBadge - Semantic role and status badges A flexible badge component for displaying user roles and status states. Captures the 36+ color-coded badge pattern instances across the codebase.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "StatusBadgeProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "StatusIndicator",
+        "name": "Status Indicator",
+        "path": "components/primitives/StatusIndicator.tsx",
+        "category": "composite",
+        "layer": 2,
+        "description": "Current status",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "StatusIndicator",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/primitives",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ],
+    "layout": [
+      {
+        "id": "InteractiveModelLayout",
+        "name": "Interactive Model Layout",
+        "path": "components/layouts/InteractiveModelLayout.tsx",
+        "category": "layout",
+        "layer": 3,
+        "description": "Layout arrangement of elements (default: 'vertical')",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "InteractiveModelLayout",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@react-three/drei",
+            "isInternal": false
+          },
+          {
+            "name": "@/app/landing/components/InteractiveModel",
+            "isInternal": false
+          },
+          {
+            "name": "@/app/landing/components/InteractiveModel",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "ViewContainer",
+        "name": "View Container",
+        "path": "components/layouts/ViewContainer.tsx",
+        "category": "layout",
+        "layer": 3,
+        "description": "ViewContainer - Layout preset consumer component Applies a view preset configuration to a page, handling responsive behavior, spacing, quality settings, and mobile optimizations automatically.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "ViewContainerProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "ViewContainer",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "useViewPreset",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          },
+          {
+            "name": "useViewportBehaviors",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          },
+          {
+            "name": "useGridColumns",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          },
+          {
+            "name": "MyPage",
+            "isComponent": true,
+            "isHook": false,
+            "type": "default"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/lib/config/design/views.config",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils/viewPresets",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/layouts",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/config/views.config",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ],
+    "scene": [],
+    "model": [
+      {
+        "id": "BookModel",
+        "name": "Book Model",
+        "path": "lib/scenes/models/BookModel.tsx",
+        "category": "model",
+        "subcategory": "animations",
+        "description": "Book Model Component Displays book model for documentation/contract sections",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "BookModel",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@react-three/fiber",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelCache",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/modelOptimization",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/deviceCapability",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelDisposal",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelScaling",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "BuildingModel",
+        "name": "Building Model",
+        "path": "lib/scenes/models/BuildingModel.tsx",
+        "category": "model",
+        "subcategory": "animations",
+        "description": "Building Model Component Displays building 3D model with native caching and disposal Memoized to prevent unnecessary re-renders",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "BuildingModel",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@react-three/fiber",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelCache",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/modelOptimization",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/deviceCapability",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelDisposal",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelScaling",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "FutureIslandModel",
+        "name": "Future Island Model",
+        "path": "lib/scenes/models/FutureIslandModel.tsx",
+        "category": "model",
+        "subcategory": "animations",
+        "description": "Future Island Model Component Displays futuristic island model",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "FutureIslandModel",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@react-three/fiber",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelCache",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/modelOptimization",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/deviceCapability",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelDisposal",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelScaling",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "UAVModel",
+        "name": "U A V Model",
+        "path": "lib/scenes/models/UAVModel.tsx",
+        "category": "model",
+        "subcategory": "animations",
+        "description": "UAV Model Component Displays UAV drone model with proper caching and disposal",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "UAVModel",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@react-three/fiber",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelCache",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/modelOptimization",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/optimization/deviceCapability",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelDisposal",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/threejs/utils/modelScaling",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ],
+    "hook": [
+      {
+        "id": "useMobileDetection",
+        "name": "use Mobile Detection",
+        "path": "hooks/useMobileDetection.ts",
+        "category": "hook",
+        "description": "Hook to detect mobile screen size",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "useMobileDetection",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "useModelStats",
+        "name": "use Model Stats",
+        "path": "hooks/useModelStats.ts",
+        "category": "hook",
+        "description": "Hook for attaching stat displays to 3D models Handles positioning, visibility, and LOD (level of detail) for loader components attached to 3D models in a scene.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "ModelStatsConfig",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "ModelStatsData",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "useModelStats",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          },
+          {
+            "name": "usePositionFromModel",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          },
+          {
+            "name": "getStatusColor",
+            "isComponent": false,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "mapDataToVisuals",
+            "isComponent": false,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@react-three/fiber",
+            "isInternal": false
+          },
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "useMountAnimation",
+        "name": "use Mount Animation",
+        "path": "hooks/useMountAnimation.ts",
+        "category": "hook",
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "getRecommendedEasing",
+            "isComponent": false,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "useMountAnimation",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ]
+      },
+      {
+        "id": "useResponsiveOffset",
+        "name": "use Responsive Offset",
+        "path": "hooks/useResponsiveOffset.ts",
+        "category": "hook",
+        "description": "Hook to detect screen size and calculate responsive offsets Returns offset values for positioning model and content On large screens: models positioned at right edge (justify-end equivalent)",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "useResponsiveOffset",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "useRoleBasedNavigation",
+        "name": "use Role Based Navigation",
+        "path": "hooks/useRoleBasedNavigation.ts",
+        "category": "hook",
+        "description": "Filter navigation items based on user's access level Removes items the user doesn't have permission to see",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "useRoleBasedNavigation",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/contexts/AuthContext",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/config/navigation",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/types/auth.types",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "useScrollNavigation",
+        "name": "use Scroll Navigation",
+        "path": "hooks/useScrollNavigation.ts",
+        "category": "hook",
+        "description": "Hook for scroll-based navigation between sections",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "useScrollNavigation",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "useScrollSection",
+        "name": "use Scroll Section",
+        "path": "hooks/useScrollSection.ts",
+        "category": "hook",
+        "description": "Hook to track which section is currently in view based on scroll position Optimized with requestAnimationFrame for better performance",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "useScrollSection",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "use-animated-model",
+        "name": "use-animated-model",
+        "path": "hooks/use-animated-model.ts",
+        "category": "hook",
+        "description": "",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "useAnimatedModel",
+            "isComponent": false,
+            "isHook": true,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@react-three/fiber",
+            "isInternal": false
+          }
+        ]
+      }
+    ],
+    "utility": [],
+    "primitive": [
+      {
+        "id": "CameraViewfinder",
+        "name": "Camera Viewfinder",
+        "path": "components/primitives/CameraViewfinder.tsx",
+        "category": "primitive",
+        "layer": 2,
+        "description": "CameraViewfinder - Minimal camera overlay wrapper Wraps any component in a camera viewfinder UI with metadata display. Useful for showcasing 3D models, product views, or any focal content.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "CameraViewfinderProps",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "class-variance-authority",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ],
+    "dashboard": [
+      {
+        "id": "DashboardCard",
+        "name": "Dashboard Card",
+        "path": "components/dashboard/DashboardCard.tsx",
+        "category": "dashboard",
+        "layer": 2,
+        "description": "Dashboard Card Component Card container for dashboard content with optional icon and status indicators. Supports different variants for various data display purposes.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "DashboardCard",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/card",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "DashboardLayout",
+        "name": "Dashboard Layout",
+        "path": "components/dashboard/DashboardLayout.tsx",
+        "category": "dashboard",
+        "layer": 2,
+        "description": "Dashboard Layout Component Main container for dashboard layouts with grid support and responsive design. Combines a main content area with optional sidebar for controls.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "DashboardLayout",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "DataGrid",
+        "name": "Data Grid",
+        "path": "components/dashboard/DataGrid.tsx",
+        "category": "dashboard",
+        "layer": 2,
+        "description": "Data Grid Component Responsive table for displaying structured data with sorting and filtering support. Designed for dashboard use with clean styling.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "DataGrid",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/card",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ],
+    "editor": [
+      {
+        "id": "PropertyInput",
+        "name": "Property Input",
+        "path": "components/editor/PropertyInput.tsx",
+        "category": "editor",
+        "layer": 2,
+        "description": "Property Input Component Labeled input for editing a single property value. Supports various input types with validation and formatting.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "PropertyInput",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "react",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/input",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/label",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "PropertyPanel",
+        "name": "Property Panel",
+        "path": "components/editor/PropertyPanel.tsx",
+        "category": "editor",
+        "layer": 2,
+        "description": "Property Panel Component Container for editing object properties with organized sections. Supports collapsible groups and various input types.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "PropertySection",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          },
+          {
+            "name": "PropertyPanel",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/components/ui/card",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/button",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "VectorInput",
+        "name": "Vector Input",
+        "path": "components/editor/VectorInput.tsx",
+        "category": "editor",
+        "layer": 2,
+        "description": "Vector Input Component Input for 3D vectors (x, y, z) with synchronized controls. Useful for positions, scales, and rotations.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "VectorInput",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/components/ui/label",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/input",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/ui/button",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          },
+          {
+            "name": "@/lib/utils",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ],
+    "3d-dashboard": [
+      {
+        "id": "ModelDashboard",
+        "name": "Model Dashboard",
+        "path": "components/3d-dashboard/ModelDashboard.tsx",
+        "category": "3d-dashboard",
+        "layer": 2,
+        "description": "Model Dashboard Component Complete dashboard for 3D model viewing and manipulation. Combines 3D viewport with property editor and statistics.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "ModelDashboard",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/components/dashboard/DashboardLayout",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/editor/PropertyPanel",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/editor/PropertyInput",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/editor/VectorInput",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/dashboard/DashboardCard",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/dashboard/DataGrid",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      },
+      {
+        "id": "SceneControlPanel",
+        "name": "Scene Control Panel",
+        "path": "components/3d-dashboard/SceneControlPanel.tsx",
+        "category": "3d-dashboard",
+        "layer": 2,
+        "description": "Scene Control Panel Component Control panel for managing 3D scene properties including lighting, camera, environment, and effects.",
+        "tags": [
+          "generated"
+        ],
+        "exports": [
+          {
+            "name": "SceneControlPanel",
+            "isComponent": true,
+            "isHook": false,
+            "type": "named"
+          }
+        ],
+        "dependencies": [
+          {
+            "name": "@/components/editor/PropertyPanel",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/editor/PropertyInput",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/editor/VectorInput",
+            "isInternal": false
+          },
+          {
+            "name": "@/components/dashboard/DashboardCard",
+            "isInternal": false
+          },
+          {
+            "name": "lucide-react",
+            "isInternal": false
+          }
+        ],
+        "deprecated": false
+      }
+    ]
+  },
+  "byId": {
+    "theme-toggle": {
+      "id": "theme-toggle",
+      "name": "theme-toggle",
+      "path": "components/ui/theme-toggle.tsx",
+      "category": "ui",
+      "layer": 1,
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "ThemeToggle",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        },
+        {
+          "name": "next-themes",
+          "isInternal": false
+        },
+        {
+          "name": "./button",
+          "isInternal": true,
+          "internalPath": "components/ui/button"
+        }
+      ]
+    },
+    "BrandButton": {
+      "id": "BrandButton",
+      "name": "Brand Button",
+      "path": "components/primitives/BrandButton.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "BrandButton - Extended button component with brand variants Enhanced button component extending the base Button with glass-morphism and floating action variants while preserving all original Button variants.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "BrandButtonProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@radix-ui/react-slot",
+          "isInternal": false
+        },
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "CameraViewfinder": {
+      "id": "CameraViewfinder",
+      "name": "Camera Viewfinder",
+      "path": "components/primitives/CameraViewfinder.tsx",
+      "category": "primitive",
+      "layer": 2,
+      "description": "CameraViewfinder - Minimal camera overlay wrapper Wraps any component in a camera viewfinder UI with metadata display. Useful for showcasing 3D models, product views, or any focal content.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "CameraViewfinderProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "FloatingAction": {
+      "id": "FloatingAction",
+      "name": "Floating Action",
+      "path": "components/primitives/FloatingAction.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "FloatingAction - Floating action button primitive A fixed-position floating action button with multiple variants and positions. Captures the 8+ floating button instances across the codebase.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "FloatingActionProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "GlassCard": {
+      "id": "GlassCard",
+      "name": "Glass Card",
+      "path": "components/primitives/GlassCard.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "GlassCard - Reusable glass-morphism card component A flexible card component with glass-morphism effects and multiple variants. Captures the 23+ glass-morphism pattern instances across the codebase.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "GlassCardProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "InteractiveCard": {
+      "id": "InteractiveCard",
+      "name": "Interactive Card",
+      "path": "components/primitives/InteractiveCard.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "InteractiveCard - Interactive card component with hover/click states A flexible card component with predefined interactive behaviors. Captures the 20+ interactive card pattern instances across the codebase.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "InteractiveCardProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "NavHeader": {
+      "id": "NavHeader",
+      "name": "Nav Header",
+      "path": "components/primitives/NavHeader.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "NavHeader - Navigation header primitive A flexible navigation header component with glass-morphism and floating variants. Captures the 12+ navigation header instances across the codebase.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "NavHeaderProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "NavigationButtonBlock": {
+      "id": "NavigationButtonBlock",
+      "name": "Navigation Button Block",
+      "path": "components/primitives/NavigationButtonBlock.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "NavigationButton",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "NavigationButtonBlockProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "NavigationButtonBlock",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "next/navigation",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ]
+    },
+    "StatusBadge": {
+      "id": "StatusBadge",
+      "name": "Status Badge",
+      "path": "components/primitives/StatusBadge.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "StatusBadge - Semantic role and status badges A flexible badge component for displaying user roles and status states. Captures the 36+ color-coded badge pattern instances across the codebase.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "StatusBadgeProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "class-variance-authority",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "StatusIndicator": {
+      "id": "StatusIndicator",
+      "name": "Status Indicator",
+      "path": "components/primitives/StatusIndicator.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "Current status",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "StatusIndicator",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/primitives",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "OverviewContent": {
+      "id": "OverviewContent",
+      "name": "Overview Content",
+      "path": "components/PitchDeck/OverviewContent.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "Generic Overview Content Component Consolidated replacement for BusinessOverviewContent and IdeasOverviewContent Renders a hero section followed by section cards with navigation",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "OverviewContent",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/PitchDeckSection",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/button",
+          "isInternal": false
+        },
+        {
+          "name": "./PitchDeckHero",
+          "isInternal": true,
+          "internalPath": "components/PitchDeck/PitchDeckHero"
+        },
+        {
+          "name": "./PitchDeckContentRenderer",
+          "isInternal": true,
+          "internalPath": "components/PitchDeck/PitchDeckContentRenderer"
+        },
+        {
+          "name": "@/hooks/useScrollNavigation",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "PitchDeckContentRenderer": {
+      "id": "PitchDeckContentRenderer",
+      "name": "Pitch Deck Content Renderer",
+      "path": "components/PitchDeck/PitchDeckContentRenderer.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "Renders paragraph and highlight content for pitch deck sections Handles both simple strings and complex content objects",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "PitchDeckContentRenderer",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "PitchDeckHero": {
+      "id": "PitchDeckHero",
+      "name": "Pitch Deck Hero",
+      "path": "components/PitchDeck/PitchDeckHero.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "Hero section component for pitch deck presentations Displays avatar, title, subtitle, stats, and optional custom content",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "PitchDeckHero",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/avatar",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "PitchDeckSectionCard": {
+      "id": "PitchDeckSectionCard",
+      "name": "Pitch Deck Section Card",
+      "path": "components/PitchDeck/PitchDeckSectionCard.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "Reusable section card component for pitch deck presentations Provides consistent glass-morphism styling and navigation",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "PitchDeckSectionCard",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/button",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "job-card": {
+      "id": "job-card",
+      "name": "job-card",
+      "path": "components/sections/job-card.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "JobCard",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/components/ui/card",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/badge",
+          "isInternal": false
+        }
+      ]
+    },
+    "section-card": {
+      "id": "section-card",
+      "name": "section-card",
+      "path": "components/sections/section-card.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "SectionCard",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/components/ui/card",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/hooks/use-navigation",
+          "isInternal": false
+        }
+      ]
+    },
+    "section-grid": {
+      "id": "section-grid",
+      "name": "section-grid",
+      "path": "components/sections/section-grid.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "SectionGrid",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "./section-card",
+          "isInternal": true,
+          "internalPath": "components/sections/section-card"
+        },
+        {
+          "name": "./job-card",
+          "isInternal": true,
+          "internalPath": "components/sections/job-card"
+        },
+        {
+          "name": "next/navigation",
+          "isInternal": false
+        }
+      ]
+    },
+    "DashboardCard": {
+      "id": "DashboardCard",
+      "name": "Dashboard Card",
+      "path": "components/dashboard/DashboardCard.tsx",
+      "category": "dashboard",
+      "layer": 2,
+      "description": "Dashboard Card Component Card container for dashboard content with optional icon and status indicators. Supports different variants for various data display purposes.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "DashboardCard",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/card",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "DashboardLayout": {
+      "id": "DashboardLayout",
+      "name": "Dashboard Layout",
+      "path": "components/dashboard/DashboardLayout.tsx",
+      "category": "dashboard",
+      "layer": 2,
+      "description": "Dashboard Layout Component Main container for dashboard layouts with grid support and responsive design. Combines a main content area with optional sidebar for controls.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "DashboardLayout",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "DataGrid": {
+      "id": "DataGrid",
+      "name": "Data Grid",
+      "path": "components/dashboard/DataGrid.tsx",
+      "category": "dashboard",
+      "layer": 2,
+      "description": "Data Grid Component Responsive table for displaying structured data with sorting and filtering support. Designed for dashboard use with clean styling.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "DataGrid",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/card",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "PropertyInput": {
+      "id": "PropertyInput",
+      "name": "Property Input",
+      "path": "components/editor/PropertyInput.tsx",
+      "category": "editor",
+      "layer": 2,
+      "description": "Property Input Component Labeled input for editing a single property value. Supports various input types with validation and formatting.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "PropertyInput",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/input",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/label",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "PropertyPanel": {
+      "id": "PropertyPanel",
+      "name": "Property Panel",
+      "path": "components/editor/PropertyPanel.tsx",
+      "category": "editor",
+      "layer": 2,
+      "description": "Property Panel Component Container for editing object properties with organized sections. Supports collapsible groups and various input types.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "PropertySection",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "PropertyPanel",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/components/ui/card",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/button",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "VectorInput": {
+      "id": "VectorInput",
+      "name": "Vector Input",
+      "path": "components/editor/VectorInput.tsx",
+      "category": "editor",
+      "layer": 2,
+      "description": "Vector Input Component Input for 3D vectors (x, y, z) with synchronized controls. Useful for positions, scales, and rotations.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "VectorInput",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/components/ui/label",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/input",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/button",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "ModelDashboard": {
+      "id": "ModelDashboard",
+      "name": "Model Dashboard",
+      "path": "components/3d-dashboard/ModelDashboard.tsx",
+      "category": "3d-dashboard",
+      "layer": 2,
+      "description": "Model Dashboard Component Complete dashboard for 3D model viewing and manipulation. Combines 3D viewport with property editor and statistics.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "ModelDashboard",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/components/dashboard/DashboardLayout",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/editor/PropertyPanel",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/editor/PropertyInput",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/editor/VectorInput",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/dashboard/DashboardCard",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/dashboard/DataGrid",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "SceneControlPanel": {
+      "id": "SceneControlPanel",
+      "name": "Scene Control Panel",
+      "path": "components/3d-dashboard/SceneControlPanel.tsx",
+      "category": "3d-dashboard",
+      "layer": 2,
+      "description": "Scene Control Panel Component Control panel for managing 3D scene properties including lighting, camera, environment, and effects.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "SceneControlPanel",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/components/editor/PropertyPanel",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/editor/PropertyInput",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/editor/VectorInput",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/dashboard/DashboardCard",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "InteractiveModelLayout": {
+      "id": "InteractiveModelLayout",
+      "name": "Interactive Model Layout",
+      "path": "components/layouts/InteractiveModelLayout.tsx",
+      "category": "layout",
+      "layer": 3,
+      "description": "Layout arrangement of elements (default: 'vertical')",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "InteractiveModelLayout",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@react-three/drei",
+          "isInternal": false
+        },
+        {
+          "name": "@/app/landing/components/InteractiveModel",
+          "isInternal": false
+        },
+        {
+          "name": "@/app/landing/components/InteractiveModel",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "ViewContainer": {
+      "id": "ViewContainer",
+      "name": "View Container",
+      "path": "components/layouts/ViewContainer.tsx",
+      "category": "layout",
+      "layer": 3,
+      "description": "ViewContainer - Layout preset consumer component Applies a view preset configuration to a page, handling responsive behavior, spacing, quality settings, and mobile optimizations automatically.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "ViewContainerProps",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "ViewContainer",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "useViewPreset",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        },
+        {
+          "name": "useViewportBehaviors",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        },
+        {
+          "name": "useGridColumns",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        },
+        {
+          "name": "MyPage",
+          "isComponent": true,
+          "isHook": false,
+          "type": "default"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@/lib/config/design/views.config",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils/viewPresets",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/layouts",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/config/views.config",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "ResumePdfPreview": {
+      "id": "ResumePdfPreview",
+      "name": "Resume Pdf Preview",
+      "path": "components/resume/ResumePdfPreview.tsx",
+      "category": "composite",
+      "layer": 2,
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "ResumePdfPreview",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/button",
+          "isInternal": false
+        },
+        {
+          "name": "@/components/ui/dialog",
+          "isInternal": false
+        },
+        {
+          "name": "lucide-react",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils/resumePdfGenerator",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/utils",
+          "isInternal": false
+        }
+      ]
+    },
+    "BookModel": {
+      "id": "BookModel",
+      "name": "Book Model",
+      "path": "lib/scenes/models/BookModel.tsx",
+      "category": "model",
+      "subcategory": "animations",
+      "description": "Book Model Component Displays book model for documentation/contract sections",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "BookModel",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@react-three/fiber",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelCache",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/modelOptimization",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/deviceCapability",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelDisposal",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelScaling",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "BuildingModel": {
+      "id": "BuildingModel",
+      "name": "Building Model",
+      "path": "lib/scenes/models/BuildingModel.tsx",
+      "category": "model",
+      "subcategory": "animations",
+      "description": "Building Model Component Displays building 3D model with native caching and disposal Memoized to prevent unnecessary re-renders",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "BuildingModel",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@react-three/fiber",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelCache",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/modelOptimization",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/deviceCapability",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelDisposal",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelScaling",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "FutureIslandModel": {
+      "id": "FutureIslandModel",
+      "name": "Future Island Model",
+      "path": "lib/scenes/models/FutureIslandModel.tsx",
+      "category": "model",
+      "subcategory": "animations",
+      "description": "Future Island Model Component Displays futuristic island model",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "FutureIslandModel",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@react-three/fiber",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelCache",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/modelOptimization",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/deviceCapability",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelDisposal",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelScaling",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "UAVModel": {
+      "id": "UAVModel",
+      "name": "U A V Model",
+      "path": "lib/scenes/models/UAVModel.tsx",
+      "category": "model",
+      "subcategory": "animations",
+      "description": "UAV Model Component Displays UAV drone model with proper caching and disposal",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "UAVModel",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@react-three/fiber",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelCache",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/modelOptimization",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/optimization/deviceCapability",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelDisposal",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/threejs/utils/modelScaling",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "use-animated-model": {
+      "id": "use-animated-model",
+      "name": "use-animated-model",
+      "path": "hooks/use-animated-model.ts",
+      "category": "hook",
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "useAnimatedModel",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@react-three/fiber",
+          "isInternal": false
+        }
+      ]
+    },
+    "useMobileDetection": {
+      "id": "useMobileDetection",
+      "name": "use Mobile Detection",
+      "path": "hooks/useMobileDetection.ts",
+      "category": "hook",
+      "description": "Hook to detect mobile screen size",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "useMobileDetection",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "useModelStats": {
+      "id": "useModelStats",
+      "name": "use Model Stats",
+      "path": "hooks/useModelStats.ts",
+      "category": "hook",
+      "description": "Hook for attaching stat displays to 3D models Handles positioning, visibility, and LOD (level of detail) for loader components attached to 3D models in a scene.",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "ModelStatsConfig",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "ModelStatsData",
+          "isComponent": true,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "useModelStats",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        },
+        {
+          "name": "usePositionFromModel",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        },
+        {
+          "name": "getStatusColor",
+          "isComponent": false,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "mapDataToVisuals",
+          "isComponent": false,
+          "isHook": false,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "@react-three/fiber",
+          "isInternal": false
+        },
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "useMountAnimation": {
+      "id": "useMountAnimation",
+      "name": "use Mount Animation",
+      "path": "hooks/useMountAnimation.ts",
+      "category": "hook",
+      "description": "",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "getRecommendedEasing",
+          "isComponent": false,
+          "isHook": false,
+          "type": "named"
+        },
+        {
+          "name": "useMountAnimation",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ]
+    },
+    "useResponsiveOffset": {
+      "id": "useResponsiveOffset",
+      "name": "use Responsive Offset",
+      "path": "hooks/useResponsiveOffset.ts",
+      "category": "hook",
+      "description": "Hook to detect screen size and calculate responsive offsets Returns offset values for positioning model and content On large screens: models positioned at right edge (justify-end equivalent)",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "useResponsiveOffset",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "useRoleBasedNavigation": {
+      "id": "useRoleBasedNavigation",
+      "name": "use Role Based Navigation",
+      "path": "hooks/useRoleBasedNavigation.ts",
+      "category": "hook",
+      "description": "Filter navigation items based on user's access level Removes items the user doesn't have permission to see",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "useRoleBasedNavigation",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/contexts/AuthContext",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/config/navigation",
+          "isInternal": false
+        },
+        {
+          "name": "@/lib/types/auth.types",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "useScrollNavigation": {
+      "id": "useScrollNavigation",
+      "name": "use Scroll Navigation",
+      "path": "hooks/useScrollNavigation.ts",
+      "category": "hook",
+      "description": "Hook for scroll-based navigation between sections",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "useScrollNavigation",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    },
+    "useScrollSection": {
+      "id": "useScrollSection",
+      "name": "use Scroll Section",
+      "path": "hooks/useScrollSection.ts",
+      "category": "hook",
+      "description": "Hook to track which section is currently in view based on scroll position Optimized with requestAnimationFrame for better performance",
+      "tags": [
+        "generated"
+      ],
+      "exports": [
+        {
+          "name": "useScrollSection",
+          "isComponent": false,
+          "isHook": true,
+          "type": "named"
+        }
+      ],
+      "dependencies": [
+        {
+          "name": "react",
+          "isInternal": false
+        }
+      ],
+      "deprecated": false
+    }
+  },
+  "stats": {
+    "countByCategory": {
+      "ui": 1,
+      "composite": 16,
+      "layout": 2,
+      "scene": 0,
+      "model": 4,
+      "hook": 8,
+      "utility": 0
+    },
+    "countByLayer": {
+      "1": 1,
+      "2": 25,
+      "3": 2,
+      "none": 12
+    },
+    "countBySubcategory": {
+      "lighting": 0,
+      "camera": 0,
+      "materials": 0,
+      "animations": 4,
+      "physics": 0,
+      "interactions": 0,
+      "effects": 0,
+      "optimization": 0
+    },
+    "commonDependencies": [
+      {
+        "name": "react",
+        "count": 22
+      },
+      {
+        "name": "@/lib/utils",
+        "count": 17
+      },
+      {
+        "name": "lucide-react",
+        "count": 8
+      },
+      {
+        "name": "class-variance-authority",
+        "count": 7
+      },
+      {
+        "name": "@react-three/fiber",
+        "count": 6
+      },
+      {
+        "name": "@/components/ui/button",
+        "count": 5
+      },
+      {
+        "name": "@/components/ui/card",
+        "count": 5
+      },
+      {
+        "name": "@/lib/threejs/utils/modelCache",
+        "count": 4
+      },
+      {
+        "name": "@/lib/threejs/optimization/modelOptimization",
+        "count": 4
+      },
+      {
+        "name": "@/lib/threejs/optimization/deviceCapability",
+        "count": 4
+      },
+      {
+        "name": "@/lib/threejs/utils/modelDisposal",
+        "count": 4
+      },
+      {
+        "name": "@/lib/threejs/utils/modelScaling",
+        "count": 4
+      },
+      {
+        "name": "next/navigation",
+        "count": 2
+      },
+      {
+        "name": "@/components/ui/input",
+        "count": 2
+      },
+      {
+        "name": "@/components/ui/label",
+        "count": 2
+      },
+      {
+        "name": "@/components/editor/PropertyPanel",
+        "count": 2
+      },
+      {
+        "name": "@/components/editor/PropertyInput",
+        "count": 2
+      },
+      {
+        "name": "@/components/editor/VectorInput",
+        "count": 2
+      },
+      {
+        "name": "@/components/dashboard/DashboardCard",
+        "count": 2
+      },
+      {
+        "name": "@/app/landing/components/InteractiveModel",
+        "count": 2
+      }
+    ]
+  }
+}

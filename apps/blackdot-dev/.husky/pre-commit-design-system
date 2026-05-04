@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Design System Pre-Commit Hook
+# Automatically checks for design system compliance
+# Prevents commits with hardcoded patterns
+
+echo "🎨 Design System Compliance Check..."
+echo ""
+
+# Run design system reviewer on staged files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E "\.(ts|tsx)$" | grep -v "primitives/")
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+echo "📝 Checking ${STAGED_FILES} for design system violations..."
+echo ""
+
+# Run the reviewer
+npx ts-node scripts/design-system-reviewer.ts > /tmp/design-check.log 2>&1
+
+if [ $? -eq 0 ]; then
+  echo "✅ Design system check passed!"
+  exit 0
+else
+  echo "⚠️  Design system violations detected:"
+  echo ""
+  cat /tmp/design-check.log
+  echo ""
+  echo "💡 Tips to resolve:"
+  echo "  1. Use <GlassCard> instead of hardcoded glass-morphism"
+  echo "  2. Use <InteractiveCard> instead of hardcoded hover effects"
+  echo "  3. Use <StatusBadge> instead of hardcoded badge colors"
+  echo "  4. Use <FloatingAction> instead of hardcoded floating buttons"
+  echo "  5. Use <NavHeader> instead of hardcoded sticky headers"
+  echo ""
+  echo "  📖 See DESIGN_SYSTEM_ADOPTION_PLAYBOOK.md for migration guides"
+  echo ""
+  echo "  To skip this check: git commit --no-verify"
+  echo "  To auto-fix: npx ts-node scripts/design-system-reviewer.ts --fix"
+  echo ""
+  exit 1
+fi

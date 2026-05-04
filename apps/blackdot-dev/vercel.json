@@ -1,0 +1,5 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "[ \"$ALLOW_VERCEL_BUILD\" = '1' ] && (cd ../.. && pnpm turbo build --filter=@dds/blackdot-dev) || (echo 'BLOCKED: use GitHub Actions to deploy, not Vercel cloud builds' && exit 1)",
+  "outputDirectory": ".next"
+}
