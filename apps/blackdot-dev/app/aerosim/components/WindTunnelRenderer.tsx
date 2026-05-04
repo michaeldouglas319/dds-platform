@@ -96,7 +96,7 @@ export function WindTunnelRenderer({
   // Store meshSDF in ref for use in useFrame (avoid dependency issues)
   const meshSDFRef = useRef(meshSDF);
   useEffect(() => {
-    meshSDFRef.current = meshSDF;
+    (meshSDFRef as any).current = meshSDF;
   }, [meshSDF]);
   
   // Points ref for GPU-optimized rendering (like particle-simulator for better visual appearance)
@@ -139,13 +139,13 @@ export function WindTunnelRenderer({
         // CRITICAL: Regenerate velocity field when deflection parameters change
         console.log(`🔄 Regenerating velocity field with deflectionStrength=${deflectionStrength}, accelerationFactor=${accelerationFactor}, turbulenceIntensity=${turbulenceIntensity}%`);
         simulator = FlowScenarios.meshFlowWithSDF(flowSpeed, meshSDF, new THREE.Vector3(0, 0, 0), meshBounds, deflectionStrength, accelerationFactor, turbulenceIntensity);
-        velocityFieldRef.current = simulator as VelocityField;
-        fluidSimulatorRef.current = null;
+        (velocityFieldRef as any).current = simulator as VelocityField;
+        (fluidSimulatorRef as any).current = null;
       } else {
         // SDF not yet available, use uniform flow as placeholder
         simulator = FlowScenarios.uniformLaminarFlow(flowSpeed);
-        velocityFieldRef.current = simulator as VelocityField;
-        fluidSimulatorRef.current = null;
+        (velocityFieldRef as any).current = simulator as VelocityField;
+        (fluidSimulatorRef as any).current = null;
       }
     } else {
       // For other scenarios, use FluidSimulator with renderer
@@ -162,8 +162,8 @@ export function WindTunnelRenderer({
       );
       
       if (simulator instanceof FluidSimulator) {
-        fluidSimulatorRef.current = simulator;
-        velocityFieldRef.current = null;
+        (fluidSimulatorRef as any).current = simulator;
+        (velocityFieldRef as any).current = null;
         
         // Apply CFD parameters
         simulator.setParameters({
@@ -175,22 +175,22 @@ export function WindTunnelRenderer({
         });
       } else {
         // Fallback to VelocityField if simulator creation failed
-        velocityFieldRef.current = simulator as VelocityField;
-        fluidSimulatorRef.current = null;
+        (velocityFieldRef as any).current = simulator as VelocityField;
+        (fluidSimulatorRef as any).current = null;
       }
     }
     
     // Initialize with empty particles array - will be filled by waves
     const particles: WindParticle[] = [];
-    particlesRef.current = particles;
-    waveTimerRef.current = 0;
+    (particlesRef as any).current = particles;
+    (waveTimerRef as any).current = 0;
 
     // Initialize position and color buffers if not already initialized
     if (!positionsRef.current || !colorsRef.current) {
       const positions = new Float32Array(particleCount * 3);
       const colors = new Float32Array(particleCount * 3);
-      positionsRef.current = positions;
-      colorsRef.current = colors;
+      (positionsRef as any).current = positions;
+      (colorsRef as any).current = colors;
     }
 
     // Update geometry if points ref exists
@@ -202,7 +202,7 @@ export function WindTunnelRenderer({
 
     // Calculate particles per wave based on target count (reduced for performance)
     const particlesPerWave = Math.max(5, Math.ceil(particleCount / 150));
-    particlesPerWaveRef.current = particlesPerWave;
+    (particlesPerWaveRef as any).current = particlesPerWave;
 
     // Use droneSDFVersion instead of meshSDF/meshBounds to prevent infinite loops
     // CRITICAL: Include deflectionStrength, accelerationFactor, and turbulenceIntensity for real-time updates
@@ -246,7 +246,7 @@ export function WindTunnelRenderer({
           minVelocityThreshold: 0.1,
           colorBySpeed: true,
         });
-        velocityVectorsRef.current = vectors;
+        (velocityVectorsRef as any).current = vectors;
         scene.add(vectors);
       } else {
         VelocityVisualization.updateVelocityVectors(velocityVectorsRef.current, field, {
@@ -288,7 +288,7 @@ export function WindTunnelRenderer({
         const plane = new THREE.Mesh(geometry, material);
         plane.position.set(0, 0, 0);
         plane.rotation.x = -Math.PI / 2; // Lay flat in XY plane
-        velocityHeatmapRef.current = plane;
+        (velocityHeatmapRef as any).current = plane;
         scene.add(plane);
       } else {
         // Update texture
@@ -336,7 +336,7 @@ export function WindTunnelRenderer({
           8,    // radialSegments
           flowSpeed * 2 // maxSpeed for color normalization
         );
-        streamlinesRef.current = lines;
+        (streamlinesRef as any).current = lines;
         scene.add(lines);
       }
       if (streamlinesRef.current) {
@@ -428,7 +428,7 @@ export function WindTunnelRenderer({
     waveTimerRef.current += timeStep;
     if (waveTimerRef.current >= waveIntervalRef.current) {
       handleSpawnWave();
-      waveTimerRef.current = 0;
+      (waveTimerRef as any).current = 0;
     }
 
     const particles = particlesRef.current;
@@ -457,7 +457,7 @@ export function WindTunnelRenderer({
       const updateStart = performance.now();
       simulator.update(); // This now includes syncVelocityData()
       performanceStatsRef.current.updateTime = performance.now() - updateStart;
-      frameSkipCounterRef.current = 0;
+      (frameSkipCounterRef as any).current = 0;
       
       // Debug: Log when CFD updates
       if (frameCountRef.current % 180 === 0) { // Every 3 seconds at 60fps
@@ -539,7 +539,7 @@ export function WindTunnelRenderer({
 
     // Performance logging (every ~1 second)
     const frameTime = performance.now() - frameStart;
-    frameTimeRef.current = frameTime;
+    (frameTimeRef as any).current = frameTime;
     
     // Type guard: meshSDFRef.current might be a plain function, but getSDFStats expects MeshSDFWithStats
     const sdfStats = meshSDFRef.current && typeof meshSDFRef.current === 'function' && ('__voxelGrid' in meshSDFRef.current || '__meshSDFInstance' in meshSDFRef.current)
@@ -568,8 +568,8 @@ export function WindTunnelRenderer({
       colors[i * 3 + 2] = defaultColor.b;
     }
     
-    positionsRef.current = positions;
-    colorsRef.current = colors;
+    (positionsRef as any).current = positions;
+    (colorsRef as any).current = colors;
     
     if (pointsRef.current) {
       const geometry = pointsRef.current.geometry;

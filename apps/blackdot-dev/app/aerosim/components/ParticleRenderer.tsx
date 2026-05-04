@@ -88,10 +88,10 @@ export function ParticleRenderer({
       velocities[i * 3 + 2] = vz;
     }
 
-    particlesRef.current = particles;
-    positionsRef.current = positions;
-    colorsRef.current = colors;
-    velocitiesRef.current = velocities;
+    (particlesRef as any).current = particles;
+    (positionsRef as any).current = positions;
+    (colorsRef as any).current = colors;
+    (velocitiesRef as any).current = velocities;
 
     // Update geometry
     if (pointsRef.current) {
